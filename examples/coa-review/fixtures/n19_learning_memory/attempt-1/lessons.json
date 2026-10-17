@@ -1,0 +1,43 @@
+{
+ "lessons": [
+  {
+   "id": "L-01",
+   "statement": "On a review screen, put the evidence being compared before the decision control; on wide screens keep the decision beside it",
+   "scope": "reusable",
+   "evidence_class": "inferred",
+   "evidence": [
+    "D-001",
+    "FB-001",
+    "comparison:cycle-1"
+   ],
+   "rule_id": null,
+   "category": "ux_interaction"
+  },
+  {
+   "id": "L-02",
+   "statement": "Every foreground/background pairing a build uses must be a declared pair: on-system tokens in an undeclared pairing still failed contrast",
+   "scope": "reusable",
+   "evidence_class": "verified",
+   "evidence": [
+    "D-002",
+    "D-003",
+    "D-004",
+    "comparison:cycle-1"
+   ],
+   "rule_id": "R-A11Y-001",
+   "helped": true
+  },
+  {
+   "id": "L-03",
+   "statement": "Riverside tablets are offline: the single-file build is the delivery format",
+   "scope": "project_specific",
+   "evidence_class": "verified",
+   "evidence": [
+    "E-10",
+    "C-01"
+   ],
+   "rule_id": null
+  }
+ ],
+ "summary": "Two reusable lessons (one new candidate) and one project-specific note."
+}

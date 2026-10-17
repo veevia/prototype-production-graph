@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lot Release Workbench (fictional)</title>
+<style>/*INLINE:styles.css*/</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="app-header">
+  <div class="brand">
+    <svg class="logo" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2 3 6.5v5c0 5 3.8 9.2 9 10.5 5.2-1.3 9-5.5 9-10.5v-5zm-1.2 14.2-4-4 1.4-1.4 2.6 2.6 5.4-5.4 1.4 1.4z"/></svg>
+    <div><p class="brand__name">Lot Release Workbench</p><p class="brand__org">Fabrikam Beverages · Riverside plant (fictional)</p></div>
+  </div>
+  <nav class="app-nav" aria-label="Main">
+    <a href="#/queue" data-nav="queue">Lot queue</a>
+    <a href="#/audit" data-nav="audit">Decision log</a>
+  </nav>
+  <p class="user">Signed in as Morgan Lee · QA reviewer</p>
+</header>
+<p class="synthetic-banner" role="note"><strong>Synthetic data.</strong> Fictional lots, suppliers and certificates, for design review only.</p>
+<main id="main" tabindex="-1"><div id="app"></div></main>
+<div id="live" class="sr-only" aria-live="polite"></div>
+<footer class="app-footer">
+  <p>Prototype build <span data-build>dev</span>. <span data-storage-note>Decisions are stored in this browser only.</span></p>
+  <button type="button" class="btn btn--quiet" data-testid="reset-demo">Reset demo data</button>
+</footer>
+<script type="application/json" id="lots-data">/*INLINE:data*/</script>
+<script>/*INLINE:domain.js*/</script>
+<script>/*INLINE:app.js*/</script>
+</body>
+</html>

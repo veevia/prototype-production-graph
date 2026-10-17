@@ -1,0 +1,12 @@
+id: feasibility
+name: Technical feasibility and code quality
+reviewer: front-end-engineer
+scale: "tool dimensions pass/fail; review dimensions 1–5"
+dimensions:
+  - {id: TEC-SYNTAX, name: "Every script parses", brief_dimension: "code quality", level: MUST, check: {type: tool, fn: "feasibility:check"}, threshold: "node --check exits 0 for every .js file", rule: R-TEC-003, cases: {never: [], always: []}}
+  - {id: TEC-UNIT, name: "Domain unit tests pass", brief_dimension: "functional correctness", level: MUST, check: {type: tool, fn: "feasibility:check"}, threshold: "node --test exits 0", rule: R-TEC-003, cases: {never: [], always: []}}
+  - {id: TEC-BUNDLE, name: "Single-file build within budget", brief_dimension: "performance and reliability", level: SHOULD, check: {type: tool, fn: "feasibility:check"}, threshold: "≤ 1.5 MB (calibration pending; earlier builds were 0.4–0.8 MB)", rule: R-TEC-007, cases: {never: [], always: []}}
+  - {id: TEC-DEPS, name: "No runtime network dependency", brief_dimension: "performance and reliability", level: MUST, check: {type: tool, fn: "feasibility:check"}, threshold: "0 external URLs in the built entry", rule: R-TEC-002, cases: {never: [], always: []}}
+  - {id: TEC-DEVDOC, name: "development.md is an implementation-ready foundation", brief_dimension: "technical feasibility", level: MUST, check: {type: tool, fn: "feasibility:check"}, threshold: "sections present: architecture, technology, components, data and APIs, folder structure, standards, testing", rule: R-TEC-008, cases: {never: [], always: []}}
+  - {id: TEC-FEASIBLE, name: "Mocked seams named with what each needs; no production claim", brief_dimension: "technical feasibility", level: MUST, check: {type: review}, threshold: "score ≥ 4", rule: R-TEC-009, cases: {never: ["'production ready'"], always: ["'persistence is localStorage; production needs the lots API and SSO'"]}}
+  - {id: TEC-QUALITY, name: "Readable, cohesive code a team could extend", brief_dimension: "code quality", level: SHOULD, check: {type: review}, threshold: "score ≥ 4", rule: R-TEC-003, cases: {never: [], always: []}}

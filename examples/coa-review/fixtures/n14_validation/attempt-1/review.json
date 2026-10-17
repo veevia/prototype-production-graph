@@ -1,0 +1,11 @@
+{
+ "dimensions": [
+  {
+   "id": "VAL-INSIGHT",
+   "score": 4,
+   "evidence": "Each finding names the screen and the flow it implicates"
+  }
+ ],
+ "findings": [],
+ "summary": "Scripted validation review (dry run)."
+}

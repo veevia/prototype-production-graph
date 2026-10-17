@@ -1,0 +1,5 @@
+# n14_validation attempt 1 — scripted agent output for the fictional example (dry run)
+outputs:
+  validation: "validation.json"
+  validation_review: "review.json"
+  research_md: "research.md"

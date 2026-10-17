@@ -1,0 +1,8 @@
+id: interaction
+name: Interactions and states
+reviewer: ux-interaction-designer
+scale: "tool dimensions pass/fail"
+dimensions:
+  - {id: EXP-STATES, name: "Data screens specify empty, error and success states", brief_dimension: "interaction and state behavior", level: MUST, check: {type: tool, fn: "experience:check_interactions"}, threshold: "100% of screens have a spec; every data screen has empty and error states", rule: R-UX-002, cases: {never: ["an empty filter result with no way back"], always: ["an empty state with a reset action"]}}
+  - {id: EXP-KEYBOARD, name: "Every interaction specifies keyboard behaviour", brief_dimension: "accessibility", level: MUST, check: {type: tool, fn: "experience:check_interactions"}, threshold: "100% of interactions; focus rules present", rule: R-A11Y-003, cases: {never: [], always: []}}
+  - {id: EXP-LOCKED-EXPLAINED, name: "A locked action states what unlocks it", brief_dimension: "usability and clarity", level: MUST, check: {type: tool, fn: "experience:check_interactions"}, threshold: "every disabled/locked control in the spec has an 'unlocks when' explanation", rule: R-UX-003, cases: {never: ["a greyed-out button with no reason"], always: ["'Release unlocks when every result is within spec.'"]}}

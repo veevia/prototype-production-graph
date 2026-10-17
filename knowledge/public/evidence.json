@@ -1,0 +1,699 @@
+{
+ "distribution": "public",
+ "fields": [],
+ "records": [
+  {
+   "id": "PUBLIC-R-CBV-001",
+   "type": "standard",
+   "text": "Before design starts, state the job, the primary persona and the top pain in one sentence each, with evidence.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-CBV-001"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-CBV-002",
+   "type": "standard",
+   "text": "Frame the opportunity as at least three How-Might-We questions.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-CBV-002"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-EVD-001",
+   "type": "standard",
+   "text": "Register every source with an evidence tag (observed · reported · assumed); never invent a source, quote or participant.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-EVD-001"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-EVD-002",
+   "type": "standard",
+   "text": "Every product decision traces to evidence or to a named assumption.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-EVD-002"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-EVD-003",
+   "type": "standard",
+   "text": "Make assumptions explicit with importance and certainty, and flag the riskiest before anything is built.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-EVD-003"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-EVD-004",
+   "type": "standard",
+   "text": "Declare missing information; never fill a gap with invention.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-EVD-004"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-SCP-001",
+   "type": "standard",
+   "text": "Change only what the request or the defect scopes: refine, don't redesign, and re-open only the nodes a defect traces to.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-SCP-001"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-SCP-002",
+   "type": "standard",
+   "text": "Scope is signed 🟢 before build; every open 🟡 carries a trigger, an expiry and an owner.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-SCP-002"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-SCP-003",
+   "type": "standard",
+   "text": "Non-goals and out-of-scope lists are never empty.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-SCP-003"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-SCP-004",
+   "type": "standard",
+   "text": "Rollback triggers name a measurable condition, never 'if things go bad'.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-SCP-004"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-SCP-005",
+   "type": "standard",
+   "text": "Success criteria are numbers, not adjectives, with one north-star metric.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-SCP-005"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-SCP-006",
+   "type": "standard",
+   "text": "Unbuilt capability is visibly marked in the UI, never silently omitted or faked (drafts are never 'sent').",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-SCP-006"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-SCP-007",
+   "type": "standard",
+   "text": "Every P0 requirement has acceptance criteria a reviewer can check.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-SCP-007"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-SCP-008",
+   "type": "standard",
+   "text": "Requirements cover user, business and technical needs.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-SCP-008"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-SCP-009",
+   "type": "standard",
+   "text": "Document the constraints (technical, business, regulatory, time) before design starts.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-SCP-009"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-SCP-010",
+   "type": "standard",
+   "text": "Protect what must not degrade with a guardrail metric.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-SCP-010"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-STR-001",
+   "type": "standard",
+   "text": "Compare at least three distinct concepts before converging.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-STR-001"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-STR-002",
+   "type": "standard",
+   "text": "Make the concept choice defensible: weighted criteria traced to requirements, and an explained override.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-STR-002"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-STR-003",
+   "type": "standard",
+   "text": "Every concept names its riskiest assumption.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-STR-003"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-IA-001",
+   "type": "standard",
+   "text": "When sources serve different business units, unify the shell and the components, not their domain workflows.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-IA-001"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-IA-002",
+   "type": "standard",
+   "text": "Every P0 requirement is covered by a complete, executable user flow.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-IA-002"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-IA-003",
+   "type": "standard",
+   "text": "Every screen is reachable, with one name and one route.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-IA-003"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-UX-001",
+   "type": "standard",
+   "text": "Decision-driving values show their derivation on screen.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-UX-001"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-UX-002",
+   "type": "standard",
+   "text": "Specify and build every state: success, empty (with a way back), error, and the domain's own.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-UX-002"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-UX-003",
+   "type": "standard",
+   "text": "A locked action says what unlocks it.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-UX-003"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-VIS-001",
+   "type": "standard",
+   "text": "Optimise for component consistency and usability: one type scale (≤ 8 sizes), one radius set (≤ 5), one focus ring, consistent status colours.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-VIS-001"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-VIS-002",
+   "type": "standard",
+   "text": "Off-system values are defects: every colour comes from a design-system token with provenance.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-VIS-002"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-VIS-003",
+   "type": "standard",
+   "text": "Spacing follows one 4 px scale.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-VIS-003"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-VIS-004",
+   "type": "standard",
+   "text": "The design system names its prohibited patterns.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-VIS-004"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-VIS-005",
+   "type": "standard",
+   "text": "Each colour carries one meaning: the alert colour is reserved for alerts, and status is never colour alone.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-VIS-005"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-VIS-006",
+   "type": "standard",
+   "text": "Responsive layouts adapt (restack), not just shrink.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-VIS-006"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-VIS-007",
+   "type": "standard",
+   "text": "Clear hierarchy: one focal point and one primary action per screen.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-VIS-007"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-VIS-008",
+   "type": "standard",
+   "text": "Comparison and audit tasks use tables and compact rows, not decorative cards.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-VIS-008"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-A11Y-001",
+   "type": "standard",
+   "text": "Accessibility is a binary gate: zero axe violations (WCAG 2.0/2.1/2.2 A and AA) on every screen and state.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-A11Y-001"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-A11Y-002",
+   "type": "standard",
+   "text": "Every declared colour pair meets WCAG contrast: 4.5:1 for text, 3:1 for large text and UI.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-A11Y-002"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-A11Y-003",
+   "type": "standard",
+   "text": "Everything is keyboard operable, with a visible and unobscured focus indicator.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-A11Y-003"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-A11Y-004",
+   "type": "standard",
+   "text": "No horizontal overflow from 320 px to desktop: content reflows.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-A11Y-004"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-A11Y-005",
+   "type": "standard",
+   "text": "Pointer targets are at least 24 × 24 px (WCAG 2.2 AA).",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-A11Y-005"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-A11Y-006",
+   "type": "standard",
+   "text": "Mobile targets are at least 44 × 44 px.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-A11Y-006"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-A11Y-007",
+   "type": "standard",
+   "text": "Rendered text is at least 12 px and does not clip under WCAG text spacing.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-A11Y-007"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-A11Y-008",
+   "type": "standard",
+   "text": "Names, headings and landmarks make sense to a screen-reader user; automated checks catch only part of this.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-A11Y-008"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-A11Y-009",
+   "type": "standard",
+   "text": "Reduced-motion preferences are honoured.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-A11Y-009"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-FID-001",
+   "type": "standard",
+   "text": "Fidelity rises only with validated riskiest assumptions and customer alignment.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-FID-001"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-FID-002",
+   "type": "standard",
+   "text": "Synthetic, invented and missing data is visible as such at the point of decision.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-FID-002"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-FID-003",
+   "type": "standard",
+   "text": "No placeholder text: realistic, product-specific copy.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-FID-003"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-FID-004",
+   "type": "standard",
+   "text": "Datasets are large and varied enough to exercise every scenario.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-FID-004"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-FID-005",
+   "type": "standard",
+   "text": "Data exercises every mechanism the scenarios depend on (out-of-range, missing and borderline values).",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-FID-005"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-FID-006",
+   "type": "standard",
+   "text": "Product-specific, not generic: the domain's own vocabulary, meaningful workflows, contextual relevance.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-FID-006"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-FUN-001",
+   "type": "standard",
+   "text": "A polished prototype is incomplete unless its primary workflows run end to end in a real browser.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-FUN-001"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-TEC-002",
+   "type": "standard",
+   "text": "The prototype runs offline from one self-contained file, with no network requests.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-TEC-002"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-TEC-003",
+   "type": "standard",
+   "text": "Code parses, and domain logic is unit-tested.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-TEC-003"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-TEC-004",
+   "type": "standard",
+   "text": "Builds are reproducible from sources: assembled by a script, with hashes verified.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-TEC-004"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-TEC-005",
+   "type": "standard",
+   "text": "No console errors or uncaught exceptions.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-TEC-005"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-TEC-006",
+   "type": "standard",
+   "text": "The prototype is interactive within 1.5 s from disk.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-TEC-006"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-TEC-007",
+   "type": "standard",
+   "text": "The single-file build stays within 1.5 MB.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-TEC-007"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-TEC-008",
+   "type": "standard",
+   "text": "development.md defines architecture, technology, components, data and APIs, folder structure, standards and testing.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-TEC-008"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-TEC-009",
+   "type": "standard",
+   "text": "Name every mocked seam and what production needs; never present a prototype as production-ready.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-TEC-009"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-TEC-010",
+   "type": "standard",
+   "text": "Re-verify with hashes before reporting done: the working tree can change under you.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-TEC-010"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-VAL-001",
+   "type": "standard",
+   "text": "Validate with real users and stakeholders before raising fidelity or releasing.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-VAL-001"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-VAL-002",
+   "type": "standard",
+   "text": "Every P0 flow has an executable scenario that ends in an expectation.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-VAL-002"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-VAL-003",
+   "type": "standard",
+   "text": "Primary tasks meet a planned, task-level success threshold.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-VAL-003"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-VAL-004",
+   "type": "standard",
+   "text": "Primary tasks average a Single Ease Question score of at least 5.5 of 7.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-VAL-004"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-VAL-005",
+   "type": "standard",
+   "text": "Validation findings trace to the flows and requirements they implicate.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-VAL-005"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-GOV-001",
+   "type": "standard",
+   "text": "Never stop after one round: keep build → review → fix running until every gate passes or a genuine blocker is reported.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-GOV-001"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-GOV-003",
+   "type": "standard",
+   "text": "Humans own the commitments: problem, scope, concept, visual system, fidelity and release are named human decisions.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-GOV-003"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-GOV-004",
+   "type": "standard",
+   "text": "Simulated input and non-human approvals are labelled and never presented as evidence.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-GOV-004"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-GOV-005",
+   "type": "standard",
+   "text": "Trace every defect to the responsible node, with the smallest fix and an acceptance check.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-GOV-005"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-GOV-006",
+   "type": "standard",
+   "text": "Interpret every piece of feedback: map it to defects or dismiss it with a reason.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-GOV-006"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-GOV-007",
+   "type": "standard",
+   "text": "Escalate repeated failures instead of looping: three failed corrections or a spent budget stop the run.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-GOV-007"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-GOV-008",
+   "type": "standard",
+   "text": "Release only when every gate passes on the current version, recomputed from disk.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-GOV-008"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-GOV-009",
+   "type": "standard",
+   "text": "Package deliveries with a hashed manifest and their evidence.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-GOV-009"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-LRN-001",
+   "type": "standard",
+   "text": "Lessons carry evidence; defaults change only with evidence.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-LRN-001"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-LRN-002",
+   "type": "standard",
+   "text": "Keep project-specific observations apart from reusable knowledge.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-LRN-002"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-LRN-003",
+   "type": "standard",
+   "text": "Learning never modifies approved product truth, requirements, evidence or design principles.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-LRN-003"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-PRJ-001",
+   "type": "standard",
+   "text": "Programme-specific: the customer's brand red on a warm neutral canvas with Fluent 2 and Segoe UI.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-PRJ-001"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-PRJ-002",
+   "type": "standard",
+   "text": "Programme-specific: the four business-unit prototypes stay separate behind one switcher.",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-PRJ-002"
+   ]
+  },
+  {
+   "id": "PUBLIC-R-PRJ-003",
+   "type": "standard",
+   "text": "Programme-specific: 11 px semibold labels in the M365 mocks (conflicts with R-A11Y-007's 12 px minimum).",
+   "evidence_class": "recommendation",
+   "citations": [
+    "public-rule:R-PRJ-003"
+   ]
+  }
+ ]
+}

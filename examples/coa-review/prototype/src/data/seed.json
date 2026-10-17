@@ -1,0 +1,298 @@
+{
+ "generated": {
+  "generator": "data/generate.py",
+  "seed": 20260926,
+  "provenance": "synthetic",
+  "note": "Fictional companies, materials and certificates for design review only."
+ },
+ "specs": {
+  "MAT-SUC": {
+   "material": "Liquid sucrose 67 °Bx",
+   "parameters": [
+    {
+     "id": "brix",
+     "name": "Brix",
+     "unit": "°Bx",
+     "min": 66.5,
+     "max": 67.5
+    },
+    {
+     "id": "color",
+     "name": "Colour",
+     "unit": "ICUMSA",
+     "max": 35
+    },
+    {
+     "id": "ph",
+     "name": "pH",
+     "unit": "",
+     "min": 6.0,
+     "max": 7.5
+    },
+    {
+     "id": "turbidity",
+     "name": "Turbidity",
+     "unit": "NTU",
+     "max": 5
+    },
+    {
+     "id": "yeast",
+     "name": "Yeast and mould",
+     "unit": "CFU/10 g",
+     "max": 10
+    }
+   ]
+  },
+  "MAT-CIT": {
+   "material": "Citric acid, anhydrous",
+   "parameters": [
+    {
+     "id": "assay",
+     "name": "Assay",
+     "unit": "%",
+     "min": 99.5,
+     "max": 100.5
+    },
+    {
+     "id": "moisture",
+     "name": "Moisture",
+     "unit": "%",
+     "max": 0.5
+    },
+    {
+     "id": "sulfate",
+     "name": "Sulfate",
+     "unit": "mg/kg",
+     "max": 150
+    },
+    {
+     "id": "lead",
+     "name": "Lead",
+     "unit": "mg/kg",
+     "max": 0.5
+    }
+   ]
+  },
+  "MAT-LEM": {
+   "material": "Natural lemon flavour",
+   "parameters": [
+    {
+     "id": "sg",
+     "name": "Specific gravity (20 °C)",
+     "unit": "",
+     "min": 0.85,
+     "max": 0.87
+    },
+    {
+     "id": "ri",
+     "name": "Refractive index (20 °C)",
+     "unit": "",
+     "min": 1.47,
+     "max": 1.48
+    },
+    {
+     "id": "ethanol",
+     "name": "Ethanol",
+     "unit": "% v/v",
+     "min": 30,
+     "max": 40
+    }
+   ]
+  },
+  "MAT-ASC": {
+   "material": "Ascorbic acid",
+   "parameters": [
+    {
+     "id": "assay",
+     "name": "Assay",
+     "unit": "%",
+     "min": 99.0,
+     "max": 100.5
+    },
+    {
+     "id": "lod",
+     "name": "Loss on drying",
+     "unit": "%",
+     "max": 0.4
+    },
+    {
+     "id": "ph",
+     "name": "pH (5 % solution)",
+     "unit": "",
+     "min": 2.1,
+     "max": 2.6
+    }
+   ]
+  },
+  "MAT-CO2": {
+   "material": "Carbon dioxide, beverage grade",
+   "parameters": [
+    {
+     "id": "purity",
+     "name": "Purity",
+     "unit": "% v/v",
+     "min": 99.9,
+     "borderline_margin": 0.02
+    },
+    {
+     "id": "moisture",
+     "name": "Moisture",
+     "unit": "ppm v/v",
+     "max": 20
+    },
+    {
+     "id": "acetaldehyde",
+     "name": "Acetaldehyde",
+     "unit": "ppm v/v",
+     "max": 0.2
+    },
+    {
+     "id": "sulfur",
+     "name": "Total sulfur",
+     "unit": "ppm v/v",
+     "max": 0.1
+    }
+   ]
+  },
+  "MAT-ORC": {
+   "material": "Orange juice concentrate 65 °Bx",
+   "parameters": [
+    {
+     "id": "brix",
+     "name": "Brix",
+     "unit": "°Bx",
+     "min": 64.5,
+     "max": 65.5
+    },
+    {
+     "id": "acidity",
+     "name": "Acidity (as citric)",
+     "unit": "%",
+     "min": 3.0,
+     "max": 4.0
+    },
+    {
+     "id": "pulp",
+     "name": "Sinking pulp",
+     "unit": "%",
+     "max": 12
+    }
+   ]
+  }
+ },
+ "suppliers": [
+  {
+   "id": "SUP-NWS",
+   "name": "Northwind Sweeteners",
+   "contact": "quality@northwind-sweeteners.example"
+  },
+  {
+   "id": "SUP-CTC",
+   "name": "Contoso Citrus",
+   "contact": "coa-desk@contoso-citrus.example"
+  },
+  {
+   "id": "SUP-ADF",
+   "name": "Adatum Flavors",
+   "contact": "qa@adatum-flavors.example"
+  },
+  {
+   "id": "SUP-TSG",
+   "name": "Tailspin Gases",
+   "contact": "quality@tailspin-gases.example"
+  },
+  {
+   "id": "SUP-LWC",
+   "name": "Litware Chemicals",
+   "contact": "coa@litware-chemicals.example"
+  }
+ ],
+ "lots": [
+  {
+   "id": "L-2418",
+   "material": "MAT-SUC",
+   "supplier": "SUP-NWS",
+   "received": "2026-09-21",
+   "due": "2026-09-22",
+   "po": "PO-771200",
+   "coa": "CoA-5500",
+   "edge_case": "within",
+   "results": {
+    "brix": 67.0,
+    "color": 22,
+    "ph": 6.8,
+    "turbidity": 2.1,
+    "yeast": 3
+   },
+   "notes": {}
+  },
+  {
+   "id": "L-2431",
+   "material": "MAT-SUC",
+   "supplier": "SUP-NWS",
+   "received": "2026-09-22",
+   "due": "2026-09-23",
+   "po": "PO-771235",
+   "coa": "CoA-5515",
+   "edge_case": "out-of-spec",
+   "results": {
+    "brix": 67.9,
+    "color": 9.0,
+    "ph": 6.62,
+    "turbidity": 1.5,
+    "yeast": 3.0
+   },
+   "notes": {}
+  },
+  {
+   "id": "L-2437",
+   "material": "MAT-LEM",
+   "supplier": "SUP-ADF",
+   "received": "2026-09-23",
+   "due": "2026-09-24",
+   "po": "PO-771256",
+   "coa": "CoA-5524",
+   "edge_case": "missing-value",
+   "results": {
+    "sg": null,
+    "ri": 1.4744,
+    "ethanol": 34.9
+   },
+   "notes": {
+    "sg": "Value unreadable on the supplier's scanned certificate"
+   }
+  }
+ ],
+ "history": [
+  {
+   "lot": "L-2396",
+   "material": "MAT-SUC",
+   "decision": "release",
+   "verdict": "ready",
+   "verdictLabel": "Ready to release",
+   "rationale": "",
+   "by": "Sam Rivera",
+   "at": "2026-09-17T14:22:00"
+  },
+  {
+   "lot": "L-2402",
+   "material": "MAT-CIT",
+   "decision": "hold",
+   "verdict": "hold",
+   "verdictLabel": "Hold",
+   "rationale": "Lead at 0.62 mg/kg against a 0.5 mg/kg maximum. Held for a retest from Litware; the QA lead sent the notice to their certificate desk. Keep it out of the citrus line until the retest clears.",
+   "by": "Morgan Lee",
+   "at": "2026-09-17T16:05:00"
+  },
+  {
+   "lot": "L-2405",
+   "material": "MAT-LEM",
+   "decision": "reject",
+   "verdict": "escalate",
+   "verdictLabel": "Escalate to QA lead",
+   "rationale": "Second certificate in a row with an unreadable specific gravity; supplier asked to re-issue and retest.",
+   "by": "Sam Rivera",
+   "at": "2026-09-17T17:40:00"
+  }
+ ]
+}

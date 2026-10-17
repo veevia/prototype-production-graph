@@ -1,0 +1,199 @@
+{
+ "evidence": [
+  {
+   "id": "E-01",
+   "claim": "4 of 5 reviewers re-key certificate values from the PDF into a spreadsheet before comparing them with the specification",
+   "source_ids": [
+    "S-02"
+   ],
+   "tag": "observed",
+   "quote": "I type every number twice"
+  },
+  {
+   "id": "E-02",
+   "claim": "The median review takes 11 minutes per lot (n = 40); re-keying is about 6 of them",
+   "source_ids": [
+    "S-03"
+   ],
+   "tag": "observed",
+   "quote": ""
+  },
+  {
+   "id": "E-03",
+   "claim": "3 of 4 out-of-spec lots were missed on first review (37 of 40 lots correct first time)",
+   "source_ids": [
+    "S-03"
+   ],
+   "tag": "observed",
+   "quote": ""
+  },
+  {
+   "id": "E-04",
+   "claim": "Reviewers want each value next to its limit before deciding",
+   "source_ids": [
+    "S-02"
+   ],
+   "tag": "observed",
+   "quote": "I need to see the number next to the limit, not scroll between them"
+  },
+  {
+   "id": "E-05",
+   "claim": "The SOP requires a written rationale for every hold or reject, attributable to a named reviewer with a time",
+   "source_ids": [
+    "S-05"
+   ],
+   "tag": "reported",
+   "quote": ""
+  },
+  {
+   "id": "E-06",
+   "claim": "Unreadable values are escalated by phone to the QA lead, with no record",
+   "source_ids": [
+    "S-02"
+   ],
+   "tag": "observed",
+   "quote": "I only hear about unreadable certificates when someone calls me"
+  },
+  {
+   "id": "E-07",
+   "claim": "In the paper test, 4 of 5 reviewers released a compliant lot from the derived verdict without re-keying",
+   "source_ids": [
+    "S-04"
+   ],
+   "tag": "observed",
+   "quote": ""
+  },
+  {
+   "id": "E-08",
+   "claim": "Supplier notices are drafted by the reviewer and sent by the supplier-quality manager",
+   "source_ids": [
+    "S-02",
+    "S-05"
+   ],
+   "tag": "reported",
+   "quote": ""
+  },
+  {
+   "id": "E-09",
+   "claim": "The QA lead agreed the lot-release flow and that the tool never releases a lot itself",
+   "source_ids": [
+    "S-04"
+   ],
+   "tag": "observed",
+   "quote": ""
+  },
+  {
+   "id": "E-10",
+   "claim": "Plant tablets have no internet access; tools must run offline",
+   "source_ids": [
+    "S-05"
+   ],
+   "tag": "reported",
+   "quote": ""
+  },
+  {
+   "id": "E-11",
+   "claim": "Reviewers handle 15–20 lots a shift",
+   "source_ids": [
+    "S-03",
+    "S-01"
+   ],
+   "tag": "observed",
+   "quote": ""
+  },
+  {
+   "id": "E-12",
+   "claim": "Status is shown as icon + text + colour; red is reserved for failures",
+   "source_ids": [
+    "S-07"
+   ],
+   "tag": "reported",
+   "quote": ""
+  }
+ ],
+ "insights": [
+  {
+   "id": "I-01",
+   "statement": "Re-keying is both the time sink and the error source",
+   "evidence_ids": [
+    "E-01",
+    "E-02",
+    "E-03"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "I-02",
+   "statement": "Reviewers trust a derived verdict when they can see the value next to its limit",
+   "evidence_ids": [
+    "E-04",
+    "E-07"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "I-03",
+   "statement": "Escalations for unreadable values are invisible today",
+   "evidence_ids": [
+    "E-06"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "I-04",
+   "statement": "Every decision must be attributable and explained; sending stays with supplier quality",
+   "evidence_ids": [
+    "E-05",
+    "E-08"
+   ],
+   "confidence": "high"
+  }
+ ],
+ "assumptions": [
+  {
+   "id": "A-01",
+   "statement": "Reviewers will release from a derived verdict without re-keying values",
+   "importance": "high",
+   "certainty": "medium",
+   "riskiest": true,
+   "validation": "validated",
+   "evidence_ids": [
+    "E-07"
+   ]
+  },
+  {
+   "id": "A-02",
+   "statement": "Showing the derivation next to each result is enough to catch a misread",
+   "importance": "medium",
+   "certainty": "medium"
+  },
+  {
+   "id": "A-03",
+   "statement": "The supplier-quality manager will reuse the reviewer's notice draft",
+   "importance": "medium",
+   "certainty": "low"
+  },
+  {
+   "id": "A-04",
+   "statement": "Sixteen lots represent a realistic shift queue",
+   "importance": "low",
+   "certainty": "medium"
+  }
+ ],
+ "open_questions": [
+  {
+   "id": "Q-01",
+   "question": "Can the plant's LIMS export certificate values as structured data?",
+   "blocking": false,
+   "owner": "LIMS owner (fictional)",
+   "light": "yellow",
+   "trigger": "The LIMS owner confirms the export format",
+   "expiry": "2026-10-31"
+  }
+ ],
+ "missing": [
+  "Structured certificate exports from the LIMS (none provided)",
+  "Usage analytics of the current spreadsheet",
+  "The supplier-quality manager's view of notice drafts"
+ ]
+}

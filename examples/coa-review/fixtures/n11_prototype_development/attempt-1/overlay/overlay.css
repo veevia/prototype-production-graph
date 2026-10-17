@@ -1,0 +1,6 @@
+/* First draft (scripted fixture): the decision panel leads the lot review, and status chips use the subtle
+   text token on the alt surface — an undeclared pairing. Both are on-system tokens, so the static checks pass;
+   the browser review measures the contrast. */
+.lot-layout { display: flex; flex-direction: column; }
+.lot-layout .decision-col { order: -1; position: static; }
+.chip { color: var(--color-text-subtle); background: var(--color-surface-alt); }

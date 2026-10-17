@@ -1,0 +1,9 @@
+id: concepts
+name: Concept comparison
+reviewer: service-experience-designer
+scale: "tool dimensions pass/fail; human dimensions decided by a named human"
+dimensions:
+  - {id: CON-OPTIONS, name: "At least three distinct concepts compared", brief_dimension: "customer and business relevance", level: MUST, check: {type: tool, fn: "concepts:check"}, threshold: "≥ 3 concepts (calibration pending)", rule: R-STR-001, cases: {never: ["one concept and two strawmen"], always: []}}
+  - {id: CON-MATRIX, name: "Weighted criteria traced to requirements; overrides explained", brief_dimension: "requirement coverage", level: MUST, check: {type: tool, fn: "concepts:check"}, threshold: "weights sum to 1 ± 0.01; every concept scored on every criterion; a non-top pick has a ≥ 40-character rationale", rule: R-STR-002, cases: {never: [], always: []}}
+  - {id: CON-RISK, name: "Every concept names its riskiest assumption", brief_dimension: "customer and business relevance", level: MUST, check: {type: tool, fn: "concepts:check"}, threshold: "100% of concepts", rule: R-STR-003, cases: {never: [], always: []}}
+  - {id: CON-SELECTED, name: "Wei chose the concept", brief_dimension: "customer and business relevance", level: MUST, check: {type: human}, threshold: "a named human approved at N06", rule: R-GOV-003, cases: {never: [], always: []}}

@@ -1,0 +1,4845 @@
+{
+ "$defs": {
+  "AcceptanceTrace": {
+   "additionalProperties": false,
+   "description": "Where the plan checks one acceptance line of a requirement (field run 2, R2-18: a P1 naming rule never reached\nthe plan, and every gate passed). Exactly one of: an expectation step, a `forbidden_text` entry, a check a later\nnode runs, or the reason it is out of scope for this prototype.",
+   "properties": {
+    "requirement": {
+     "title": "Requirement",
+     "type": "string"
+    },
+    "acceptance": {
+     "title": "Acceptance",
+     "type": "string"
+    },
+    "scenario": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Scenario"
+    },
+    "step": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Step"
+    },
+    "forbidden_text": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Forbidden Text"
+    },
+    "covered_by": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Covered By"
+    },
+    "out_of_scope": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Out Of Scope"
+    }
+   },
+   "required": [
+    "requirement",
+    "acceptance"
+   ],
+   "title": "AcceptanceTrace",
+   "type": "object"
+  },
+  "Alignment": {
+   "additionalProperties": false,
+   "properties": {
+    "status": {
+     "enum": [
+      "aligned",
+      "pending"
+     ],
+     "title": "Status",
+     "type": "string"
+    },
+    "with_whom": {
+     "title": "With Whom",
+     "type": "string"
+    },
+    "evidence_ids": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Evidence Ids",
+     "type": "array"
+    }
+   },
+   "required": [
+    "status",
+    "with_whom"
+   ],
+   "title": "Alignment",
+   "type": "object"
+  },
+  "Approval": {
+   "additionalProperties": false,
+   "properties": {
+    "node": {
+     "title": "Node",
+     "type": "string"
+    },
+    "decision": {
+     "title": "Decision",
+     "type": "string"
+    },
+    "actor": {
+     "title": "Actor",
+     "type": "string"
+    },
+    "human": {
+     "title": "Human",
+     "type": "boolean"
+    },
+    "on_behalf_of": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "On Behalf Of"
+    },
+    "delegation": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Delegation"
+    },
+    "reason": {
+     "title": "Reason",
+     "type": "string"
+    },
+    "at": {
+     "title": "At",
+     "type": "string"
+    },
+    "build_version": {
+     "default": 0,
+     "title": "Build Version",
+     "type": "integer"
+    },
+    "locked": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Locked",
+     "type": "array"
+    },
+    "outputs": {
+     "additionalProperties": {
+      "type": "string"
+     },
+     "title": "Outputs",
+     "type": "object"
+    },
+    "recorded_by": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Recorded By"
+    },
+    "source": {
+     "default": "",
+     "title": "Source",
+     "type": "string"
+    },
+    "interprets": {
+     "default": false,
+     "title": "Interprets",
+     "type": "boolean"
+    }
+   },
+   "required": [
+    "node",
+    "decision",
+    "actor",
+    "human",
+    "reason",
+    "at"
+   ],
+   "title": "Approval",
+   "type": "object"
+  },
+  "ArtifactRecord": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "key": {
+     "title": "Key",
+     "type": "string"
+    },
+    "node": {
+     "title": "Node",
+     "type": "string"
+    },
+    "attempt": {
+     "title": "Attempt",
+     "type": "integer"
+    },
+    "kind": {
+     "title": "Kind",
+     "type": "string"
+    },
+    "path": {
+     "title": "Path",
+     "type": "string"
+    },
+    "sha256": {
+     "title": "Sha256",
+     "type": "string"
+    },
+    "bytes": {
+     "title": "Bytes",
+     "type": "integer"
+    },
+    "created": {
+     "title": "Created",
+     "type": "string"
+    },
+    "inputs": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Inputs",
+     "type": "array"
+    },
+    "build_version": {
+     "default": 0,
+     "title": "Build Version",
+     "type": "integer"
+    },
+    "current": {
+     "default": true,
+     "title": "Current",
+     "type": "boolean"
+    },
+    "superseded_by": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Superseded By"
+    }
+   },
+   "required": [
+    "id",
+    "key",
+    "node",
+    "attempt",
+    "kind",
+    "path",
+    "sha256",
+    "bytes",
+    "created"
+   ],
+   "title": "ArtifactRecord",
+   "type": "object"
+  },
+  "Assumption": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "statement": {
+     "title": "Statement",
+     "type": "string"
+    },
+    "importance": {
+     "enum": [
+      "high",
+      "medium",
+      "low"
+     ],
+     "title": "Importance",
+     "type": "string"
+    },
+    "certainty": {
+     "enum": [
+      "high",
+      "medium",
+      "low"
+     ],
+     "title": "Certainty",
+     "type": "string"
+    },
+    "riskiest": {
+     "default": false,
+     "title": "Riskiest",
+     "type": "boolean"
+    },
+    "validation": {
+     "default": "unvalidated",
+     "enum": [
+      "unvalidated",
+      "validated",
+      "invalidated",
+      "accepted_risk"
+     ],
+     "title": "Validation",
+     "type": "string"
+    },
+    "evidence_ids": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Evidence Ids",
+     "type": "array"
+    },
+    "accepted_by": {
+     "default": "",
+     "title": "Accepted By",
+     "type": "string"
+    }
+   },
+   "required": [
+    "id",
+    "statement",
+    "importance",
+    "certainty"
+   ],
+   "title": "Assumption",
+   "type": "object"
+  },
+  "AssumptionCheck": {
+   "additionalProperties": false,
+   "properties": {
+    "assumption_id": {
+     "title": "Assumption Id",
+     "type": "string"
+    },
+    "status": {
+     "enum": [
+      "validated",
+      "accepted_risk",
+      "unvalidated"
+     ],
+     "title": "Status",
+     "type": "string"
+    },
+    "evidence_ids": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Evidence Ids",
+     "type": "array"
+    }
+   },
+   "required": [
+    "assumption_id",
+    "status"
+   ],
+   "title": "AssumptionCheck",
+   "type": "object"
+  },
+  "BuildState": {
+   "additionalProperties": false,
+   "properties": {
+    "plan": {
+     "anyOf": [
+      {
+       "$ref": "#/$defs/PrototypePlan"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "prototype": {
+     "anyOf": [
+      {
+       "$ref": "#/$defs/PrototypeRef"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "version": {
+     "default": 0,
+     "title": "Version",
+     "type": "integer"
+    },
+    "code_artifacts": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Code Artifacts",
+     "type": "array"
+    },
+    "content_artifacts": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Content Artifacts",
+     "type": "array"
+    }
+   },
+   "title": "BuildState",
+   "type": "object"
+  },
+  "ChangeRequest": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "doc": {
+     "title": "Doc",
+     "type": "string"
+    },
+    "reason": {
+     "title": "Reason",
+     "type": "string"
+    },
+    "by": {
+     "title": "By",
+     "type": "string"
+    },
+    "human": {
+     "title": "Human",
+     "type": "boolean"
+    },
+    "on_behalf_of": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "On Behalf Of"
+    },
+    "delegation": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Delegation"
+    },
+    "status": {
+     "enum": [
+      "open",
+      "approved",
+      "applied",
+      "declined"
+     ],
+     "title": "Status",
+     "type": "string"
+    },
+    "writer": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Writer"
+    },
+    "at": {
+     "title": "At",
+     "type": "string"
+    },
+    "reruns": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Reruns",
+     "type": "array"
+    },
+    "gates": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Gates",
+     "type": "array"
+    },
+    "decided_by": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Decided By"
+    },
+    "decision_reason": {
+     "default": "",
+     "title": "Decision Reason",
+     "type": "string"
+    },
+    "recorded_by": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Recorded By"
+    },
+    "source": {
+     "default": "",
+     "title": "Source",
+     "type": "string"
+    },
+    "interprets": {
+     "default": false,
+     "title": "Interprets",
+     "type": "boolean"
+    }
+   },
+   "required": [
+    "id",
+    "doc",
+    "reason",
+    "by",
+    "human",
+    "status",
+    "at"
+   ],
+   "title": "ChangeRequest",
+   "type": "object"
+  },
+  "CheckpointRef": {
+   "additionalProperties": false,
+   "properties": {
+    "seq": {
+     "title": "Seq",
+     "type": "integer"
+    },
+    "event": {
+     "title": "Event",
+     "type": "string"
+    },
+    "node": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Node"
+    },
+    "path": {
+     "title": "Path",
+     "type": "string"
+    },
+    "at": {
+     "title": "At",
+     "type": "string"
+    }
+   },
+   "required": [
+    "seq",
+    "event",
+    "node",
+    "path",
+    "at"
+   ],
+   "title": "CheckpointRef",
+   "type": "object"
+  },
+  "ClaimedFixed": {
+   "additionalProperties": false,
+   "description": "Reviews asked to re-verify a deferred defect said it no longer holds, and no current review reports it (W61).",
+   "properties": {
+    "at": {
+     "title": "At",
+     "type": "integer"
+    },
+    "by": {
+     "items": {
+      "type": "string"
+     },
+     "title": "By",
+     "type": "array"
+    },
+    "silent": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Silent",
+     "type": "array"
+    }
+   },
+   "required": [
+    "at",
+    "by"
+   ],
+   "title": "ClaimedFixed",
+   "type": "object"
+  },
+  "ColorToken": {
+   "additionalProperties": false,
+   "properties": {
+    "name": {
+     "title": "Name",
+     "type": "string"
+    },
+    "value": {
+     "title": "Value",
+     "type": "string"
+    },
+    "role": {
+     "title": "Role",
+     "type": "string"
+    },
+    "provenance": {
+     "title": "Provenance",
+     "type": "string"
+    },
+    "state_fill_of": {
+     "items": {
+      "type": "string"
+     },
+     "title": "State Fill Of",
+     "type": "array"
+    }
+   },
+   "required": [
+    "name",
+    "value",
+    "role",
+    "provenance"
+   ],
+   "title": "ColorToken",
+   "type": "object"
+  },
+  "Comparison": {
+   "additionalProperties": false,
+   "properties": {
+    "cycle": {
+     "title": "Cycle",
+     "type": "integer"
+    },
+    "targets": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Targets",
+     "type": "array"
+    },
+    "before_version": {
+     "title": "Before Version",
+     "type": "integer"
+    },
+    "after_version": {
+     "title": "After Version",
+     "type": "integer"
+    },
+    "before": {
+     "additionalProperties": {
+      "type": "string"
+     },
+     "title": "Before",
+     "type": "object"
+    },
+    "after": {
+     "additionalProperties": {
+      "type": "string"
+     },
+     "title": "After",
+     "type": "object"
+    },
+    "resolved": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Resolved",
+     "type": "array"
+    },
+    "persisting": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Persisting",
+     "type": "array"
+    },
+    "new": {
+     "items": {
+      "type": "string"
+     },
+     "title": "New",
+     "type": "array"
+    },
+    "verdict": {
+     "enum": [
+      "improved",
+      "unchanged",
+      "regressed"
+     ],
+     "title": "Verdict",
+     "type": "string"
+    },
+    "at": {
+     "title": "At",
+     "type": "string"
+    },
+    "plan": {
+     "default": "",
+     "title": "Plan",
+     "type": "string"
+    }
+   },
+   "required": [
+    "cycle",
+    "targets",
+    "before_version",
+    "after_version",
+    "before",
+    "after",
+    "resolved",
+    "persisting",
+    "new",
+    "verdict",
+    "at"
+   ],
+   "title": "Comparison",
+   "type": "object"
+  },
+  "ComponentSpec": {
+   "additionalProperties": false,
+   "properties": {
+    "name": {
+     "title": "Name",
+     "type": "string"
+    },
+    "variants": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Variants",
+     "type": "array"
+    },
+    "states": {
+     "items": {
+      "type": "string"
+     },
+     "title": "States",
+     "type": "array"
+    }
+   },
+   "required": [
+    "name",
+    "variants",
+    "states"
+   ],
+   "title": "ComponentSpec",
+   "type": "object"
+  },
+  "Concept": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "name": {
+     "title": "Name",
+     "type": "string"
+    },
+    "summary": {
+     "title": "Summary",
+     "type": "string"
+    },
+    "before": {
+     "title": "Before",
+     "type": "string"
+    },
+    "after": {
+     "title": "After",
+     "type": "string"
+    },
+    "riskiest_assumption": {
+     "title": "Riskiest Assumption",
+     "type": "string"
+    },
+    "scores": {
+     "additionalProperties": {
+      "type": "integer"
+     },
+     "title": "Scores",
+     "type": "object"
+    }
+   },
+   "required": [
+    "id",
+    "name",
+    "summary",
+    "before",
+    "after",
+    "riskiest_assumption",
+    "scores"
+   ],
+   "title": "Concept",
+   "type": "object"
+  },
+  "Constraint": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "type": {
+     "enum": [
+      "business",
+      "technical",
+      "regulatory",
+      "time",
+      "design"
+     ],
+     "title": "Type",
+     "type": "string"
+    },
+    "statement": {
+     "title": "Statement",
+     "type": "string"
+    },
+    "source": {
+     "title": "Source",
+     "type": "string"
+    }
+   },
+   "required": [
+    "id",
+    "type",
+    "statement",
+    "source"
+   ],
+   "title": "Constraint",
+   "type": "object"
+  },
+  "ContrastPair": {
+   "additionalProperties": false,
+   "properties": {
+    "fg": {
+     "title": "Fg",
+     "type": "string"
+    },
+    "bg": {
+     "title": "Bg",
+     "type": "string"
+    },
+    "use": {
+     "title": "Use",
+     "type": "string"
+    },
+    "large_text": {
+     "default": false,
+     "title": "Large Text",
+     "type": "boolean"
+    },
+    "non_text": {
+     "default": false,
+     "title": "Non Text",
+     "type": "boolean"
+    }
+   },
+   "required": [
+    "fg",
+    "bg",
+    "use"
+   ],
+   "title": "ContrastPair",
+   "type": "object"
+  },
+  "ControlRecord": {
+   "additionalProperties": false,
+   "properties": {
+    "doc": {
+     "title": "Doc",
+     "type": "string"
+    },
+    "status": {
+     "default": "template",
+     "enum": [
+      "template",
+      "accepted",
+      "locked"
+     ],
+     "title": "Status",
+     "type": "string"
+    },
+    "version": {
+     "default": 0,
+     "title": "Version",
+     "type": "integer"
+    },
+    "accepted_sha256": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Accepted Sha256"
+    },
+    "locked_by": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Locked By"
+    },
+    "locked_node": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Locked Node"
+    },
+    "unlocked_for": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Unlocked For"
+    },
+    "unlocked_for_nodes": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Unlocked For Nodes",
+     "type": "array"
+    },
+    "history": {
+     "items": {
+      "$ref": "#/$defs/ControlVersion"
+     },
+     "title": "History",
+     "type": "array"
+    }
+   },
+   "required": [
+    "doc"
+   ],
+   "title": "ControlRecord",
+   "type": "object"
+  },
+  "ControlVersion": {
+   "additionalProperties": false,
+   "properties": {
+    "version": {
+     "title": "Version",
+     "type": "integer"
+    },
+    "sha256": {
+     "title": "Sha256",
+     "type": "string"
+    },
+    "node": {
+     "title": "Node",
+     "type": "string"
+    },
+    "at": {
+     "title": "At",
+     "type": "string"
+    },
+    "archived": {
+     "title": "Archived",
+     "type": "string"
+    },
+    "attempt": {
+     "default": 0,
+     "title": "Attempt",
+     "type": "integer"
+    }
+   },
+   "required": [
+    "version",
+    "sha256",
+    "node",
+    "at",
+    "archived"
+   ],
+   "title": "ControlVersion",
+   "type": "object"
+  },
+  "Criterion": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "name": {
+     "title": "Name",
+     "type": "string"
+    },
+    "weight": {
+     "title": "Weight",
+     "type": "number"
+    },
+    "requirement_ids": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Requirement Ids",
+     "type": "array"
+    }
+   },
+   "required": [
+    "id",
+    "name",
+    "weight"
+   ],
+   "title": "Criterion",
+   "type": "object"
+  },
+  "Decision": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "node": {
+     "title": "Node",
+     "type": "string"
+    },
+    "what": {
+     "title": "What",
+     "type": "string"
+    },
+    "light": {
+     "enum": [
+      "green",
+      "yellow",
+      "red"
+     ],
+     "title": "Light",
+     "type": "string"
+    },
+    "owner": {
+     "title": "Owner",
+     "type": "string"
+    },
+    "rationale": {
+     "title": "Rationale",
+     "type": "string"
+    },
+    "trigger": {
+     "default": "",
+     "title": "Trigger",
+     "type": "string"
+    },
+    "expiry": {
+     "default": "",
+     "title": "Expiry",
+     "type": "string"
+    },
+    "evidence": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Evidence",
+     "type": "array"
+    },
+    "at": {
+     "title": "At",
+     "type": "string"
+    }
+   },
+   "required": [
+    "id",
+    "node",
+    "what",
+    "light",
+    "owner",
+    "rationale",
+    "at"
+   ],
+   "title": "Decision",
+   "type": "object"
+  },
+  "Defect": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "signature": {
+     "title": "Signature",
+     "type": "string"
+    },
+    "dimension": {
+     "title": "Dimension",
+     "type": "string"
+    },
+    "severity": {
+     "enum": [
+      "P1",
+      "P2",
+      "P3",
+      "P4"
+     ],
+     "title": "Severity",
+     "type": "string"
+    },
+    "message": {
+     "title": "Message",
+     "type": "string"
+    },
+    "evidence": {
+     "title": "Evidence",
+     "type": "string"
+    },
+    "traced_node": {
+     "title": "Traced Node",
+     "type": "string"
+    },
+    "trace_reason": {
+     "title": "Trace Reason",
+     "type": "string"
+    },
+    "artifact_key": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Artifact Key"
+    },
+    "smallest_fix": {
+     "title": "Smallest Fix",
+     "type": "string"
+    },
+    "acceptance_check": {
+     "title": "Acceptance Check",
+     "type": "string"
+    },
+    "source_nodes": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Source Nodes",
+     "type": "array"
+    },
+    "feedback_ids": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Feedback Ids",
+     "type": "array"
+    },
+    "aliases": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Aliases",
+     "type": "array"
+    },
+    "deferred": {
+     "default": "",
+     "title": "Deferred",
+     "type": "string"
+    },
+    "deferred_by": {
+     "default": "",
+     "title": "Deferred By",
+     "type": "string"
+    },
+    "deferred_trigger": {
+     "default": "",
+     "title": "Deferred Trigger",
+     "type": "string"
+    },
+    "claimed_fixed": {
+     "anyOf": [
+      {
+       "$ref": "#/$defs/ClaimedFixed"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "status": {
+     "default": "open",
+     "enum": [
+      "open",
+      "in_rework",
+      "resolved",
+      "persisting",
+      "needs_human",
+      "dismissed"
+     ],
+     "title": "Status",
+     "type": "string"
+    },
+    "failures": {
+     "default": 0,
+     "title": "Failures",
+     "type": "integer"
+    },
+    "opened_at_version": {
+     "default": 0,
+     "title": "Opened At Version",
+     "type": "integer"
+    },
+    "rework_version": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Rework Version"
+    },
+    "attempts_at_start": {
+     "additionalProperties": {
+      "type": "integer"
+     },
+     "title": "Attempts At Start",
+     "type": "object"
+    },
+    "resolved_at_version": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Resolved At Version"
+    },
+    "history": {
+     "items": {
+      "type": "string"
+     },
+     "title": "History",
+     "type": "array"
+    }
+   },
+   "required": [
+    "id",
+    "signature",
+    "dimension",
+    "severity",
+    "message",
+    "evidence",
+    "traced_node",
+    "trace_reason",
+    "smallest_fix",
+    "acceptance_check"
+   ],
+   "title": "Defect",
+   "type": "object"
+  },
+  "Delegation": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "by": {
+     "title": "By",
+     "type": "string"
+    },
+    "instruction": {
+     "title": "Instruction",
+     "type": "string"
+    },
+    "scope": {
+     "items": {
+      "enum": [
+       "decide",
+       "change_request",
+       "unblock",
+       "accept_config",
+       "invalidate",
+       "accept_risk"
+      ],
+      "type": "string"
+     },
+     "title": "Scope",
+     "type": "array"
+    },
+    "nodes": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Nodes",
+     "type": "array"
+    },
+    "except_nodes": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Except Nodes",
+     "type": "array"
+    },
+    "agent": {
+     "title": "Agent",
+     "type": "string"
+    },
+    "created": {
+     "title": "Created",
+     "type": "string"
+    },
+    "expires": {
+     "title": "Expires",
+     "type": "string"
+    },
+    "revoked_at": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Revoked At"
+    },
+    "revoked_by": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Revoked By"
+    },
+    "recorded_by": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Recorded By"
+    },
+    "source": {
+     "default": "",
+     "title": "Source",
+     "type": "string"
+    },
+    "budget_resets": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Budget Resets"
+    },
+    "include_release": {
+     "default": false,
+     "title": "Include Release",
+     "type": "boolean"
+    }
+   },
+   "required": [
+    "id",
+    "by",
+    "instruction",
+    "agent",
+    "created",
+    "expires"
+   ],
+   "title": "Delegation",
+   "type": "object"
+  },
+  "DesignState": {
+   "additionalProperties": false,
+   "properties": {
+    "criteria": {
+     "items": {
+      "$ref": "#/$defs/Criterion"
+     },
+     "title": "Criteria",
+     "type": "array"
+    },
+    "concepts": {
+     "items": {
+      "$ref": "#/$defs/Concept"
+     },
+     "title": "Concepts",
+     "type": "array"
+    },
+    "selected_concept": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Selected Concept"
+    },
+    "journeys": {
+     "items": {
+      "$ref": "#/$defs/Journey"
+     },
+     "title": "Journeys",
+     "type": "array"
+    },
+    "screens": {
+     "items": {
+      "$ref": "#/$defs/Screen"
+     },
+     "title": "Screens",
+     "type": "array"
+    },
+    "flows": {
+     "items": {
+      "$ref": "#/$defs/Flow"
+     },
+     "title": "Flows",
+     "type": "array"
+    },
+    "interactions": {
+     "anyOf": [
+      {
+       "$ref": "#/$defs/InteractionDoc"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "system": {
+     "anyOf": [
+      {
+       "$ref": "#/$defs/DesignSystemDoc"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    }
+   },
+   "title": "DesignState",
+   "type": "object"
+  },
+  "DesignSystemDoc": {
+   "additionalProperties": false,
+   "properties": {
+    "colors": {
+     "items": {
+      "$ref": "#/$defs/ColorToken"
+     },
+     "title": "Colors",
+     "type": "array"
+    },
+    "type_scale": {
+     "items": {
+      "$ref": "#/$defs/TypeToken"
+     },
+     "title": "Type Scale",
+     "type": "array"
+    },
+    "spacing_px": {
+     "items": {
+      "type": "integer"
+     },
+     "title": "Spacing Px",
+     "type": "array"
+    },
+    "radii_px": {
+     "items": {
+      "type": "integer"
+     },
+     "title": "Radii Px",
+     "type": "array"
+    },
+    "contrast_pairs": {
+     "items": {
+      "$ref": "#/$defs/ContrastPair"
+     },
+     "title": "Contrast Pairs",
+     "type": "array"
+    },
+    "components": {
+     "items": {
+      "$ref": "#/$defs/ComponentSpec"
+     },
+     "title": "Components",
+     "type": "array"
+    },
+    "breakpoints_px": {
+     "items": {
+      "type": "integer"
+     },
+     "title": "Breakpoints Px",
+     "type": "array"
+    },
+    "motion": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Motion",
+     "type": "array"
+    },
+    "prohibited": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Prohibited",
+     "type": "array"
+    },
+    "accessibility": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Accessibility",
+     "type": "array"
+    }
+   },
+   "required": [
+    "colors",
+    "type_scale",
+    "spacing_px",
+    "radii_px",
+    "contrast_pairs",
+    "components",
+    "breakpoints_px",
+    "motion",
+    "prohibited",
+    "accessibility"
+   ],
+   "title": "DesignSystemDoc",
+   "type": "object"
+  },
+  "DimensionResult": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "level": {
+     "enum": [
+      "MUST",
+      "SHOULD"
+     ],
+     "title": "Level",
+     "type": "string"
+    },
+    "check": {
+     "enum": [
+      "tool",
+      "review",
+      "human"
+     ],
+     "title": "Check",
+     "type": "string"
+    },
+    "status": {
+     "enum": [
+      "pass",
+      "fail",
+      "advisory_fail",
+      "pending_human",
+      "not_scored"
+     ],
+     "title": "Status",
+     "type": "string"
+    },
+    "enforced": {
+     "title": "Enforced",
+     "type": "boolean"
+    },
+    "score": {
+     "anyOf": [
+      {
+       "type": "number"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Score"
+    },
+    "by": {
+     "default": "",
+     "title": "By",
+     "type": "string"
+    },
+    "evidence": {
+     "default": "",
+     "title": "Evidence",
+     "type": "string"
+    },
+    "detail": {
+     "default": "",
+     "title": "Detail",
+     "type": "string"
+    }
+   },
+   "required": [
+    "id",
+    "level",
+    "check",
+    "status",
+    "enforced"
+   ],
+   "title": "DimensionResult",
+   "type": "object"
+  },
+  "Escalation": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "node": {
+     "title": "Node",
+     "type": "string"
+    },
+    "reason": {
+     "title": "Reason",
+     "type": "string"
+    },
+    "report": {
+     "title": "Report",
+     "type": "string"
+    },
+    "at": {
+     "title": "At",
+     "type": "string"
+    },
+    "open": {
+     "default": true,
+     "title": "Open",
+     "type": "boolean"
+    },
+    "resolved_by": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Resolved By"
+    },
+    "resolved_at": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Resolved At"
+    }
+   },
+   "required": [
+    "id",
+    "node",
+    "reason",
+    "report",
+    "at"
+   ],
+   "title": "Escalation",
+   "type": "object"
+  },
+  "EvaluationState": {
+   "additionalProperties": false,
+   "properties": {
+    "reviews": {
+     "items": {
+      "$ref": "#/$defs/ReviewRecord"
+     },
+     "title": "Reviews",
+     "type": "array"
+    },
+    "test_results": {
+     "items": {
+      "$ref": "#/$defs/TestResult"
+     },
+     "title": "Test Results",
+     "type": "array"
+    },
+    "feedback": {
+     "items": {
+      "$ref": "#/$defs/Feedback"
+     },
+     "title": "Feedback",
+     "type": "array"
+    },
+    "defects": {
+     "items": {
+      "$ref": "#/$defs/Defect"
+     },
+     "title": "Defects",
+     "type": "array"
+    },
+    "gates": {
+     "items": {
+      "$ref": "#/$defs/GateResult"
+     },
+     "title": "Gates",
+     "type": "array"
+    },
+    "comparisons": {
+     "items": {
+      "$ref": "#/$defs/Comparison"
+     },
+     "title": "Comparisons",
+     "type": "array"
+    }
+   },
+   "title": "EvaluationState",
+   "type": "object"
+  },
+  "Evidence": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "claim": {
+     "title": "Claim",
+     "type": "string"
+    },
+    "source_ids": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Source Ids",
+     "type": "array"
+    },
+    "tag": {
+     "enum": [
+      "observed",
+      "reported",
+      "assumed"
+     ],
+     "title": "Tag",
+     "type": "string"
+    },
+    "quote": {
+     "default": "",
+     "title": "Quote",
+     "type": "string"
+    }
+   },
+   "required": [
+    "id",
+    "claim",
+    "source_ids",
+    "tag"
+   ],
+   "title": "Evidence",
+   "type": "object"
+  },
+  "Feedback": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "actor": {
+     "title": "Actor",
+     "type": "string"
+    },
+    "human": {
+     "title": "Human",
+     "type": "boolean"
+    },
+    "simulated": {
+     "default": false,
+     "title": "Simulated",
+     "type": "boolean"
+    },
+    "text": {
+     "title": "Text",
+     "type": "string"
+    },
+    "at": {
+     "default": "",
+     "title": "At",
+     "type": "string"
+    },
+    "severity": {
+     "default": "",
+     "title": "Severity",
+     "type": "string"
+    },
+    "created": {
+     "title": "Created",
+     "type": "string"
+    },
+    "build_version": {
+     "default": 0,
+     "title": "Build Version",
+     "type": "integer"
+    },
+    "status": {
+     "default": "open",
+     "enum": [
+      "open",
+      "interpreted",
+      "dismissed"
+     ],
+     "title": "Status",
+     "type": "string"
+    },
+    "defect_ids": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Defect Ids",
+     "type": "array"
+    },
+    "recorded_by": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Recorded By"
+    },
+    "source": {
+     "default": "",
+     "title": "Source",
+     "type": "string"
+    },
+    "interprets": {
+     "default": false,
+     "title": "Interprets",
+     "type": "boolean"
+    }
+   },
+   "required": [
+    "id",
+    "actor",
+    "human",
+    "text",
+    "created"
+   ],
+   "title": "Feedback",
+   "type": "object"
+  },
+  "FindingRecord": {
+   "additionalProperties": false,
+   "properties": {
+    "node": {
+     "title": "Node",
+     "type": "string"
+    },
+    "dimension": {
+     "title": "Dimension",
+     "type": "string"
+    },
+    "severity": {
+     "enum": [
+      "P1",
+      "P2",
+      "P3",
+      "P4"
+     ],
+     "title": "Severity",
+     "type": "string"
+    },
+    "message": {
+     "title": "Message",
+     "type": "string"
+    },
+    "evidence": {
+     "default": "",
+     "title": "Evidence",
+     "type": "string"
+    },
+    "location": {
+     "default": "",
+     "title": "Location",
+     "type": "string"
+    },
+    "by": {
+     "default": "agent",
+     "title": "By",
+     "type": "string"
+    },
+    "traced_node": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Traced Node"
+    },
+    "smallest_fix": {
+     "default": "",
+     "title": "Smallest Fix",
+     "type": "string"
+    },
+    "acceptance_check": {
+     "default": "",
+     "title": "Acceptance Check",
+     "type": "string"
+    },
+    "blocking": {
+     "default": false,
+     "title": "Blocking",
+     "type": "boolean"
+    },
+    "reported_severity": {
+     "anyOf": [
+      {
+       "enum": [
+        "P1",
+        "P2",
+        "P3",
+        "P4"
+       ],
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Reported Severity"
+    },
+    "element": {
+     "default": "",
+     "title": "Element",
+     "type": "string"
+    }
+   },
+   "required": [
+    "node",
+    "dimension",
+    "severity",
+    "message"
+   ],
+   "title": "FindingRecord",
+   "type": "object"
+  },
+  "Flow": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "name": {
+     "title": "Name",
+     "type": "string"
+    },
+    "requirement_ids": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Requirement Ids",
+     "type": "array"
+    },
+    "entry": {
+     "title": "Entry",
+     "type": "string"
+    },
+    "exit": {
+     "title": "Exit",
+     "type": "string"
+    },
+    "steps": {
+     "items": {
+      "$ref": "#/$defs/FlowStep"
+     },
+     "title": "Steps",
+     "type": "array"
+    }
+   },
+   "required": [
+    "id",
+    "name",
+    "requirement_ids",
+    "entry",
+    "exit",
+    "steps"
+   ],
+   "title": "Flow",
+   "type": "object"
+  },
+  "FlowStep": {
+   "additionalProperties": false,
+   "properties": {
+    "screen": {
+     "title": "Screen",
+     "type": "string"
+    },
+    "action": {
+     "title": "Action",
+     "type": "string"
+    },
+    "outcome": {
+     "title": "Outcome",
+     "type": "string"
+    }
+   },
+   "required": [
+    "screen",
+    "action",
+    "outcome"
+   ],
+   "title": "FlowStep",
+   "type": "object"
+  },
+  "FocusTrace": {
+   "additionalProperties": false,
+   "description": "Where the plan checks one of N08's focus rules (backlog N-22: a build broke two and passed, because no scenario\nchecked them). Exactly one of: a scenario step that is an `expect_focus`, a browser check that covers the rule, or\nthe reason it is out of scope for this prototype.",
+   "properties": {
+    "rule": {
+     "title": "Rule",
+     "type": "string"
+    },
+    "scenario": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Scenario"
+    },
+    "step": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Step"
+    },
+    "covered_by": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Covered By"
+    },
+    "out_of_scope": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Out Of Scope"
+    }
+   },
+   "required": [
+    "rule"
+   ],
+   "title": "FocusTrace",
+   "type": "object"
+  },
+  "GapWaiver": {
+   "additionalProperties": false,
+   "properties": {
+    "gap": {
+     "title": "Gap",
+     "type": "string"
+    },
+    "by": {
+     "title": "By",
+     "type": "string"
+    },
+    "reason": {
+     "title": "Reason",
+     "type": "string"
+    },
+    "at": {
+     "title": "At",
+     "type": "string"
+    }
+   },
+   "required": [
+    "gap",
+    "by",
+    "reason",
+    "at"
+   ],
+   "title": "GapWaiver",
+   "type": "object"
+  },
+  "GateResult": {
+   "additionalProperties": false,
+   "properties": {
+    "node": {
+     "title": "Node",
+     "type": "string"
+    },
+    "cycle": {
+     "title": "Cycle",
+     "type": "integer"
+    },
+    "build_version": {
+     "title": "Build Version",
+     "type": "integer"
+    },
+    "outcome": {
+     "enum": [
+      "pass",
+      "rework",
+      "blocked"
+     ],
+     "title": "Outcome",
+     "type": "string"
+    },
+    "reasons": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Reasons",
+     "type": "array"
+    },
+    "blocking_defects": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Blocking Defects",
+     "type": "array"
+    },
+    "targets": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Targets",
+     "type": "array"
+    },
+    "at": {
+     "title": "At",
+     "type": "string"
+    },
+    "answered": {
+     "items": {
+      "additionalProperties": {
+       "type": "string"
+      },
+      "type": "object"
+     },
+     "title": "Answered",
+     "type": "array"
+    },
+    "raised": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Raised",
+     "type": "array"
+    },
+    "kept_advisory": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Kept Advisory",
+     "type": "array"
+    }
+   },
+   "required": [
+    "node",
+    "cycle",
+    "build_version",
+    "outcome",
+    "reasons",
+    "blocking_defects",
+    "targets",
+    "at"
+   ],
+   "title": "GateResult",
+   "type": "object"
+  },
+  "HistoryState": {
+   "additionalProperties": false,
+   "properties": {
+    "decisions": {
+     "items": {
+      "$ref": "#/$defs/Decision"
+     },
+     "title": "Decisions",
+     "type": "array"
+    },
+    "approvals": {
+     "items": {
+      "$ref": "#/$defs/Approval"
+     },
+     "title": "Approvals",
+     "type": "array"
+    },
+    "checkpoints": {
+     "items": {
+      "$ref": "#/$defs/CheckpointRef"
+     },
+     "title": "Checkpoints",
+     "type": "array"
+    },
+    "change_requests": {
+     "items": {
+      "$ref": "#/$defs/ChangeRequest"
+     },
+     "title": "Change Requests",
+     "type": "array"
+    },
+    "delegations": {
+     "items": {
+      "$ref": "#/$defs/Delegation"
+     },
+     "title": "Delegations",
+     "type": "array"
+    },
+    "risk_acceptances": {
+     "items": {
+      "$ref": "#/$defs/RiskAcceptance"
+     },
+     "title": "Risk Acceptances",
+     "type": "array"
+    },
+    "ratifications": {
+     "items": {
+      "$ref": "#/$defs/Ratification"
+     },
+     "title": "Ratifications",
+     "type": "array"
+    },
+    "revisions": {
+     "items": {
+      "$ref": "#/$defs/Revision"
+     },
+     "title": "Revisions",
+     "type": "array"
+    },
+    "versions": {
+     "items": {
+      "additionalProperties": true,
+      "type": "object"
+     },
+     "title": "Versions",
+     "type": "array"
+    }
+   },
+   "title": "HistoryState",
+   "type": "object"
+  },
+  "InputsState": {
+   "additionalProperties": false,
+   "properties": {
+    "brief": {
+     "default": "",
+     "title": "Brief",
+     "type": "string"
+    },
+    "sources": {
+     "items": {
+      "$ref": "#/$defs/Source"
+     },
+     "title": "Sources",
+     "type": "array"
+    },
+    "frozen": {
+     "default": false,
+     "title": "Frozen",
+     "type": "boolean"
+    },
+    "inputs_sha256": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Inputs Sha256"
+    },
+    "waivers": {
+     "items": {
+      "$ref": "#/$defs/GapWaiver"
+     },
+     "title": "Waivers",
+     "type": "array"
+    }
+   },
+   "title": "InputsState",
+   "type": "object"
+  },
+  "Insight": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "statement": {
+     "title": "Statement",
+     "type": "string"
+    },
+    "evidence_ids": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Evidence Ids",
+     "type": "array"
+    },
+    "confidence": {
+     "enum": [
+      "high",
+      "medium",
+      "low"
+     ],
+     "title": "Confidence",
+     "type": "string"
+    }
+   },
+   "required": [
+    "id",
+    "statement",
+    "evidence_ids",
+    "confidence"
+   ],
+   "title": "Insight",
+   "type": "object"
+  },
+  "Interaction": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "trigger": {
+     "title": "Trigger",
+     "type": "string"
+    },
+    "response": {
+     "title": "Response",
+     "type": "string"
+    },
+    "feedback": {
+     "title": "Feedback",
+     "type": "string"
+    },
+    "keyboard": {
+     "title": "Keyboard",
+     "type": "string"
+    }
+   },
+   "required": [
+    "id",
+    "trigger",
+    "response",
+    "feedback",
+    "keyboard"
+   ],
+   "title": "Interaction",
+   "type": "object"
+  },
+  "InteractionDoc": {
+   "additionalProperties": false,
+   "properties": {
+    "screens": {
+     "items": {
+      "$ref": "#/$defs/ScreenSpec"
+     },
+     "title": "Screens",
+     "type": "array"
+    },
+    "focus_rules": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Focus Rules",
+     "type": "array"
+    },
+    "feedback_rules": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Feedback Rules",
+     "type": "array"
+    }
+   },
+   "required": [
+    "screens",
+    "focus_rules",
+    "feedback_rules"
+   ],
+   "title": "InteractionDoc",
+   "type": "object"
+  },
+  "Journey": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "persona": {
+     "title": "Persona",
+     "type": "string"
+    },
+    "job": {
+     "title": "Job",
+     "type": "string"
+    },
+    "stages": {
+     "items": {
+      "$ref": "#/$defs/JourneyStage"
+     },
+     "title": "Stages",
+     "type": "array"
+    }
+   },
+   "required": [
+    "id",
+    "persona",
+    "job",
+    "stages"
+   ],
+   "title": "Journey",
+   "type": "object"
+  },
+  "JourneyStage": {
+   "additionalProperties": false,
+   "properties": {
+    "name": {
+     "title": "Name",
+     "type": "string"
+    },
+    "doing": {
+     "title": "Doing",
+     "type": "string"
+    },
+    "pain": {
+     "default": "",
+     "title": "Pain",
+     "type": "string"
+    },
+    "opportunity": {
+     "default": "",
+     "title": "Opportunity",
+     "type": "string"
+    }
+   },
+   "required": [
+    "name",
+    "doing"
+   ],
+   "title": "JourneyStage",
+   "type": "object"
+  },
+  "KnowledgeState": {
+   "additionalProperties": false,
+   "properties": {
+    "rules_path": {
+     "default": "",
+     "title": "Rules Path",
+     "type": "string"
+    },
+    "rules_version": {
+     "default": "",
+     "title": "Rules Version",
+     "type": "string"
+    },
+    "rules_sha256": {
+     "default": "",
+     "title": "Rules Sha256",
+     "type": "string"
+    },
+    "enforced": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Enforced",
+     "type": "array"
+    },
+    "advisory": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Advisory",
+     "type": "array"
+    },
+    "lessons": {
+     "items": {
+      "$ref": "#/$defs/Lesson"
+     },
+     "title": "Lessons",
+     "type": "array"
+    },
+    "proposal": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Proposal"
+    }
+   },
+   "title": "KnowledgeState",
+   "type": "object"
+  },
+  "LedgerBreak": {
+   "additionalProperties": false,
+   "description": "A loss of ledger events that a named human accepted because no backup existed (`pdg accept-ledger-break`).",
+   "properties": {
+    "actor": {
+     "title": "Actor",
+     "type": "string"
+    },
+    "reason": {
+     "title": "Reason",
+     "type": "string"
+    },
+    "at": {
+     "title": "At",
+     "type": "string"
+    },
+    "lost_after_seq": {
+     "title": "Lost After Seq",
+     "type": "integer"
+    },
+    "recorded_seq": {
+     "default": 0,
+     "title": "Recorded Seq",
+     "type": "integer"
+    },
+    "lost_hash": {
+     "title": "Lost Hash",
+     "type": "string"
+    },
+    "problem": {
+     "title": "Problem",
+     "type": "string"
+    },
+    "resumes_at_seq": {
+     "title": "Resumes At Seq",
+     "type": "integer"
+    },
+    "rechained": {
+     "default": 0,
+     "title": "Rechained",
+     "type": "integer"
+    }
+   },
+   "required": [
+    "actor",
+    "reason",
+    "at",
+    "lost_after_seq",
+    "lost_hash",
+    "problem",
+    "resumes_at_seq"
+   ],
+   "title": "LedgerBreak",
+   "type": "object"
+  },
+  "Lesson": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "statement": {
+     "title": "Statement",
+     "type": "string"
+    },
+    "scope": {
+     "enum": [
+      "reusable",
+      "project_specific"
+     ],
+     "title": "Scope",
+     "type": "string"
+    },
+    "evidence_class": {
+     "enum": [
+      "verified",
+      "inferred",
+      "recommendation",
+      "missing"
+     ],
+     "title": "Evidence Class",
+     "type": "string"
+    },
+    "evidence": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Evidence",
+     "type": "array"
+    },
+    "rule_id": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Rule Id"
+    },
+    "helped": {
+     "anyOf": [
+      {
+       "type": "boolean"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Helped"
+    },
+    "category": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Category"
+    },
+    "target_scope": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Target Scope"
+    }
+   },
+   "required": [
+    "id",
+    "statement",
+    "scope",
+    "evidence_class",
+    "evidence"
+   ],
+   "title": "Lesson",
+   "type": "object"
+  },
+  "Metric": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "name": {
+     "title": "Name",
+     "type": "string"
+    },
+    "kind": {
+     "enum": [
+      "north_star",
+      "supporting",
+      "guardrail"
+     ],
+     "title": "Kind",
+     "type": "string"
+    },
+    "baseline": {
+     "title": "Baseline",
+     "type": "string"
+    },
+    "target": {
+     "title": "Target",
+     "type": "string"
+    },
+    "unit": {
+     "title": "Unit",
+     "type": "string"
+    },
+    "method": {
+     "title": "Method",
+     "type": "string"
+    }
+   },
+   "required": [
+    "id",
+    "name",
+    "kind",
+    "baseline",
+    "target",
+    "unit",
+    "method"
+   ],
+   "title": "Metric",
+   "type": "object"
+  },
+  "NodeRuntime": {
+   "additionalProperties": false,
+   "properties": {
+    "status": {
+     "$ref": "#/$defs/NodeStatus",
+     "default": "PLANNED"
+    },
+    "attempt": {
+     "default": 0,
+     "title": "Attempt",
+     "type": "integer"
+    },
+    "streak": {
+     "default": 0,
+     "title": "Streak",
+     "type": "integer"
+    },
+    "interruptions": {
+     "default": 0,
+     "title": "Interruptions",
+     "type": "integer"
+    },
+    "outcome": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Outcome"
+    },
+    "token": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Token"
+    },
+    "fingerprint": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Fingerprint"
+    },
+    "passed_fingerprint": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Passed Fingerprint"
+    },
+    "passed_judging": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Passed Judging"
+    },
+    "executed": {
+     "default": false,
+     "title": "Executed",
+     "type": "boolean"
+    },
+    "failures": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Failures",
+     "type": "array"
+    },
+    "rework": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Rework",
+     "type": "array"
+    },
+    "force_rerun": {
+     "default": false,
+     "title": "Force Rerun",
+     "type": "boolean"
+    },
+    "started_at": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Started At"
+    },
+    "finished_at": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Finished At"
+    },
+    "duration_s": {
+     "anyOf": [
+      {
+       "type": "number"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Duration S"
+    },
+    "memo_hits": {
+     "default": 0,
+     "title": "Memo Hits",
+     "type": "integer"
+    },
+    "rerun_reason": {
+     "default": "",
+     "title": "Rerun Reason",
+     "type": "string"
+    },
+    "passed_attempt": {
+     "default": 0,
+     "title": "Passed Attempt",
+     "type": "integer"
+    },
+    "passed_checks": {
+     "anyOf": [
+      {
+       "$ref": "#/$defs/PassedChecks"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "judged_checks": {
+     "anyOf": [
+      {
+       "$ref": "#/$defs/PassedChecks"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "passed_controls": {
+     "additionalProperties": {
+      "type": "integer"
+     },
+     "title": "Passed Controls",
+     "type": "object"
+    },
+    "gate_note": {
+     "default": "",
+     "title": "Gate Note",
+     "type": "string"
+    },
+    "parked": {
+     "anyOf": [
+      {
+       "additionalProperties": true,
+       "type": "object"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Parked"
+    },
+    "carried": {
+     "anyOf": [
+      {
+       "additionalProperties": true,
+       "type": "object"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Carried"
+    },
+    "rejudge": {
+     "anyOf": [
+      {
+       "additionalProperties": true,
+       "type": "object"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Rejudge"
+    },
+    "passed_dims": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Passed Dims",
+     "type": "array"
+    },
+    "issued_judging": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Issued Judging"
+    },
+    "issued_dims": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Issued Dims",
+     "type": "array"
+    },
+    "tool_details": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Tool Details",
+     "type": "array"
+    }
+   },
+   "title": "NodeRuntime",
+   "type": "object"
+  },
+  "NodeStatus": {
+   "enum": [
+    "PLANNED",
+    "READY",
+    "RUNNING",
+    "WAITING_AGENT",
+    "WAITING_HUMAN",
+    "VALIDATING",
+    "PASSED",
+    "ITERATE",
+    "STALE",
+    "BLOCKED"
+   ],
+   "title": "NodeStatus",
+   "type": "string"
+  },
+  "OpenQuestion": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "question": {
+     "title": "Question",
+     "type": "string"
+    },
+    "blocking": {
+     "default": false,
+     "title": "Blocking",
+     "type": "boolean"
+    },
+    "owner": {
+     "default": "",
+     "title": "Owner",
+     "type": "string"
+    },
+    "light": {
+     "default": "yellow",
+     "enum": [
+      "green",
+      "yellow",
+      "red"
+     ],
+     "title": "Light",
+     "type": "string"
+    },
+    "trigger": {
+     "default": "",
+     "title": "Trigger",
+     "type": "string"
+    },
+    "expiry": {
+     "default": "",
+     "title": "Expiry",
+     "type": "string"
+    },
+    "resolved": {
+     "default": false,
+     "title": "Resolved",
+     "type": "boolean"
+    },
+    "answer": {
+     "default": "",
+     "title": "Answer",
+     "type": "string"
+    }
+   },
+   "required": [
+    "id",
+    "question"
+   ],
+   "title": "OpenQuestion",
+   "type": "object"
+  },
+  "Pain": {
+   "additionalProperties": false,
+   "properties": {
+    "statement": {
+     "title": "Statement",
+     "type": "string"
+    },
+    "evidence_ids": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Evidence Ids",
+     "type": "array"
+    }
+   },
+   "required": [
+    "statement",
+    "evidence_ids"
+   ],
+   "title": "Pain",
+   "type": "object"
+  },
+  "PassedChecks": {
+   "additionalProperties": false,
+   "description": "The code and the configuration a node's tool checks ran with when it passed: a later change to either is a check\nupgrade its verdict never saw (field run W65).",
+   "properties": {
+    "code": {
+     "title": "Code",
+     "type": "string"
+    },
+    "config": {
+     "title": "Config",
+     "type": "string"
+    },
+    "git_state": {
+     "anyOf": [
+      {
+       "additionalProperties": true,
+       "type": "object"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Git State"
+    },
+    "recheckable": {
+     "default": true,
+     "title": "Recheckable",
+     "type": "boolean"
+    }
+   },
+   "required": [
+    "code",
+    "config"
+   ],
+   "title": "PassedChecks",
+   "type": "object"
+  },
+  "Pov": {
+   "additionalProperties": false,
+   "properties": {
+    "user": {
+     "title": "User",
+     "type": "string"
+    },
+    "need": {
+     "title": "Need",
+     "type": "string"
+    },
+    "insight": {
+     "title": "Insight",
+     "type": "string"
+    }
+   },
+   "required": [
+    "user",
+    "need",
+    "insight"
+   ],
+   "title": "Pov",
+   "type": "object"
+  },
+  "ProblemFrame": {
+   "additionalProperties": false,
+   "properties": {
+    "problem_statement": {
+     "title": "Problem Statement",
+     "type": "string"
+    },
+    "job": {
+     "title": "Job",
+     "type": "string"
+    },
+    "primary_persona": {
+     "title": "Primary Persona",
+     "type": "string"
+    },
+    "top_pain": {
+     "$ref": "#/$defs/Pain"
+    },
+    "opportunity": {
+     "title": "Opportunity",
+     "type": "string"
+    },
+    "pov": {
+     "$ref": "#/$defs/Pov"
+    },
+    "how_might_we": {
+     "items": {
+      "type": "string"
+     },
+     "title": "How Might We",
+     "type": "array"
+    },
+    "decisions_to_enable": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Decisions To Enable",
+     "type": "array"
+    },
+    "against": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Against",
+     "type": "array"
+    }
+   },
+   "required": [
+    "problem_statement",
+    "job",
+    "primary_persona",
+    "top_pain",
+    "opportunity",
+    "pov",
+    "how_might_we",
+    "decisions_to_enable"
+   ],
+   "title": "ProblemFrame",
+   "type": "object"
+  },
+  "ProductState": {
+   "additionalProperties": false,
+   "properties": {
+    "objective": {
+     "default": "",
+     "title": "Objective",
+     "type": "string"
+    },
+    "value_proposition": {
+     "default": "",
+     "title": "Value Proposition",
+     "type": "string"
+    },
+    "customer_context": {
+     "default": "",
+     "title": "Customer Context",
+     "type": "string"
+    },
+    "users": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Users",
+     "type": "array"
+    },
+    "problem": {
+     "anyOf": [
+      {
+       "$ref": "#/$defs/ProblemFrame"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "requirements": {
+     "items": {
+      "$ref": "#/$defs/Requirement"
+     },
+     "title": "Requirements",
+     "type": "array"
+    },
+    "constraints": {
+     "items": {
+      "$ref": "#/$defs/Constraint"
+     },
+     "title": "Constraints",
+     "type": "array"
+    },
+    "scope": {
+     "anyOf": [
+      {
+       "$ref": "#/$defs/Scope"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "success_criteria": {
+     "items": {
+      "$ref": "#/$defs/Metric"
+     },
+     "title": "Success Criteria",
+     "type": "array"
+    },
+    "rollback_triggers": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Rollback Triggers",
+     "type": "array"
+    }
+   },
+   "title": "ProductState",
+   "type": "object"
+  },
+  "ProjectInfo": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "name": {
+     "title": "Name",
+     "type": "string"
+    },
+    "created": {
+     "title": "Created",
+     "type": "string"
+    },
+    "workflow_id": {
+     "title": "Workflow Id",
+     "type": "string"
+    },
+    "workflow_version": {
+     "title": "Workflow Version",
+     "type": "string"
+    }
+   },
+   "required": [
+    "id",
+    "name",
+    "created",
+    "workflow_id",
+    "workflow_version"
+   ],
+   "title": "ProjectInfo",
+   "type": "object"
+  },
+  "PrototypePlan": {
+   "additionalProperties": false,
+   "properties": {
+    "goals": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Goals",
+     "type": "array"
+    },
+    "fidelity": {
+     "enum": [
+      "low",
+      "mid",
+      "high"
+     ],
+     "title": "Fidelity",
+     "type": "string"
+    },
+    "fidelity_rationale": {
+     "title": "Fidelity Rationale",
+     "type": "string"
+    },
+    "riskiest_assumptions": {
+     "items": {
+      "$ref": "#/$defs/AssumptionCheck"
+     },
+     "title": "Riskiest Assumptions",
+     "type": "array"
+    },
+    "customer_alignment": {
+     "$ref": "#/$defs/Alignment"
+    },
+    "scenarios": {
+     "items": {
+      "$ref": "#/$defs/Scenario"
+     },
+     "title": "Scenarios",
+     "type": "array"
+    },
+    "states": {
+     "items": {
+      "$ref": "#/$defs/StateCheck"
+     },
+     "title": "States",
+     "type": "array"
+    },
+    "viewports": {
+     "items": {
+      "type": "integer"
+     },
+     "title": "Viewports",
+     "type": "array"
+    },
+    "content_needs": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Content Needs",
+     "type": "array"
+    },
+    "test_criteria": {
+     "items": {
+      "$ref": "#/$defs/TestCriterion"
+     },
+     "title": "Test Criteria",
+     "type": "array"
+    },
+    "out_of_scope": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Out Of Scope",
+     "type": "array"
+    },
+    "samples": {
+     "additionalProperties": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array"
+     },
+     "title": "Samples",
+     "type": "object"
+    },
+    "forbidden_text": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Forbidden Text",
+     "type": "array"
+    },
+    "focus_trace": {
+     "items": {
+      "$ref": "#/$defs/FocusTrace"
+     },
+     "title": "Focus Trace",
+     "type": "array"
+    },
+    "acceptance_trace": {
+     "items": {
+      "$ref": "#/$defs/AcceptanceTrace"
+     },
+     "title": "Acceptance Trace",
+     "type": "array"
+    }
+   },
+   "required": [
+    "goals",
+    "fidelity",
+    "fidelity_rationale",
+    "riskiest_assumptions",
+    "customer_alignment",
+    "scenarios",
+    "states",
+    "viewports",
+    "content_needs",
+    "test_criteria",
+    "out_of_scope"
+   ],
+   "title": "PrototypePlan",
+   "type": "object"
+  },
+  "PrototypeRef": {
+   "additionalProperties": false,
+   "properties": {
+    "version": {
+     "title": "Version",
+     "type": "integer"
+    },
+    "artifact": {
+     "title": "Artifact",
+     "type": "string"
+    },
+    "entry": {
+     "title": "Entry",
+     "type": "string"
+    },
+    "sha256": {
+     "title": "Sha256",
+     "type": "string"
+    },
+    "stack": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Stack",
+     "type": "array"
+    }
+   },
+   "required": [
+    "version",
+    "artifact",
+    "entry",
+    "sha256"
+   ],
+   "title": "PrototypeRef",
+   "type": "object"
+  },
+  "Ratification": {
+   "additionalProperties": false,
+   "description": "A named human confirms or reverses a delegated/transcribed action after the fact.",
+   "properties": {
+    "target": {
+     "title": "Target",
+     "type": "string"
+    },
+    "actor": {
+     "title": "Actor",
+     "type": "string"
+    },
+    "reason": {
+     "title": "Reason",
+     "type": "string"
+    },
+    "at": {
+     "title": "At",
+     "type": "string"
+    },
+    "reverse": {
+     "default": false,
+     "title": "Reverse",
+     "type": "boolean"
+    }
+   },
+   "required": [
+    "target",
+    "actor",
+    "reason",
+    "at"
+   ],
+   "title": "Ratification",
+   "type": "object"
+  },
+  "Requirement": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "type": {
+     "enum": [
+      "user",
+      "business",
+      "technical"
+     ],
+     "title": "Type",
+     "type": "string"
+    },
+    "statement": {
+     "title": "Statement",
+     "type": "string"
+    },
+    "priority": {
+     "enum": [
+      "P0",
+      "P1",
+      "P2"
+     ],
+     "title": "Priority",
+     "type": "string"
+    },
+    "evidence_ids": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Evidence Ids",
+     "type": "array"
+    },
+    "assumption_ids": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Assumption Ids",
+     "type": "array"
+    },
+    "acceptance": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Acceptance",
+     "type": "array"
+    }
+   },
+   "required": [
+    "id",
+    "type",
+    "statement",
+    "priority"
+   ],
+   "title": "Requirement",
+   "type": "object"
+  },
+  "ResearchState": {
+   "additionalProperties": false,
+   "properties": {
+    "evidence": {
+     "items": {
+      "$ref": "#/$defs/Evidence"
+     },
+     "title": "Evidence",
+     "type": "array"
+    },
+    "insights": {
+     "items": {
+      "$ref": "#/$defs/Insight"
+     },
+     "title": "Insights",
+     "type": "array"
+    },
+    "assumptions": {
+     "items": {
+      "$ref": "#/$defs/Assumption"
+     },
+     "title": "Assumptions",
+     "type": "array"
+    },
+    "open_questions": {
+     "items": {
+      "$ref": "#/$defs/OpenQuestion"
+     },
+     "title": "Open Questions",
+     "type": "array"
+    },
+    "missing": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Missing",
+     "type": "array"
+    },
+    "validation_findings": {
+     "items": {
+      "$ref": "#/$defs/ValidationFinding"
+     },
+     "title": "Validation Findings",
+     "type": "array"
+    }
+   },
+   "title": "ResearchState",
+   "type": "object"
+  },
+  "ReviewRecord": {
+   "additionalProperties": false,
+   "properties": {
+    "node": {
+     "title": "Node",
+     "type": "string"
+    },
+    "attempt": {
+     "title": "Attempt",
+     "type": "integer"
+    },
+    "build_version": {
+     "title": "Build Version",
+     "type": "integer"
+    },
+    "dimensions": {
+     "items": {
+      "$ref": "#/$defs/DimensionResult"
+     },
+     "title": "Dimensions",
+     "type": "array"
+    },
+    "findings": {
+     "items": {
+      "$ref": "#/$defs/FindingRecord"
+     },
+     "title": "Findings",
+     "type": "array"
+    },
+    "overridden": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Overridden",
+     "type": "array"
+    },
+    "passed": {
+     "title": "Passed",
+     "type": "boolean"
+    },
+    "summary": {
+     "default": "",
+     "title": "Summary",
+     "type": "string"
+    },
+    "at": {
+     "title": "At",
+     "type": "string"
+    },
+    "reviewer": {
+     "default": "",
+     "title": "Reviewer",
+     "type": "string"
+    },
+    "independent": {
+     "anyOf": [
+      {
+       "type": "boolean"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Independent"
+    },
+    "no_longer_holds": {
+     "items": {
+      "type": "string"
+     },
+     "title": "No Longer Holds",
+     "type": "array"
+    }
+   },
+   "required": [
+    "node",
+    "attempt",
+    "build_version",
+    "dimensions",
+    "findings",
+    "passed",
+    "at"
+   ],
+   "title": "ReviewRecord",
+   "type": "object"
+  },
+  "Revision": {
+   "additionalProperties": false,
+   "properties": {
+    "node": {
+     "title": "Node",
+     "type": "string"
+    },
+    "attempt": {
+     "title": "Attempt",
+     "type": "integer"
+    },
+    "reason": {
+     "enum": [
+      "retry",
+      "rework",
+      "loop",
+      "change_request",
+      "resume",
+      "invalidate"
+     ],
+     "title": "Reason",
+     "type": "string"
+    },
+    "detail": {
+     "title": "Detail",
+     "type": "string"
+    },
+    "at": {
+     "title": "At",
+     "type": "string"
+    }
+   },
+   "required": [
+    "node",
+    "attempt",
+    "reason",
+    "detail",
+    "at"
+   ],
+   "title": "Revision",
+   "type": "object"
+  },
+  "RiskAcceptance": {
+   "additionalProperties": false,
+   "description": "A named human accepts building past an unvalidated riskiest assumption (`pdg accept-risk`).",
+   "properties": {
+    "assumption": {
+     "title": "Assumption",
+     "type": "string"
+    },
+    "actor": {
+     "title": "Actor",
+     "type": "string"
+    },
+    "on_behalf_of": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "On Behalf Of"
+    },
+    "delegation": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Delegation"
+    },
+    "reason": {
+     "title": "Reason",
+     "type": "string"
+    },
+    "at": {
+     "title": "At",
+     "type": "string"
+    },
+    "build_version": {
+     "default": 0,
+     "title": "Build Version",
+     "type": "integer"
+    },
+    "statement_sha256": {
+     "default": "",
+     "title": "Statement Sha256",
+     "type": "string"
+    },
+    "recorded_by": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Recorded By"
+    },
+    "source": {
+     "default": "",
+     "title": "Source",
+     "type": "string"
+    },
+    "interprets": {
+     "default": false,
+     "title": "Interprets",
+     "type": "boolean"
+    }
+   },
+   "required": [
+    "assumption",
+    "actor",
+    "reason",
+    "at"
+   ],
+   "title": "RiskAcceptance",
+   "type": "object"
+  },
+  "RunStatus": {
+   "enum": [
+    "RUNNING",
+    "WAITING_AGENT",
+    "WAITING_HUMAN",
+    "BLOCKED",
+    "RUN_PASS"
+   ],
+   "title": "RunStatus",
+   "type": "string"
+  },
+  "RuntimeState": {
+   "additionalProperties": false,
+   "properties": {
+    "status": {
+     "$ref": "#/$defs/RunStatus",
+     "default": "RUNNING"
+    },
+    "nodes": {
+     "additionalProperties": {
+      "$ref": "#/$defs/NodeRuntime"
+     },
+     "title": "Nodes",
+     "type": "object"
+    },
+    "loop_traversals": {
+     "additionalProperties": {
+      "type": "integer"
+     },
+     "title": "Loop Traversals",
+     "type": "object"
+    },
+    "batches": {
+     "default": 0,
+     "title": "Batches",
+     "type": "integer"
+    },
+    "rework_cycles": {
+     "default": 0,
+     "title": "Rework Cycles",
+     "type": "integer"
+    },
+    "planned_gate": {
+     "default": 0,
+     "title": "Planned Gate",
+     "type": "integer"
+    },
+    "escalations": {
+     "items": {
+      "$ref": "#/$defs/Escalation"
+     },
+     "title": "Escalations",
+     "type": "array"
+    },
+    "config_sha256": {
+     "default": "",
+     "title": "Config Sha256",
+     "type": "string"
+    },
+    "config_parts": {
+     "additionalProperties": {
+      "type": "string"
+     },
+     "title": "Config Parts",
+     "type": "object"
+    },
+    "code_parts": {
+     "additionalProperties": {
+      "type": "string"
+     },
+     "title": "Code Parts",
+     "type": "object"
+    },
+    "dry_run": {
+     "default": false,
+     "title": "Dry Run",
+     "type": "boolean"
+    },
+    "ledger_tail": {
+     "items": {},
+     "title": "Ledger Tail",
+     "type": "array"
+    },
+    "pending_ledger": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Pending Ledger",
+     "type": "array"
+    },
+    "ledger_breaks": {
+     "items": {
+      "$ref": "#/$defs/LedgerBreak"
+     },
+     "title": "Ledger Breaks",
+     "type": "array"
+    }
+   },
+   "title": "RuntimeState",
+   "type": "object"
+  },
+  "Scenario": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "flow_id": {
+     "title": "Flow Id",
+     "type": "string"
+    },
+    "name": {
+     "title": "Name",
+     "type": "string"
+    },
+    "steps": {
+     "items": {
+      "$ref": "#/$defs/ScenarioStep"
+     },
+     "title": "Steps",
+     "type": "array"
+    },
+    "success": {
+     "title": "Success",
+     "type": "string"
+    }
+   },
+   "required": [
+    "id",
+    "flow_id",
+    "name",
+    "steps",
+    "success"
+   ],
+   "title": "Scenario",
+   "type": "object"
+  },
+  "ScenarioStep": {
+   "additionalProperties": false,
+   "description": "One step of the browser scenario DSL executed by `pdg.tools.browser` (exactly one action per step).",
+   "properties": {
+    "goto": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Goto"
+    },
+    "click": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Click"
+    },
+    "fill": {
+     "anyOf": [
+      {
+       "items": {
+        "type": "string"
+       },
+       "type": "array"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Fill"
+    },
+    "press": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Press"
+    },
+    "select": {
+     "anyOf": [
+      {
+       "items": {
+        "type": "string"
+       },
+       "type": "array"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Select"
+    },
+    "expect_visible": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Expect Visible"
+    },
+    "expect_hidden": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Expect Hidden"
+    },
+    "expect_text": {
+     "anyOf": [
+      {
+       "items": {
+        "type": "string"
+       },
+       "type": "array"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Expect Text"
+    },
+    "expect_no_text": {
+     "anyOf": [
+      {
+       "items": {
+        "type": "string"
+       },
+       "type": "array"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Expect No Text"
+    },
+    "expect_count": {
+     "anyOf": [
+      {
+       "items": {},
+       "type": "array"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Expect Count"
+    },
+    "expect_disabled": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Expect Disabled"
+    },
+    "expect_enabled": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Expect Enabled"
+    },
+    "expect_route": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Expect Route"
+    },
+    "expect_focus": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Expect Focus"
+    },
+    "expect_in_viewport": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Expect In Viewport"
+    },
+    "expect_reachable": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Expect Reachable"
+    },
+    "reload": {
+     "anyOf": [
+      {
+       "type": "boolean"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Reload"
+    },
+    "screenshot": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Screenshot"
+    },
+    "axe": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Axe"
+    }
+   },
+   "title": "ScenarioStep",
+   "type": "object"
+  },
+  "Scope": {
+   "additionalProperties": false,
+   "properties": {
+    "in_scope": {
+     "items": {
+      "type": "string"
+     },
+     "title": "In Scope",
+     "type": "array"
+    },
+    "out_of_scope": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Out Of Scope",
+     "type": "array"
+    },
+    "non_goals": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Non Goals",
+     "type": "array"
+    }
+   },
+   "required": [
+    "in_scope",
+    "out_of_scope",
+    "non_goals"
+   ],
+   "title": "Scope",
+   "type": "object"
+  },
+  "Screen": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "name": {
+     "title": "Name",
+     "type": "string"
+    },
+    "purpose": {
+     "title": "Purpose",
+     "type": "string"
+    },
+    "route": {
+     "title": "Route",
+     "type": "string"
+    },
+    "parent": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Parent"
+    },
+    "kind": {
+     "anyOf": [
+      {
+       "enum": [
+        "list",
+        "record",
+        "form",
+        "dashboard",
+        "other"
+       ],
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Kind"
+    }
+   },
+   "required": [
+    "id",
+    "name",
+    "purpose",
+    "route"
+   ],
+   "title": "Screen",
+   "type": "object"
+  },
+  "ScreenSpec": {
+   "additionalProperties": false,
+   "properties": {
+    "screen": {
+     "title": "Screen",
+     "type": "string"
+    },
+    "states": {
+     "additionalProperties": {
+      "type": "string"
+     },
+     "title": "States",
+     "type": "object"
+    },
+    "interactions": {
+     "items": {
+      "$ref": "#/$defs/Interaction"
+     },
+     "title": "Interactions",
+     "type": "array"
+    },
+    "validation": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Validation",
+     "type": "array"
+    }
+   },
+   "required": [
+    "screen",
+    "states",
+    "interactions"
+   ],
+   "title": "ScreenSpec",
+   "type": "object"
+  },
+  "Source": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "kind": {
+     "enum": [
+      "brief",
+      "research",
+      "interview",
+      "survey",
+      "analytics",
+      "spec",
+      "prototype",
+      "recording",
+      "brand",
+      "design-system",
+      "feedback",
+      "prior-version",
+      "transcript",
+      "data",
+      "url",
+      "other"
+     ],
+     "title": "Kind",
+     "type": "string"
+    },
+    "title": {
+     "title": "Title",
+     "type": "string"
+    },
+    "path": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Path"
+    },
+    "url": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Url"
+    },
+    "evidence": {
+     "enum": [
+      "observed",
+      "reported",
+      "assumed"
+     ],
+     "title": "Evidence",
+     "type": "string"
+    },
+    "notes": {
+     "default": "",
+     "title": "Notes",
+     "type": "string"
+    },
+    "sha256": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Sha256"
+    },
+    "bytes": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Bytes"
+    }
+   },
+   "required": [
+    "id",
+    "kind",
+    "title",
+    "evidence"
+   ],
+   "title": "Source",
+   "type": "object"
+  },
+  "StateCheck": {
+   "additionalProperties": false,
+   "properties": {
+    "screen": {
+     "title": "Screen",
+     "type": "string"
+    },
+    "state": {
+     "title": "State",
+     "type": "string"
+    },
+    "route": {
+     "title": "Route",
+     "type": "string"
+    },
+    "marker": {
+     "title": "Marker",
+     "type": "string"
+    },
+    "recover": {
+     "anyOf": [
+      {
+       "$ref": "#/$defs/StateRecover"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    }
+   },
+   "required": [
+    "screen",
+    "state",
+    "route",
+    "marker"
+   ],
+   "title": "StateCheck",
+   "type": "object"
+  },
+  "StateRecover": {
+   "additionalProperties": false,
+   "description": "The way out of a state (R-UX-002: an empty state has a way back): the suite presses `click`, then expects the\nstate to be gone (backlog B-09: a \"Clear filters\" with no handler passed every check).",
+   "properties": {
+    "click": {
+     "title": "Click",
+     "type": "string"
+    },
+    "expect_hidden": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Expect Hidden"
+    }
+   },
+   "required": [
+    "click"
+   ],
+   "title": "StateRecover",
+   "type": "object"
+  },
+  "TestCriterion": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "metric": {
+     "title": "Metric",
+     "type": "string"
+    },
+    "threshold": {
+     "title": "Threshold",
+     "type": "string"
+    }
+   },
+   "required": [
+    "id",
+    "metric",
+    "threshold"
+   ],
+   "title": "TestCriterion",
+   "type": "object"
+  },
+  "TestResult": {
+   "additionalProperties": false,
+   "properties": {
+    "node": {
+     "title": "Node",
+     "type": "string"
+    },
+    "suite": {
+     "title": "Suite",
+     "type": "string"
+    },
+    "build_version": {
+     "title": "Build Version",
+     "type": "integer"
+    },
+    "passed": {
+     "title": "Passed",
+     "type": "integer"
+    },
+    "failed": {
+     "title": "Failed",
+     "type": "integer"
+    },
+    "details": {
+     "title": "Details",
+     "type": "string"
+    },
+    "at": {
+     "title": "At",
+     "type": "string"
+    }
+   },
+   "required": [
+    "node",
+    "suite",
+    "build_version",
+    "passed",
+    "failed",
+    "details",
+    "at"
+   ],
+   "title": "TestResult",
+   "type": "object"
+  },
+  "TypeToken": {
+   "additionalProperties": false,
+   "properties": {
+    "name": {
+     "title": "Name",
+     "type": "string"
+    },
+    "size_px": {
+     "title": "Size Px",
+     "type": "number"
+    },
+    "weight": {
+     "title": "Weight",
+     "type": "integer"
+    },
+    "line_height": {
+     "title": "Line Height",
+     "type": "number"
+    }
+   },
+   "required": [
+    "name",
+    "size_px",
+    "weight",
+    "line_height"
+   ],
+   "title": "TypeToken",
+   "type": "object"
+  },
+  "ValidationFinding": {
+   "additionalProperties": false,
+   "properties": {
+    "at_version": {
+     "title": "At Version",
+     "type": "integer"
+    },
+    "participants": {
+     "title": "Participants",
+     "type": "integer"
+    },
+    "simulated": {
+     "title": "Simulated",
+     "type": "boolean"
+    },
+    "task_success_rate": {
+     "title": "Task Success Rate",
+     "type": "number"
+    },
+    "mean_seq": {
+     "anyOf": [
+      {
+       "type": "number"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Mean Seq"
+    },
+    "summary": {
+     "title": "Summary",
+     "type": "string"
+    }
+   },
+   "required": [
+    "at_version",
+    "participants",
+    "simulated",
+    "task_success_rate",
+    "summary"
+   ],
+   "title": "ValidationFinding",
+   "type": "object"
+  }
+ },
+ "additionalProperties": false,
+ "properties": {
+  "schema_version": {
+   "title": "Schema Version",
+   "type": "string"
+  },
+  "project": {
+   "$ref": "#/$defs/ProjectInfo"
+  },
+  "inputs": {
+   "$ref": "#/$defs/InputsState"
+  },
+  "product": {
+   "$ref": "#/$defs/ProductState"
+  },
+  "research": {
+   "$ref": "#/$defs/ResearchState"
+  },
+  "design": {
+   "$ref": "#/$defs/DesignState"
+  },
+  "build": {
+   "$ref": "#/$defs/BuildState"
+  },
+  "artifacts": {
+   "additionalProperties": {
+    "$ref": "#/$defs/ArtifactRecord"
+   },
+   "title": "Artifacts",
+   "type": "object"
+  },
+  "evaluation": {
+   "$ref": "#/$defs/EvaluationState"
+  },
+  "history": {
+   "$ref": "#/$defs/HistoryState"
+  },
+  "knowledge": {
+   "$ref": "#/$defs/KnowledgeState"
+  },
+  "runtime": {
+   "$ref": "#/$defs/RuntimeState"
+  },
+  "controls": {
+   "additionalProperties": {
+    "$ref": "#/$defs/ControlRecord"
+   },
+   "title": "Controls",
+   "type": "object"
+  }
+ },
+ "required": [
+  "schema_version",
+  "project"
+ ],
+ "title": "ProjectState",
+ "type": "object"
+}

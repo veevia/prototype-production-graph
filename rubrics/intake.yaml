@@ -1,0 +1,7 @@
+# Intake (N01). Each dimension names the rule (knowledge/rules.json) whose lifecycle state decides whether it blocks.
+id: intake
+name: Source intake
+reviewer: context-research
+scale: "tool dimensions pass/fail"
+dimensions:
+  - {id: EVD-SOURCES, name: "Sources registered and tagged", brief_dimension: "customer and business relevance", level: MUST, check: {type: tool, fn: "sources:check_registry"}, threshold: "brief registered; every source tagged observed|reported|assumed; every local path exists in the project", rule: R-EVD-001, cases: {never: ["a source summarised in place of being registered", "a quote with no source"], always: ["the brief registered verbatim"]}}

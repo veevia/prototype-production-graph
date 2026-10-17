@@ -1,0 +1,103 @@
+{
+ "$defs": {
+  "Dataset": {
+   "additionalProperties": false,
+   "properties": {
+    "path": {
+     "title": "Path",
+     "type": "string"
+    },
+    "records": {
+     "title": "Records",
+     "type": "integer"
+    },
+    "provenance": {
+     "enum": [
+      "real",
+      "synthetic",
+      "invented",
+      "mixed"
+     ],
+     "title": "Provenance",
+     "type": "string"
+    },
+    "verified_fields": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Verified Fields",
+     "type": "array"
+    },
+    "source_ids": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Source Ids",
+     "type": "array"
+    },
+    "generator": {
+     "default": "",
+     "title": "Generator",
+     "type": "string"
+    },
+    "seed": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Seed"
+    },
+    "label_shown_in_ui": {
+     "title": "Label Shown In Ui",
+     "type": "boolean"
+    },
+    "primary": {
+     "default": "",
+     "title": "Primary",
+     "type": "string"
+    }
+   },
+   "required": [
+    "path",
+    "records",
+    "provenance",
+    "label_shown_in_ui"
+   ],
+   "title": "Dataset",
+   "type": "object"
+  }
+ },
+ "additionalProperties": false,
+ "properties": {
+  "datasets": {
+   "items": {
+    "$ref": "#/$defs/Dataset"
+   },
+   "title": "Datasets",
+   "type": "array"
+  },
+  "copy_deck": {
+   "title": "Copy Deck",
+   "type": "string"
+  },
+  "edge_cases": {
+   "items": {
+    "type": "string"
+   },
+   "title": "Edge Cases",
+   "type": "array"
+  }
+ },
+ "required": [
+  "datasets",
+  "copy_deck",
+  "edge_cases"
+ ],
+ "title": "ContentDoc",
+ "type": "object"
+}

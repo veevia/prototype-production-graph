@@ -1,0 +1,16 @@
+{
+ "dimensions": [
+  {
+   "id": "TEC-FEASIBLE",
+   "score": 4,
+   "evidence": "development.md names the LIMS, decision-log and notice seams and what each needs"
+  },
+  {
+   "id": "TEC-QUALITY",
+   "score": 4,
+   "evidence": "Pure domain module with unit tests; renderers small and escaped"
+  }
+ ],
+ "findings": [],
+ "summary": "Scripted feasibility review (dry run)."
+}

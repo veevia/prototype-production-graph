@@ -1,0 +1,5 @@
+# n05_scope_success attempt 1 — scripted agent output for the fictional example (dry run)
+outputs:
+  scope: "scope.json"
+  product_md: "product.md"
+  evaluation_md: "evaluation.md"

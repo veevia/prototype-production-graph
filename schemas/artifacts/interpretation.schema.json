@@ -1,0 +1,185 @@
+{
+ "$defs": {
+  "DefectIn": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "signature": {
+     "title": "Signature",
+     "type": "string"
+    },
+    "dimension": {
+     "title": "Dimension",
+     "type": "string"
+    },
+    "severity": {
+     "enum": [
+      "P1",
+      "P2",
+      "P3",
+      "P4"
+     ],
+     "title": "Severity",
+     "type": "string"
+    },
+    "message": {
+     "title": "Message",
+     "type": "string"
+    },
+    "evidence": {
+     "title": "Evidence",
+     "type": "string"
+    },
+    "traced_node": {
+     "title": "Traced Node",
+     "type": "string"
+    },
+    "artifact_key": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Artifact Key"
+    },
+    "trace_reason": {
+     "title": "Trace Reason",
+     "type": "string"
+    },
+    "smallest_fix": {
+     "title": "Smallest Fix",
+     "type": "string"
+    },
+    "acceptance_check": {
+     "title": "Acceptance Check",
+     "type": "string"
+    },
+    "from_findings": {
+     "items": {
+      "type": "string"
+     },
+     "title": "From Findings",
+     "type": "array"
+    },
+    "from_feedback": {
+     "items": {
+      "type": "string"
+     },
+     "title": "From Feedback",
+     "type": "array"
+    }
+   },
+   "required": [
+    "id",
+    "signature",
+    "dimension",
+    "severity",
+    "message",
+    "evidence",
+    "traced_node",
+    "trace_reason",
+    "smallest_fix",
+    "acceptance_check"
+   ],
+   "title": "DefectIn",
+   "type": "object"
+  },
+  "FeedbackMapping": {
+   "additionalProperties": false,
+   "properties": {
+    "feedback_id": {
+     "title": "Feedback Id",
+     "type": "string"
+    },
+    "defect_ids": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Defect Ids",
+     "type": "array"
+    },
+    "dismissed_reason": {
+     "default": "",
+     "title": "Dismissed Reason",
+     "type": "string"
+    }
+   },
+   "required": [
+    "feedback_id"
+   ],
+   "title": "FeedbackMapping",
+   "type": "object"
+  },
+  "FindingAnswer": {
+   "additionalProperties": false,
+   "description": "The interpreter's answer to a review finding that is not a defect (field run W22). Never a tool finding.",
+   "properties": {
+    "finding": {
+     "title": "Finding",
+     "type": "string"
+    },
+    "reason": {
+     "title": "Reason",
+     "type": "string"
+    },
+    "evidence": {
+     "title": "Evidence",
+     "type": "string"
+    },
+    "checked_by": {
+     "title": "Checked By",
+     "type": "string"
+    }
+   },
+   "required": [
+    "finding",
+    "reason",
+    "evidence",
+    "checked_by"
+   ],
+   "title": "FindingAnswer",
+   "type": "object"
+  }
+ },
+ "additionalProperties": false,
+ "properties": {
+  "defects": {
+   "items": {
+    "$ref": "#/$defs/DefectIn"
+   },
+   "title": "Defects",
+   "type": "array"
+  },
+  "feedback": {
+   "items": {
+    "$ref": "#/$defs/FeedbackMapping"
+   },
+   "title": "Feedback",
+   "type": "array"
+  },
+  "answered_findings": {
+   "items": {
+    "$ref": "#/$defs/FindingAnswer"
+   },
+   "title": "Answered Findings",
+   "type": "array"
+  },
+  "summary": {
+   "title": "Summary",
+   "type": "string"
+  }
+ },
+ "required": [
+  "defects",
+  "summary"
+ ],
+ "title": "Interpretation",
+ "type": "object"
+}

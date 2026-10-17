@@ -1,0 +1,202 @@
+{
+ "$defs": {
+  "DimensionScore": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "score": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Score"
+    },
+    "passed": {
+     "anyOf": [
+      {
+       "type": "boolean"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Passed"
+    },
+    "evidence": {
+     "default": "",
+     "title": "Evidence",
+     "type": "string"
+    },
+    "notes": {
+     "default": "",
+     "title": "Notes",
+     "type": "string"
+    }
+   },
+   "required": [
+    "id"
+   ],
+   "title": "DimensionScore",
+   "type": "object"
+  },
+  "Finding": {
+   "additionalProperties": false,
+   "properties": {
+    "dimension": {
+     "title": "Dimension",
+     "type": "string"
+    },
+    "severity": {
+     "enum": [
+      "P1",
+      "P2",
+      "P3",
+      "P4"
+     ],
+     "title": "Severity",
+     "type": "string"
+    },
+    "message": {
+     "title": "Message",
+     "type": "string"
+    },
+    "evidence": {
+     "default": "",
+     "title": "Evidence",
+     "type": "string"
+    },
+    "location": {
+     "default": "",
+     "title": "Location",
+     "type": "string"
+    },
+    "element": {
+     "default": "",
+     "title": "Element",
+     "type": "string"
+    },
+    "traced_node": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Traced Node"
+    },
+    "artifact_key": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Artifact Key"
+    },
+    "smallest_fix": {
+     "default": "",
+     "title": "Smallest Fix",
+     "type": "string"
+    },
+    "acceptance_check": {
+     "default": "",
+     "title": "Acceptance Check",
+     "type": "string"
+    },
+    "by": {
+     "default": "agent",
+     "enum": [
+      "tool",
+      "agent",
+      "human"
+     ],
+     "title": "By",
+     "type": "string"
+    },
+    "participant": {
+     "default": "",
+     "title": "Participant",
+     "type": "string"
+    }
+   },
+   "required": [
+    "dimension",
+    "severity",
+    "message"
+   ],
+   "title": "Finding",
+   "type": "object"
+  }
+ },
+ "additionalProperties": false,
+ "properties": {
+  "dimensions": {
+   "items": {
+    "$ref": "#/$defs/DimensionScore"
+   },
+   "title": "Dimensions",
+   "type": "array"
+  },
+  "findings": {
+   "items": {
+    "$ref": "#/$defs/Finding"
+   },
+   "title": "Findings",
+   "type": "array"
+  },
+  "summary": {
+   "title": "Summary",
+   "type": "string"
+  },
+  "reviewer": {
+   "default": "",
+   "title": "Reviewer",
+   "type": "string"
+  },
+  "independent": {
+   "anyOf": [
+    {
+     "type": "boolean"
+    },
+    {
+     "type": "null"
+    }
+   ],
+   "default": null,
+   "title": "Independent"
+  },
+  "build": {
+   "default": "",
+   "title": "Build",
+   "type": "string"
+  },
+  "no_longer_holds": {
+   "items": {
+    "type": "string"
+   },
+   "title": "No Longer Holds",
+   "type": "array"
+  }
+ },
+ "required": [
+  "dimensions",
+  "summary"
+ ],
+ "title": "ReviewDoc",
+ "type": "object"
+}

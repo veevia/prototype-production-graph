@@ -1,0 +1,3 @@
+# n15_feasibility_review attempt 2 — scripted agent output for the fictional example (dry run)
+outputs:
+  feasibility_review: "review.json"

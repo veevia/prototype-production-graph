@@ -1,0 +1,108 @@
+{
+ "$defs": {
+  "Pain": {
+   "additionalProperties": false,
+   "properties": {
+    "statement": {
+     "title": "Statement",
+     "type": "string"
+    },
+    "evidence_ids": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Evidence Ids",
+     "type": "array"
+    }
+   },
+   "required": [
+    "statement",
+    "evidence_ids"
+   ],
+   "title": "Pain",
+   "type": "object"
+  },
+  "Pov": {
+   "additionalProperties": false,
+   "properties": {
+    "user": {
+     "title": "User",
+     "type": "string"
+    },
+    "need": {
+     "title": "Need",
+     "type": "string"
+    },
+    "insight": {
+     "title": "Insight",
+     "type": "string"
+    }
+   },
+   "required": [
+    "user",
+    "need",
+    "insight"
+   ],
+   "title": "Pov",
+   "type": "object"
+  }
+ },
+ "additionalProperties": false,
+ "properties": {
+  "problem_statement": {
+   "title": "Problem Statement",
+   "type": "string"
+  },
+  "job": {
+   "title": "Job",
+   "type": "string"
+  },
+  "primary_persona": {
+   "title": "Primary Persona",
+   "type": "string"
+  },
+  "top_pain": {
+   "$ref": "#/$defs/Pain"
+  },
+  "opportunity": {
+   "title": "Opportunity",
+   "type": "string"
+  },
+  "pov": {
+   "$ref": "#/$defs/Pov"
+  },
+  "how_might_we": {
+   "items": {
+    "type": "string"
+   },
+   "title": "How Might We",
+   "type": "array"
+  },
+  "decisions_to_enable": {
+   "items": {
+    "type": "string"
+   },
+   "title": "Decisions To Enable",
+   "type": "array"
+  },
+  "against": {
+   "items": {
+    "type": "string"
+   },
+   "title": "Against",
+   "type": "array"
+  }
+ },
+ "required": [
+  "problem_statement",
+  "job",
+  "primary_persona",
+  "top_pain",
+  "opportunity",
+  "pov",
+  "how_might_we",
+  "decisions_to_enable"
+ ],
+ "title": "ProblemFrame",
+ "type": "object"
+}

@@ -1,0 +1,10 @@
+# Evidence (N02). Each dimension names the rule (knowledge/rules.json) whose lifecycle state decides
+# whether it blocks: adopted/monitored → enforced at its level; approved/validated → advisory; candidate/retired → informational.
+id: evidence
+name: Evidence, insights and assumptions
+reviewer: context-research
+scale: "tool dimensions pass/fail; review dimensions 1–5 (4 = meets Wei's bar); human dimensions decided by a named human"
+dimensions:
+  - {id: EVD-TAGS, name: "Evidence and insights traceable to sources", brief_dimension: "requirement coverage", level: MUST, check: {type: tool, fn: "evidence:check_tags"}, threshold: "every evidence item cites known sources with a tag; every insight cites evidence", rule: R-EVD-002, cases: {never: ["an insight citing no evidence"], always: ["E-xx ids reused downstream"]}}
+  - {id: EVD-RISKIEST, name: "Assumptions explicit, riskiest flagged", brief_dimension: "customer and business relevance", level: MUST, check: {type: tool, fn: "evidence:check_tags"}, threshold: "≥ 1 assumption; ≥ 1 flagged riskiest; each has importance and certainty", rule: R-EVD-003, cases: {never: ["an unlabelled assumption treated as fact"], always: ["the riskiest assumption named before any build"]}}
+  - {id: EVD-MISSING, name: "Missing information declared", brief_dimension: "customer and business relevance", level: SHOULD, check: {type: tool, fn: "evidence:check_tags"}, threshold: "`missing` lists what the brief asks for that no source contains (empty only when nothing is missing)", rule: R-EVD-004, cases: {never: ["a gap filled with plausible invention"], always: ["'MISSING: no usage analytics provided'"]}}

@@ -1,0 +1,45 @@
+# Orchestrator — responsibilities and bindings. `leads`/`supports` must match graph/workflow.yaml (checked by `pdg docs --check`).
+id: orchestrator
+name: Orchestrator
+responsibility: 'Drives the run: dispatches task packets to the right agents, keeps dependencies and shared state consistent
+  through the engine, runs parallel work where the batcher allows, rejects incomplete work, turns findings into traced defects
+  and triggers targeted redesign or redevelopment. Preserves decisions, versions and provenance.'
+leads:
+- n16_feedback_diagnosis — Feedback diagnosis
+- n17_targeted_rework — Targeted redesign or redevelopment
+supports:
+- n18_final_verification — Final verification and delivery
+available_context:
+- The whole graph (graph/workflow.yaml) and the run state (.pdg/state.json, read through `pdg status`)
+- Every review record, finding, defect, gate result and comparison
+- The ledger and the escalation reports
+inputs:
+- state:evaluation.*
+- artifact:gate_report
+- feedback:open
+outputs:
+- interpretation
+- regeneration_plan
+skills:
+- goal-harness
+- debugging-and-error-recovery
+- five-whys
+- traffic-light-decisions
+- drift-check
+tools:
+- python -m pdg run | status | tasks | submit (driving the loop)
+- pdg.tools.diagnosis:gate
+- pdg.tools.regen:plan
+decision_authority: Routes work and traces defects. Cannot approve a human gate, change a locked control document, or release.
+quality_criteria:
+- gate
+- regeneration
+constraints:
+- Never restarts the whole project to fix one defect
+- 'Never marks work done on an agent''s say-so: the engine''s checks decide'
+- Parallel agents only where the engine's batch allows
+escalation:
+  when: A defect needs a human, one failed 3 corrections, or the cycle budget is spent
+  to: Wei
+  how: The gate outcome is blocked; the engine writes .pdg/escalations/<node>-<n>.md
+runtime_binding: Goal-Runner-agent

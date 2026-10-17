@@ -1,0 +1,241 @@
+{
+ "$defs": {
+  "Flow": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "name": {
+     "title": "Name",
+     "type": "string"
+    },
+    "requirement_ids": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Requirement Ids",
+     "type": "array"
+    },
+    "entry": {
+     "title": "Entry",
+     "type": "string"
+    },
+    "exit": {
+     "title": "Exit",
+     "type": "string"
+    },
+    "steps": {
+     "items": {
+      "$ref": "#/$defs/FlowStep"
+     },
+     "title": "Steps",
+     "type": "array"
+    }
+   },
+   "required": [
+    "id",
+    "name",
+    "requirement_ids",
+    "entry",
+    "exit",
+    "steps"
+   ],
+   "title": "Flow",
+   "type": "object"
+  },
+  "FlowStep": {
+   "additionalProperties": false,
+   "properties": {
+    "screen": {
+     "title": "Screen",
+     "type": "string"
+    },
+    "action": {
+     "title": "Action",
+     "type": "string"
+    },
+    "outcome": {
+     "title": "Outcome",
+     "type": "string"
+    }
+   },
+   "required": [
+    "screen",
+    "action",
+    "outcome"
+   ],
+   "title": "FlowStep",
+   "type": "object"
+  },
+  "Journey": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "persona": {
+     "title": "Persona",
+     "type": "string"
+    },
+    "job": {
+     "title": "Job",
+     "type": "string"
+    },
+    "stages": {
+     "items": {
+      "$ref": "#/$defs/JourneyStage"
+     },
+     "title": "Stages",
+     "type": "array"
+    }
+   },
+   "required": [
+    "id",
+    "persona",
+    "job",
+    "stages"
+   ],
+   "title": "Journey",
+   "type": "object"
+  },
+  "JourneyStage": {
+   "additionalProperties": false,
+   "properties": {
+    "name": {
+     "title": "Name",
+     "type": "string"
+    },
+    "doing": {
+     "title": "Doing",
+     "type": "string"
+    },
+    "pain": {
+     "default": "",
+     "title": "Pain",
+     "type": "string"
+    },
+    "opportunity": {
+     "default": "",
+     "title": "Opportunity",
+     "type": "string"
+    }
+   },
+   "required": [
+    "name",
+    "doing"
+   ],
+   "title": "JourneyStage",
+   "type": "object"
+  },
+  "Screen": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "name": {
+     "title": "Name",
+     "type": "string"
+    },
+    "purpose": {
+     "title": "Purpose",
+     "type": "string"
+    },
+    "route": {
+     "title": "Route",
+     "type": "string"
+    },
+    "parent": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Parent"
+    },
+    "kind": {
+     "anyOf": [
+      {
+       "enum": [
+        "list",
+        "record",
+        "form",
+        "dashboard",
+        "other"
+       ],
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Kind"
+    }
+   },
+   "required": [
+    "id",
+    "name",
+    "purpose",
+    "route"
+   ],
+   "title": "Screen",
+   "type": "object"
+  }
+ },
+ "additionalProperties": false,
+ "properties": {
+  "journeys": {
+   "items": {
+    "$ref": "#/$defs/Journey"
+   },
+   "title": "Journeys",
+   "type": "array"
+  },
+  "screens": {
+   "items": {
+    "$ref": "#/$defs/Screen"
+   },
+   "title": "Screens",
+   "type": "array"
+  },
+  "navigation": {
+   "items": {
+    "type": "string"
+   },
+   "title": "Navigation",
+   "type": "array"
+  },
+  "flows": {
+   "items": {
+    "$ref": "#/$defs/Flow"
+   },
+   "title": "Flows",
+   "type": "array"
+  },
+  "system_behavior": {
+   "items": {
+    "type": "string"
+   },
+   "title": "System Behavior",
+   "type": "array"
+  }
+ },
+ "required": [
+  "journeys",
+  "screens",
+  "navigation",
+  "flows",
+  "system_behavior"
+ ],
+ "title": "ExperienceDoc",
+ "type": "object"
+}

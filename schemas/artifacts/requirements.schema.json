@@ -1,0 +1,123 @@
+{
+ "$defs": {
+  "Constraint": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "type": {
+     "enum": [
+      "business",
+      "technical",
+      "regulatory",
+      "time",
+      "design"
+     ],
+     "title": "Type",
+     "type": "string"
+    },
+    "statement": {
+     "title": "Statement",
+     "type": "string"
+    },
+    "source": {
+     "title": "Source",
+     "type": "string"
+    }
+   },
+   "required": [
+    "id",
+    "type",
+    "statement",
+    "source"
+   ],
+   "title": "Constraint",
+   "type": "object"
+  },
+  "Requirement": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "type": {
+     "enum": [
+      "user",
+      "business",
+      "technical"
+     ],
+     "title": "Type",
+     "type": "string"
+    },
+    "statement": {
+     "title": "Statement",
+     "type": "string"
+    },
+    "priority": {
+     "enum": [
+      "P0",
+      "P1",
+      "P2"
+     ],
+     "title": "Priority",
+     "type": "string"
+    },
+    "evidence_ids": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Evidence Ids",
+     "type": "array"
+    },
+    "assumption_ids": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Assumption Ids",
+     "type": "array"
+    },
+    "acceptance": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Acceptance",
+     "type": "array"
+    }
+   },
+   "required": [
+    "id",
+    "type",
+    "statement",
+    "priority"
+   ],
+   "title": "Requirement",
+   "type": "object"
+  }
+ },
+ "additionalProperties": false,
+ "properties": {
+  "requirements": {
+   "items": {
+    "$ref": "#/$defs/Requirement"
+   },
+   "title": "Requirements",
+   "type": "array"
+  },
+  "constraints": {
+   "items": {
+    "$ref": "#/$defs/Constraint"
+   },
+   "title": "Constraints",
+   "type": "array"
+  }
+ },
+ "required": [
+  "requirements",
+  "constraints"
+ ],
+ "title": "RequirementsDoc",
+ "type": "object"
+}

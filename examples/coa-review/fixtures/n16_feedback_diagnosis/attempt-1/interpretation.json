@@ -1,0 +1,28 @@
+{
+ "defects": [
+  {
+   "id": "D-001",
+   "signature": "LAYOUT-COMPARISON-FIRST@lot",
+   "dimension": "STAKEHOLDER-FEEDBACK",
+   "severity": "P2",
+   "message": "The decision panel precedes the comparison, so on a laptop the reviewer scrolls between the results and the decision",
+   "evidence": "FB-001 (simulated QA-lead session P4, build v1)",
+   "traced_node": "n08_interaction_design",
+   "trace_reason": "The interaction spec (N08) put the decision panel first; the build implemented the spec faithfully",
+   "smallest_fix": "Specify the comparison table first and the decision panel after it (beside it, sticky, at ≥ 1024 px)",
+   "acceptance_check": "On arrival at #/lot/L-2418 the comparison table's first row is in the viewport at 390, 768 and 1440 px (S-01)",
+   "from_feedback": [
+    "FB-001"
+   ]
+  }
+ ],
+ "feedback": [
+  {
+   "feedback_id": "FB-001",
+   "defect_ids": [
+    "D-001"
+   ]
+  }
+ ],
+ "summary": "One simulated stakeholder concern traced to the interaction spec; the tool's contrast findings are mapped from their own trace."
+}

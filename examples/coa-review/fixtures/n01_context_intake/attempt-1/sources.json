@@ -1,0 +1,61 @@
+{
+ "sources": [
+  {
+   "id": "S-01",
+   "kind": "brief",
+   "title": "Brief (fictional)",
+   "path": "sources/brief.md",
+   "evidence": "reported",
+   "notes": "The requester's words, verbatim"
+  },
+  {
+   "id": "S-02",
+   "kind": "interview",
+   "title": "Reviewer interviews — synthesis",
+   "path": "sources/research/reviewer-interviews.md",
+   "evidence": "observed",
+   "notes": "Fictional research: 5 reviewers + the QA lead"
+  },
+  {
+   "id": "S-03",
+   "kind": "analytics",
+   "title": "Time study, 40 lots",
+   "path": "sources/research/time-study.csv",
+   "evidence": "observed",
+   "notes": "Fictional research"
+  },
+  {
+   "id": "S-04",
+   "kind": "research",
+   "title": "Paper-prototype test",
+   "path": "sources/research/paper-prototype-test.md",
+   "evidence": "observed",
+   "notes": "Fictional research: 5 reviewers, 3 paper lots"
+  },
+  {
+   "id": "S-05",
+   "kind": "spec",
+   "title": "Lot release SOP (excerpt)",
+   "path": "sources/process/lot-release-sop.md",
+   "evidence": "reported"
+  },
+  {
+   "id": "S-06",
+   "kind": "spec",
+   "title": "Ingredient specifications",
+   "path": "sources/specs/ingredient-specs.json",
+   "evidence": "observed"
+  }
+ ],
+ "open_questions": [
+  {
+   "id": "Q-01",
+   "question": "Can the plant's LIMS export certificate values as structured data?",
+   "blocking": false,
+   "owner": "LIMS owner (fictional)",
+   "light": "yellow",
+   "trigger": "The LIMS owner confirms the export format",
+   "expiry": "2026-10-31"
+  }
+ ]
+}

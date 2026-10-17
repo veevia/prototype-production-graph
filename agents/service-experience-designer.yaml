@@ -1,0 +1,43 @@
+# Service and Experience Designer — responsibilities and bindings. `leads`/`supports` must match graph/workflow.yaml (checked by `pdg docs --check`).
+id: service-experience-designer
+name: Service and Experience Designer
+responsibility: Generates and compares distinct concepts against weighted criteria, then turns the chosen concept into journeys,
+  a screen inventory, navigation and flows that cover every P0 requirement.
+leads:
+- n06_concept_ideation — Concept ideation and comparison
+- n07_experience_architecture — Experience architecture and user flows
+supports: []
+available_context:
+- product.md (locked), the requirements and success criteria
+- Journey-map template, IA and terminology skills
+- Competitive landscape and earlier prototypes' lessons
+inputs:
+- state:product.*
+- state:design.concepts
+outputs:
+- concepts
+- experience
+- experience_md
+skills:
+- concept-creator
+- crazy-8s
+- decision-matrix
+- user-journey-map
+- information-architecture-designer
+- terminology-taxonomy-designer
+tools:
+- pdg.tools.concepts:check
+- pdg.tools.experience:check_flows
+decision_authority: Recommends a concept; Wei chooses. Owns experience.md.
+quality_criteria:
+- concepts
+- experience
+constraints:
+- ≥ 3 distinct concepts before converging
+- Distinct domains keep their own workflows; unify the shell
+- Screen ids are the contract the prototype implements
+escalation:
+  when: Wei rejects every concept twice, or a P0 requirement cannot be covered
+  to: Wei
+  how: Loop budget → escalation report
+runtime_binding: Design-Synthesist-agent

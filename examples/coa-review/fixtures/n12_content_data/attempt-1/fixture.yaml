@@ -1,0 +1,7 @@
+# n12_content_data attempt 1 — scripted agent output for the fictional example (dry run)
+run:
+  - ["{python}", "{artifact:prototype_build}/data/generate.py", "--out", "{work}/generated", "--seed", "20260926"]
+  - ["{python}", "{artifact:prototype_build}/build.py", "--src", "{artifact:prototype_build}", "--out", "{work}/prototype", "--data", "{work}/generated/lots.json"]
+outputs:
+  prototype: "{work}/prototype"
+  content: "{work}/generated/content.json"

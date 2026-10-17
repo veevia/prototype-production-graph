@@ -1,0 +1,5950 @@
+{
+ "schema": "pdg-rules/v1",
+ "version": "1.0.22",
+ "updated": "2026-09-29T17:52:26+00:00",
+ "note": "Public author-maintained rule profile; private evidence and project approvals are not distributed.",
+ "protected_scopes": [
+  "product_truth",
+  "requirements",
+  "evidence",
+  "approved_design_principles"
+ ],
+ "categories": [
+  "accessibility_responsive",
+  "customer_business_value",
+  "evidence_and_process",
+  "ia_flows",
+  "product_strategy_scope",
+  "project_specific_decisions",
+  "prototype_fidelity_realism",
+  "technical_feasibility_quality",
+  "ux_interaction",
+  "validation_usability",
+  "visual_design_system"
+ ],
+ "rules": [
+  {
+   "id": "R-CBV-001",
+   "statement": "Before design starts, state the job, the primary persona and the top pain in one sentence each, with evidence.",
+   "category": "customer_business_value",
+   "scope": "stable",
+   "basis": "canonical-framework",
+   "evidence": [
+    "PUBLIC-R-CBV-001"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "PRB-ONE-SENTENCE",
+     "PRB-EVIDENCE"
+    ],
+    "fn": "product:check_problem"
+   },
+   "threshold": "one sentence each, ≤ 40 words; ≥ 1 evidence id, every id known",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-CBV-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-CBV-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-CBV-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "canonical-framework"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-CBV-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-CBV-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/problem.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-CBV-002",
+   "statement": "Frame the opportunity as at least three How-Might-We questions.",
+   "category": "customer_business_value",
+   "scope": "stable",
+   "basis": "observed-pattern",
+   "evidence": [
+    "PUBLIC-R-CBV-002"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "PRB-HMW"
+    ],
+    "fn": "product:check_problem"
+   },
+   "threshold": "≥ 3 How-Might-We questions",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "validated",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-CBV-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-CBV-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": false
+  },
+  {
+   "id": "R-EVD-001",
+   "statement": "Register every source with an evidence tag (observed · reported · assumed); never invent a source, quote or participant.",
+   "category": "evidence_and_process",
+   "scope": "stable",
+   "basis": "canonical-framework",
+   "evidence": [
+    "PUBLIC-R-EVD-001"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "EVD-SOURCES"
+    ],
+    "fn": "sources:check_registry"
+   },
+   "threshold": "brief registered; every source tagged observed|reported|assumed; every local path exists in the project",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-EVD-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-EVD-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-EVD-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "canonical-framework"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-EVD-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-EVD-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/intake.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-EVD-002",
+   "statement": "Every product decision traces to evidence or to a named assumption.",
+   "category": "evidence_and_process",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-EVD-002"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "EVD-TAGS",
+     "REQ-TRACE"
+    ],
+    "fn": [
+     "evidence:check_tags",
+     "product:check_requirements"
+    ]
+   },
+   "threshold": "100% of requirements cite ≥ 1 known evidence or assumption id; every evidence item cites known sources with a tag; every insight cites evidence",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-EVD-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-EVD-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-EVD-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-EVD-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-EVD-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/evidence.yaml, rubrics/requirements.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-EVD-003",
+   "statement": "Make assumptions explicit with importance and certainty, and flag the riskiest before anything is built.",
+   "category": "evidence_and_process",
+   "scope": "stable",
+   "basis": "canonical-framework",
+   "evidence": [
+    "PUBLIC-R-EVD-003"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "EVD-RISKIEST"
+    ],
+    "fn": "evidence:check_tags"
+   },
+   "threshold": "≥ 1 assumption; ≥ 1 flagged riskiest; each has importance and certainty",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-EVD-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-EVD-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-EVD-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "canonical-framework"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-EVD-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-EVD-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/evidence.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-EVD-004",
+   "statement": "Declare missing information; never fill a gap with invention.",
+   "category": "evidence_and_process",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-EVD-004"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "EVD-MISSING"
+    ],
+    "fn": "evidence:check_tags"
+   },
+   "threshold": "`missing` lists what the brief asks for that no source contains (empty only when nothing is missing)",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-EVD-004"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-EVD-004"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-EVD-004"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-EVD-004"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-EVD-004"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/evidence.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-SCP-001",
+   "statement": "Change only what the request or the defect scopes: refine, don't redesign, and re-open only the nodes a defect traces to.",
+   "category": "product_strategy_scope",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-SCP-001"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "RGN-TARGETED",
+     "REF-PARITY"
+    ],
+    "fn": [
+     "regen:check_targeted",
+     "browser:check"
+    ],
+    "test": "tests/test_engine.py::test_targeted_rework_reruns_only_traced_nodes"
+   },
+   "threshold": "targets = the traced nodes of open blocking defects, all regeneration targets; no full restart",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-SCP-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-29T03:41:29+00:00",
+      "by": "agent:main-session",
+      "human": false,
+      "awaits_confirmation": true,
+      "evidence": [
+       "PUBLIC-R-SCP-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/regeneration.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-SCP-002",
+   "statement": "Scope is signed 🟢 before build; every open 🟡 carries a trigger, an expiry and an owner.",
+   "category": "product_strategy_scope",
+   "scope": "stable",
+   "basis": "canonical-framework",
+   "evidence": [
+    "PUBLIC-R-SCP-002"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "SCP-YELLOW"
+    ],
+    "fn": "product:check_scope"
+   },
+   "threshold": "100% of yellow open questions",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "canonical-framework"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-SCP-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/scope.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-SCP-003",
+   "statement": "Non-goals and out-of-scope lists are never empty.",
+   "category": "product_strategy_scope",
+   "scope": "stable",
+   "basis": "canonical-framework",
+   "evidence": [
+    "PUBLIC-R-SCP-003"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "SCP-NONGOALS"
+    ],
+    "fn": "product:check_scope"
+   },
+   "threshold": "≥ 1 non-goal and ≥ 1 out-of-scope item",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "canonical-framework"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-SCP-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/scope.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-SCP-004",
+   "statement": "Rollback triggers name a measurable condition, never 'if things go bad'.",
+   "category": "product_strategy_scope",
+   "scope": "stable",
+   "basis": "canonical-framework",
+   "evidence": [
+    "PUBLIC-R-SCP-004"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "SCP-ROLLBACK"
+    ],
+    "fn": "product:check_scope"
+   },
+   "threshold": "each trigger names a measurable condition (a number or a named event)",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-004"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-004"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-004"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "canonical-framework"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-004"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-SCP-004"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/scope.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-SCP-005",
+   "statement": "Success criteria are numbers, not adjectives, with one north-star metric.",
+   "category": "product_strategy_scope",
+   "scope": "stable",
+   "basis": "canonical-framework",
+   "evidence": [
+    "PUBLIC-R-SCP-005"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "SCP-NUMBERS"
+    ],
+    "fn": "product:check_scope"
+   },
+   "threshold": "every target contains a number; ≥ 1 north star",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "canonical-framework"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-SCP-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/scope.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-SCP-006",
+   "statement": "Unbuilt capability is visibly marked in the UI, never silently omitted or faked (drafts are never 'sent').",
+   "category": "product_strategy_scope",
+   "scope": "stable",
+   "basis": "observed-pattern",
+   "evidence": [
+    "PUBLIC-R-SCP-006"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "review",
+    "dimensions": [
+     "DES-SCOPE-VISIBLE"
+    ]
+   },
+   "threshold": "score ≥ 4",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-006"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-006"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-27T00:31:41+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-SCP-006"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:31:41+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-SCP-006"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/design-quality.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-SCP-007",
+   "statement": "Every P0 requirement has acceptance criteria a reviewer can check.",
+   "category": "product_strategy_scope",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-SCP-007"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "REQ-ACCEPTANCE",
+     "PLN-ACCEPTANCE"
+    ],
+    "fn": [
+     "product:check_requirements",
+     "plan:check"
+    ]
+   },
+   "threshold": "100% of P0 requirements have ≥ 1 acceptance criterion",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-007"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-007"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-007"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-007"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-SCP-007"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-29T03:10:01+00:00",
+      "by": "agent:main-session",
+      "human": false,
+      "awaits_confirmation": true,
+      "evidence": [
+       "PUBLIC-R-SCP-007"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/requirements.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-SCP-008",
+   "statement": "Requirements cover user, business and technical needs.",
+   "category": "product_strategy_scope",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-SCP-008"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "REQ-TYPES"
+    ],
+    "fn": "product:check_requirements"
+   },
+   "threshold": "≥ 1 of each type",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-008"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-008"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-008"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-008"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-SCP-008"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/requirements.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-SCP-009",
+   "statement": "Document the constraints (technical, business, regulatory, time) before design starts.",
+   "category": "product_strategy_scope",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-SCP-009"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "REQ-CONSTRAINTS"
+    ],
+    "fn": "product:check_requirements"
+   },
+   "threshold": "≥ 1 constraint with a source",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-009"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-009"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-009"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-009"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-SCP-009"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/requirements.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-SCP-010",
+   "statement": "Protect what must not degrade with a guardrail metric.",
+   "category": "product_strategy_scope",
+   "scope": "stable",
+   "basis": "observed-pattern",
+   "evidence": [
+    "PUBLIC-R-SCP-010"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "SCP-GUARDRAIL"
+    ],
+    "fn": "product:check_scope"
+   },
+   "threshold": "≥ 1 guardrail metric",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "validated",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-010"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-SCP-010"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": false
+  },
+  {
+   "id": "R-STR-001",
+   "statement": "Compare at least three distinct concepts before converging.",
+   "category": "product_strategy_scope",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-STR-001"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "CON-OPTIONS"
+    ],
+    "fn": "concepts:check"
+   },
+   "threshold": "≥ 3 concepts (calibration pending)",
+   "calibration_pending": true,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-STR-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-STR-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-STR-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-STR-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-STR-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/concepts.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-STR-002",
+   "statement": "Make the concept choice defensible: weighted criteria traced to requirements, and an explained override.",
+   "category": "product_strategy_scope",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-STR-002"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "CON-MATRIX"
+    ],
+    "fn": "concepts:check"
+   },
+   "threshold": "weights sum to 1 ± 0.01; every concept scored on every criterion; a non-top pick has a ≥ 40-character rationale",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-STR-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-STR-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-STR-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-STR-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-STR-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/concepts.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-STR-003",
+   "statement": "Every concept names its riskiest assumption.",
+   "category": "product_strategy_scope",
+   "scope": "stable",
+   "basis": "canonical-framework",
+   "evidence": [
+    "PUBLIC-R-STR-003"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "CON-RISK"
+    ],
+    "fn": "concepts:check"
+   },
+   "threshold": "100% of concepts",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-STR-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-STR-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-STR-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "canonical-framework"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-STR-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-STR-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/concepts.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-IA-001",
+   "statement": "When sources serve different business units, unify the shell and the components, not their domain workflows.",
+   "category": "ia_flows",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-IA-001"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "review",
+    "dimensions": [
+     "DES-DOMAIN"
+    ]
+   },
+   "threshold": "score ≥ 4",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-IA-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-IA-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-IA-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-IA-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-IA-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/design-quality.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-IA-002",
+   "statement": "Every P0 requirement is covered by a complete, executable user flow.",
+   "category": "ia_flows",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-IA-002"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "EXP-COVERAGE"
+    ],
+    "fn": "experience:check_flows"
+   },
+   "threshold": "100% of P0 requirements appear in ≥ 1 flow; every flow has an entry, steps and an exit",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-IA-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-IA-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-IA-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-IA-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-IA-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/experience.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-IA-003",
+   "statement": "Every screen is reachable, with one name and one route.",
+   "category": "ia_flows",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-IA-003"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "EXP-SCREENS"
+    ],
+    "fn": "experience:check_flows"
+   },
+   "threshold": "0 orphan screens; 0 duplicate routes; 0 flow steps on unknown screens",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-IA-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-IA-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-IA-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-IA-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-IA-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/experience.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-UX-001",
+   "statement": "Decision-driving values show their derivation on screen.",
+   "category": "ux_interaction",
+   "scope": "stable",
+   "basis": "observed-pattern",
+   "evidence": [
+    "PUBLIC-R-UX-001"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "review",
+    "dimensions": [
+     "DES-DERIVATION"
+    ]
+   },
+   "threshold": "score ≥ 4",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-UX-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-UX-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-27T00:31:40+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-UX-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:31:40+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-UX-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/design-quality.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-UX-002",
+   "statement": "Specify and build every state: success, empty (with a way back), error, and the domain's own.",
+   "category": "ux_interaction",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-UX-002"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "FUNC-STATES",
+     "EXP-STATES",
+     "PLN-STATES"
+    ],
+    "fn": [
+     "browser:check",
+     "experience:check_interactions",
+     "plan:check"
+    ]
+   },
+   "threshold": "100% of data screens; 100% of screens have a spec; every data screen has empty and error states",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-UX-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-UX-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-UX-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-UX-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-UX-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/functional.yaml, rubrics/interaction.yaml, rubrics/prototype-plan.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-UX-003",
+   "statement": "A locked action says what unlocks it.",
+   "category": "ux_interaction",
+   "scope": "stable",
+   "basis": "observed-pattern",
+   "evidence": [
+    "PUBLIC-R-UX-003"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "EXP-LOCKED-EXPLAINED"
+    ],
+    "fn": "experience:check_interactions"
+   },
+   "threshold": "every disabled/locked control in the spec has an 'unlocks when' explanation",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-UX-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-UX-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-27T00:31:40+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-UX-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:31:40+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-UX-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/interaction.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-VIS-001",
+   "statement": "Optimise for component consistency and usability: one type scale (≤ 8 sizes), one radius set (≤ 5), one focus ring, consistent status colours.",
+   "category": "visual_design_system",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-VIS-001"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "review",
+    "dimensions": [
+     "DES-CONSISTENCY",
+     "VIS-TYPE",
+     "VIS-RADII"
+    ],
+    "fn": "design_system:check"
+   },
+   "threshold": "score ≥ 4; ≤ 8 sizes; min ≥ 12 px (calibration pending: an earlier programme used 11 px labels)",
+   "calibration_pending": true,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VIS-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VIS-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VIS-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VIS-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-VIS-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/design-quality.yaml, rubrics/visual-system.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-VIS-002",
+   "statement": "Off-system values are defects: every colour comes from a design-system token with provenance.",
+   "category": "visual_design_system",
+   "scope": "stable",
+   "basis": "graduated-skill",
+   "evidence": [
+    "PUBLIC-R-VIS-002"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "BLD-TOKENS",
+     "VIS-PROVENANCE",
+     "VIS-TOKENS-RUNTIME",
+     "VIS-RATIO-STATED"
+    ],
+    "fn": [
+     "design_system:check",
+     "prototype:check_static",
+     "browser:check"
+    ]
+   },
+   "threshold": "100% of colour tokens name their source; 0 colour literals outside the token block; every contrast ratio design.md states is the one the tokens give (VIS-RATIO-STATED, SHOULD)",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VIS-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VIS-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VIS-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "graduated-skill"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VIS-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-VIS-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-29T02:47:43+00:00",
+      "by": "agent:main-session",
+      "human": false,
+      "awaits_confirmation": true,
+      "evidence": [
+       "PUBLIC-R-VIS-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-29T17:52:26+00:00",
+      "by": "agent:main-session",
+      "human": false,
+      "awaits_confirmation": true,
+      "evidence": [
+       "PUBLIC-R-VIS-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/build.yaml, rubrics/visual-system.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-VIS-003",
+   "statement": "Spacing follows one 4 px scale.",
+   "category": "visual_design_system",
+   "scope": "stable",
+   "basis": "observed-pattern",
+   "evidence": [
+    "PUBLIC-R-VIS-003"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "VIS-SPACING"
+    ],
+    "fn": "design_system:check"
+   },
+   "threshold": "every spacing step is a multiple of 4 px",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "validated",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VIS-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VIS-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": false
+  },
+  {
+   "id": "R-VIS-004",
+   "statement": "The design system names its prohibited patterns.",
+   "category": "visual_design_system",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-VIS-004"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "VIS-PROHIBITED"
+    ],
+    "fn": "design_system:check"
+   },
+   "threshold": "≥ 1 prohibited pattern",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VIS-004"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VIS-004"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VIS-004"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VIS-004"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-VIS-004"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/visual-system.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-VIS-005",
+   "statement": "Each colour carries one meaning: the alert colour is reserved for alerts, and status is never colour alone.",
+   "category": "visual_design_system",
+   "scope": "stable",
+   "basis": "observed-pattern",
+   "evidence": [
+    "PUBLIC-R-VIS-005"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "review",
+    "dimensions": [
+     "DES-SEMANTIC-COLOR",
+     "VIS-ALERT-RESERVED",
+     "VIS-STATE-FILLS"
+    ],
+    "fn": [
+     "design_system:check",
+     "browser:check"
+    ]
+   },
+   "threshold": "score ≥ 4; the alert role appears on no non-alert token; in the build, no current, selected or hovered item takes a status colour and no state repaints a status mark (VIS-STATE-FILLS, SHOULD)",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VIS-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VIS-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-27T00:31:41+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-VIS-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:31:41+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-VIS-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-29T17:52:26+00:00",
+      "by": "agent:main-session",
+      "human": false,
+      "awaits_confirmation": true,
+      "evidence": [
+       "PUBLIC-R-VIS-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/design-quality.yaml, rubrics/visual-system.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-VIS-006",
+   "statement": "Responsive layouts adapt (restack), not just shrink.",
+   "category": "visual_design_system",
+   "scope": "stable",
+   "basis": "observed-pattern",
+   "evidence": [
+    "PUBLIC-R-VIS-006"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "review",
+    "dimensions": [
+     "RESP-LAYOUT",
+     "RESP-TEXT"
+    ],
+    "fn": [
+     "browser:check"
+    ]
+   },
+   "threshold": "score ≥ 4 (RESP-LAYOUT); RESP-TEXT: across the width band, no word broken mid-word, no boxed text past its box, no select that cuts its value or would cut an option, nothing 1.4.12 spacing breaks, and none of these once a select's longest value is chosen at the phone widths",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "validated",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VIS-006"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VIS-006"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-29T05:35:51+00:00",
+      "by": "agent:main-session",
+      "human": false,
+      "awaits_confirmation": true,
+      "evidence": [
+       "PUBLIC-R-VIS-006"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-29T17:52:26+00:00",
+      "by": "agent:main-session",
+      "human": false,
+      "awaits_confirmation": true,
+      "evidence": [
+       "PUBLIC-R-VIS-006"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": false
+  },
+  {
+   "id": "R-VIS-007",
+   "statement": "Clear hierarchy: one focal point and one primary action per screen.",
+   "category": "visual_design_system",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-VIS-007"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "review",
+    "dimensions": [
+     "DES-HIERARCHY"
+    ]
+   },
+   "threshold": "score ≥ 4",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VIS-007"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VIS-007"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VIS-007"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VIS-007"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-VIS-007"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/design-quality.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-VIS-008",
+   "statement": "Comparison and audit tasks use tables and compact rows, not decorative cards.",
+   "category": "visual_design_system",
+   "scope": "stable",
+   "basis": "observed-pattern",
+   "evidence": [
+    "PUBLIC-R-VIS-008"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "review",
+    "dimensions": [
+     "DES-DENSITY"
+    ]
+   },
+   "threshold": "score ≥ 4",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VIS-008"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VIS-008"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-27T00:31:40+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-VIS-008"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:31:40+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-VIS-008"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/design-quality.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-A11Y-001",
+   "statement": "Accessibility is a binary gate: zero axe violations (WCAG 2.0/2.1/2.2 A and AA) on every screen and state.",
+   "category": "accessibility_responsive",
+   "scope": "stable",
+   "basis": "canonical-framework",
+   "evidence": [
+    "PUBLIC-R-A11Y-001"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "A11Y-AXE"
+    ],
+    "fn": "browser:check"
+   },
+   "threshold": "0 violations on every screen, state and viewport (axe finds ~57% of issues; the rest needs judgement)",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "canonical-framework"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-A11Y-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/accessibility.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-A11Y-002",
+   "statement": "Every declared colour pair meets WCAG contrast: 4.5:1 for text, 3:1 for large text and UI.",
+   "category": "accessibility_responsive",
+   "scope": "stable",
+   "basis": "canonical-framework",
+   "evidence": [
+    "PUBLIC-R-A11Y-002"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "VIS-CONTRAST"
+    ],
+    "fn": "design_system:check"
+   },
+   "threshold": "text ≥ 4.5:1; large text and non-text UI ≥ 3:1 (WCAG 2.2 SC 1.4.3, 1.4.11)",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "canonical-framework"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-A11Y-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/visual-system.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-A11Y-003",
+   "statement": "Everything is keyboard operable, with a visible and unobscured focus indicator.",
+   "category": "accessibility_responsive",
+   "scope": "stable",
+   "basis": "canonical-framework",
+   "evidence": [
+    "PUBLIC-R-A11Y-003"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "A11Y-FOCUS",
+     "A11Y-FOCUS-VISIBLE-2411",
+     "EXP-KEYBOARD",
+     "PLN-FOCUS",
+     "A11Y-FOCUS-POINTER"
+    ],
+    "fn": [
+     "browser:check",
+     "experience:check_interactions",
+     "plan:check"
+    ]
+   },
+   "threshold": "100% of interactions; focus rules present; 100% of tab stops sampled show an outline or ring (WCAG 2.4.7); 0 focus stops wholly obscured after walking Tab and Shift+Tab (WCAG 2.2 SC 2.4.11)",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "canonical-framework"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-A11Y-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-28",
+      "by": "agent:main-session",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-29T02:47:43+00:00",
+      "by": "agent:main-session",
+      "human": false,
+      "awaits_confirmation": true,
+      "evidence": [
+       "PUBLIC-R-A11Y-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-29T17:52:26+00:00",
+      "by": "agent:main-session",
+      "human": false,
+      "awaits_confirmation": true,
+      "evidence": [
+       "PUBLIC-R-A11Y-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/accessibility.yaml, rubrics/interaction.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-A11Y-004",
+   "statement": "No horizontal overflow from 320 px to desktop: content reflows.",
+   "category": "accessibility_responsive",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-A11Y-004"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "PLN-VIEWPORTS",
+     "RESP-OVERFLOW",
+     "RESP-REFLOW-320",
+     "RESP-BAND",
+     "PLN-SAMPLES"
+    ],
+    "fn": [
+     "browser:check",
+     "plan:check"
+    ]
+   },
+   "threshold": "no page scroll wider than the viewport (the document, or a region around the view that scrolls sideways) on every screen at every planned viewport; no page-level horizontal scroll at 320 px (WCAG 2.2 SC 1.4.10; data tables may scroll inside their own region); at the phone widths also with each select's longest option chosen and any disclosure that hides a select open; the width checks also load each record screen's worst-case records, which the plan names (PLN-SAMPLES, SHOULD)",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-004"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-004"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-004"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-004"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-A11Y-004"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-29T05:35:51+00:00",
+      "by": "agent:main-session",
+      "human": false,
+      "awaits_confirmation": true,
+      "evidence": [
+       "PUBLIC-R-A11Y-004"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-29T17:52:26+00:00",
+      "by": "agent:main-session",
+      "human": false,
+      "awaits_confirmation": true,
+      "evidence": [
+       "PUBLIC-R-A11Y-004"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-29T17:52:26+00:00",
+      "by": "agent:main-session",
+      "human": false,
+      "awaits_confirmation": true,
+      "evidence": [
+       "PUBLIC-R-A11Y-004"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/prototype-plan.yaml, rubrics/responsive.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-A11Y-005",
+   "statement": "Pointer targets are at least 24 × 24 px (WCAG 2.2 AA).",
+   "category": "accessibility_responsive",
+   "scope": "stable",
+   "basis": "canonical-framework",
+   "evidence": [
+    "PUBLIC-R-A11Y-005"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "A11Y-TARGET-AA"
+    ],
+    "fn": "browser:check"
+   },
+   "threshold": "0 interactive elements below 24 × 24 CSS px (WCAG 2.2 SC 2.5.8 AA; inline links exempt)",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "canonical-framework"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-A11Y-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/accessibility.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-A11Y-006",
+   "statement": "Mobile targets are at least 44 × 44 px.",
+   "category": "accessibility_responsive",
+   "scope": "stable",
+   "basis": "observed-pattern",
+   "evidence": [
+    "PUBLIC-R-A11Y-006"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "A11Y-TARGET-44"
+    ],
+    "fn": "browser:check"
+   },
+   "threshold": "0 interactive elements below 44 × 44 at the mobile viewport (WCAG 2.5.5 AAA; case-study rubric H22)",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "validated",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-006"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-006"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": false
+  },
+  {
+   "id": "R-A11Y-007",
+   "statement": "Rendered text is at least 12 px and does not clip under WCAG text spacing.",
+   "category": "accessibility_responsive",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-A11Y-007"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "A11Y-TYPE-MIN",
+     "A11Y-TEXT-SPACING-1412"
+    ],
+    "fn": "browser:check"
+   },
+   "threshold": "0 visible text elements below 12 px (calibration pending); 0 visible text elements whose scrollHeight or scrollWidth exceeds their hidden/clip overflow box after applying WCAG 1.4.12 text spacing at the widest planned viewport",
+   "calibration_pending": true,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-007"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-007"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-007"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-007"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:31:42+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-A11Y-007"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-28",
+      "by": "agent:main-session",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-007"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-29T02:47:43+00:00",
+      "by": "agent:main-session",
+      "human": false,
+      "awaits_confirmation": true,
+      "evidence": [
+       "PUBLIC-R-A11Y-007"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/accessibility.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-A11Y-008",
+   "statement": "Names, headings and landmarks make sense to a screen-reader user; automated checks catch only part of this.",
+   "category": "accessibility_responsive",
+   "scope": "stable",
+   "basis": "canonical-framework",
+   "evidence": [
+    "PUBLIC-R-A11Y-008"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "review",
+    "dimensions": [
+     "A11Y-SEMANTICS",
+     "A11Y-MANUAL"
+    ]
+   },
+   "threshold": "score ≥ 4",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-008"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-008"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-008"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "canonical-framework"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-008"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-A11Y-008"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-28",
+      "by": "agent:main-session",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-008"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-29T02:47:43+00:00",
+      "by": "agent:main-session",
+      "human": false,
+      "awaits_confirmation": true,
+      "evidence": [
+       "PUBLIC-R-A11Y-008"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/accessibility.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-A11Y-009",
+   "statement": "Reduced-motion preferences are honoured.",
+   "category": "accessibility_responsive",
+   "scope": "stable",
+   "basis": "observed-pattern",
+   "evidence": [
+    "PUBLIC-R-A11Y-009"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "A11Y-REDUCED-MOTION"
+    ],
+    "fn": "browser:check"
+   },
+   "threshold": "no running CSS animation or transition longer than 0.2 s under prefers-reduced-motion: reduce",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-009"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-A11Y-009"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-27T00:31:42+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-A11Y-009"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:31:42+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-A11Y-009"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/accessibility.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-FID-001",
+   "statement": "Fidelity rises only with validated riskiest assumptions and customer alignment.",
+   "category": "prototype_fidelity_realism",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-FID-001"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "PLN-FIDELITY-GATE"
+    ],
+    "fn": "plan:check"
+   },
+   "threshold": "mid/high fidelity: every riskiest assumption validated or accepted as a risk by a named human; high fidelity: customer alignment with evidence",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-FID-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-FID-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-FID-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-FID-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-FID-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/prototype-plan.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-FID-002",
+   "statement": "Synthetic, invented and missing data is visible as such at the point of decision.",
+   "category": "prototype_fidelity_realism",
+   "scope": "stable",
+   "basis": "observed-pattern",
+   "evidence": [
+    "PUBLIC-R-FID-002"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "CNT-PROVENANCE"
+    ],
+    "fn": "content:check"
+   },
+   "threshold": "every synthetic/invented dataset has label_shown_in_ui and the build contains a visible 'synthetic' label",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-FID-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-FID-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-27T00:31:41+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-FID-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:31:41+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-FID-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/content.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-FID-003",
+   "statement": "No placeholder text: realistic, product-specific copy.",
+   "category": "prototype_fidelity_realism",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-FID-003"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "BLD-PLACEHOLDER",
+     "CNT-PLACEHOLDER"
+    ],
+    "fn": [
+     "content:check",
+     "prototype:check_static"
+    ]
+   },
+   "threshold": "0 lorem/TODO/TBD/FIXME/xxx; 0 occurrences of lorem/ipsum/TODO/TBD/FIXME/xxx in visible text",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-FID-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-FID-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-FID-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-FID-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-FID-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/build.yaml, rubrics/content.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-FID-004",
+   "statement": "Datasets are large and varied enough to exercise every scenario.",
+   "category": "prototype_fidelity_realism",
+   "scope": "stable",
+   "basis": "observed-pattern",
+   "evidence": [
+    "PUBLIC-R-FID-004"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "CNT-VOLUME"
+    ],
+    "fn": "content:check"
+   },
+   "threshold": "≥ 12 records per primary dataset (calibration pending)",
+   "calibration_pending": true,
+   "note": "",
+   "lifecycle": {
+    "state": "validated",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-FID-004"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-FID-004"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": false
+  },
+  {
+   "id": "R-FID-005",
+   "statement": "Data exercises every mechanism the scenarios depend on (out-of-range, missing and borderline values).",
+   "category": "prototype_fidelity_realism",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-FID-005"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "CNT-EDGE"
+    ],
+    "fn": "content:check"
+   },
+   "threshold": "every listed edge case appears in the data",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-FID-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-FID-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-FID-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-FID-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-FID-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/content.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-FID-006",
+   "statement": "Product-specific, not generic: the domain's own vocabulary, meaningful workflows, contextual relevance.",
+   "category": "prototype_fidelity_realism",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-FID-006"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "review",
+    "dimensions": [
+     "DES-SPECIFICITY"
+    ]
+   },
+   "threshold": "score ≥ 4",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-FID-006"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-FID-006"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-FID-006"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-FID-006"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-FID-006"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/design-quality.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-FUN-001",
+   "statement": "A polished prototype is incomplete unless its primary workflows run end to end in a real browser.",
+   "category": "prototype_fidelity_realism",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-FUN-001"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "BLD-SCREENS",
+     "FUNC-SCENARIOS"
+    ],
+    "fn": [
+     "browser:check",
+     "prototype:check_static"
+    ]
+   },
+   "threshold": "100% of scenarios pass at every planned viewport; every screen id appears as data-screen in the build",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-FUN-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-FUN-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-FUN-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-FUN-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-FUN-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/build.yaml, rubrics/functional.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-TEC-002",
+   "statement": "The prototype runs offline from one self-contained file, with no network requests.",
+   "category": "technical_feasibility_quality",
+   "scope": "stable",
+   "basis": "graduated-skill",
+   "evidence": [
+    "PUBLIC-R-TEC-002"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "BLD-OFFLINE",
+     "TEC-DEPS",
+     "FUNC-OFFLINE"
+    ],
+    "fn": [
+     "browser:check",
+     "feasibility:check",
+     "prototype:check_static"
+    ]
+   },
+   "threshold": "0 external URLs in the built entry; 0 requests other than file:// and data:",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-TEC-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-TEC-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-TEC-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "graduated-skill"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-TEC-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-TEC-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/build.yaml, rubrics/feasibility.yaml, rubrics/functional.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-TEC-003",
+   "statement": "Code parses, and domain logic is unit-tested.",
+   "category": "technical_feasibility_quality",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-TEC-003"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "BLD-SYNTAX",
+     "BLD-UNIT",
+     "TEC-SYNTAX",
+     "TEC-UNIT",
+     "TEC-QUALITY"
+    ],
+    "fn": [
+     "feasibility:check",
+     "prototype:check_unit"
+    ]
+   },
+   "threshold": "node --check exits 0 for every .js file; node --test exits 0",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-TEC-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-TEC-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-TEC-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-TEC-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-TEC-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/build.yaml, rubrics/feasibility.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-TEC-004",
+   "statement": "Builds are reproducible from sources: assembled by a script, with hashes verified.",
+   "category": "technical_feasibility_quality",
+   "scope": "stable",
+   "basis": "observed-pattern",
+   "evidence": [
+    "PUBLIC-R-TEC-004"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "BLD-REPRO"
+    ],
+    "fn": "prototype:check_static"
+   },
+   "threshold": "every manifest hash matches the file on disk",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "validated",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-TEC-004"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-TEC-004"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": false
+  },
+  {
+   "id": "R-TEC-005",
+   "statement": "No console errors or uncaught exceptions.",
+   "category": "technical_feasibility_quality",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-TEC-005"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "FUNC-CONSOLE"
+    ],
+    "fn": "browser:check"
+   },
+   "threshold": "0 console errors and 0 page errors across all runs",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-TEC-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-TEC-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-TEC-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-TEC-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-TEC-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/functional.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-TEC-006",
+   "statement": "The prototype is interactive within 1.5 s from disk.",
+   "category": "technical_feasibility_quality",
+   "scope": "stable",
+   "basis": "recommendation",
+   "evidence": [
+    "PUBLIC-R-TEC-006"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "PERF-LOAD"
+    ],
+    "fn": "browser:check"
+   },
+   "threshold": "DOMContentLoaded ≤ 1500 ms locally (calibration pending)",
+   "calibration_pending": true,
+   "note": "",
+   "lifecycle": {
+    "state": "candidate",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-TEC-006"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": false
+  },
+  {
+   "id": "R-TEC-007",
+   "statement": "The single-file build stays within 1.5 MB.",
+   "category": "technical_feasibility_quality",
+   "scope": "stable",
+   "basis": "observed-pattern",
+   "evidence": [
+    "PUBLIC-R-TEC-007"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "TEC-BUNDLE"
+    ],
+    "fn": "feasibility:check"
+   },
+   "threshold": "≤ 1.5 MB (calibration pending; earlier builds were 0.4–0.8 MB)",
+   "calibration_pending": true,
+   "note": "",
+   "lifecycle": {
+    "state": "validated",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-TEC-007"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-TEC-007"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": false
+  },
+  {
+   "id": "R-TEC-008",
+   "statement": "development.md defines architecture, technology, components, data and APIs, folder structure, standards and testing.",
+   "category": "technical_feasibility_quality",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-TEC-008"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "TEC-DEVDOC"
+    ],
+    "fn": "feasibility:check"
+   },
+   "threshold": "sections present: architecture, technology, components, data and APIs, folder structure, standards, testing",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-TEC-008"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-TEC-008"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-TEC-008"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-TEC-008"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-TEC-008"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/feasibility.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-TEC-009",
+   "statement": "Name every mocked seam and what production needs; never present a prototype as production-ready.",
+   "category": "technical_feasibility_quality",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-TEC-009"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "review",
+    "dimensions": [
+     "TEC-FEASIBLE"
+    ]
+   },
+   "threshold": "score ≥ 4",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-TEC-009"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-TEC-009"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-TEC-009"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-TEC-009"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-TEC-009"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/feasibility.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-TEC-010",
+   "statement": "Re-verify with hashes before reporting done: the working tree can change under you.",
+   "category": "technical_feasibility_quality",
+   "scope": "stable",
+   "basis": "observed-pattern",
+   "evidence": [
+    "PUBLIC-R-TEC-010"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "test",
+    "dimensions": [],
+    "test": "tests/test_engine.py::test_tampered_artifact_blocks_the_run"
+   },
+   "threshold": "",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "validated",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-TEC-010"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-TEC-010"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": false
+  },
+  {
+   "id": "R-VAL-001",
+   "statement": "Validate with real users and stakeholders before raising fidelity or releasing.",
+   "category": "validation_usability",
+   "scope": "stable",
+   "basis": "canonical-framework",
+   "evidence": [
+    "PUBLIC-R-VAL-001"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "human",
+    "dimensions": [
+     "VAL-REAL-USERS"
+    ]
+   },
+   "threshold": "Wei confirms real sessions at N18; simulated sessions never satisfy it",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VAL-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VAL-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VAL-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "canonical-framework"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VAL-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-VAL-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/validation.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-VAL-002",
+   "statement": "Every P0 flow has an executable scenario that ends in an expectation.",
+   "category": "validation_usability",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-VAL-002"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "PLN-SCENARIOS"
+    ],
+    "fn": "plan:check"
+   },
+   "threshold": "100% of P0 flows; every scenario ends in an expectation",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VAL-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VAL-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VAL-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VAL-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-VAL-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/prototype-plan.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-VAL-003",
+   "statement": "Primary tasks meet a planned, task-level success threshold.",
+   "category": "validation_usability",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-VAL-003"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "VAL-TASK-SUCCESS"
+    ],
+    "fn": "validation:check"
+   },
+   "threshold": "task success rate ≥ the plan's threshold (default 0.8) on primary scenarios",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VAL-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VAL-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VAL-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VAL-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-VAL-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/validation.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-VAL-004",
+   "statement": "Primary tasks average a Single Ease Question score of at least 5.5 of 7.",
+   "category": "validation_usability",
+   "scope": "stable",
+   "basis": "recommendation",
+   "evidence": [
+    "PUBLIC-R-VAL-004"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "VAL-SEQ"
+    ],
+    "fn": "validation:check"
+   },
+   "threshold": "mean SEQ ≥ 5.5 of 7 (calibration pending)",
+   "calibration_pending": true,
+   "note": "",
+   "lifecycle": {
+    "state": "candidate",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VAL-004"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": false
+  },
+  {
+   "id": "R-VAL-005",
+   "statement": "Validation findings trace to the flows and requirements they implicate.",
+   "category": "validation_usability",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-VAL-005"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "review",
+    "dimensions": [
+     "VAL-INSIGHT"
+    ]
+   },
+   "threshold": "score ≥ 4",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VAL-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VAL-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VAL-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-VAL-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-VAL-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/validation.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-GOV-001",
+   "statement": "Never stop after one round: keep build → review → fix running until every gate passes or a genuine blocker is reported.",
+   "category": "evidence_and_process",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-GOV-001"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "test",
+    "dimensions": [],
+    "test": "tests/test_engine.py::test_rework_cycle_then_pass"
+   },
+   "threshold": "",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-GOV-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-GOV-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-GOV-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-GOV-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-GOV-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-GOV-003",
+   "statement": "Humans own the commitments: problem, scope, concept, visual system, fidelity and release are named human decisions.",
+   "category": "evidence_and_process",
+   "scope": "stable",
+   "basis": "canonical-framework",
+   "evidence": [
+    "PUBLIC-R-GOV-003"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "human",
+    "dimensions": [
+     "CON-SELECTED",
+     "DES-TASTE",
+     "PRB-APPROVED",
+     "PLN-APPROVED",
+     "REL-DECISION",
+     "SCP-SIGNOFF",
+     "VIS-APPROVED"
+    ]
+   },
+   "threshold": "decided by Wei at N18; a named human approved at N06",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-GOV-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-GOV-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-GOV-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "canonical-framework"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-GOV-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-GOV-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/concepts.yaml, rubrics/design-quality.yaml, rubrics/problem.yaml, rubrics/prototype-plan.yaml, rubrics/release.yaml, rubrics/scope.yaml, rubrics/visual-system.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-GOV-004",
+   "statement": "Simulated input and non-human approvals are labelled and never presented as evidence.",
+   "category": "evidence_and_process",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-GOV-004"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "LRN-HONEST",
+     "REL-HONEST",
+     "VAL-SIMULATED-FLAGGED"
+    ],
+    "fn": [
+     "learning:check_lessons",
+     "release:verify",
+     "validation:check"
+    ]
+   },
+   "threshold": "every session carries the simulated flag; evidence counts exclude simulated sessions; every verified lesson cites ≥ 1 non-simulated item (a tool- or human-found defect, real feedback, or research evidence)",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-GOV-004"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-GOV-004"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-GOV-004"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-GOV-004"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-GOV-004"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/learning.yaml, rubrics/release.yaml, rubrics/validation.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-GOV-005",
+   "statement": "Trace every defect to the responsible node, with the smallest fix and an acceptance check.",
+   "category": "evidence_and_process",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-GOV-005"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "GAT-TRACE"
+    ],
+    "fn": "diagnosis:gate"
+   },
+   "threshold": "100% of blocking defects have a known trace, a fix and an acceptance check",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-GOV-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-GOV-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-GOV-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-GOV-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-GOV-005"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/gate.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-GOV-006",
+   "statement": "Interpret every piece of feedback: map it to defects or dismiss it with a reason.",
+   "category": "evidence_and_process",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-GOV-006"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "GAT-FEEDBACK"
+    ],
+    "fn": "diagnosis:gate"
+   },
+   "threshold": "0 open feedback items after diagnosis",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-GOV-006"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-GOV-006"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-GOV-006"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-GOV-006"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-GOV-006"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/gate.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-GOV-007",
+   "statement": "Escalate repeated failures instead of looping: three failed corrections or a spent budget stop the run.",
+   "category": "evidence_and_process",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-GOV-007"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "GAT-ESCALATE"
+    ],
+    "fn": "diagnosis:gate"
+   },
+   "threshold": "blocked after 3 failed corrections of one defect or when the cycle budget is spent",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-GOV-007"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-GOV-007"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-GOV-007"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-GOV-007"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-GOV-007"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/gate.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-GOV-008",
+   "statement": "Release only when every gate passes on the current version, recomputed from disk.",
+   "category": "evidence_and_process",
+   "scope": "stable",
+   "basis": "canonical-framework",
+   "evidence": [
+    "PUBLIC-R-GOV-008"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "REL-CONDITIONS"
+    ],
+    "fn": "release:verify"
+   },
+   "threshold": "latest gate pass on the current build version; 0 open blocking defects; every review current; hashes and ledger verify",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-GOV-008"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-GOV-008"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-GOV-008"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "canonical-framework"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-GOV-008"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-GOV-008"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/release.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-GOV-009",
+   "statement": "Package deliveries with a hashed manifest and their evidence.",
+   "category": "evidence_and_process",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-GOV-009"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "REL-PACKAGE"
+    ],
+    "fn": "release:verify"
+   },
+   "threshold": "every packaged file listed with sha256",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-GOV-009"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-GOV-009"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-GOV-009"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-GOV-009"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-GOV-009"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/release.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-LRN-001",
+   "statement": "Lessons carry evidence; defaults change only with evidence.",
+   "category": "evidence_and_process",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-LRN-001"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "LRN-EVIDENCE"
+    ],
+    "fn": "learning:check_lessons"
+   },
+   "threshold": "100% of lessons cite defect, comparison, feedback or ledger evidence",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-LRN-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-LRN-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-LRN-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-LRN-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-LRN-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/learning.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-LRN-002",
+   "statement": "Keep project-specific observations apart from reusable knowledge.",
+   "category": "evidence_and_process",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-LRN-002"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "LRN-SCOPE"
+    ],
+    "fn": "learning:check_lessons"
+   },
+   "threshold": "every lesson has a scope; referenced rules exist",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-LRN-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-LRN-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-LRN-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-LRN-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-LRN-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/learning.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-LRN-003",
+   "statement": "Learning never modifies approved product truth, requirements, evidence or design principles.",
+   "category": "evidence_and_process",
+   "scope": "stable",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-LRN-003"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "tool",
+    "dimensions": [
+     "LRN-PROTECTED"
+    ],
+    "fn": "learning:check_lessons"
+   },
+   "threshold": "0 lessons that target product truth, requirements, evidence or approved design principles",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "adopted",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-LRN-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "validated",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-LRN-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "approved",
+      "at": "2026-09-26",
+      "by": "pdg seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-LRN-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed.",
+      "basis": "stated-requirement"
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-26",
+      "by": "pdg v1.0.0 seed",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-LRN-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     },
+     {
+      "state": "adopted",
+      "at": "2026-09-27T00:46:47+00:00",
+      "by": "Wei",
+      "human": true,
+      "evidence": [
+       "PUBLIC-R-LRN-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "rubrics/learning.yaml",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": true
+  },
+  {
+   "id": "R-PRJ-001",
+   "statement": "Programme-specific: the customer's brand red on a warm neutral canvas with Fluent 2 and Segoe UI.",
+   "category": "project_specific_decisions",
+   "scope": "project_specific",
+   "basis": "observed-pattern",
+   "evidence": [
+    "PUBLIC-R-PRJ-001"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "reference",
+    "dimensions": []
+   },
+   "threshold": "",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "candidate",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-PRJ-001"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": false
+  },
+  {
+   "id": "R-PRJ-002",
+   "statement": "Programme-specific: the four business-unit prototypes stay separate behind one switcher.",
+   "category": "project_specific_decisions",
+   "scope": "project_specific",
+   "basis": "stated-requirement",
+   "evidence": [
+    "PUBLIC-R-PRJ-002"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "reference",
+    "dimensions": []
+   },
+   "threshold": "",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "candidate",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-PRJ-002"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": false
+  },
+  {
+   "id": "R-PRJ-003",
+   "statement": "Programme-specific: 11 px semibold labels in the M365 mocks (conflicts with R-A11Y-007's 12 px minimum).",
+   "category": "project_specific_decisions",
+   "scope": "project_specific",
+   "basis": "observed-pattern",
+   "evidence": [
+    "PUBLIC-R-PRJ-003"
+   ],
+   "evidence_class": "recommendation",
+   "check": {
+    "type": "reference",
+    "dimensions": []
+   },
+   "threshold": "",
+   "calibration_pending": false,
+   "note": "",
+   "lifecycle": {
+    "state": "candidate",
+    "history": [
+     {
+      "state": "candidate",
+      "at": "2026-09-26",
+      "by": "pdg seed from the case study",
+      "human": false,
+      "evidence": [
+       "PUBLIC-R-PRJ-003"
+      ],
+      "reason": "Author rule lifecycle; original private evidence is not distributed."
+     }
+    ]
+   },
+   "adopted_in": "",
+   "observations": [],
+   "previous_versions": [],
+   "confirmed_by_wei": false
+  }
+ ]
+}

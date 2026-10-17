@@ -1,0 +1,4 @@
+# n19_learning_memory attempt 1 — scripted agent output for the fictional example (dry run)
+outputs:
+  lessons: "lessons.json"
+  memory_md: "memory.md"

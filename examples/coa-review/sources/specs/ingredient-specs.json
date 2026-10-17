@@ -1,0 +1,178 @@
+{
+ "note": "Fictional Fabrikam ingredient specifications for the pdg example",
+ "specs": {
+  "MAT-SUC": {
+   "material": "Liquid sucrose 67 °Bx",
+   "parameters": [
+    {
+     "id": "brix",
+     "name": "Brix",
+     "unit": "°Bx",
+     "min": 66.5,
+     "max": 67.5
+    },
+    {
+     "id": "color",
+     "name": "Colour",
+     "unit": "ICUMSA",
+     "max": 35
+    },
+    {
+     "id": "ph",
+     "name": "pH",
+     "unit": "",
+     "min": 6.0,
+     "max": 7.5
+    },
+    {
+     "id": "turbidity",
+     "name": "Turbidity",
+     "unit": "NTU",
+     "max": 5
+    },
+    {
+     "id": "yeast",
+     "name": "Yeast and mould",
+     "unit": "CFU/10 g",
+     "max": 10
+    }
+   ]
+  },
+  "MAT-CIT": {
+   "material": "Citric acid, anhydrous",
+   "parameters": [
+    {
+     "id": "assay",
+     "name": "Assay",
+     "unit": "%",
+     "min": 99.5,
+     "max": 100.5
+    },
+    {
+     "id": "moisture",
+     "name": "Moisture",
+     "unit": "%",
+     "max": 0.5
+    },
+    {
+     "id": "sulfate",
+     "name": "Sulfate",
+     "unit": "mg/kg",
+     "max": 150
+    },
+    {
+     "id": "lead",
+     "name": "Lead",
+     "unit": "mg/kg",
+     "max": 0.5
+    }
+   ]
+  },
+  "MAT-LEM": {
+   "material": "Natural lemon flavour",
+   "parameters": [
+    {
+     "id": "sg",
+     "name": "Specific gravity (20 °C)",
+     "unit": "",
+     "min": 0.85,
+     "max": 0.87
+    },
+    {
+     "id": "ri",
+     "name": "Refractive index (20 °C)",
+     "unit": "",
+     "min": 1.47,
+     "max": 1.48
+    },
+    {
+     "id": "ethanol",
+     "name": "Ethanol",
+     "unit": "% v/v",
+     "min": 30,
+     "max": 40
+    }
+   ]
+  },
+  "MAT-ASC": {
+   "material": "Ascorbic acid",
+   "parameters": [
+    {
+     "id": "assay",
+     "name": "Assay",
+     "unit": "%",
+     "min": 99.0,
+     "max": 100.5
+    },
+    {
+     "id": "lod",
+     "name": "Loss on drying",
+     "unit": "%",
+     "max": 0.4
+    },
+    {
+     "id": "ph",
+     "name": "pH (5 % solution)",
+     "unit": "",
+     "min": 2.1,
+     "max": 2.6
+    }
+   ]
+  },
+  "MAT-CO2": {
+   "material": "Carbon dioxide, beverage grade",
+   "parameters": [
+    {
+     "id": "purity",
+     "name": "Purity",
+     "unit": "% v/v",
+     "min": 99.9,
+     "borderline_margin": 0.02
+    },
+    {
+     "id": "moisture",
+     "name": "Moisture",
+     "unit": "ppm v/v",
+     "max": 20
+    },
+    {
+     "id": "acetaldehyde",
+     "name": "Acetaldehyde",
+     "unit": "ppm v/v",
+     "max": 0.2
+    },
+    {
+     "id": "sulfur",
+     "name": "Total sulfur",
+     "unit": "ppm v/v",
+     "max": 0.1
+    }
+   ]
+  },
+  "MAT-ORC": {
+   "material": "Orange juice concentrate 65 °Bx",
+   "parameters": [
+    {
+     "id": "brix",
+     "name": "Brix",
+     "unit": "°Bx",
+     "min": 64.5,
+     "max": 65.5
+    },
+    {
+     "id": "acidity",
+     "name": "Acidity (as citric)",
+     "unit": "%",
+     "min": 3.0,
+     "max": 4.0
+    },
+    {
+     "id": "pulp",
+     "name": "Sinking pulp",
+     "unit": "%",
+     "max": 12
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,193 @@
+{
+ "journeys": [
+  {
+   "id": "J-01",
+   "persona": "QA lot reviewer",
+   "job": "When a lot arrives with its supplier certificate, confirm every result against our specification so compliant lots are released the same shift and the rest are held with a clear reason.",
+   "stages": [
+    {
+     "name": "Receive",
+     "doing": "A lot and its certificate arrive",
+     "pain": "Certificates are PDFs",
+     "opportunity": "Queue lots with a derived verdict"
+    },
+    {
+     "name": "Review",
+     "doing": "Compare each value with the specification",
+     "pain": "Re-keying, 6 of 11 minutes (E-02)",
+     "opportunity": "Values next to limits"
+    },
+    {
+     "name": "Decide",
+     "doing": "Release, hold or reject",
+     "pain": "Missed out-of-spec values (E-03)",
+     "opportunity": "A guarded, explained decision"
+    },
+    {
+     "name": "Notify",
+     "doing": "Tell the supplier",
+     "pain": "Drafts written from scratch",
+     "opportunity": "A generated draft, sent by supplier quality"
+    },
+    {
+     "name": "Audit",
+     "doing": "Show who decided what",
+     "pain": "Phone escalations leave no trace (E-06)",
+     "opportunity": "A decision log"
+    }
+   ]
+  }
+ ],
+ "screens": [
+  {
+   "id": "queue",
+   "name": "Lot queue",
+   "purpose": "See incoming lots with their derived verdict; find the next lot to review",
+   "route": "#/queue",
+   "kind": "list"
+  },
+  {
+   "id": "lot",
+   "name": "Lot review",
+   "purpose": "Compare every result with its limit, read the verdict, record the decision",
+   "route": "#/lot/L-2418",
+   "parent": "queue",
+   "kind": "record"
+  },
+  {
+   "id": "notice",
+   "name": "Supplier notice draft",
+   "purpose": "Prepare the supplier notice for a held lot (never sent from here)",
+   "route": "#/lot/L-2431/notice",
+   "parent": "lot",
+   "kind": "form"
+  },
+  {
+   "id": "audit",
+   "name": "Decision log",
+   "purpose": "See every decision, who made it, when, and the verdict at the time",
+   "route": "#/audit",
+   "kind": "list"
+  }
+ ],
+ "navigation": [
+  "Lot queue (#/queue)",
+  "Decision log (#/audit)"
+ ],
+ "flows": [
+  {
+   "id": "F-01",
+   "name": "Release a compliant lot",
+   "requirement_ids": [
+    "R-01",
+    "R-02",
+    "R-03",
+    "R-06"
+   ],
+   "entry": "queue",
+   "exit": "audit",
+   "steps": [
+    {
+     "screen": "queue",
+     "action": "Filter to Needs review and open the lot",
+     "outcome": "The lot review opens with focus on its heading"
+    },
+    {
+     "screen": "lot",
+     "action": "Read results next to limits and the derived verdict",
+     "outcome": "Ready to release, with the derivation per row"
+    },
+    {
+     "screen": "lot",
+     "action": "Choose Release, add a rationale, record",
+     "outcome": "Status Released; decision announced"
+    },
+    {
+     "screen": "audit",
+     "action": "Open the decision log",
+     "outcome": "The release is the newest entry"
+    }
+   ]
+  },
+  {
+   "id": "F-02",
+   "name": "Hold an out-of-spec lot and draft the notice",
+   "requirement_ids": [
+    "R-01",
+    "R-02",
+    "R-03",
+    "R-04",
+    "R-07"
+   ],
+   "entry": "lot",
+   "exit": "notice",
+   "steps": [
+    {
+     "screen": "lot",
+     "action": "See the out-of-spec result and the Hold verdict",
+     "outcome": "Release is locked and says what unlocks it"
+    },
+    {
+     "screen": "lot",
+     "action": "Choose Hold with a rationale of at least 20 characters",
+     "outcome": "Status On hold"
+    },
+    {
+     "screen": "notice",
+     "action": "Draft the supplier notice and save it",
+     "outcome": "Draft saved — not sent"
+    }
+   ]
+  },
+  {
+   "id": "F-03",
+   "name": "Escalate an unreadable certificate",
+   "requirement_ids": [
+    "R-05",
+    "R-04"
+   ],
+   "entry": "lot",
+   "exit": "lot",
+   "steps": [
+    {
+     "screen": "lot",
+     "action": "See the missing result and the Escalate verdict",
+     "outcome": "Release is locked"
+    },
+    {
+     "screen": "lot",
+     "action": "Try a hold with a short rationale",
+     "outcome": "Refused with a message; focus on the rationale"
+    }
+   ]
+  },
+  {
+   "id": "F-04",
+   "name": "Find a lot and recover",
+   "requirement_ids": [
+    "R-09",
+    "R-08"
+   ],
+   "entry": "queue",
+   "exit": "queue",
+   "steps": [
+    {
+     "screen": "queue",
+     "action": "The first load fails; retry",
+     "outcome": "The queue loads (offline, from the file)"
+    },
+    {
+     "screen": "queue",
+     "action": "Search with no match, then reset",
+     "outcome": "Empty state with Reset filters; back to all lots"
+    }
+   ]
+  }
+ ],
+ "system_behavior": [
+  "The verdict is derived: any out-of-spec result → Hold; any missing or unreadable result → Escalate (never lower); otherwise Ready",
+  "Release is guarded: allowed only when the verdict is Ready",
+  "Decisions persist in the browser and appear in the log",
+  "Notices are drafts; nothing is ever sent"
+ ]
+}

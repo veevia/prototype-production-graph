@@ -1,0 +1,13 @@
+{
+ "note": "Fictional test vocabulary only. Add your own confidential identifiers locally before recording real reviews. This is not a complete privacy classifier.",
+ "replacements": [["Example Confidential Client", "the example client"]],
+ "banned": ["Example Confidential Client", "sample-private-product"],
+ "whole_words": ["ExamplePrivateBrand"],
+ "preference_product_words": ["Example Confidential Client", "sample-private-product"],
+ "preference_run_aliases": {
+  "the first run": "first-run",
+  "the second run": "second-run",
+  "the third run": "third-run",
+  "sample-v4-pdg": "third-run"
+ }
+}

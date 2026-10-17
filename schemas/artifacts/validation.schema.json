@@ -1,0 +1,212 @@
+{
+ "$defs": {
+  "Finding": {
+   "additionalProperties": false,
+   "properties": {
+    "dimension": {
+     "title": "Dimension",
+     "type": "string"
+    },
+    "severity": {
+     "enum": [
+      "P1",
+      "P2",
+      "P3",
+      "P4"
+     ],
+     "title": "Severity",
+     "type": "string"
+    },
+    "message": {
+     "title": "Message",
+     "type": "string"
+    },
+    "evidence": {
+     "default": "",
+     "title": "Evidence",
+     "type": "string"
+    },
+    "location": {
+     "default": "",
+     "title": "Location",
+     "type": "string"
+    },
+    "element": {
+     "default": "",
+     "title": "Element",
+     "type": "string"
+    },
+    "traced_node": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Traced Node"
+    },
+    "artifact_key": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Artifact Key"
+    },
+    "smallest_fix": {
+     "default": "",
+     "title": "Smallest Fix",
+     "type": "string"
+    },
+    "acceptance_check": {
+     "default": "",
+     "title": "Acceptance Check",
+     "type": "string"
+    },
+    "by": {
+     "default": "agent",
+     "enum": [
+      "tool",
+      "agent",
+      "human"
+     ],
+     "title": "By",
+     "type": "string"
+    },
+    "participant": {
+     "default": "",
+     "title": "Participant",
+     "type": "string"
+    }
+   },
+   "required": [
+    "dimension",
+    "severity",
+    "message"
+   ],
+   "title": "Finding",
+   "type": "object"
+  },
+  "Session": {
+   "additionalProperties": false,
+   "properties": {
+    "participant": {
+     "title": "Participant",
+     "type": "string"
+    },
+    "role": {
+     "title": "Role",
+     "type": "string"
+    },
+    "simulated": {
+     "title": "Simulated",
+     "type": "boolean"
+    },
+    "tasks": {
+     "items": {
+      "$ref": "#/$defs/Task"
+     },
+     "title": "Tasks",
+     "type": "array"
+    },
+    "quotes": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Quotes",
+     "type": "array"
+    }
+   },
+   "required": [
+    "participant",
+    "role",
+    "simulated",
+    "tasks"
+   ],
+   "title": "Session",
+   "type": "object"
+  },
+  "Task": {
+   "additionalProperties": false,
+   "properties": {
+    "scenario_id": {
+     "title": "Scenario Id",
+     "type": "string"
+    },
+    "success": {
+     "title": "Success",
+     "type": "boolean"
+    },
+    "time_s": {
+     "anyOf": [
+      {
+       "type": "number"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Time S"
+    },
+    "seq": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Seq"
+    },
+    "notes": {
+     "default": "",
+     "title": "Notes",
+     "type": "string"
+    }
+   },
+   "required": [
+    "scenario_id",
+    "success"
+   ],
+   "title": "Task",
+   "type": "object"
+  }
+ },
+ "additionalProperties": false,
+ "properties": {
+  "sessions": {
+   "items": {
+    "$ref": "#/$defs/Session"
+   },
+   "title": "Sessions",
+   "type": "array"
+  },
+  "findings": {
+   "items": {
+    "$ref": "#/$defs/Finding"
+   },
+   "title": "Findings",
+   "type": "array"
+  },
+  "summary": {
+   "title": "Summary",
+   "type": "string"
+  }
+ },
+ "required": [
+  "sessions",
+  "summary"
+ ],
+ "title": "ValidationDoc",
+ "type": "object"
+}

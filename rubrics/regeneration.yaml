@@ -1,0 +1,6 @@
+id: regeneration
+name: Targeted rework
+reviewer: orchestrator
+scale: "tool dimensions pass/fail"
+dimensions:
+  - {id: RGN-TARGETED, name: "Only the traced nodes are re-opened", brief_dimension: "technical feasibility", level: MUST, check: {type: tool, fn: "regen:check_targeted"}, threshold: "targets = the traced nodes of open blocking defects, all regeneration targets; no full restart", rule: R-SCP-001, cases: {never: ["redesigning everything to fix one contrast defect"], always: ["re-open N11 only"]}}

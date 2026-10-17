@@ -1,0 +1,9 @@
+id: learning
+name: Learning and memory
+reviewer: learning-memory
+scale: "tool dimensions pass/fail"
+dimensions:
+  - {id: LRN-EVIDENCE, name: "Every lesson carries evidence", brief_dimension: "customer and business relevance", level: MUST, check: {type: tool, fn: "learning:check_lessons"}, threshold: "100% of lessons cite evidence, and every cited id exists in this run (defect, feedback, comparison, research evidence, requirement, constraint, artifact or rule)", rule: R-LRN-001, cases: {never: [], always: []}}
+  - {id: LRN-SCOPE, name: "Project-specific notes kept apart from reusable lessons", brief_dimension: "customer and business relevance", level: MUST, check: {type: tool, fn: "learning:check_lessons"}, threshold: "every lesson has a scope; referenced rules exist", rule: R-LRN-002, cases: {never: [], always: []}}
+  - {id: LRN-PROTECTED, name: "Learning never edits protected scopes", brief_dimension: "customer and business relevance", level: MUST, check: {type: tool, fn: "learning:check_lessons"}, threshold: "0 lessons that target product truth, requirements, evidence or approved design principles", rule: R-LRN-003, cases: {never: [], always: []}}
+  - {id: LRN-HONEST, name: "A lesson resting only on simulated evidence is never classed verified", brief_dimension: "customer and business relevance", level: MUST, check: {type: tool, fn: "learning:check_lessons"}, threshold: "every verified lesson cites ≥ 1 non-simulated item (a tool- or human-found defect, real feedback, or research evidence)", rule: R-GOV-004, cases: {never: ["a verified lesson whose only support is simulated validation"], always: ["simulated support is classed inferred"]}}

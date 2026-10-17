@@ -1,0 +1,11 @@
+id: scope
+name: Scope and success criteria
+reviewer: product-strategist
+scale: "tool dimensions pass/fail; human dimensions decided by a named human"
+dimensions:
+  - {id: SCP-NONGOALS, name: "Non-goals and out-of-scope never empty", brief_dimension: "requirement coverage", level: MUST, check: {type: tool, fn: "product:check_scope"}, threshold: "≥ 1 non-goal and ≥ 1 out-of-scope item", rule: R-SCP-003, cases: {never: ["'None' as a non-goal"], always: []}}
+  - {id: SCP-NUMBERS, name: "Success targets are numbers, not adjectives", brief_dimension: "customer and business relevance", level: MUST, check: {type: tool, fn: "product:check_scope"}, threshold: "every target contains a number; ≥ 1 north star", rule: R-SCP-005, cases: {never: ["'faster reviews'"], always: ["'median review ≤ 4 min (baseline 11 min)'"]}}
+  - {id: SCP-ROLLBACK, name: "Rollback triggers are specific", brief_dimension: "customer and business relevance", level: MUST, check: {type: tool, fn: "product:check_scope"}, threshold: "each trigger names a measurable condition (a number or a named event)", rule: R-SCP-004, cases: {never: ["'if things go bad'"], always: ["'if < 60% of reviewers finish Task 1 unaided'"]}}
+  - {id: SCP-YELLOW, name: "Every yellow has a trigger, an expiry and an owner", brief_dimension: "customer and business relevance", level: MUST, check: {type: tool, fn: "product:check_scope"}, threshold: "100% of yellow open questions", rule: R-SCP-002, cases: {never: ["'yellow until we know more'"], always: []}}
+  - {id: SCP-GUARDRAIL, name: "A guardrail metric protects what must not degrade", brief_dimension: "customer and business relevance", level: SHOULD, check: {type: tool, fn: "product:check_scope"}, threshold: "≥ 1 guardrail metric", rule: R-SCP-010, cases: {never: [], always: []}}
+  - {id: SCP-SIGNOFF, name: "Wei signed the scope (Design → Build gate)", brief_dimension: "customer and business relevance", level: MUST, check: {type: human}, threshold: "a named human approved at N05", rule: R-GOV-003, cases: {never: [], always: []}}

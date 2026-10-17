@@ -1,0 +1,132 @@
+{
+ "$defs": {
+  "Concept": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "name": {
+     "title": "Name",
+     "type": "string"
+    },
+    "summary": {
+     "title": "Summary",
+     "type": "string"
+    },
+    "before": {
+     "title": "Before",
+     "type": "string"
+    },
+    "after": {
+     "title": "After",
+     "type": "string"
+    },
+    "riskiest_assumption": {
+     "title": "Riskiest Assumption",
+     "type": "string"
+    },
+    "scores": {
+     "additionalProperties": {
+      "type": "integer"
+     },
+     "title": "Scores",
+     "type": "object"
+    }
+   },
+   "required": [
+    "id",
+    "name",
+    "summary",
+    "before",
+    "after",
+    "riskiest_assumption",
+    "scores"
+   ],
+   "title": "Concept",
+   "type": "object"
+  },
+  "Criterion": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "name": {
+     "title": "Name",
+     "type": "string"
+    },
+    "weight": {
+     "title": "Weight",
+     "type": "number"
+    },
+    "requirement_ids": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Requirement Ids",
+     "type": "array"
+    }
+   },
+   "required": [
+    "id",
+    "name",
+    "weight"
+   ],
+   "title": "Criterion",
+   "type": "object"
+  }
+ },
+ "additionalProperties": false,
+ "properties": {
+  "criteria": {
+   "items": {
+    "$ref": "#/$defs/Criterion"
+   },
+   "title": "Criteria",
+   "type": "array"
+  },
+  "concepts": {
+   "items": {
+    "$ref": "#/$defs/Concept"
+   },
+   "title": "Concepts",
+   "type": "array"
+  },
+  "selected": {
+   "title": "Selected",
+   "type": "string"
+  },
+  "rationale": {
+   "title": "Rationale",
+   "type": "string"
+  },
+  "light": {
+   "enum": [
+    "green",
+    "yellow",
+    "red"
+   ],
+   "title": "Light",
+   "type": "string"
+  },
+  "disagreement": {
+   "items": {
+    "type": "string"
+   },
+   "title": "Disagreement",
+   "type": "array"
+  }
+ },
+ "required": [
+  "criteria",
+  "concepts",
+  "selected",
+  "rationale",
+  "light"
+ ],
+ "title": "ConceptsDoc",
+ "type": "object"
+}

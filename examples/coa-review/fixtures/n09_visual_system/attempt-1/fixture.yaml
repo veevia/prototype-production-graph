@@ -1,0 +1,4 @@
+# n09_visual_system attempt 1 — scripted agent output for the fictional example (dry run)
+outputs:
+  design_system: "design-system.json"
+  design_md: "design.md"

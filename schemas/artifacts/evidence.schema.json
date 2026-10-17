@@ -1,0 +1,254 @@
+{
+ "$defs": {
+  "Assumption": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "statement": {
+     "title": "Statement",
+     "type": "string"
+    },
+    "importance": {
+     "enum": [
+      "high",
+      "medium",
+      "low"
+     ],
+     "title": "Importance",
+     "type": "string"
+    },
+    "certainty": {
+     "enum": [
+      "high",
+      "medium",
+      "low"
+     ],
+     "title": "Certainty",
+     "type": "string"
+    },
+    "riskiest": {
+     "default": false,
+     "title": "Riskiest",
+     "type": "boolean"
+    },
+    "validation": {
+     "default": "unvalidated",
+     "enum": [
+      "unvalidated",
+      "validated",
+      "invalidated",
+      "accepted_risk"
+     ],
+     "title": "Validation",
+     "type": "string"
+    },
+    "evidence_ids": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Evidence Ids",
+     "type": "array"
+    },
+    "accepted_by": {
+     "default": "",
+     "title": "Accepted By",
+     "type": "string"
+    }
+   },
+   "required": [
+    "id",
+    "statement",
+    "importance",
+    "certainty"
+   ],
+   "title": "Assumption",
+   "type": "object"
+  },
+  "Evidence": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "claim": {
+     "title": "Claim",
+     "type": "string"
+    },
+    "source_ids": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Source Ids",
+     "type": "array"
+    },
+    "tag": {
+     "enum": [
+      "observed",
+      "reported",
+      "assumed"
+     ],
+     "title": "Tag",
+     "type": "string"
+    },
+    "quote": {
+     "default": "",
+     "title": "Quote",
+     "type": "string"
+    }
+   },
+   "required": [
+    "id",
+    "claim",
+    "source_ids",
+    "tag"
+   ],
+   "title": "Evidence",
+   "type": "object"
+  },
+  "Insight": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "statement": {
+     "title": "Statement",
+     "type": "string"
+    },
+    "evidence_ids": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Evidence Ids",
+     "type": "array"
+    },
+    "confidence": {
+     "enum": [
+      "high",
+      "medium",
+      "low"
+     ],
+     "title": "Confidence",
+     "type": "string"
+    }
+   },
+   "required": [
+    "id",
+    "statement",
+    "evidence_ids",
+    "confidence"
+   ],
+   "title": "Insight",
+   "type": "object"
+  },
+  "OpenQuestion": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "question": {
+     "title": "Question",
+     "type": "string"
+    },
+    "blocking": {
+     "default": false,
+     "title": "Blocking",
+     "type": "boolean"
+    },
+    "owner": {
+     "default": "",
+     "title": "Owner",
+     "type": "string"
+    },
+    "light": {
+     "default": "yellow",
+     "enum": [
+      "green",
+      "yellow",
+      "red"
+     ],
+     "title": "Light",
+     "type": "string"
+    },
+    "trigger": {
+     "default": "",
+     "title": "Trigger",
+     "type": "string"
+    },
+    "expiry": {
+     "default": "",
+     "title": "Expiry",
+     "type": "string"
+    },
+    "resolved": {
+     "default": false,
+     "title": "Resolved",
+     "type": "boolean"
+    },
+    "answer": {
+     "default": "",
+     "title": "Answer",
+     "type": "string"
+    }
+   },
+   "required": [
+    "id",
+    "question"
+   ],
+   "title": "OpenQuestion",
+   "type": "object"
+  }
+ },
+ "additionalProperties": false,
+ "properties": {
+  "evidence": {
+   "items": {
+    "$ref": "#/$defs/Evidence"
+   },
+   "title": "Evidence",
+   "type": "array"
+  },
+  "insights": {
+   "items": {
+    "$ref": "#/$defs/Insight"
+   },
+   "title": "Insights",
+   "type": "array"
+  },
+  "assumptions": {
+   "items": {
+    "$ref": "#/$defs/Assumption"
+   },
+   "title": "Assumptions",
+   "type": "array"
+  },
+  "open_questions": {
+   "items": {
+    "$ref": "#/$defs/OpenQuestion"
+   },
+   "title": "Open Questions",
+   "type": "array"
+  },
+  "missing": {
+   "items": {
+    "type": "string"
+   },
+   "title": "Missing",
+   "type": "array"
+  }
+ },
+ "required": [
+  "evidence",
+  "insights",
+  "assumptions"
+ ],
+ "title": "EvidenceDoc",
+ "type": "object"
+}

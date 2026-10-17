@@ -1,0 +1,9 @@
+id: problem
+name: Problem and opportunity
+reviewer: product-strategist
+scale: "tool dimensions pass/fail; human dimensions decided by a named human"
+dimensions:
+  - {id: PRB-ONE-SENTENCE, name: "Job, persona and top pain in one sentence each", brief_dimension: "customer and business relevance", level: MUST, check: {type: tool, fn: "product:check_problem"}, threshold: "one sentence each, ≤ 40 words", rule: R-CBV-001, cases: {never: ["a persona paragraph of demographics"], always: ["'Lot reviewers need to release compliant lots fast without missing an out-of-spec value.'"]}}
+  - {id: PRB-EVIDENCE, name: "Top pain cites evidence", brief_dimension: "customer and business relevance", level: MUST, check: {type: tool, fn: "product:check_problem"}, threshold: "≥ 1 evidence id, every id known", rule: R-CBV-001, cases: {never: ["a pain the team assumed"], always: ["a pain with an observed or reported evidence id"]}}
+  - {id: PRB-HMW, name: "Opportunities framed as How-Might-We", brief_dimension: "customer and business relevance", level: SHOULD, check: {type: tool, fn: "product:check_problem"}, threshold: "≥ 3 How-Might-We questions", rule: R-CBV-002, cases: {never: [], always: []}}
+  - {id: PRB-APPROVED, name: "Wei approved the problem frame", brief_dimension: "customer and business relevance", level: MUST, check: {type: human}, threshold: "a named human approved at N03", rule: R-GOV-003, cases: {never: ["an agent approving its own frame"], always: []}}

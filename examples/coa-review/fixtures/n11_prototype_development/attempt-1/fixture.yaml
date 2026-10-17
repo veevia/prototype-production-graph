@@ -1,0 +1,7 @@
+# n11_prototype_development attempt 1 — scripted agent output for the fictional example (dry run)
+run:
+  - ["{python}", "{project}/prototype/build.py", "--src", "{project}/prototype", "--out", "{work}/prototype_build", "--overlay", "{fixture}/overlay"]
+outputs:
+  prototype_build: "{work}/prototype_build"
+  build_manifest: "{work}/prototype_build/build-manifest.json"
+  development_md: "development.md"

@@ -1,0 +1,116 @@
+{
+ "screens": [
+  {
+   "screen": "queue",
+   "states": {
+    "loading": "Skeleton rows while the lots load",
+    "empty": "No lots match — Reset filters",
+    "error": "The lot list did not load — Try again",
+    "success": "Lots with verdict and status, needs-review first"
+   },
+   "interactions": [
+    {
+     "id": "filter",
+     "trigger": "A status filter",
+     "response": "The table shows that status",
+     "feedback": "The count is announced",
+     "keyboard": "Tab to the filter; Enter or Space toggles it"
+    },
+    {
+     "id": "search",
+     "trigger": "Typing in Search",
+     "response": "Rows filter as you type",
+     "feedback": "An empty result shows Reset filters",
+     "keyboard": "Type; Escape clears"
+    },
+    {
+     "id": "open",
+     "trigger": "A lot link",
+     "response": "The lot review opens",
+     "feedback": "Focus moves to the lot heading",
+     "keyboard": "Enter on the link"
+    }
+   ]
+  },
+  {
+   "screen": "lot",
+   "states": {
+    "success": "The decision panel sits first, above the comparison table, so the action is always visible",
+    "error": "Lot not found — back to the queue",
+    "ready": "Verdict Ready to release",
+    "hold": "Verdict Hold",
+    "escalate": "Verdict Escalate to QA lead"
+   },
+   "interactions": [
+    {
+     "id": "choose",
+     "trigger": "A decision option",
+     "response": "Release is disabled unless the verdict is Ready; the reason 'Release unlocks when every result is within specification.' is shown",
+     "feedback": "The locked option explains what unlocks it",
+     "keyboard": "Arrow keys move between options"
+    },
+    {
+     "id": "record",
+     "trigger": "Record decision",
+     "response": "Validates the rationale (≥ 20 characters for hold and reject)",
+     "feedback": "On error the message shows and focus moves to the rationale; on success the status is announced",
+     "keyboard": "Enter submits the form"
+    },
+    {
+     "id": "notice",
+     "trigger": "Draft supplier notice",
+     "response": "Opens the draft",
+     "feedback": "Focus moves to the draft heading",
+     "keyboard": "Enter on the link"
+    }
+   ],
+   "validation": [
+    "Rationale of at least 20 characters for hold and reject",
+    "Release only when the verdict is Ready"
+   ]
+  },
+  {
+   "screen": "notice",
+   "states": {
+    "success": "Issues list and editable draft; Save draft",
+    "error": "Lot not found",
+    "not-needed": "No notice needed for a Ready lot"
+   },
+   "interactions": [
+    {
+     "id": "save",
+     "trigger": "Save draft",
+     "response": "Stores the draft locally",
+     "feedback": "'Draft saved — not sent' is announced",
+     "keyboard": "Enter on the button"
+    }
+   ]
+  },
+  {
+   "screen": "audit",
+   "states": {
+    "empty": "No decisions recorded yet — go to the queue",
+    "error": "Decisions can't be saved in this browser (storage unavailable)",
+    "success": "Decisions newest first"
+   },
+   "interactions": [
+    {
+     "id": "open",
+     "trigger": "A lot link",
+     "response": "The lot review opens",
+     "feedback": "Focus moves to the lot heading",
+     "keyboard": "Enter on the link"
+    }
+   ]
+  }
+ ],
+ "focus_rules": [
+  "On navigation, focus moves to the new screen's h1",
+  "Every control shows a 2 px focus ring",
+  "An error moves focus to the invalid field"
+ ],
+ "feedback_rules": [
+  "Status changes are announced in a polite live region",
+  "Status is never colour alone: icon + text + colour"
+ ]
+}

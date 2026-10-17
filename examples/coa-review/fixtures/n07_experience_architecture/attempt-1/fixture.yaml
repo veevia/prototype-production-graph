@@ -1,0 +1,4 @@
+# n07_experience_architecture attempt 1 — scripted agent output for the fictional example (dry run)
+outputs:
+  experience: "experience.json"
+  experience_md: "experience.md"

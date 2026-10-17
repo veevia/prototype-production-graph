@@ -1,0 +1,7 @@
+# Example product project for the pdg dry run: a FICTIONAL lot-release workbench. Every source, participant, company and
+# data value in this folder is invented to exercise the workflow end to end; none of it is evidence about a real product.
+id: coa-review-example
+name: Lot Release Workbench (fictional example)
+dry_run: true              # scripted agents (fixtures/) and the dry-run actor at human gates — never presented as human
+fixtures: fixtures
+humans: [Wei]

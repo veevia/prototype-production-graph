@@ -1,0 +1,872 @@
+id: prototype-design
+name: Graph-based product design, prototype and development workflow
+version: "1.0.0"
+description: >-
+  Takes a product from Context → Problem Definition → Concept → UX Design → Prototype → Development → Validation →
+  Iteration, and runs Wei's Understand → Design → Build → Learn loop as a governed graph. It was distilled from the
+  2026 hub prototype programmes (the case study in knowledge/case-studies/) and Wei's canonical frameworks (00_README/_frameworks/).
+  Flow edges form a DAG with join = all, loop edges are bounded rework and rejection paths, and escalate edges stop and
+  report to a named human.
+start: START
+end: END
+
+policies:
+  max_rework_cycles: 4            # a rework cycle is one N16 → N17 → targets → N16 round
+  max_same_defect_failures: 3     # goal-harness: the same defect fails 3 corrections → stop and report, never loop
+  parallel_limit: 4               # N13 ∥ N14 ∥ N15 and N08 ∥ N09 fan out together
+  single_flight_resources: [browser]   # one real browser session at a time (shared, heavy upstream)
+  blocking_severities: [P1, P2, P3]    # P4 findings are nits: reported, never blocking
+  dry_run_actor: dry-run-auto
+  human_actors: [Wei]             # named humans who may approve; a project adds its own in pdg.project.yaml
+  regeneration_targets:
+    - n03_problem_definition
+    - n04_requirements
+    - n05_scope_success
+    - n06_concept_ideation
+    - n07_experience_architecture
+    - n08_interaction_design
+    - n09_visual_system
+    - n10_prototype_planning
+    - n11_prototype_development
+    - n12_content_data
+
+subgraphs:
+  - {id: discovery, name: Discovery and evidence, pattern: "sequence + bounded loop (gaps → intake)", purpose: "Register the sources, synthesise evidence and freeze the immutable inputs.", nodes: [n01_context_intake, n02_evidence_review]}
+  - {id: definition, name: Problem and product definition, pattern: "sequence with human gates (problem, PRD sign-off)", purpose: "Commit to a problem, requirements traced to evidence, and a signed scope with numeric success criteria.", nodes: [n03_problem_definition, n04_requirements, n05_scope_success]}
+  - {id: concept, name: Concept, pattern: "diverge → weighted comparison → human selection (bounded re-ideation loop)", purpose: "Compare distinct concepts against the criteria and let Wei choose.", nodes: [n06_concept_ideation]}
+  - {id: experience, name: Experience design, pattern: "sequence, then fan-out (interaction ∥ visual system)", purpose: "Define journeys, screens and flows, then interactions and states in parallel with the visual system.", nodes: [n07_experience_architecture, n08_interaction_design, n09_visual_system]}
+  - {id: prototype, name: Prototype and development, pattern: "fan-in (plan) → build → content integration", purpose: "Plan a fidelity the evidence supports, build a working prototype, integrate realistic content and data.", nodes: [n10_prototype_planning, n11_prototype_development, n12_content_data]}
+  - {id: validation, name: Validation, pattern: "fan-out of three reviewers → fan-in", purpose: "Check function, design, accessibility, users and technical feasibility in parallel.", nodes: [n13_quality_review, n14_validation, n15_feasibility_review]}
+  - {id: iteration, name: Iteration, pattern: "tri-state gate → bounded targeted rework loop", purpose: "Turn findings and feedback into traced defects, then re-run only the nodes they trace to.", nodes: [n16_feedback_diagnosis, n17_targeted_rework]}
+  - {id: delivery, name: Delivery and learning, pattern: "human release gate → governed learning", purpose: "Verify and package the release, get Wei's decision, and propose lessons.", nodes: [n18_final_verification, n19_learning_memory]}
+
+nodes:
+  # ------------------------------------------------------------------------------------------------------ discovery
+  - id: n01_context_intake
+    num: 1
+    name: Context intake
+    lifecycle_step: Context intake
+    phase: Understand
+    stage: Context
+    subgraph: discovery
+    kind: agent
+    purpose: Register every source that can ground the product — brief, research, analytics, specs, prior prototypes, design-system authority and feedback — each with an evidence tag, without inventing any.
+    depends_on: [START]
+    inputs: ["state:inputs.brief", "files:sources/**", "artifact:gaps", "control:memory", "rework:self"]
+    context: ["The brief, verbatim, in sources/brief.md", "Project-hub raw intake (00_context_intake/) and wiki (_wiki/), through /context-pull", "Earlier rounds, their reviews and Wei's feedback", "Project lessons from earlier runs in controls/memory.md", "Meeting recordings are cited by id, never quoted"]
+    state_read: [inputs.brief, research.open_questions]
+    state_write: [inputs.sources, research.open_questions]
+    agent: context-research
+    skills: [context-intake, context-pull, evidence-tagging, wiki-query, workiq-grounding]
+    tools: ["markitdown MCP (convert documents to markdown)", "WorkIQ MCP (read-only M365 grounding)", "local file search"]
+    instructions: >-
+      Register each source with an id, a project-relative path (or a cited URL), a kind and an evidence tag (observed |
+      reported | assumed). The brief must be registered. Register user evidence (research, interviews, surveys, analytics or
+      feedback) and a design-system authority when they exist. List open questions, and mark a question blocking only when
+      the product cannot be defined without its answer. On a loop back from N02, resolve each gap in `artifact:gaps` by
+      registering the missing source; a gap you cannot resolve stays open. Never summarise a source in place of registering
+      it, and never invent a source, a quote or a participant.
+    prompt: prompts/n01_context_intake.md
+    outputs:
+      - {key: sources, kind: json, schema: sources, description: "Source registry with evidence tags, plus open questions", state_fields: {sources: inputs.sources, open_questions: research.open_questions}}
+      - {key: intake_notes, kind: markdown, description: "What each source contributes and what is missing", required: false}
+    completion:
+      - {type: artifact, key: sources, description: "The source registry validates against the sources schema"}
+      - {type: tool, fn: "sources:check_registry", description: "Every source has an evidence tag, every local path exists inside the project, and a brief is registered"}
+    evaluation: [intake]
+    failure_conditions: ["No brief registered", "A source without an evidence tag", "A local source path that does not exist or lies outside the project"]
+    retry: {max_attempts: 3, behavior: "Re-dispatch with the failing registry checks and N02's gap list as context"}
+    escalation: {after: "3 consecutive failed attempts, or the intake loop (E03) traversed twice", to: Wei, report: "Sources found, sources missing, and the questions only Wei can answer"}
+    human_review: {required: false, decision: "Not required; N03 is the first human gate"}
+    provenance: ["Source ids with sha256, recorded at N02", "An evidence tag per source", "Ledger: node_dispatched, node_submitted, node_passed"]
+    controls: {read: [memory], write: []}
+
+  - id: n02_evidence_review
+    num: 2
+    name: Research and evidence review
+    lifecycle_step: Research and evidence review
+    phase: Understand
+    stage: Context
+    subgraph: discovery
+    kind: gate
+    purpose: Turn the sources into tagged evidence, insights, assumptions and declared missing information, then detect context gaps and freeze the immutable inputs once they are sufficient.
+    depends_on: [n01_context_intake]
+    inputs: ["state:inputs.sources", "state:inputs.brief", "state:research.open_questions", "artifact:sources", "rework:self"]
+    context: ["Every registered source, read in full", "Wei's evidence-tagging discipline: observed > reported > assumed; unlabelled assumptions are the defect", "Missing information is declared, never filled in"]
+    state_read: [inputs.sources, inputs.brief, research.open_questions]
+    state_write: [inputs.sources, research.evidence, research.insights, research.assumptions, research.open_questions, research.missing]
+    agent: context-research
+    skills: [research-synthesis, evidence-tagging, assumption-mapping, known-unknown-mapper, affinity-map]
+    tools: ["pdg.tools.evidence:review (hash sources, detect gaps, freeze inputs)", "pdg.tools.evidence:check_tags"]
+    instructions: >-
+      Extract each evidence item (E-xx) as a claim, the source ids it comes from and a tag. Group the evidence into
+      insights (each citing evidence ids, with a confidence). List the assumptions the team is treating as fact (A-xx), with
+      importance and certainty, and flag the riskiest. Declare missing information in `missing`: anything the brief asks for
+      that the sources do not contain. Write research.md from the template, and keep its Evidence log append-only. The
+      deterministic hook then hashes every local source and decides: `pass` freezes the inputs, `gaps_resolvable` loops back
+      to intake with the gap list, and `gaps_blocking` escalates to Wei.
+    prompt: prompts/n02_evidence_review.md
+    outputs:
+      - {key: evidence, kind: json, schema: evidence, description: "Evidence, insights, assumptions, open questions and missing information", state_fields: {evidence: research.evidence, insights: research.insights, assumptions: research.assumptions, open_questions: research.open_questions, missing: research.missing}}
+      - {key: research_md, kind: control, doc: research, description: "your copy of research.md, installed into controls/research.md — evidence log, insights, assumptions, open questions"}
+      - {key: gaps, kind: json, schema: gaps, description: "Hook output: the gap report with every local source hashed"}
+    completion:
+      - {type: artifact, key: evidence, description: "The evidence document validates against its schema"}
+      - {type: tool, fn: "evidence:check_tags", description: "Every evidence item cites known sources with a valid tag; every insight cites evidence; the riskiest assumptions are flagged"}
+    evaluation: [evidence]
+    failure_conditions: ["Evidence cites an unknown source", "An insight without evidence", "No assumption flagged as riskiest", "A registered local source is missing (blocking gap)"]
+    retry: {max_attempts: 3, behavior: "Re-dispatch with the failing evidence checks; gaps are outcomes, not failures"}
+    escalation: {after: "gaps_blocking, 3 consecutive failed attempts, or the intake loop traversed twice", to: Wei, report: "The gap list, and what source or answer would close each gap"}
+    human_review: {required: false, decision: "Not required; blocking gaps escalate to Wei"}
+    provenance: ["inputs_frozen ledger event with the inputs sha256", "gaps.json kept per attempt", "research.md versions archived under .pdg/controls/"]
+    controls: {read: [memory], write: [research], sections: {research: [_preamble, Evidence log, Insights, Assumptions, Open questions, Missing information]}}
+    outcomes: [pass, gaps_resolvable, gaps_blocking]
+    run: {tool: "evidence:review"}
+    gate: freeze_inputs
+
+  # ------------------------------------------------------------------------------------------------------ definition
+  - id: n03_problem_definition
+    num: 3
+    name: Problem and opportunity definition
+    lifecycle_step: Problem and opportunity definition
+    phase: Understand
+    stage: Problem Definition
+    subgraph: definition
+    kind: agent
+    purpose: Commit to one problem — the job, the primary persona and the top pain, each in one sentence with evidence — and the opportunity and point of view that follow from it.
+    depends_on: [n02_evidence_review]
+    inputs: ["state:research.evidence", "state:research.insights", "state:research.assumptions", "artifact:evidence", "control:research", "rework:self"]
+    context: ["The problem-frame and POV templates (00_README/_templates/1-0, 2-1)", "Gate to Design (design-thinking-loop.md): the job, the persona and the top pain in one sentence each, with evidence", "Solve the right problem first (wei-isms §2)"]
+    state_read: [research.evidence, research.insights, research.assumptions]
+    state_write: [product.problem, product.users, product.customer_context]
+    agent: product-strategist
+    skills: [problem-framing, problem-statement-builder, design-pov-author, jobs-to-be-done, how-might-we]
+    tools: ["pdg.tools.product:check_problem"]
+    instructions: >-
+      Write the problem frame: a problem statement, the job, the primary persona, the top pain (with evidence ids), the
+      opportunity, a POV (user · need · insight), who we design against, at least three How-Might-We questions, and the
+      decisions the prototype must enable. The job, the persona and the top pain are one sentence each. Every evidence id
+      must exist in research.evidence. Update product.md's Problem section. Wei approves or rejects the frame at the gate.
+    prompt: prompts/n03_problem_definition.md
+    outputs:
+      - {key: problem, kind: json, schema: problem, description: "Problem frame and POV", state_fields: {".": product.problem, primary_persona: product.users, problem_statement: product.customer_context}}
+      - {key: product_md, kind: control, doc: product, description: "your copy of product.md, installed into controls/product.md — Problem section"}
+    completion:
+      - {type: artifact, key: problem, description: "The problem frame validates against its schema"}
+      - {type: tool, fn: "product:check_problem", description: "Job, persona and top pain are one sentence each; the pain cites known evidence; ≥ 3 How-Might-We questions"}
+    evaluation: [problem]
+    failure_conditions: ["The job, persona or pain runs to more than one sentence", "The top pain cites no evidence, or unknown evidence", "Fewer than three How-Might-We questions"]
+    retry: {max_attempts: 3, behavior: "Re-dispatch with the failing checks, or with Wei's rejection reason after a rejected gate"}
+    escalation: {after: "3 consecutive failed attempts, or 2 rejections (E07)", to: Wei, report: "The frame as it stands, and what Wei's rejections asked for"}
+    human_review: {required: true, decision: "Is this the right problem? (Understand → Design gate)", approver: Wei, outcomes: [approved, rejected]}
+    provenance: ["Problem frame per attempt", "Wei's decision and words in history.approvals", "product.md versions archived"]
+    controls: {read: [research], write: [product], sections: {product: [Problem, Users]}}
+    outcomes: [approved, rejected]
+
+  - id: n04_requirements
+    num: 4
+    name: User, business, and technical requirements
+    lifecycle_step: User, business, and technical requirements
+    phase: Design
+    stage: Problem Definition
+    subgraph: definition
+    kind: agent
+    purpose: Derive user, business and technical requirements, each traced to evidence or to a named assumption and each P0 with acceptance criteria, plus the business, technical, regulatory and time constraints.
+    depends_on: [n03_problem_definition]
+    inputs: ["state:product.problem", "state:research.evidence", "state:research.assumptions", "artifact:problem", "control:product", "control:research", "rework:self"]
+    context: ["The PRD template §7–8 (00_README/_templates/2-3)", "Constraint mapping: technical, business, regulatory and time limits known to engineers", "A requirement without evidence must name the assumption it rests on"]
+    state_read: [product.problem, research.evidence, research.assumptions]
+    state_write: [product.requirements, product.constraints]
+    agent: product-strategist
+    skills: [prd-author, constraint-mapping, jobs-to-be-done, spec-driven-development, evidence-tagging]
+    tools: ["pdg.tools.product:check_requirements"]
+    instructions: >-
+      Write requirements R-xx with a type (user | business | technical), a statement, a priority (P0 | P1 | P2), the evidence
+      ids or assumption ids they rest on, and acceptance criteria (required for every P0). Include at least one requirement of
+      each type. Write constraints C-xx with a type and a source. Update product.md's Requirements and Constraints sections.
+      Never add a requirement that no evidence or named assumption supports.
+    prompt: prompts/n04_requirements.md
+    outputs:
+      - {key: requirements, kind: json, schema: requirements, description: "Requirements and constraints", state_fields: {requirements: product.requirements, constraints: product.constraints}}
+      - {key: product_md, kind: control, doc: product, description: "your copy of product.md, installed into controls/product.md — Requirements and Constraints sections"}
+    completion:
+      - {type: artifact, key: requirements, description: "The requirements document validates against its schema"}
+      - {type: tool, fn: "product:check_requirements", description: "Every requirement traces to evidence or an assumption; every P0 has acceptance criteria; all three types are present"}
+    evaluation: [requirements]
+    failure_conditions: ["A requirement with no evidence and no assumption", "A P0 without acceptance criteria", "A missing requirement type", "No constraints"]
+    retry: {max_attempts: 3, behavior: "Re-dispatch with the untraced requirements listed"}
+    escalation: {after: "3 consecutive failed attempts, or a rework cycle whose fix would change locked product.md", to: Wei, report: "The untraced requirements and the evidence that would support them"}
+    human_review: {required: false, decision: "Signed with the scope at N05"}
+    provenance: ["Requirement → evidence and assumption links", "product.md versions archived"]
+    controls: {read: [product, research], write: [product], sections: {product: [Requirements, Constraints]}}
+
+  - id: n05_scope_success
+    num: 5
+    name: Product scope and success criteria
+    lifecycle_step: Product scope and success criteria
+    phase: Design
+    stage: Problem Definition
+    subgraph: definition
+    kind: agent
+    purpose: Sign the product scope — objective, value proposition, in and out of scope, non-goals, numeric success criteria, guardrails and specific rollback triggers — and the quality bar every later gate uses.
+    depends_on: [n04_requirements]
+    inputs: ["state:product.requirements", "state:product.constraints", "state:product.problem", "artifact:requirements", "control:product", "rework:self"]
+    context: ["The PRD template §5–6, §10–11 and the design-brief template §8, §11", "Wei's quality bars: non-goals never empty, scope-out never empty, rollback triggers specific, numbers not adjectives", "Gate to Build: PRD signed 🟢; open questions answered or 🟡 with a trigger and an expiry"]
+    state_read: [product.requirements, product.constraints, product.problem]
+    state_write: [product.objective, product.value_proposition, product.scope, product.success_criteria, product.rollback_triggers, research.open_questions]
+    agent: product-strategist
+    skills: [success-metrics, prd-author, traffic-light-decisions, extreme-clarity, pathfinder-prioritizer]
+    tools: ["pdg.tools.product:check_scope"]
+    instructions: >-
+      Write the objective and value proposition in one sentence each. List in-scope items, out-of-scope items and non-goals;
+      none may be empty. Write success criteria M-xx with a baseline, a numeric target, a unit and a method: at least one north
+      star and one guardrail. Write rollback triggers that name a measurable condition. Every open question that stays
+      open is a 🟡 with a trigger, an expiry and an owner. Update product.md (Scope and Success criteria) and evaluation.md
+      (the quality bar, with any threshold overrides in its front matter). Wei's approval locks product.md and evaluation.md.
+    prompt: prompts/n05_scope_success.md
+    outputs:
+      - {key: scope, kind: json, schema: scope, description: "Objective, value proposition, scope, success criteria, rollback triggers", state_fields: {objective: product.objective, value_proposition: product.value_proposition, scope: product.scope, success_criteria: product.success_criteria, rollback_triggers: product.rollback_triggers}}
+      - {key: product_md, kind: control, doc: product, description: "your copy of product.md, installed into controls/product.md — Scope and Success criteria"}
+      - {key: evaluation_md, kind: control, doc: evaluation, description: "your copy of evaluation.md, installed into controls/evaluation.md — the approved quality gates"}
+    completion:
+      - {type: artifact, key: scope, description: "The scope document validates against its schema"}
+      - {type: tool, fn: "product:check_scope", description: "Non-goals and out-of-scope are non-empty; targets are numeric; rollback triggers are specific; every yellow has a trigger and an expiry"}
+    evaluation: [scope]
+    failure_conditions: ["Empty non-goals or out-of-scope", "A success target with no number", "A vague rollback trigger", "A yellow open question without a trigger or an expiry"]
+    retry: {max_attempts: 3, behavior: "Re-dispatch with the failing quality bars, or with Wei's rejection reason"}
+    escalation: {after: "3 consecutive failed attempts, or 2 rejections (E10)", to: Wei, report: "The scope as drafted and the open questions that block sign-off"}
+    human_review: {required: true, decision: "Sign the PRD scope and the quality bar (Design → Build gate)", approver: Wei, outcomes: [approved, rejected]}
+    provenance: ["Wei's sign-off in history.approvals", "product.md and evaluation.md locked on approval (approved sha256 recorded)"]
+    controls: {read: [product, research], write: [product, evaluation], lock_on_approval: [product, evaluation], sections: {product: [_preamble, Value proposition, Scope, Success criteria, Rollback triggers, Open questions]}}
+    outcomes: [approved, rejected]
+
+  # --------------------------------------------------------------------------------------------------------- concept
+  - id: n06_concept_ideation
+    num: 6
+    name: Concept ideation and comparison
+    lifecycle_step: Concept ideation and comparison
+    phase: Design
+    stage: Concept
+    subgraph: concept
+    kind: agent
+    purpose: Generate at least three distinct concepts, compare them against weighted criteria traced to the requirements, name each concept's riskiest assumption, and bring one recommendation to Wei.
+    depends_on: [n05_scope_success]
+    inputs: ["state:product.requirements", "state:product.scope", "state:product.success_criteria", "state:research.assumptions", "control:product", "rework:self"]
+    context: ["Design criteria are traced to requirements (design-criteria)", "Crazy 8s / lightning demos to widen the range before converging", "A decision matrix makes a close call defensible; disagreement heard is recorded, never invented"]
+    state_read: [product.requirements, product.scope, product.success_criteria, research.assumptions]
+    state_write: [design.criteria, design.concepts, design.selected_concept]
+    agent: service-experience-designer
+    support_agents: [product-strategist]
+    skills: [concept-creator, crazy-8s, design-criteria, decision-matrix, competitive-landscape]
+    tools: ["pdg.tools.concepts:check"]
+    instructions: >-
+      Write criteria with weights that sum to 1, each tied to requirement ids. Write at least three concepts: a name, a
+      summary, a before/after for the primary persona, the riskiest assumption, and a 1–5 score per criterion. Recommend one
+      concept in `selected`. If it is not the highest weighted score, `rationale` must say why (≥ 40 characters). Record real
+      disagreement only; leave it empty when none was heard. Wei chooses at the gate; a rejection re-opens ideation with
+      Wei's reason.
+    prompt: prompts/n06_concept_ideation.md
+    outputs:
+      - {key: concepts, kind: json, schema: concepts, description: "Criteria, concepts, scores and the recommendation", state_fields: {criteria: design.criteria, concepts: design.concepts, selected: design.selected_concept}}
+    completion:
+      - {type: artifact, key: concepts, description: "The concepts document validates against its schema"}
+      - {type: tool, fn: "concepts:check", description: "≥ 3 concepts scored on every criterion; weights sum to 1; the selection is a concept; an override has a rationale; every concept names its riskiest assumption"}
+    evaluation: [concepts]
+    failure_conditions: ["Fewer than three concepts", "Weights that do not sum to 1", "An unscored criterion", "A below-top selection without a rationale"]
+    retry: {max_attempts: 3, behavior: "Re-dispatch with the failing matrix checks, or with Wei's rejection reason"}
+    escalation: {after: "3 consecutive failed attempts, or 2 rejections (E12)", to: Wei, report: "The matrix, and the two closest concepts with their trade-offs"}
+    human_review: {required: true, decision: "Choose the concept to prototype", approver: Wei, outcomes: [approved, rejected]}
+    provenance: ["The decision matrix per attempt", "Wei's choice and reason in history.approvals and history.decisions"]
+    controls: {read: [product], write: []}
+    outcomes: [approved, rejected]
+
+  # ------------------------------------------------------------------------------------------------------ experience
+  - id: n07_experience_architecture
+    num: 7
+    name: Experience architecture and user flows
+    lifecycle_step: Experience architecture and user flows
+    phase: Design
+    stage: UX Design
+    subgraph: experience
+    kind: agent
+    purpose: Turn the chosen concept into journeys, a screen inventory with routes, navigation and user flows that cover every P0 requirement, plus the system behaviour the flows depend on.
+    depends_on: [n06_concept_ideation]
+    inputs: ["state:design.concepts", "state:design.selected_concept", "state:product.requirements", "state:product.problem", "control:product", "rework:self"]
+    context: ["The journey-map template (00_README/_templates/1-4)", "Information architecture: one name per thing, and navigation that follows the domain's own lifecycle", "Keep distinct domains as distinct workflows; unify the shell, not the domain logic (Wei, 2026-09-26)"]
+    state_read: [design.concepts, design.selected_concept, product.requirements, product.problem]
+    state_write: [design.journeys, design.screens, design.flows]
+    agent: service-experience-designer
+    skills: [user-journey-map, information-architecture-designer, terminology-taxonomy-designer, storyboard, jobs-to-be-done]
+    tools: ["pdg.tools.experience:check_flows"]
+    instructions: >-
+      Write the journeys (persona, job, stages with doing, pain and opportunity), the screens (stable id, name, purpose,
+      route, kind; and for a record, a form or a route nested under another screen's, its `parent`: the screen that links to
+      it), the navigation, and flows F-xx (the requirement ids they serve, the entry and exit screens, and steps of screen ·
+      action · outcome). Every P0 requirement must be covered by at least one flow. Every screen must be reachable from the
+      navigation, a flow, or its parent. Write experience.md's Journeys, Information architecture and Flows sections. The screen ids are
+      the contract the prototype implements with `data-screen`.
+    prompt: prompts/n07_experience_architecture.md
+    outputs:
+      - {key: experience, kind: json, schema: experience, description: "Journeys, screens, navigation, flows, system behaviour", state_fields: {journeys: design.journeys, screens: design.screens, flows: design.flows}}
+      - {key: experience_md, kind: control, doc: experience, description: "your copy of experience.md, installed into controls/experience.md — journeys, IA, flows"}
+    completion:
+      - {type: artifact, key: experience, description: "The experience document validates against its schema"}
+      - {type: tool, fn: "experience:check_flows", description: "Every P0 requirement is covered by a flow; every flow step names a known screen; every screen is reachable; routes are unique"}
+    evaluation: [experience]
+    failure_conditions: ["An uncovered P0 requirement", "A flow step on an unknown screen", "An unreachable screen", "A duplicate route"]
+    retry: {max_attempts: 3, behavior: "Re-dispatch with the uncovered requirements and orphan screens"}
+    escalation: {after: "3 consecutive failed attempts", to: Wei, report: "The coverage matrix of requirements × flows, with the gaps"}
+    human_review: {required: false, decision: "Reviewed through the prototype at N13–N14"}
+    provenance: ["Requirement → flow coverage matrix recomputed at every attempt", "experience.md versions archived"]
+    controls: {read: [product], write: [experience], sections: {experience: [_preamble, Journeys, Tasks, Information architecture, User flows, System behavior]}}
+
+  - id: n08_interaction_design
+    num: 8
+    name: UX and interaction design
+    lifecycle_step: UX and interaction design
+    phase: Design
+    stage: UX Design
+    subgraph: experience
+    kind: agent
+    purpose: Specify every screen's states (loading, empty, error, success and the domain's own), interactions with triggers, feedback and keyboard behaviour, validation rules, and the focus and feedback rules the prototype must honour.
+    depends_on: [n07_experience_architecture]
+    inputs: ["state:design.screens", "state:design.flows", "state:product.requirements", "artifact:experience", "control:experience", "rework:self"]
+    context: ["The design-handoff template §3–4, §7 (00_README/_templates/2-4)", "“The prototype looks good but does not work” → every state and error path is specified (Wei, brief 2026-09-26)", "Requirement-first panels: a locked action says what unlocks it"]
+    state_read: [design.screens, design.flows, product.requirements]
+    state_write: [design.interactions]
+    agent: ux-interaction-designer
+    skills: [prototyping-principles, heuristic-evaluation, hitl-boundary-designer, content-writing, design-review]
+    tools: ["pdg.tools.experience:check_interactions"]
+    instructions: >-
+      Write one screen spec per screen in the experience document: its states (at least the success state, plus the empty and
+      error states for every data screen), its interactions (trigger, response, feedback, keyboard), and its validation
+      rules. Write the global focus rules (focus moves to the new heading on navigation; a visible focus ring everywhere) and
+      feedback rules (status messages are announced; never colour alone). A list that holds a current item names its
+      treatment: the design system's "where you are" mark (a bar, a ring) on a light fill, never a status colour; rest,
+      hover and current visibly ordered (hover lighter than current); every status mark inside an item keeps its colour in
+      every state. A consequential action is never automatic; a locked action states what unlocks it. Update experience.md's
+      Interactions and states section.
+    prompt: prompts/n08_interaction_design.md
+    outputs:
+      - {key: interactions, kind: json, schema: interactions, description: "Screen specs: states, interactions, validation; focus and feedback rules", state_fields: {".": design.interactions}}
+      - {key: experience_md, kind: control, doc: experience, description: "your copy of experience.md, installed into controls/experience.md — interactions and states"}
+    completion:
+      - {type: artifact, key: interactions, description: "The interaction document validates against its schema"}
+      - {type: tool, fn: "experience:check_interactions", description: "Every screen has a spec; list screens specify empty and error states, record screens an error state; every interaction has keyboard behaviour; focus and feedback rules exist"}
+    evaluation: [interaction]
+    failure_conditions: ["A screen without a spec", "A data screen without empty or error states", "An interaction without keyboard behaviour"]
+    retry: {max_attempts: 3, behavior: "Re-dispatch with the missing states and interactions listed"}
+    escalation: {after: "3 consecutive failed attempts", to: Wei, report: "The screens whose behaviour is still unspecified"}
+    human_review: {required: false, decision: "Reviewed through the prototype at N13–N14"}
+    provenance: ["State inventory per screen", "experience.md versions archived"]
+    controls: {read: [experience, product], write: [experience], sections: {experience: [Interactions and states]}}
+
+  - id: n09_visual_system
+    num: 9
+    name: Visual and design-system definition
+    lifecycle_step: Visual and design-system definition
+    phase: Design
+    stage: UX Design
+    subgraph: experience
+    kind: agent
+    purpose: Define the visual language as tokens with provenance — colour roles, type scale, spacing, radii, motion, components, breakpoints — with every text and UI colour pair meeting WCAG contrast, and the prohibited patterns.
+    depends_on: [n07_experience_architecture]
+    inputs: ["state:design.screens", "artifact:experience", "files:sources/**", "control:product", "rework:self"]
+    context: ["The workspace design system (05_Library/DESIGN-SYSTEM-AI-INSTRUCTIONS.md) and the project's brand authority", "Design system as infrastructure: reuse tokens and components; off-system output is a defect", "One component language across surfaces: type scale, radii, focus ring, status colours (Wei, 2026-09-26)"]
+    state_read: [design.screens]
+    state_write: [design.system]
+    agent: visual-design-system
+    support_agents: [accessibility-reviewer]
+    skills: [design-system-author, design-system-as-infrastructure, frontend-design, impeccable, accessibility-verification]
+    tools: ["pdg.tools.design_system:check (WCAG contrast of every declared pair, type-scale and radius counts)"]
+    instructions: >-
+      Write colour tokens (name, #rrggbb value, role, provenance), the type scale (≤ 8 sizes, none below 12 px), a 4 px spacing
+      scale, radii (≤ 5), motion rules (respect reduced motion), components with their variants and states, breakpoints, the
+      accessibility rules and the prohibited patterns. Declare every foreground/background pair the UI uses; each must meet
+      4.5:1 (3:1 for large text and non-text UI). Reserve the alert colour for alerts, and name the status each status
+      colour carries in its role (alert, warning, success, watch…): no hover, current or selected state may take one. A
+      ratio design.md states is the one the tokens give, cut or rounded, never rounded up across 4.5 or 3. Write design.md
+      from the template.
+      Wei approves the visual system, which locks design.md.
+    prompt: prompts/n09_visual_system.md
+    outputs:
+      - {key: design_system, kind: json, schema: design-system, description: "Tokens, pairs, components, rules", state_fields: {".": design.system}}
+      - {key: design_md, kind: control, doc: design, description: "your copy of design.md, installed into controls/design.md — visual language and prohibited patterns"}
+    completion:
+      - {type: artifact, key: design_system, description: "The design-system document validates against its schema"}
+      - {type: tool, fn: "design_system:check", description: "Every declared pair meets WCAG contrast, and every ratio design.md states is the one the tokens give; ≤ 8 type sizes, none below 12 px; spacing on a 4 px grid; tokens carry provenance; prohibited patterns listed"}
+    evaluation: [visual-system]
+    failure_conditions: ["A declared pair below its contrast minimum", "A type size below 12 px or more than 8 sizes", "A token without provenance", "No prohibited patterns"]
+    retry: {max_attempts: 3, behavior: "Re-dispatch with the failing pairs and counts, or with Wei's rejection reason"}
+    escalation: {after: "3 consecutive failed attempts, or 2 rejections (E17)", to: Wei, report: "The token set, the failing pairs and the brand constraint in conflict"}
+    human_review: {required: true, decision: "Approve the visual system", approver: Wei, outcomes: [approved, rejected]}
+    provenance: ["Contrast ratios recomputed from the token values", "design.md locked on approval (approved sha256 recorded)"]
+    controls: {read: [product], write: [design], lock_on_approval: [design]}
+    outcomes: [approved, rejected]
+
+  # ------------------------------------------------------------------------------------------------------- prototype
+  - id: n10_prototype_planning
+    num: 10
+    name: Prototype planning
+    lifecycle_step: Prototype planning
+    phase: Build
+    stage: Prototype
+    subgraph: prototype
+    kind: agent
+    purpose: Choose the fidelity the evidence supports, and plan the goals, the scenarios that exercise every P0 flow, the states to reach, the viewports, the content needs and the measurable test criteria.
+    depends_on: [n08_interaction_design, n09_visual_system]
+    inputs: ["state:design.flows", "state:design.interactions", "state:design.system", "state:research.assumptions", "state:product.success_criteria", "state:product.requirements", "artifact:interactions", "artifact:design_system", "control:experience", "control:design", "control:evaluation", "rework:self"]
+    context: ["The test-plan template (00_README/_templates/3-1)", "Build the thinnest slice that tests the riskiest assumption (design-thinking-loop.md, Build)", "“Development moved too quickly” → validated assumptions and customer alignment before fidelity rises (Wei, brief 2026-09-26)"]
+    state_read: [design.flows, design.interactions, design.system, research.assumptions, product.success_criteria, product.requirements]
+    state_write: [build.plan]
+    agent: prototype-developer
+    support_agents: [ux-interaction-designer]
+    skills: [prototyping-assist, poc-planner, experiment-planner, hypothesis-creator, mve-mvp-planner]
+    tools: ["pdg.tools.plan:check (fidelity gate, scenario and state coverage)"]
+    instructions: >-
+      Pick a fidelity (low | mid | high). Mid or high fidelity needs every riskiest assumption validated, or accepted as a risk
+      by a named human; high fidelity also needs customer alignment with evidence. Write scenarios S-xx in the step DSL
+      (goto, click, fill, press, select, expect_*, screenshot, axe): at least one per P0 flow, and each ends in an expectation.
+      Only a scenario's first `goto` loads the page cold: a later one that changes only the `#` route keeps the app's state,
+      and one to the URL the page is on returns to the top with the state kept. For each record screen, name in `samples`
+      two or more other records most likely to break its layout.
+      List the states to reach (screen, state, route, marker selector) for every data screen's empty and error states; the
+      viewports (at least one ≤ 400 px and one ≥ 1280 px); the content needs; and the test criteria. Write prototype.md. Wei's
+      approval locks prototype.md.
+    prompt: prompts/n10_prototype_planning.md
+    outputs:
+      - {key: plan, kind: json, schema: plan, description: "Fidelity, scenarios, states, viewports, test criteria", state_fields: {".": build.plan}}
+      - {key: prototype_md, kind: control, doc: prototype, description: "your copy of prototype.md, installed into controls/prototype.md — the prototype plan"}
+    completion:
+      - {type: artifact, key: plan, description: "The plan validates against its schema"}
+      - {type: tool, fn: "plan:check", description: "The fidelity gate holds; every P0 flow has a scenario ending in an expectation; every data screen's empty and error states are planned; viewports span ≤ 400 and ≥ 1280 px; every record screen names its worst-case samples"}
+    evaluation: [prototype-plan]
+    failure_conditions: ["Mid/high fidelity with an unvalidated riskiest assumption", "High fidelity without customer alignment", "A P0 flow with no scenario", "An unplanned empty or error state"]
+    retry: {max_attempts: 3, behavior: "Re-dispatch with the failing gate; lowering the fidelity is a valid fix"}
+    escalation: {after: "3 consecutive failed attempts, or 2 rejections (E19)", to: Wei, report: "Which assumptions are unvalidated and the cheapest test that would validate each"}
+    human_review: {required: true, decision: "Approve the fidelity and the prototype plan", approver: Wei, outcomes: [approved, rejected]}
+    provenance: ["Assumption status at planning time", "prototype.md locked on approval"]
+    controls: {read: [experience, design, evaluation], write: [prototype], lock_on_approval: [prototype]}
+    outcomes: [approved, rejected]
+
+  - id: n11_prototype_development
+    num: 11
+    name: Prototype development
+    lifecycle_step: Prototype development
+    phase: Build
+    stage: Development
+    subgraph: prototype
+    kind: agent
+    purpose: Build a working, offline prototype of the planned scenarios on the approved tokens and components, with every screen and state implemented, domain logic unit-tested, and development.md as the implementation-ready foundation.
+    depends_on: [n10_prototype_planning]
+    inputs: ["state:build.plan", "state:design.system", "state:design.interactions", "state:design.screens", "artifact:plan", "artifact:design_system", "artifact:interactions", "control:prototype", "control:design", "control:experience", "control:product", "rework:self"]
+    context: ["The approved plan (prototype.md), design system (design.md) and interaction spec (experience.md)", "Single-file offline builds assembled from parts by a reproducible build script (the case-study pattern)", "“A visually polished prototype is not complete if its primary workflows do not function” (Wei, brief 2026-09-26)"]
+    state_read: [build.plan, design.system, design.interactions, design.screens]
+    state_write: [build.code_artifacts]
+    agent: prototype-developer
+    support_agents: [front-end-engineer]
+    skills: [frontend-design, web-artifacts-builder, design-system-as-infrastructure, test-driven-development, prototyping-principles]
+    tools: ["python build script (assembles the single-file offline build and build-manifest.json)", "node --check and node --test (Node 22)", "pdg.tools.prototype:check_static"]
+    instructions: >-
+      Implement every screen in the experience document and mark it with data-screen="<id>". Implement every planned state
+      and mark it with its marker selector. Use only the design-system tokens (CSS custom properties); a colour outside the
+      tokens is a defect. Keep domain logic (derivations, rules, guards) in a module with node unit tests. Build to a
+      self-contained file that runs from file:// with no network requests. Write build-manifest.json (entry, stack, file
+      hashes, screen selectors, unit-test file) and development.md (architecture, technology choices, components, data and
+      APIs, folder structure, implementation standards, testing requirements). On rework, change only what the defect
+      needs.
+    prompt: prompts/n11_prototype_development.md
+    outputs:
+      - {key: prototype_build, kind: dir, description: "Prototype source and single-file build (src/, dist/, tests/, build script)"}
+      - {key: build_manifest, kind: json, schema: build-manifest, description: "Entry, stack, file hashes, screen selectors, unit tests"}
+      - {key: development_md, kind: control, doc: development, description: "your copy of development.md, installed into controls/development.md — the implementation-ready foundation"}
+    completion:
+      - {type: artifact, key: prototype_build, description: "The prototype build directory was registered"}
+      - {type: artifact, key: build_manifest, description: "The build manifest validates against its schema"}
+      - {type: tool, fn: "prototype:check_static", description: "Manifest hashes match; entry is offline; every screen is implemented; only design tokens are used; no placeholder text"}
+      - {type: tool, fn: "prototype:check_unit", description: "Every script passes node --check and the domain unit tests pass"}
+    evaluation: [build]
+    failure_conditions: ["A manifest hash mismatch", "A network reference in the build", "An unimplemented screen", "An off-system colour", "A failing unit test"]
+    retry: {max_attempts: 3, behavior: "Re-dispatch with the failing static checks and unit-test output"}
+    escalation: {after: "3 consecutive failed attempts, or the same defect failed 3 corrections", to: Wei, report: "The failing checks, what was tried, and whether the plan or the design system needs a change request"}
+    human_review: {required: false, decision: "Reviewed at N13–N15"}
+    provenance: ["Build directory tree hash", "build-manifest.json file hashes", "Unit-test results in evaluation.test_results"]
+    controls: {read: [prototype, design, experience, product], write: [development]}
+    run: {command_hook: true}
+
+  - id: n12_content_data
+    num: 12
+    name: Content and realistic data integration
+    lifecycle_step: Content and realistic data integration
+    phase: Build
+    stage: Prototype
+    subgraph: prototype
+    kind: agent
+    purpose: Replace seed data with realistic, labelled, reproducible content — datasets that exercise the planned edge cases and a copy deck in the users' vocabulary — and integrate them into the prototype build under review.
+    depends_on: [n11_prototype_development]
+    inputs: ["artifact:prototype_build", "artifact:plan", "state:build.plan", "state:design.screens", "state:research.evidence", "control:prototype", "control:research", "rework:self"]
+    context: ["“The prototype is too generic” → product-specific, realistic content and meaningful workflows (Wei, brief 2026-09-26)", "Synthetic or invented data is labelled at the point of decision; missing data is shown as missing, never as zero", "Seeded generators make data reproducible"]
+    state_read: [build.plan, design.screens, research.evidence]
+    state_write: [build.prototype, build.version, build.content_artifacts]
+    agent: content-designer
+    skills: [content-writing, content-designer, terminology-taxonomy-designer, asset-collection, evidence-tagging]
+    tools: ["seeded synthetic-data generator", "python build script", "pdg.tools.content:check"]
+    instructions: >-
+      Generate or curate datasets with a seed and a provenance (real | synthetic | invented | mixed: invented records whose
+      `verified_fields` were checked against the named `source_ids`). Cover every edge case the
+      plan's scenarios need (for example out-of-range, missing and borderline values) and name them in `edge_cases`. Write the
+      copy deck in the users' own vocabulary. Show a visible label in the UI when data is synthetic. Integrate the data and
+      copy into a copy of `artifact:prototype_build` and rebuild; submit the rebuilt directory as `prototype`. Never leave
+      lorem ipsum, TODO or TBD text.
+    prompt: prompts/n12_content_data.md
+    outputs:
+      - {key: prototype, kind: dir, description: "The integrated prototype version under review"}
+      - {key: content, kind: json, schema: content, description: "Datasets with provenance, copy deck, edge cases"}
+    completion:
+      - {type: artifact, key: prototype, description: "The integrated prototype directory was registered"}
+      - {type: artifact, key: content, description: "The content document validates against its schema"}
+      - {type: tool, fn: "content:check", description: "Datasets exist and parse; volume meets the plan; provenance is labelled in the UI; every source id is known and every verified field is in the data; every edge case appears in the data; no placeholder text"}
+    evaluation: [content]
+    failure_conditions: ["Placeholder text in the build", "Synthetic data without a visible label", "A planned edge case missing from the data", "Too few records"]
+    retry: {max_attempts: 3, behavior: "Re-dispatch with the failing content checks"}
+    escalation: {after: "3 consecutive failed attempts", to: Wei, report: "Which content cannot be made realistic without a real source, and who could supply it"}
+    human_review: {required: false, decision: "Reviewed at N13–N14"}
+    provenance: ["Dataset seed and generator recorded", "The integrated build's tree hash becomes build version N", "history.versions entry"]
+    controls: {read: [prototype, research], write: []}
+
+  # ------------------------------------------------------------------------------------------------------ validation
+  - id: n13_quality_review
+    num: 13
+    name: Functional, design, and accessibility review
+    lifecycle_step: Functional, design, and accessibility review
+    phase: Build
+    stage: Validation
+    subgraph: validation
+    kind: review
+    purpose: Run every planned scenario in a real browser at every viewport, audit accessibility, responsiveness, console, network and performance, then judge visual hierarchy, product specificity and consistency from the screenshots.
+    depends_on: [n12_content_data]
+    inputs: ["artifact:prototype", "artifact:plan", "state:build.plan", "state:build.prototype", "state:design.system", "state:design.screens", "control:design", "control:experience", "control:evaluation", "rework:self"]
+    context: ["Rendered-output inspection finds defects that value checks miss (case-study lesson)", "Automated accessibility testing finds about 57% of WCAG issues (Deque); the rest needs judgement", "“The design is hard to read” → hierarchy, contrast, typography, spacing, density (Wei, brief 2026-09-26)"]
+    state_read: [build.plan, build.prototype, design.system, design.screens]
+    state_write: [evaluation.reviews, evaluation.test_results]
+    agent: product-ux-critic
+    support_agents: [accessibility-reviewer, technical-qa]
+    skills: [design-review, accessibility-verification, webapp-testing, prototype-qa, heuristic-evaluation]
+    tools: ["Playwright Chromium through pdg.tools.browser:check", "axe-core 4.11.4 (vendored; WCAG 2.0/2.1/2.2 A and AA tags)", "full-page screenshots per screen, state and viewport"]
+    instructions: >-
+      The tool pre-check has already run the browser suite: read browser-report.json and the screenshots. Score every review
+      dimension 1–5 (4 meets the bar) with evidence (the screenshot and the element). For every score below 4, file a finding
+      with a severity, the location (screen:viewport), the node it traces to, the smallest fix and an acceptance check. Never
+      re-score a tool dimension; a tool failure cannot be overridden. Never review work you produced.
+    prompt: prompts/n13_quality_review.md
+    outputs:
+      - {key: browser_report, kind: json, description: "Tool pre-check: scenarios, axe, overflow, targets, text size, focus, console, network, timing"}
+      - {key: screenshots, kind: dir, description: "Screenshots per screen, state and viewport"}
+      - {key: quality_review, kind: json, schema: review, description: "The agent's scored review dimensions and findings"}
+    completion:
+      - {type: artifact, key: browser_report, description: "The browser suite ran and wrote its report"}
+      - {type: review_complete, key: quality_review, description: "Every MUST review dimension is scored with evidence"}
+    evaluation: [functional, accessibility, responsive, design-quality]
+    failure_conditions: ["The browser suite could not run (escalates: Playwright or Chromium unavailable)", "A MUST review dimension left unscored"]
+    retry: {max_attempts: 2, behavior: "Re-dispatch with the unscored dimensions; findings are outcomes, not failures"}
+    escalation: {after: "2 consecutive failed attempts, or the browser cannot start", to: Wei, report: "The tool error, or the dimensions the reviewer could not judge from the evidence"}
+    human_review: {required: false, decision: "Wei's taste dimensions stay pending until N18"}
+    provenance: ["browser-report.json and screenshots per build version", "Review record per attempt in evaluation.reviews"]
+    controls: {read: [design, experience, evaluation], write: []}
+    resources: [browser]
+    run: {tool: "browser:check"}
+
+  - id: n14_validation
+    num: 14
+    name: User and stakeholder validation
+    lifecycle_step: User and stakeholder validation
+    phase: Learn
+    stage: Validation
+    subgraph: validation
+    kind: review
+    purpose: Put the planned scenarios in front of named participants and stakeholders, record task success, time, ease (SEQ) and quotes, and keep simulated input strictly apart from user evidence.
+    depends_on: [n12_content_data]
+    inputs: ["artifact:prototype", "artifact:plan", "state:build.plan", "state:product.success_criteria", "feedback:open", "control:research", "control:evaluation", "rework:self"]
+    context: ["Task success rate is the bottom line of usability; SEQ is a 7-point post-task question (NN/g, MeasuringU)", "Three rounds of five users beat one round of fifteen (NN/g)", "An agent never plays a user: simulated sessions are labelled and never counted as evidence"]
+    state_read: [build.plan, product.success_criteria]
+    state_write: [evaluation.reviews, research.validation_findings]
+    agent: context-research
+    support_agents: [product-ux-critic]
+    skills: [usability-metrics, desirability-testing, feedback-collector, uxr-feedback-assist, interview-debrief]
+    tools: ["pdg.tools.validation:prepare (moderator guide from the plan's scenarios)", "pdg.tools.validation:check (success rate, time, SEQ; simulated input flagged)"]
+    instructions: >-
+      Use the moderator guide the pre-check wrote. For each session record the participant (role and an anonymised id), whether
+      it was simulated, and per task the scenario id, success, time and SEQ, plus verbatim quotes. File findings for failed or
+      hard tasks and for stakeholder concerns, each traced to the node it implicates, with the smallest fix and an acceptance
+      check. Append the validation findings to research.md; its Evidence log is append-only. Score the review dimensions. If no
+      real participant was available, say so: the human dimension stays pending.
+    prompt: prompts/n14_validation.md
+    outputs:
+      - {key: moderator_guide, kind: markdown, description: "Tool pre-check: tasks, success criteria and the SEQ question for each scenario"}
+      - {key: validation, kind: json, schema: validation, description: "Sessions, tasks, quotes and findings"}
+      - {key: validation_review, kind: json, schema: review, description: "Scored review dimensions and findings"}
+      - {key: research_md, kind: control, doc: research, description: "your copy of research.md, installed into controls/research.md — validation findings appended"}
+    completion:
+      - {type: artifact, key: validation, description: "The validation document validates against its schema"}
+      - {type: tool, fn: "validation:check", description: "Every task maps to a planned scenario; success rate, time and SEQ are computed; simulated sessions are flagged"}
+      - {type: review_complete, key: validation_review, description: "Every MUST review dimension is scored"}
+    evaluation: [validation]
+    failure_conditions: ["A task on an unknown scenario", "A session without the simulated flag", "A MUST review dimension left unscored"]
+    retry: {max_attempts: 2, behavior: "Re-dispatch with the failing validation checks"}
+    escalation: {after: "2 consecutive failed attempts", to: Wei, report: "Which sessions could not be run, and whom to recruit"}
+    human_review: {required: false, decision: "Real-user validation is a human dimension, confirmed by Wei at N18"}
+    provenance: ["Sessions per build version; simulated input flagged", "research.md validation findings are append-only"]
+    controls: {read: [research, evaluation], write: [research], sections: {research: [Validation findings]}}
+    run: {tool: "validation:prepare"}
+
+  - id: n15_feasibility_review
+    num: 15
+    name: Technical feasibility review
+    lifecycle_step: Technical feasibility review
+    phase: Build
+    stage: Validation
+    subgraph: validation
+    kind: review
+    purpose: Check that the prototype is a sound implementation foundation — scripts parse, domain tests pass, the bundle stays in budget, nothing depends on the network — and judge whether development.md is buildable for production.
+    depends_on: [n12_content_data]
+    inputs: ["artifact:prototype", "artifact:prototype_build", "artifact:build_manifest", "state:build.prototype", "control:development", "control:product", "control:evaluation", "rework:self"]
+    context: ["Code review across correctness, readability, architecture, security and performance", "Staged data proves interaction, not integration: say which seams need real services", "A prototype is not a production claim"]
+    state_read: [build.prototype, build.code_artifacts]
+    state_write: [evaluation.reviews, evaluation.test_results]
+    agent: front-end-engineer
+    support_agents: [technical-qa]
+    skills: [code-review-and-quality, performance-optimization, security-and-hardening, test-driven-development, observability-and-instrumentation]
+    tools: ["pdg.tools.feasibility:check (node --check, node --test, bundle budget, offline dependency audit, development.md sections)"]
+    instructions: >-
+      Read feasibility-report.json. Score the review dimensions with evidence. File a finding, with a trace, the smallest fix
+      and an acceptance check, for every architecture, security, performance or maintainability risk that would block turning
+      the prototype into production code. Name the integration seams that stay mocked and what each needs (APIs, auth,
+      persistence). Never claim production readiness.
+    prompt: prompts/n15_feasibility_review.md
+    outputs:
+      - {key: feasibility_report, kind: json, description: "Tool pre-check: syntax, unit tests, bundle size, dependencies, development.md sections"}
+      - {key: feasibility_review, kind: json, schema: review, description: "Scored feasibility dimensions and findings"}
+    completion:
+      - {type: artifact, key: feasibility_report, description: "The feasibility pre-check ran and wrote its report"}
+      - {type: review_complete, key: feasibility_review, description: "Every MUST review dimension is scored"}
+    evaluation: [feasibility]
+    failure_conditions: ["The feasibility pre-check could not run", "A MUST review dimension left unscored"]
+    retry: {max_attempts: 2, behavior: "Re-dispatch with the unscored dimensions"}
+    escalation: {after: "2 consecutive failed attempts, or node is unavailable", to: Wei, report: "The tool error or the unanswerable feasibility questions"}
+    human_review: {required: false, decision: "Not required"}
+    provenance: ["feasibility-report.json per build version", "Unit-test results in evaluation.test_results"]
+    controls: {read: [development, product, evaluation], write: []}
+    run: {tool: "feasibility:check"}
+
+  # ------------------------------------------------------------------------------------------------------- iteration
+  - id: n16_feedback_diagnosis
+    num: 16
+    name: Feedback diagnosis
+    lifecycle_step: Feedback diagnosis
+    phase: Learn
+    stage: Iteration
+    subgraph: iteration
+    kind: gate
+    purpose: Turn every blocking finding and every open piece of feedback into a traced defect — the requirement, design decision, node or implementation it comes from, the smallest effective fix and an acceptance check — then gate the version pass, rework or blocked.
+    depends_on: [n13_quality_review, n14_validation, n15_feasibility_review]
+    inputs: ["state:evaluation.reviews", "state:evaluation.feedback", "state:evaluation.defects", "feedback:open", "defects:open", "artifact:browser_report", "artifact:quality_review", "artifact:validation_review", "artifact:feasibility_review", "control:evaluation", "rework:self"]
+    context: ["The seven-step failure procedure: identify, trace, smallest fix, re-run only what is affected, compare, record, escalate", "Tool findings arrive pre-traced; confirm or re-trace them", "Wei's words are feedback, not instructions to redesign everything (“you made an over design”, 2026-09-26)"]
+    state_read: [evaluation.reviews, evaluation.feedback, evaluation.defects]
+    state_write: [evaluation.defects, evaluation.feedback, evaluation.gates, evaluation.comparisons]
+    agent: orchestrator
+    support_agents: [product-ux-critic, technical-qa]
+    skills: [debugging-and-error-recovery, five-whys, fishbone-diagram, traffic-light-decisions, rose-bud-thorn]
+    tools: ["pdg.tools.diagnosis:gate (tri-state gate and before/after comparison)"]
+    instructions: >-
+      For every blocking agent or human finding and every open feedback item, write a defect: a stable signature
+      (dimension@location), the severity, the evidence, the node it traces to and why (trace_reason), the smallest fix and
+      an acceptance check. Blocking tool findings are mapped automatically from their own trace; re-trace one only with a
+      reason. Map every feedback item to defects or dismiss it with a reason. Trace to the earliest node whose output is
+      wrong, not to the last node that touched it. The deterministic gate then decides: pass (nothing blocking), rework
+      (routable defects and budget left) or blocked (needs Wei: a locked document, an unroutable trace, a defect that failed
+      3 corrections, or the cycle budget spent).
+    prompt: prompts/n16_feedback_diagnosis.md
+    outputs:
+      - {key: interpretation, kind: json, schema: interpretation, description: "Traced defects and the feedback mapping"}
+      - {key: gate_report, kind: json, description: "Hook output: gate outcome, reasons, blocking defects, targets, comparison"}
+    completion:
+      - {type: artifact, key: interpretation, description: "The interpretation validates against its schema"}
+      - {type: interpretation_complete, description: "Every open feedback item and blocking agent/human finding is mapped; every defect has a known trace, a smallest fix and an acceptance check"}
+    evaluation: [gate]
+    failure_conditions: ["An unmapped feedback item", "A blocking finding without a defect", "A defect traced to an unknown node or without a fix"]
+    retry: {max_attempts: 3, behavior: "Re-dispatch with the unmapped findings and feedback listed"}
+    escalation: {after: "Gate outcome blocked, or 3 consecutive failed attempts", to: Wei, report: "Open defects, their traces, what was tried in each cycle, and what unblocks the run"}
+    human_review: {required: false, decision: "Blocked gates escalate to Wei"}
+    provenance: ["Gate result per cycle in evaluation.gates", "Before/after comparison per rework cycle", "Ledger: gate, regeneration_plan"]
+    controls: {read: [evaluation], write: []}
+    outcomes: [pass, rework, blocked]
+    run: {tool: "diagnosis:gate"}
+    gate: review_gate
+
+  - id: n17_targeted_rework
+    num: 17
+    name: Targeted redesign or redevelopment
+    lifecycle_step: Targeted redesign or redevelopment
+    phase: Build
+    stage: Iteration
+    subgraph: iteration
+    kind: tool
+    purpose: Plan the smallest correction — re-open only the nodes the defects trace to (a design node for redesign, a build node for redevelopment), snapshot their outputs for the before/after comparison, and hand each target its defects.
+    depends_on: [n16_feedback_diagnosis]
+    inputs: ["state:evaluation.gates", "state:evaluation.defects", "artifact:gate_report", "rework:self"]
+    context: ["Minimal regeneration: fingerprints skip unaffected work", "Change only what the defect needs; never restart the whole project to fix one defect"]
+    state_read: [evaluation.gates, evaluation.defects]
+    state_write: [evaluation.defects, history.revisions]
+    agent: orchestrator
+    skills: [debugging-and-error-recovery, code-simplification, drift-check, design-decision-articulator, traffic-light-decisions]
+    tools: ["pdg.tools.regen:plan", "pdg.tools.regen:check_targeted"]
+    instructions: >-
+      Deterministic. Build the regeneration plan from the gate: the target nodes (only regeneration targets), the defects per
+      target with their smallest fix and acceptance check, and a snapshot of each target's current output hashes. The engine
+      then fires one `target:<node>` loop edge per target, invalidating the target and its flow descendants; unchanged
+      fingerprints are memo-skipped. A plan with no target escalates.
+    prompt: prompts/n17_targeted_rework.md
+    outputs:
+      - {key: regeneration_plan, kind: json, description: "Targets, defects per target, before-snapshot"}
+    completion:
+      - {type: artifact, key: regeneration_plan, description: "The regeneration plan was written"}
+      - {type: tool, fn: "regen:check_targeted", description: "Every target is a regeneration target traced by an open defect; no untraced node is re-opened"}
+    evaluation: [regeneration]
+    failure_conditions: ["A target no defect traces to", "A target outside the regeneration targets"]
+    retry: {max_attempts: 2, behavior: "Tool errors only"}
+    escalation: {after: "No routable target (E40), or a loop edge's traversal budget spent", to: Wei, report: "The defects that could not be routed and the rework history"}
+    human_review: {required: false, decision: "Not required"}
+    provenance: ["regeneration-plan.json per cycle", "Ledger: regeneration_plan, invalidated", "history.revisions per target"]
+    controls: {read: [], write: []}
+    outcomes: [rework, no_target]
+    run: {tool: "regen:plan"}
+    gate: regeneration_plan
+
+  # -------------------------------------------------------------------------------------------------------- delivery
+  - id: n18_final_verification
+    num: 18
+    name: Final verification and delivery
+    lifecycle_step: Final verification and delivery
+    phase: Build
+    stage: Validation
+    subgraph: delivery
+    kind: tool
+    purpose: Recompute every release condition from disk, package the prototype with its evidence and a hashed manifest, list every human dimension still pending, and ask Wei to release or request changes.
+    depends_on: [n16_feedback_diagnosis]
+    inputs: ["state:evaluation.gates", "state:evaluation.defects", "state:evaluation.reviews", "state:build.prototype", "state:history.approvals", "artifact:prototype", "artifact:gate_report", "control:product", "control:evaluation", "rework:self"]
+    context: ["A technical pass is not a release: Wei decides", "Dry-run approvals are labelled not human in the package", "Simulated validation is listed as simulated, never as user evidence"]
+    state_read: [evaluation.gates, evaluation.defects, evaluation.reviews, build.prototype, history.approvals]
+    state_write: [history.decisions, history.versions]
+    agent: technical-qa
+    support_agents: [orchestrator]
+    skills: [shipping-and-launch, prototype-review, traffic-light-decisions, extreme-clarity, documentation-and-adrs]
+    tools: ["pdg.tools.release:verify (recompute conditions, verify the ledger, package with sha256 manifest)"]
+    instructions: >-
+      Deterministic. Verify the latest gate passed on the current build version, that no blocking defect is open and that every
+      review is current; re-hash the prototype, verify the ledger, and package the prototype, the control documents, the
+      reviews, the gate history, the comparisons and the approvals with a sha256 manifest. The release summary leads with a
+      TL;DR and lists pending human dimensions and non-human approvals. Wei releases the version or requests changes with
+      feedback, which loops back to diagnosis (E42).
+    prompt: prompts/n18_final_verification.md
+    outputs:
+      - {key: release_report, kind: json, description: "Every release condition with its evidence"}
+      - {key: release_summary, kind: markdown, description: "TL;DR, conditions, pending human dimensions, non-human approvals"}
+      - {key: package, kind: dir, description: "Prototype, control documents and evidence with a sha256 manifest"}
+    completion:
+      - {type: artifact, key: release_report, description: "The release report was written"}
+      - {type: artifact, key: package, description: "The package directory was registered"}
+    evaluation: [release]
+    failure_conditions: ["A release condition fails on recompute", "A manifest hash mismatch", "The ledger fails verification"]
+    retry: {max_attempts: 2, behavior: "Tool errors only; a failed condition escalates"}
+    escalation: {after: "A failed release condition, or 2 change-request loops (E42)", to: Wei, report: "The failing condition with its evidence"}
+    human_review: {required: true, decision: "Release this prototype version, or request changes with feedback", approver: Wei, outcomes: [approved, changes_requested]}
+    provenance: ["release-report.json and package manifest (sha256 per file)", "Wei's release decision in history.approvals"]
+    controls: {read: [product, evaluation], write: []}
+    outcomes: [approved, changes_requested]
+    run: {tool: "release:verify"}
+    gate: release
+
+  - id: n19_learning_memory
+    num: 19
+    name: Learning and memory update
+    lifecycle_step: Learning and memory update
+    phase: Learn
+    stage: Iteration
+    subgraph: delivery
+    kind: gate
+    purpose: Capture what this run taught — defects, effective corrections, rule observations and Wei's feedback — separate project-specific notes from reusable lessons, and propose rule changes that only a named human can apply.
+    depends_on: [n18_final_verification]
+    inputs: ["state:evaluation.defects", "state:evaluation.comparisons", "state:evaluation.feedback", "state:knowledge.enforced", "state:history.approvals", "artifact:release_report", "control:memory", "rework:self"]
+    context: ["Rule lifecycle: candidate → validated → approved → adopted → monitored → revised | retired", "Evidence before any change to default behaviour", "Learning never edits product truth, requirements, evidence or approved design principles"]
+    state_read: [evaluation.defects, evaluation.comparisons, evaluation.feedback, knowledge.enforced]
+    state_write: [knowledge.lessons, knowledge.proposal]
+    agent: learning-memory
+    skills: [rubric-authoring, evidence-tagging, decision-capture, skill-creator, wiki-ingest]
+    tools: ["pdg.tools.learning:propose (rule observations and candidates)", "pdg.tools.learning:check_lessons"]
+    instructions: >-
+      Write lessons, each with a scope (reusable | project_specific), an evidence class (verified | inferred | recommendation |
+      missing), its evidence (defect ids, comparisons, feedback ids, ledger events) and, when it observes an existing rule,
+      the rule id and whether the rule helped. Update memory.md: project-specific notes stay there. The deterministic hook
+      writes learning-proposal.json; the rule base changes only when Wei runs `pdg memory apply`.
+    prompt: prompts/n19_learning_memory.md
+    outputs:
+      - {key: lessons, kind: json, schema: lessons, description: "Lessons classified by scope and evidence", state_fields: {lessons: knowledge.lessons}}
+      - {key: memory_md, kind: control, doc: memory, description: "your copy of memory.md, installed into controls/memory.md — project lessons and patterns"}
+      - {key: learning_proposal, kind: json, description: "Hook output: rule observations and new candidates, for `pdg memory apply`"}
+    completion:
+      - {type: artifact, key: lessons, description: "The lessons document validates against its schema"}
+      - {type: tool, fn: "learning:check_lessons", description: "Every lesson has evidence and a scope; referenced rules exist; nothing targets a protected scope"}
+    evaluation: [learning]
+    failure_conditions: ["A lesson without evidence", "A lesson that changes a protected scope", "A reference to an unknown rule"]
+    retry: {max_attempts: 2, behavior: "Re-dispatch with the failing lessons"}
+    escalation: {after: "2 consecutive failed attempts", to: Wei, report: "The lessons that could not be evidenced"}
+    human_review: {required: false, decision: "Rule changes are applied by Wei with `pdg memory apply`"}
+    provenance: ["learning-proposal.json", "memory.md versions archived", "rules-changelog.jsonl on apply"]
+    controls: {read: [memory], write: [memory]}
+    run: {tool: "learning:propose"}
+    gate: learning
+
+edges:
+  - {id: E01, from: START, to: n01_context_intake, kind: flow, transition: deterministic, when: "*", transfers: ["the brief", "sources/"], threshold: "sources/brief.md exists", behavior: "Opens the run"}
+  - {id: E02, from: n01_context_intake, to: n02_evidence_review, kind: flow, transition: deterministic, when: "*", transfers: ["artifact:sources", "state:inputs.sources"], threshold: "Registry schema-valid; every source tagged", behavior: "Forward"}
+  - {id: E03, from: n02_evidence_review, to: n01_context_intake, kind: loop, transition: conditional, when: gaps_resolvable, transfers: ["artifact:gaps"], threshold: "At least one resolvable gap", behavior: "Retry intake with the gap list; the inputs stay unfrozen", max_traversals: 2}
+  - {id: E04, from: n02_evidence_review, to: n03_problem_definition, kind: flow, transition: conditional, when: pass, transfers: ["artifact:evidence", "state:research.*", "the inputs sha256"], threshold: "No blocking or resolvable gap; inputs frozen", behavior: "Branch: pass"}
+  - {id: E05, from: n02_evidence_review, to: "@escalate", kind: escalate, transition: conditional, when: gaps_blocking, transfers: ["artifact:gaps"], threshold: "A blocking gap", behavior: "Escalate to Wei; the run is BLOCKED until a source is registered or the gap is waived"}
+  - {id: E06, from: n03_problem_definition, to: n04_requirements, kind: flow, transition: conditional, when: approved, transfers: ["artifact:problem", "state:product.problem"], threshold: "Wei approved the problem frame", behavior: "Approval: forward"}
+  - {id: E07, from: n03_problem_definition, to: n03_problem_definition, kind: loop, transition: conditional, when: rejected, transfers: ["Wei's rejection reason"], threshold: "Wei rejected the frame", behavior: "Retry the frame with Wei's reason", max_traversals: 2}
+  - {id: E08, from: n04_requirements, to: n05_scope_success, kind: flow, transition: deterministic, when: "*", transfers: ["artifact:requirements", "state:product.requirements"], threshold: "Every requirement traced; every P0 has acceptance criteria", behavior: "Forward"}
+  - {id: E09, from: n05_scope_success, to: n06_concept_ideation, kind: flow, transition: conditional, when: approved, transfers: ["artifact:scope", "product.md and evaluation.md (locked)"], threshold: "Wei signed the scope", behavior: "Approval: forward; product.md and evaluation.md lock"}
+  - {id: E10, from: n05_scope_success, to: n04_requirements, kind: loop, transition: conditional, when: rejected, transfers: ["Wei's rejection reason"], threshold: "Wei rejected the scope", behavior: "Rollback to requirements with Wei's reason", max_traversals: 2}
+  - {id: E11, from: n06_concept_ideation, to: n07_experience_architecture, kind: flow, transition: conditional, when: approved, transfers: ["artifact:concepts", "state:design.selected_concept"], threshold: "Wei chose a concept", behavior: "Approval: forward"}
+  - {id: E12, from: n06_concept_ideation, to: n06_concept_ideation, kind: loop, transition: conditional, when: rejected, transfers: ["Wei's rejection reason"], threshold: "Wei rejected every concept", behavior: "Re-ideate with Wei's reason", max_traversals: 2}
+  - {id: E13, from: n07_experience_architecture, to: n08_interaction_design, kind: flow, transition: deterministic, when: "*", transfers: ["artifact:experience", "state:design.screens", "state:design.flows"], threshold: "Every P0 requirement covered by a flow", behavior: "Fan-out (1 of 2)"}
+  - {id: E14, from: n07_experience_architecture, to: n09_visual_system, kind: flow, transition: deterministic, when: "*", transfers: ["artifact:experience", "state:design.screens"], threshold: "Screen inventory complete", behavior: "Fan-out (2 of 2); runs in parallel with N08"}
+  - {id: E15, from: n08_interaction_design, to: n10_prototype_planning, kind: flow, transition: deterministic, when: "*", transfers: ["artifact:interactions", "state:design.interactions"], threshold: "Every screen has states and keyboard behaviour", behavior: "Fan-in (1 of 2): join = all"}
+  - {id: E16, from: n09_visual_system, to: n10_prototype_planning, kind: flow, transition: conditional, when: approved, transfers: ["artifact:design_system", "design.md (locked)"], threshold: "Wei approved the visual system", behavior: "Fan-in (2 of 2): join = all; design.md locks"}
+  - {id: E17, from: n09_visual_system, to: n09_visual_system, kind: loop, transition: conditional, when: rejected, transfers: ["Wei's rejection reason"], threshold: "Wei rejected the visual system", behavior: "Retry the visual system with Wei's reason", max_traversals: 2}
+  - {id: E18, from: n10_prototype_planning, to: n11_prototype_development, kind: flow, transition: conditional, when: approved, transfers: ["artifact:plan", "prototype.md (locked)"], threshold: "Wei approved the fidelity and the plan", behavior: "Approval: forward; prototype.md locks"}
+  - {id: E19, from: n10_prototype_planning, to: n10_prototype_planning, kind: loop, transition: conditional, when: rejected, transfers: ["Wei's rejection reason"], threshold: "Wei rejected the plan", behavior: "Replan with Wei's reason (lowering the fidelity is a valid fix)", max_traversals: 2}
+  - {id: E20, from: n11_prototype_development, to: n12_content_data, kind: flow, transition: deterministic, when: "*", transfers: ["artifact:prototype_build", "artifact:build_manifest"], threshold: "Static checks and unit tests pass", behavior: "Forward"}
+  - {id: E21, from: n12_content_data, to: n13_quality_review, kind: flow, transition: deterministic, when: "*", transfers: ["artifact:prototype (build version N)"], threshold: "Content checks pass", behavior: "Fan-out (1 of 3)"}
+  - {id: E22, from: n12_content_data, to: n14_validation, kind: flow, transition: deterministic, when: "*", transfers: ["artifact:prototype (build version N)", "artifact:plan"], threshold: "Content checks pass", behavior: "Fan-out (2 of 3); parallel"}
+  - {id: E23, from: n12_content_data, to: n15_feasibility_review, kind: flow, transition: deterministic, when: "*", transfers: ["artifact:prototype", "artifact:prototype_build"], threshold: "Content checks pass", behavior: "Fan-out (3 of 3); parallel"}
+  - {id: E24, from: n13_quality_review, to: n16_feedback_diagnosis, kind: flow, transition: deterministic, when: "*", transfers: ["review record", "tool findings"], threshold: "Review complete for build version N", behavior: "Fan-in (1 of 3): join = all"}
+  - {id: E25, from: n14_validation, to: n16_feedback_diagnosis, kind: flow, transition: deterministic, when: "*", transfers: ["review record", "validation sessions"], threshold: "Review complete for build version N", behavior: "Fan-in (2 of 3): join = all"}
+  - {id: E26, from: n15_feasibility_review, to: n16_feedback_diagnosis, kind: flow, transition: deterministic, when: "*", transfers: ["review record", "feasibility report"], threshold: "Review complete for build version N", behavior: "Fan-in (3 of 3): join = all"}
+  - {id: E27, from: n16_feedback_diagnosis, to: n18_final_verification, kind: flow, transition: conditional, when: pass, transfers: ["artifact:gate_report"], threshold: "No blocking defect open; every review current", behavior: "Branch: pass"}
+  - {id: E28, from: n16_feedback_diagnosis, to: n17_targeted_rework, kind: flow, transition: conditional, when: rework, transfers: ["artifact:gate_report", "the routable defects"], threshold: "Blocking defects with routable traces and budget left", behavior: "Branch: rework"}
+  - {id: E29, from: n16_feedback_diagnosis, to: "@escalate", kind: escalate, transition: conditional, when: blocked, transfers: ["artifact:gate_report", "rework history"], threshold: "A defect needs Wei, failed 3 corrections, or the cycle budget is spent", behavior: "Escalate; the run is BLOCKED"}
+  - {id: E30, from: n17_targeted_rework, to: n03_problem_definition, kind: loop, transition: conditional, when: "target:n03_problem_definition", transfers: ["defects traced to the problem frame"], threshold: "An open defect traces here", behavior: "Redesign: re-open the problem frame and its descendants", max_traversals: 4}
+  - {id: E31, from: n17_targeted_rework, to: n04_requirements, kind: loop, transition: conditional, when: "target:n04_requirements", transfers: ["defects traced to a requirement"], threshold: "An open defect traces here (product.md is locked: a change request comes first)", behavior: "Redesign: re-open requirements and descendants", max_traversals: 4}
+  - {id: E32, from: n17_targeted_rework, to: n05_scope_success, kind: loop, transition: conditional, when: "target:n05_scope_success", transfers: ["defects traced to scope or success criteria"], threshold: "An open defect traces here (locked documents need a change request)", behavior: "Redesign: re-open scope and descendants", max_traversals: 4}
+  - {id: E33, from: n17_targeted_rework, to: n06_concept_ideation, kind: loop, transition: conditional, when: "target:n06_concept_ideation", transfers: ["defects traced to the concept"], threshold: "An open defect traces here", behavior: "Redesign: re-open the concept and descendants", max_traversals: 4}
+  - {id: E34, from: n17_targeted_rework, to: n07_experience_architecture, kind: loop, transition: conditional, when: "target:n07_experience_architecture", transfers: ["defects traced to flows or IA"], threshold: "An open defect traces here", behavior: "Redesign: re-open the experience architecture and descendants", max_traversals: 4}
+  - {id: E35, from: n17_targeted_rework, to: n08_interaction_design, kind: loop, transition: conditional, when: "target:n08_interaction_design", transfers: ["defects traced to interactions or states"], threshold: "An open defect traces here", behavior: "Redesign: re-open the interaction spec and descendants", max_traversals: 4}
+  - {id: E36, from: n17_targeted_rework, to: n09_visual_system, kind: loop, transition: conditional, when: "target:n09_visual_system", transfers: ["defects traced to tokens or components"], threshold: "An open defect traces here (design.md is locked: a change request comes first)", behavior: "Redesign: re-open the visual system and descendants", max_traversals: 4}
+  - {id: E37, from: n17_targeted_rework, to: n10_prototype_planning, kind: loop, transition: conditional, when: "target:n10_prototype_planning", transfers: ["defects traced to the plan"], threshold: "An open defect traces here (prototype.md is locked: a change request comes first)", behavior: "Replan and re-open descendants", max_traversals: 4}
+  - {id: E38, from: n17_targeted_rework, to: n11_prototype_development, kind: loop, transition: conditional, when: "target:n11_prototype_development", transfers: ["defects traced to the implementation"], threshold: "An open defect traces here", behavior: "Redevelopment: re-open the build and descendants", max_traversals: 4}
+  - {id: E39, from: n17_targeted_rework, to: n12_content_data, kind: loop, transition: conditional, when: "target:n12_content_data", transfers: ["defects traced to content or data"], threshold: "An open defect traces here", behavior: "Redevelopment: re-open content integration and descendants", max_traversals: 4}
+  - {id: E40, from: n17_targeted_rework, to: "@escalate", kind: escalate, transition: conditional, when: no_target, transfers: ["the unroutable defects"], threshold: "No routable target", behavior: "Escalate; the run is BLOCKED"}
+  - {id: E41, from: n18_final_verification, to: n19_learning_memory, kind: flow, transition: conditional, when: approved, transfers: ["artifact:release_report", "artifact:package"], threshold: "Wei released the version", behavior: "Approval: forward"}
+  - {id: E42, from: n18_final_verification, to: n16_feedback_diagnosis, kind: loop, transition: conditional, when: changes_requested, transfers: ["Wei's feedback, recorded as feedback items"], threshold: "Wei requested changes", behavior: "Rollback to diagnosis: the feedback becomes traced defects", max_traversals: 2}
+  - {id: E43, from: n19_learning_memory, to: END, kind: flow, transition: deterministic, when: "*", transfers: ["artifact:lessons", "artifact:learning_proposal"], threshold: "Lessons evidenced", behavior: "Ends the run"}

@@ -1,0 +1,3 @@
+# n13_quality_review attempt 1 — scripted agent output for the fictional example (dry run)
+outputs:
+  quality_review: "review.json"

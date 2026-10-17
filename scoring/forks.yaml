@@ -1,0 +1,63 @@
+# pdg forks for the shared score system (D15).
+# Method, model and tool: the film workflow's score system v1 (docs/dependencies.md), run
+# with pdg's own store. This file and the store sit outside every run's configuration fingerprint (workflow,
+# knowledge/rules.json, defaults and rubrics are in it), so changing either never re-opens a run.
+tool: "scoring/vpg_score.py"
+store: "knowledge/preferences/wei"
+run_from: "."
+usage: "python scoring/vpg_score.py --data knowledge/preferences/wei <score|record|fit|report> ..."
+fork_file: "<project>/review/forks/F-nnn.json, in the tool's FORK.json format (method README, section 2)"
+
+floor: >
+  Only a candidate that passes every enforced MUST, with no P1 open, reaches Wei. An option that needs a MUST deferred
+  (for example keeping a reference's styling that fails A11Y-TARGET-AA) is not a candidate: the end review lists it as
+  a deferral only Wei can make.
+
+tool_dimension_scores:
+  pass_fail: {pass: 5, fail: 1}
+  counted: "0 findings 5, 1-2 findings 4, 3-5 findings 3, 6-10 findings 2, more 1"   # assumed; revisit after each type's first fits
+
+fork_types:
+  concept:
+    node: n06_concept_ideation
+    question: "Which concept to build: a whole-prototype direction"
+    per_version: 1   # at most one whole-prototype fork per version
+    built_as: >
+      The primary goes through pdg. Each other option becomes a variant build in <project>/candidates/<fork>/<id>/
+      after the primary passes N12, checked with pdg check-prototype and an independent read-only review against the
+      same rubrics.
+    dims:
+      - {id: DES-TASTE, measured: false}   # a human dimension: the agent's score forecasts Wei's
+      - {id: DES-HIERARCHY, measured: false}
+      - {id: DES-SPECIFICITY, measured: false}
+      - {id: DES-DENSITY, measured: false}
+      - {id: DES-DOMAIN, measured: false}
+      - {id: VAL-INSIGHT, measured: false}
+      - {id: VAL-TASK-SUCCESS, measured: true}
+      - {id: EXP-COVERAGE, measured: true}
+  visual:
+    node: n09_visual_system
+    question: "Which visual system"
+    built_as: "the key screens only, in each system, over the same content"
+    dims:
+      - {id: DES-TASTE, measured: false}
+      - {id: DES-HIERARCHY, measured: false}
+      - {id: DES-CONSISTENCY, measured: false}
+      - {id: DES-SEMANTIC-COLOR, measured: false}
+      - {id: DES-DERIVATION, measured: false}
+      - {id: VIS-CONTRAST, measured: true}
+      - {id: VIS-TYPE, measured: true}
+  refinement:
+    node: "any node after a build"
+    question: "How to settle a design trade-off a build surfaced, for example keeping a reference's styling or changing it"
+    built_as: "variant builds of the affected screens only"
+    dims:
+      - {id: DES-TASTE, measured: false}
+      - {id: DES-CONSISTENCY, measured: false}
+      - {id: DES-DENSITY, measured: false}
+      - {id: REF-PARITY, measured: true}
+    plus: "each tool dimension the trade-off moves (for example A11Y-TARGET-44 or RESP-TEXT), measured: true"
+
+not_forks: >
+  Gates, risk acceptances, configuration accepts, change requests and budget resets have no options to build. They are
+  provisional decisions with a decision card, confirmed at the end review.

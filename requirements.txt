@@ -1,0 +1,6 @@
+# Python 3.11+. Also needs Node 22+ (node --test) and Chromium: python -m playwright install chromium
+pydantic>=2.13
+PyYAML>=6.0
+jsonschema>=4.26
+playwright>=1.60
+pytest>=9.1

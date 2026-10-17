@@ -1,0 +1,4 @@
+# n03_problem_definition attempt 1 — scripted agent output for the fictional example (dry run)
+outputs:
+  problem: "problem.json"
+  product_md: "product.md"

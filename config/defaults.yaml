@@ -1,0 +1,54 @@
+# Default quality thresholds. Every value names the rule (knowledge/rules.json) whose evidence justifies it; the rule's
+# lifecycle state decides whether the check blocks. A project overrides values in the front matter of its approved
+# controls/evaluation.md (`thresholds:`), so the quality bar Wei signs at N05 is the one the gates read. Changing a default
+# here is a learning-loop change: record it as a rule revision (`pdg memory apply`), never as a silent edit.
+thresholds:
+  problem:
+    max_sentence_words: 40        # R-CBV-001  job / persona / pain "in one sentence" (design-thinking-loop.md gate)
+    min_hmw: 3                    # R-CBV-002  POV template §9
+  concepts:
+    min_concepts: 3               # R-STR-001  calibration pending
+    weight_tolerance: 0.01        # R-STR-002
+    min_override_rationale_chars: 40   # R-STR-002
+  design_system:
+    min_contrast_text: 4.5        # R-A11Y-002 WCAG 2.2 SC 1.4.3
+    min_contrast_large: 3.0       # R-A11Y-002 WCAG large-scale text
+    min_contrast_non_text: 3.0    # R-A11Y-002 WCAG 2.2 SC 1.4.11
+    max_type_sizes: 8             # R-VIS-001  case-study v2 rubric (H22): at most eight font sizes
+    min_type_px: 12               # R-A11Y-007 calibration pending (an earlier programme used 11 px labels)
+    max_radii: 5                  # R-VIS-001  case-study v2 rubric (H22): at most five radii
+    spacing_grid_px: 4            # R-VIS-003  Fluent 4 px spacing scale
+  plan:
+    min_viewports: 3              # R-A11Y-004
+    mobile_max_px: 400            # R-A11Y-004
+    desktop_min_px: 1280          # R-A11Y-004
+  content:
+    min_records: 12               # R-FID-004  calibration pending
+  browser:
+    viewports: [390, 768, 1440]   # used when the plan names none
+    reflow_px: 320                # R-A11Y-004 WCAG 2.2 SC 1.4.10
+    min_target_px: 24             # R-A11Y-005 WCAG 2.2 SC 2.5.8 (AA)
+    mobile_target_px: 44          # R-A11Y-006 WCAG 2.2 SC 2.5.5 (AAA); case-study v2 rubric (H22)
+    min_text_px: 12               # R-A11Y-007 calibration pending
+    load_budget_ms: 1500          # R-TEC-006  calibration pending
+    axe_tags: [wcag2a, wcag2aa, wcag21a, wcag21aa, wcag22aa]   # R-A11Y-001
+    focus_sample: 25              # tab stops sampled per screen for A11Y-FOCUS
+    focus_obscured_sample: 60      # tab stops sampled per direction per screen for WCAG 2.2 SC 2.4.11
+    step_timeout_ms: 5000
+    reduced_motion_max_s: 0.2     # R-A11Y-009
+    state_hold_ms: 1000           # R-UX-002: each state is watched this long with focus on its first control (B-09)
+    state_max_changes: 10         # elements added or removed in that time, descendants included; not for aria-busy
+    state_max_live: 1             # live regions inserted in that time; more is a repeated announcement
+    token_rules_max: 3000         # style rules read per screen for VIS-TOKENS-RUNTIME (B-08)
+    parity_title_px: 1            # REF-PARITY: page-title size difference allowed against the reference (N-28)
+    parity_control_px: 4          # REF-PARITY: median control-height difference allowed
+    band_step_px: 20              # RESP-BAND/RESP-TEXT: the width band between the planned widths is read this often (W47)
+  validation:
+    min_task_success: 0.8         # R-VAL-003  default when the plan names none
+    min_mean_seq: 5.5             # R-VAL-004  calibration pending
+  feasibility:
+    bundle_budget_kb: 1536        # R-TEC-007  calibration pending (earlier single-file builds: 424–826 KB)
+    node_timeout_s: 60
+    devdoc_sections: ["Architecture", "Technology", "Components", "Data and APIs", "Folder structure", "Standards", "Testing"]   # R-TEC-008
+  review:
+    score_threshold: 4            # review dimensions are scored 1–5; 4 meets the bar

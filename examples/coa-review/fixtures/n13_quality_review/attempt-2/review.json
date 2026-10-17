@@ -1,0 +1,61 @@
+{
+ "dimensions": [
+  {
+   "id": "DES-HIERARCHY",
+   "score": 4,
+   "evidence": "lot-1440.png: the verdict and the comparison lead; one primary action"
+  },
+  {
+   "id": "DES-SPECIFICITY",
+   "score": 5,
+   "evidence": "queue-1440.png: lot, certificate, material, supplier and limits in the domain's words"
+  },
+  {
+   "id": "DES-CONSISTENCY",
+   "score": 4,
+   "evidence": "One table style, one chip style, one radius set across the four screens"
+  },
+  {
+   "id": "DES-DENSITY",
+   "score": 4,
+   "evidence": "Tables for comparison and audit; no decorative cards"
+  },
+  {
+   "id": "DES-SEMANTIC-COLOR",
+   "score": 4,
+   "evidence": "Green pass, amber attention, red failure; icon + text on every chip"
+  },
+  {
+   "id": "DES-DERIVATION",
+   "score": 5,
+   "evidence": "Every row shows how its result was derived"
+  },
+  {
+   "id": "DES-SCOPE-VISIBLE",
+   "score": 5,
+   "evidence": "notice: 'Draft only — sending happens outside this prototype'"
+  },
+  {
+   "id": "DES-DOMAIN",
+   "score": 4,
+   "evidence": "Reviewer workflow only; no merged flows"
+  },
+  {
+   "id": "A11Y-SEMANTICS",
+   "score": 4,
+   "evidence": "One h1 per screen, captions on tables, labelled controls, live status"
+  },
+  {
+   "id": "A11Y-MANUAL",
+   "score": 4,
+   "evidence": "Keyboard-only walk of S-01 to S-04 at 1440 and 390: focus follows the reading order, returns to the lot row after the decision dialog closes, and the status region announces each recorded decision"
+  },
+  {
+   "id": "RESP-LAYOUT",
+   "score": 4,
+   "evidence": "lot-390.png: rows restack as labelled fields"
+  }
+ ],
+ "findings": [],
+ "summary": "Scripted review (dry run): the design dimensions meet the bar; the tool findings stand on their own."
+}

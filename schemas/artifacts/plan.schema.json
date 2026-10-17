@@ -1,0 +1,706 @@
+{
+ "$defs": {
+  "AcceptanceTrace": {
+   "additionalProperties": false,
+   "description": "Where the plan checks one acceptance line of a requirement (field run 2, R2-18: a P1 naming rule never reached\nthe plan, and every gate passed). Exactly one of: an expectation step, a `forbidden_text` entry, a check a later\nnode runs, or the reason it is out of scope for this prototype.",
+   "properties": {
+    "requirement": {
+     "title": "Requirement",
+     "type": "string"
+    },
+    "acceptance": {
+     "title": "Acceptance",
+     "type": "string"
+    },
+    "scenario": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Scenario"
+    },
+    "step": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Step"
+    },
+    "forbidden_text": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Forbidden Text"
+    },
+    "covered_by": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Covered By"
+    },
+    "out_of_scope": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Out Of Scope"
+    }
+   },
+   "required": [
+    "requirement",
+    "acceptance"
+   ],
+   "title": "AcceptanceTrace",
+   "type": "object"
+  },
+  "Alignment": {
+   "additionalProperties": false,
+   "properties": {
+    "status": {
+     "enum": [
+      "aligned",
+      "pending"
+     ],
+     "title": "Status",
+     "type": "string"
+    },
+    "with_whom": {
+     "title": "With Whom",
+     "type": "string"
+    },
+    "evidence_ids": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Evidence Ids",
+     "type": "array"
+    }
+   },
+   "required": [
+    "status",
+    "with_whom"
+   ],
+   "title": "Alignment",
+   "type": "object"
+  },
+  "AssumptionCheck": {
+   "additionalProperties": false,
+   "properties": {
+    "assumption_id": {
+     "title": "Assumption Id",
+     "type": "string"
+    },
+    "status": {
+     "enum": [
+      "validated",
+      "accepted_risk",
+      "unvalidated"
+     ],
+     "title": "Status",
+     "type": "string"
+    },
+    "evidence_ids": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Evidence Ids",
+     "type": "array"
+    }
+   },
+   "required": [
+    "assumption_id",
+    "status"
+   ],
+   "title": "AssumptionCheck",
+   "type": "object"
+  },
+  "FocusTrace": {
+   "additionalProperties": false,
+   "description": "Where the plan checks one of N08's focus rules (backlog N-22: a build broke two and passed, because no scenario\nchecked them). Exactly one of: a scenario step that is an `expect_focus`, a browser check that covers the rule, or\nthe reason it is out of scope for this prototype.",
+   "properties": {
+    "rule": {
+     "title": "Rule",
+     "type": "string"
+    },
+    "scenario": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Scenario"
+    },
+    "step": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Step"
+    },
+    "covered_by": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Covered By"
+    },
+    "out_of_scope": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Out Of Scope"
+    }
+   },
+   "required": [
+    "rule"
+   ],
+   "title": "FocusTrace",
+   "type": "object"
+  },
+  "Scenario": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "flow_id": {
+     "title": "Flow Id",
+     "type": "string"
+    },
+    "name": {
+     "title": "Name",
+     "type": "string"
+    },
+    "steps": {
+     "items": {
+      "$ref": "#/$defs/ScenarioStep"
+     },
+     "title": "Steps",
+     "type": "array"
+    },
+    "success": {
+     "title": "Success",
+     "type": "string"
+    }
+   },
+   "required": [
+    "id",
+    "flow_id",
+    "name",
+    "steps",
+    "success"
+   ],
+   "title": "Scenario",
+   "type": "object"
+  },
+  "ScenarioStep": {
+   "additionalProperties": false,
+   "description": "One step of the browser scenario DSL executed by `pdg.tools.browser` (exactly one action per step).",
+   "properties": {
+    "goto": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Goto"
+    },
+    "click": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Click"
+    },
+    "fill": {
+     "anyOf": [
+      {
+       "items": {
+        "type": "string"
+       },
+       "type": "array"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Fill"
+    },
+    "press": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Press"
+    },
+    "select": {
+     "anyOf": [
+      {
+       "items": {
+        "type": "string"
+       },
+       "type": "array"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Select"
+    },
+    "expect_visible": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Expect Visible"
+    },
+    "expect_hidden": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Expect Hidden"
+    },
+    "expect_text": {
+     "anyOf": [
+      {
+       "items": {
+        "type": "string"
+       },
+       "type": "array"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Expect Text"
+    },
+    "expect_no_text": {
+     "anyOf": [
+      {
+       "items": {
+        "type": "string"
+       },
+       "type": "array"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Expect No Text"
+    },
+    "expect_count": {
+     "anyOf": [
+      {
+       "items": {},
+       "type": "array"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Expect Count"
+    },
+    "expect_disabled": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Expect Disabled"
+    },
+    "expect_enabled": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Expect Enabled"
+    },
+    "expect_route": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Expect Route"
+    },
+    "expect_focus": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Expect Focus"
+    },
+    "expect_in_viewport": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Expect In Viewport"
+    },
+    "expect_reachable": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Expect Reachable"
+    },
+    "reload": {
+     "anyOf": [
+      {
+       "type": "boolean"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Reload"
+    },
+    "screenshot": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Screenshot"
+    },
+    "axe": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Axe"
+    }
+   },
+   "title": "ScenarioStep",
+   "type": "object"
+  },
+  "StateCheck": {
+   "additionalProperties": false,
+   "properties": {
+    "screen": {
+     "title": "Screen",
+     "type": "string"
+    },
+    "state": {
+     "title": "State",
+     "type": "string"
+    },
+    "route": {
+     "title": "Route",
+     "type": "string"
+    },
+    "marker": {
+     "title": "Marker",
+     "type": "string"
+    },
+    "recover": {
+     "anyOf": [
+      {
+       "$ref": "#/$defs/StateRecover"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    }
+   },
+   "required": [
+    "screen",
+    "state",
+    "route",
+    "marker"
+   ],
+   "title": "StateCheck",
+   "type": "object"
+  },
+  "StateRecover": {
+   "additionalProperties": false,
+   "description": "The way out of a state (R-UX-002: an empty state has a way back): the suite presses `click`, then expects the\nstate to be gone (backlog B-09: a \"Clear filters\" with no handler passed every check).",
+   "properties": {
+    "click": {
+     "title": "Click",
+     "type": "string"
+    },
+    "expect_hidden": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Expect Hidden"
+    }
+   },
+   "required": [
+    "click"
+   ],
+   "title": "StateRecover",
+   "type": "object"
+  },
+  "TestCriterion": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "metric": {
+     "title": "Metric",
+     "type": "string"
+    },
+    "threshold": {
+     "title": "Threshold",
+     "type": "string"
+    }
+   },
+   "required": [
+    "id",
+    "metric",
+    "threshold"
+   ],
+   "title": "TestCriterion",
+   "type": "object"
+  }
+ },
+ "additionalProperties": false,
+ "properties": {
+  "goals": {
+   "items": {
+    "type": "string"
+   },
+   "title": "Goals",
+   "type": "array"
+  },
+  "fidelity": {
+   "enum": [
+    "low",
+    "mid",
+    "high"
+   ],
+   "title": "Fidelity",
+   "type": "string"
+  },
+  "fidelity_rationale": {
+   "title": "Fidelity Rationale",
+   "type": "string"
+  },
+  "riskiest_assumptions": {
+   "items": {
+    "$ref": "#/$defs/AssumptionCheck"
+   },
+   "title": "Riskiest Assumptions",
+   "type": "array"
+  },
+  "customer_alignment": {
+   "$ref": "#/$defs/Alignment"
+  },
+  "scenarios": {
+   "items": {
+    "$ref": "#/$defs/Scenario"
+   },
+   "title": "Scenarios",
+   "type": "array"
+  },
+  "states": {
+   "items": {
+    "$ref": "#/$defs/StateCheck"
+   },
+   "title": "States",
+   "type": "array"
+  },
+  "viewports": {
+   "items": {
+    "type": "integer"
+   },
+   "title": "Viewports",
+   "type": "array"
+  },
+  "content_needs": {
+   "items": {
+    "type": "string"
+   },
+   "title": "Content Needs",
+   "type": "array"
+  },
+  "test_criteria": {
+   "items": {
+    "$ref": "#/$defs/TestCriterion"
+   },
+   "title": "Test Criteria",
+   "type": "array"
+  },
+  "out_of_scope": {
+   "items": {
+    "type": "string"
+   },
+   "title": "Out Of Scope",
+   "type": "array"
+  },
+  "samples": {
+   "additionalProperties": {
+    "items": {
+     "type": "string"
+    },
+    "type": "array"
+   },
+   "title": "Samples",
+   "type": "object"
+  },
+  "forbidden_text": {
+   "items": {
+    "type": "string"
+   },
+   "title": "Forbidden Text",
+   "type": "array"
+  },
+  "focus_trace": {
+   "items": {
+    "$ref": "#/$defs/FocusTrace"
+   },
+   "title": "Focus Trace",
+   "type": "array"
+  },
+  "acceptance_trace": {
+   "items": {
+    "$ref": "#/$defs/AcceptanceTrace"
+   },
+   "title": "Acceptance Trace",
+   "type": "array"
+  }
+ },
+ "required": [
+  "goals",
+  "fidelity",
+  "fidelity_rationale",
+  "riskiest_assumptions",
+  "customer_alignment",
+  "scenarios",
+  "states",
+  "viewports",
+  "content_needs",
+  "test_criteria",
+  "out_of_scope"
+ ],
+ "title": "PrototypePlan",
+ "type": "object"
+}

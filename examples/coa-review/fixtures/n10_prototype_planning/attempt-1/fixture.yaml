@@ -1,0 +1,4 @@
+# n10_prototype_planning attempt 1 — scripted agent output for the fictional example (dry run)
+outputs:
+  plan: "plan.json"
+  prototype_md: "prototype.md"

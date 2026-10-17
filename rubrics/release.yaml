@@ -1,0 +1,9 @@
+id: release
+name: Release
+reviewer: technical-qa
+scale: "tool dimensions pass/fail; human dimensions decided by a named human"
+dimensions:
+  - {id: REL-CONDITIONS, name: "Every release condition holds, recomputed from disk", brief_dimension: "functional correctness", level: MUST, check: {type: tool, fn: "release:verify"}, threshold: "latest gate pass on the current build version; 0 open blocking defects; every review current; hashes and ledger verify", rule: R-GOV-008, cases: {never: ["releasing on an agent's 'done'"], always: []}}
+  - {id: REL-PACKAGE, name: "Packaged with a hashed manifest and evidence", brief_dimension: "code quality", level: MUST, check: {type: tool, fn: "release:verify"}, threshold: "every packaged file listed with sha256", rule: R-GOV-009, cases: {never: [], always: []}}
+  - {id: REL-HONEST, name: "Non-human approvals and simulated validation are labelled", brief_dimension: "customer and business relevance", level: MUST, check: {type: tool, fn: "release:verify"}, threshold: "the summary lists every non-human approval and every simulated session", rule: R-GOV-004, cases: {never: [], always: []}}
+  - {id: REL-DECISION, name: "Wei released the version", brief_dimension: "customer and business relevance", level: MUST, check: {type: human}, threshold: "a named human approved at N18", rule: R-GOV-003, cases: {never: [], always: []}}

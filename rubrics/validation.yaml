@@ -1,0 +1,10 @@
+id: validation
+name: User and stakeholder validation
+reviewer: context-research
+scale: "tool dimensions pass/fail; review dimensions 1–5; human dimensions decided by a named human"
+dimensions:
+  - {id: VAL-TASK-SUCCESS, name: "Primary tasks meet the planned success rate", brief_dimension: "usability and clarity", level: MUST, check: {type: tool, fn: "validation:check"}, threshold: "task success rate ≥ the plan's threshold (default 0.8) on primary scenarios", rule: R-VAL-003, cases: {never: [], always: []}}
+  - {id: VAL-SEQ, name: "Tasks feel easy (SEQ)", brief_dimension: "usability and clarity", level: SHOULD, check: {type: tool, fn: "validation:check"}, threshold: "mean SEQ ≥ 5.5 of 7 (calibration pending)", rule: R-VAL-004, cases: {never: [], always: []}}
+  - {id: VAL-SIMULATED-FLAGGED, name: "Simulated input is flagged and never counted as evidence", brief_dimension: "customer and business relevance", level: MUST, check: {type: tool, fn: "validation:check"}, threshold: "every session carries the simulated flag; evidence counts exclude simulated sessions", rule: R-GOV-004, cases: {never: ["an agent-played user reported as a participant"], always: []}}
+  - {id: VAL-INSIGHT, name: "Findings trace to the flows and requirements they implicate", brief_dimension: "requirement coverage", level: MUST, check: {type: review}, threshold: "score ≥ 4", rule: R-VAL-005, cases: {never: [], always: []}}
+  - {id: VAL-REAL-USERS, name: "Validated with real users and stakeholders", brief_dimension: "usability and clarity", level: MUST, check: {type: human}, threshold: "Wei confirms real sessions at N18; simulated sessions never satisfy it", rule: R-VAL-001, cases: {never: [], always: []}}

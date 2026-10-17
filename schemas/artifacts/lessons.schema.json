@@ -1,0 +1,119 @@
+{
+ "$defs": {
+  "Lesson": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "statement": {
+     "title": "Statement",
+     "type": "string"
+    },
+    "scope": {
+     "enum": [
+      "reusable",
+      "project_specific"
+     ],
+     "title": "Scope",
+     "type": "string"
+    },
+    "evidence_class": {
+     "enum": [
+      "verified",
+      "inferred",
+      "recommendation",
+      "missing"
+     ],
+     "title": "Evidence Class",
+     "type": "string"
+    },
+    "evidence": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Evidence",
+     "type": "array"
+    },
+    "rule_id": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Rule Id"
+    },
+    "helped": {
+     "anyOf": [
+      {
+       "type": "boolean"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Helped"
+    },
+    "category": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Category"
+    },
+    "target_scope": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Target Scope"
+    }
+   },
+   "required": [
+    "id",
+    "statement",
+    "scope",
+    "evidence_class",
+    "evidence"
+   ],
+   "title": "Lesson",
+   "type": "object"
+  }
+ },
+ "additionalProperties": false,
+ "properties": {
+  "lessons": {
+   "items": {
+    "$ref": "#/$defs/Lesson"
+   },
+   "title": "Lessons",
+   "type": "array"
+  },
+  "summary": {
+   "title": "Summary",
+   "type": "string"
+  }
+ },
+ "required": [
+  "lessons",
+  "summary"
+ ],
+ "title": "LessonsDoc",
+ "type": "object"
+}

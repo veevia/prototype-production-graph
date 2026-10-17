@@ -1,0 +1,4 @@
+# n08_interaction_design attempt 2 — scripted agent output for the fictional example (dry run)
+outputs:
+  interactions: "interactions.json"
+  experience_md: "experience.md"

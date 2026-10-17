@@ -1,0 +1,4 @@
+# n04_requirements attempt 1 — scripted agent output for the fictional example (dry run)
+outputs:
+  requirements: "requirements.json"
+  product_md: "product.md"

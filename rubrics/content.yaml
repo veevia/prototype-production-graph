@@ -1,0 +1,9 @@
+id: content
+name: Content and data realism
+reviewer: content-designer
+scale: "tool dimensions pass/fail"
+dimensions:
+  - {id: CNT-PLACEHOLDER, name: "No placeholder text in the integrated build", brief_dimension: "content realism", level: MUST, check: {type: tool, fn: "content:check"}, threshold: "0 lorem/TODO/TBD/FIXME/xxx", rule: R-FID-003, cases: {never: [], always: []}}
+  - {id: CNT-PROVENANCE, name: "Synthetic data is labelled where it is shown", brief_dimension: "content realism", level: MUST, check: {type: tool, fn: "content:check"}, threshold: "every synthetic, invented or mixed dataset has label_shown_in_ui and the rendered build shows a visible 'synthetic' label; every source id a dataset names is one the run knows (a registered source or an evidence id); every verified field of a mixed dataset is held by at least one record", rule: R-FID-002, cases: {never: ["invented numbers presented as real"], always: ["'Synthetic data — for design review only'"]}}
+  - {id: CNT-VOLUME, name: "Enough varied records to exercise the scenarios", brief_dimension: "content realism", level: SHOULD, check: {type: tool, fn: "content:check"}, threshold: "≥ 12 records per primary dataset (calibration pending)", rule: R-FID-004, cases: {never: [], always: []}}
+  - {id: CNT-EDGE, name: "Data exercises the planned edge cases", brief_dimension: "content realism", level: MUST, check: {type: tool, fn: "content:check"}, threshold: "every listed edge case appears in the data", rule: R-FID-005, cases: {never: ["an escalation rule no record triggers"], always: ["one missing value, one out-of-spec value, one borderline value"]}}

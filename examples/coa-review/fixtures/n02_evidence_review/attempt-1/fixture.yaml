@@ -1,0 +1,4 @@
+# n02_evidence_review attempt 1 — scripted agent output for the fictional example (dry run)
+outputs:
+  evidence: "evidence.json"
+  research_md: "research.md"

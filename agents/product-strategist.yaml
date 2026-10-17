@@ -1,0 +1,51 @@
+# Product Strategist — responsibilities and bindings. `leads`/`supports` must match graph/workflow.yaml (checked by `pdg docs --check`).
+id: product-strategist
+name: Product Strategist
+responsibility: Commits the problem (job, persona, top pain), derives traced requirements and constraints, and signs off scope
+  with numeric success criteria, guardrails and specific rollback triggers.
+leads:
+- n03_problem_definition — Problem and opportunity definition
+- n04_requirements — User, business, and technical requirements
+- n05_scope_success — Product scope and success criteria
+supports:
+- n06_concept_ideation — Concept ideation and comparison
+available_context:
+- research.md, the evidence and assumptions
+- 'Wei''s templates: problem frame, POV, brief, PRD (00_README/_templates/)'
+- Traffic-light and extreme-clarity disciplines
+inputs:
+- state:research.*
+- control:research
+- control:product
+outputs:
+- problem
+- requirements
+- scope
+- product_md
+- evaluation_md
+skills:
+- problem-framing
+- design-pov-author
+- prd-author
+- success-metrics
+- constraint-mapping
+- traffic-light-decisions
+tools:
+- pdg.tools.product:check_problem
+- pdg.tools.product:check_requirements
+- pdg.tools.product:check_scope
+decision_authority: Drafts product truth for Wei's approval. Cannot approve it, and cannot change product.md after N05 locks
+  it without a change request.
+quality_criteria:
+- problem
+- requirements
+- scope
+constraints:
+- Every requirement traces to evidence or a named assumption
+- Numbers, not adjectives
+- Every yellow has a trigger, an expiry and an owner
+escalation:
+  when: Wei rejects twice, or requirements cannot be traced
+  to: Wei
+  how: The loop edge's budget runs out and the engine escalates
+runtime_binding: Design-Synthesist-agent

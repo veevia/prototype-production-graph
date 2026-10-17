@@ -1,0 +1,7 @@
+# fictional time study for the pdg example: 40 lots, 5 reviewers, current spreadsheet process
+metric,value,note
+lots_observed,40,5 reviewers over 3 shifts
+median_minutes_per_lot,11,re-keying accounts for about 6 of the 11 minutes
+out_of_spec_lots,4,
+out_of_spec_missed_on_first_review,3,all caught later by the QA lead (37 of 40 correct first time)
+lots_per_shift,15-20,

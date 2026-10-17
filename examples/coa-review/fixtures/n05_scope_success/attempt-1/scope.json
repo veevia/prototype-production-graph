@@ -1,0 +1,78 @@
+{
+ "objective": "Cut the median lot review from 11 to 4 minutes without releasing a single out-of-spec lot.",
+ "value_proposition": "Reviewers see every certificate result against its limit, with a derived and explained verdict, and decide on one screen.",
+ "scope": {
+  "in_scope": [
+   "Lot queue with derived verdicts",
+   "Lot review: comparison, verdict, guarded decision with rationale",
+   "Draft supplier notice",
+   "Decision log",
+   "Loading, empty, error and not-found states"
+  ],
+  "out_of_scope": [
+   "Sending supplier notices",
+   "LIMS or ERP integration",
+   "Editing specifications",
+   "Sign-in and multi-user sync"
+  ],
+  "non_goals": [
+   "Auto-releasing lots without a human decision",
+   "Replacing the QA lead's judgement on escalations",
+   "Supplier scorecards"
+  ]
+ },
+ "success_criteria": [
+  {
+   "id": "M-01",
+   "name": "Median review time per lot",
+   "kind": "north_star",
+   "baseline": "11 min (time study, n = 40)",
+   "target": "≤ 4 min",
+   "unit": "minutes",
+   "method": "Timed moderated sessions, 5 reviewers per round"
+  },
+  {
+   "id": "M-02",
+   "name": "Out-of-spec values caught on first review",
+   "kind": "supporting",
+   "baseline": "1 of 4 (time study)",
+   "target": "4 of 4 (100%)",
+   "unit": "lots",
+   "method": "Seeded out-of-spec lots in the session set"
+  },
+  {
+   "id": "M-03",
+   "name": "Wrong releases",
+   "kind": "guardrail",
+   "baseline": "0",
+   "target": "0",
+   "unit": "lots",
+   "method": "Every release checked against the specification in the session log"
+  },
+  {
+   "id": "M-04",
+   "name": "Reviewers who try to bypass the release guard",
+   "kind": "supporting",
+   "baseline": "not measured (new)",
+   "target": "≤ 1 of 5",
+   "unit": "reviewers",
+   "method": "Session observation"
+  }
+ ],
+ "rollback_triggers": [
+  "If fewer than 4 of 5 reviewers complete S-01 unaided in round one, stop and revisit the comparison layout",
+  "If any session releases an out-of-spec lot, stop the pilot and fix the guard before round two"
+ ],
+ "open_questions": [
+  {
+   "id": "Q-01",
+   "question": "Can the plant's LIMS export certificate values as structured data?",
+   "blocking": false,
+   "owner": "LIMS owner (fictional)",
+   "light": "yellow",
+   "trigger": "The LIMS owner confirms the export format",
+   "expiry": "2026-10-31"
+  }
+ ],
+ "light": "green"
+}

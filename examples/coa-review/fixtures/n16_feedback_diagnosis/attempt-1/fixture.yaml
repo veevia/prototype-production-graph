@@ -1,0 +1,3 @@
+# n16_feedback_diagnosis attempt 1 — scripted agent output for the fictional example (dry run)
+outputs:
+  interpretation: "interpretation.json"

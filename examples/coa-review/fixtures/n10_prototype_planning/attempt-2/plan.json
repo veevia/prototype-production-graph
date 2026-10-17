@@ -1,0 +1,424 @@
+{
+ "goals": [
+  "Test whether reviewers release compliant lots from the derived verdict without re-keying certificate values (riskiest assumption A-01)",
+  "Test whether the release guard and the 20-character rationale are understood without coaching",
+  "Show every state a reviewer can meet: loading, empty, error, not found"
+ ],
+ "fidelity": "mid",
+ "fidelity_rationale": "A paper prototype already validated the riskiest assumption A-01 (E-07: 4 of 5 reviewers released from the derived verdict without re-keying). The next question is behavioural (guards, rationale, notice), which needs a clickable, functional build with realistic data — not production visuals.",
+ "riskiest_assumptions": [
+  {
+   "assumption_id": "A-01",
+   "status": "validated",
+   "evidence_ids": [
+    "E-07"
+   ]
+  }
+ ],
+ "customer_alignment": {
+  "status": "aligned",
+  "with_whom": "QA lead (fictional example)",
+  "evidence_ids": [
+   "E-09"
+  ]
+ },
+ "scenarios": [
+  {
+   "id": "S-01",
+   "flow_id": "F-01",
+   "name": "Release a compliant lot from the queue",
+   "success": "L-2418 is released with a rationale and appears first in the decision log",
+   "steps": [
+    {
+     "goto": "#/queue"
+    },
+    {
+     "click": "[data-filter=\"needs-review\"]"
+    },
+    {
+     "expect_visible": "[data-lot-row=\"L-2418\"]"
+    },
+    {
+     "click": "[data-lot-link=\"L-2418\"]"
+    },
+    {
+     "expect_route": "#/lot/L-2418"
+    },
+    {
+     "goto": null,
+     "expect_count": [
+      "[data-testid=\"comparison-table\"] tbody tr:first-child :is(td[data-label=\"Specification\"], td[data-label=\"Certificate\"], td[data-label=\"Result\"])",
+      3
+     ]
+    },
+    {
+     "expect_in_viewport": "[data-testid=\"comparison-table\"] tbody tr:first-child"
+    },
+    {
+     "expect_focus": "h1"
+    },
+    {
+     "expect_text": [
+      "[data-testid=\"verdict\"]",
+      "Ready to release"
+     ]
+    },
+    {
+     "click": "#decision-release"
+    },
+    {
+     "fill": [
+      "#rationale",
+      "All five results are within specification and the certificate matches the PO."
+     ]
+    },
+    {
+     "expect_reachable": "[data-testid=\"record-decision\"]"
+    },
+    {
+     "click": "[data-testid=\"record-decision\"]"
+    },
+    {
+     "expect_text": [
+      "[data-testid=\"decision-status\"]",
+      "Released"
+     ]
+    },
+    {
+     "goto": "#/audit"
+    },
+    {
+     "expect_text": [
+      "[data-testid=\"audit-table\"] tbody tr:first-child",
+      "L-2418"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "S-02",
+   "flow_id": "F-02",
+   "name": "Hold an out-of-spec lot and draft the supplier notice",
+   "success": "L-2431 is on hold and a draft notice is saved, not sent",
+   "steps": [
+    {
+     "goto": "#/lot/L-2431"
+    },
+    {
+     "expect_text": [
+      "[data-testid=\"verdict\"]",
+      "Hold"
+     ]
+    },
+    {
+     "expect_disabled": "#decision-release"
+    },
+    {
+     "expect_text": [
+      "[data-testid=\"release-hint\"]",
+      "Release unlocks when every result is within specification"
+     ]
+    },
+    {
+     "click": "#decision-hold"
+    },
+    {
+     "fill": [
+      "#rationale",
+      "Brix is above the 67.5 maximum; hold the lot pending a supplier retest."
+     ]
+    },
+    {
+     "click": "[data-testid=\"record-decision\"]"
+    },
+    {
+     "expect_text": [
+      "[data-testid=\"decision-status\"]",
+      "On hold"
+     ]
+    },
+    {
+     "click": "[data-testid=\"draft-notice\"]"
+    },
+    {
+     "expect_route": "#/lot/L-2431/notice"
+    },
+    {
+     "expect_text": [
+      "[data-testid=\"notice-issues\"]",
+      "Brix"
+     ]
+    },
+    {
+     "expect_reachable": "[data-testid=\"save-draft\"]"
+    },
+    {
+     "click": "[data-testid=\"save-draft\"]"
+    },
+    {
+     "expect_text": [
+      "[data-testid=\"notice-status\"]",
+      "Draft saved — not sent"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "S-03",
+   "flow_id": "F-03",
+   "name": "Escalate a lot with an unreadable result",
+   "success": "L-2437 cannot be released and a short rationale is refused with a clear message",
+   "steps": [
+    {
+     "goto": "#/lot/L-2437"
+    },
+    {
+     "expect_text": [
+      "[data-testid=\"verdict\"]",
+      "Escalate to QA lead"
+     ]
+    },
+    {
+     "expect_disabled": "#decision-release"
+    },
+    {
+     "click": "#decision-hold"
+    },
+    {
+     "fill": [
+      "#rationale",
+      "Too short"
+     ]
+    },
+    {
+     "expect_reachable": "[data-testid=\"record-decision\"]"
+    },
+    {
+     "click": "[data-testid=\"record-decision\"]"
+    },
+    {
+     "expect_text": [
+      "[data-testid=\"rationale-error\"]",
+      "at least 20 characters"
+     ]
+    },
+    {
+     "expect_focus": "#rationale"
+    }
+   ]
+  },
+  {
+   "id": "S-04",
+   "flow_id": "F-04",
+   "name": "Recover from a failed load and an empty search",
+   "success": "The reviewer retries, searches, and resets back to the full queue",
+   "steps": [
+    {
+     "goto": "?fail=1#/queue"
+    },
+    {
+     "expect_visible": "[data-state=\"error\"]"
+    },
+    {
+     "click": "[data-testid=\"retry\"]"
+    },
+    {
+     "expect_visible": "[data-lot-row=\"L-2418\"]"
+    },
+    {
+     "fill": [
+      "#search",
+      "no-such-lot"
+     ]
+    },
+    {
+     "expect_visible": "[data-state=\"empty\"]"
+    },
+    {
+     "expect_reachable": "[data-testid=\"reset-filters\"]"
+    },
+    {
+     "click": "[data-testid=\"reset-filters\"]"
+    },
+    {
+     "expect_visible": "[data-lot-row=\"L-2418\"]"
+    }
+   ]
+  }
+ ],
+ "states": [
+  {
+   "screen": "queue",
+   "state": "loading",
+   "route": "?loading=hold#/queue",
+   "marker": "[data-state=\"loading\"]"
+  },
+  {
+   "screen": "queue",
+   "state": "error",
+   "route": "?fail=1#/queue",
+   "marker": "[data-state=\"error\"]"
+  },
+  {
+   "screen": "queue",
+   "state": "empty",
+   "route": "#/queue?q=no-such-lot",
+   "marker": "[data-state=\"empty\"]",
+   "recover": {
+    "click": "[data-testid=\"reset-filters\"]"
+   }
+  },
+  {
+   "screen": "lot",
+   "state": "error",
+   "route": "#/lot/L-0000",
+   "marker": "[data-state=\"error\"]"
+  },
+  {
+   "screen": "notice",
+   "state": "error",
+   "route": "#/lot/L-0000/notice",
+   "marker": "[data-state=\"error\"]"
+  },
+  {
+   "screen": "audit",
+   "state": "empty",
+   "route": "?log=empty#/audit",
+   "marker": "[data-state=\"empty\"]",
+   "recover": {
+    "click": "[data-state=\"empty\"] a[href=\"#/queue\"]"
+   }
+  },
+  {
+   "screen": "audit",
+   "state": "error",
+   "route": "?storage=off#/audit",
+   "marker": "[data-state=\"error\"]"
+  }
+ ],
+ "viewports": [
+  390,
+  768,
+  1440
+ ],
+ "content_needs": [
+  "16+ lots across six ingredient specifications",
+  "one out-of-spec, one missing and one borderline result at least",
+  "a lot with both an out-of-spec and a missing result (tier rule)",
+  "supplier contacts for the notice draft"
+ ],
+ "test_criteria": [
+  {
+   "id": "T-01",
+   "metric": "task success rate on S-01..S-04",
+   "threshold": "80%"
+  },
+  {
+   "id": "T-02",
+   "metric": "median time to release a compliant lot",
+   "threshold": "≤ 4 min (baseline 11 min)"
+  },
+  {
+   "id": "T-03",
+   "metric": "reviewers who try to bypass the release guard",
+   "threshold": "≤ 1 of 5"
+  }
+ ],
+ "out_of_scope": [
+  "Sending notices (drafts only)",
+  "LIMS or ERP integration",
+  "Authentication and multi-user sync",
+  "Editing specifications"
+ ],
+ "focus_trace": [
+  {
+   "rule": "On navigation, focus moves to the new screen's h1",
+   "scenario": "S-01",
+   "step": 8
+  },
+  {
+   "rule": "Every control shows a 2 px focus ring",
+   "covered_by": "A11Y-FOCUS"
+  },
+  {
+   "rule": "An error moves focus to the invalid field",
+   "scenario": "S-03",
+   "step": 9
+  }
+ ],
+ "acceptance_trace": [
+  {
+   "requirement": "R-01",
+   "acceptance": "Each parameter row shows the specification, the certificate value and the result",
+   "scenario": "S-01",
+   "step": 6
+  },
+  {
+   "requirement": "R-01",
+   "acceptance": "No value has to be re-keyed",
+   "out_of_scope": "values come from the certificate data already; re-keying is the production LIMS seam that development.md names"
+  },
+  {
+   "requirement": "R-02",
+   "acceptance": "The verdict names the results that drive it",
+   "covered_by": "DES-DERIVATION"
+  },
+  {
+   "requirement": "R-02",
+   "acceptance": "Each row shows its derivation",
+   "covered_by": "DES-DERIVATION"
+  },
+  {
+   "requirement": "R-03",
+   "acceptance": "Release is disabled with an 'unlocks when' reason otherwise",
+   "scenario": "S-02",
+   "step": 4
+  },
+  {
+   "requirement": "R-04",
+   "acceptance": "A shorter rationale is refused with a message, and focus moves to the field",
+   "scenario": "S-03",
+   "step": 8
+  },
+  {
+   "requirement": "R-05",
+   "acceptance": "An unreadable value makes the verdict 'Escalate to QA lead'",
+   "scenario": "S-03",
+   "step": 2
+  },
+  {
+   "requirement": "R-06",
+   "acceptance": "The decision log lists every decision, newest first",
+   "scenario": "S-01",
+   "step": 16
+  },
+  {
+   "requirement": "R-08",
+   "acceptance": "Opens from file:// with zero network requests",
+   "covered_by": "FUNC-OFFLINE"
+  },
+  {
+   "requirement": "R-07",
+   "acceptance": "The draft lists every result that needs action",
+   "scenario": "S-02",
+   "step": 11
+  },
+  {
+   "requirement": "R-07",
+   "acceptance": "No send control exists",
+   "covered_by": "DES-SCOPE-VISIBLE"
+  },
+  {
+   "requirement": "R-09",
+   "acceptance": "An empty result offers 'Reset filters'",
+   "scenario": "S-04",
+   "step": 7
+  }
+ ],
+ "samples": {
+  "lot": [
+   "#/lot/L-2431",
+   "#/lot/L-2437"
+  ]
+ }
+}

@@ -1,0 +1,39 @@
+# Learning and Memory Agent — responsibilities and bindings. `leads`/`supports` must match graph/workflow.yaml (checked by `pdg docs --check`).
+id: learning-memory
+name: Learning and Memory Agent
+responsibility: Separates project-specific notes from reusable lessons, records which rules fired and whether they helped,
+  and proposes rule changes that only a named human can apply.
+leads:
+- n19_learning_memory — Learning and memory update
+supports: []
+available_context:
+- Defects, comparisons, feedback and approvals of the run
+- knowledge/rules.json and its lifecycle
+- controls/memory.md
+inputs:
+- state:evaluation.*
+- artifact:release_report
+- control:memory
+outputs:
+- lessons
+- memory_md
+- learning_proposal
+skills:
+- rubric-authoring
+- evidence-tagging
+- decision-capture
+- skill-creator
+tools:
+- pdg.tools.learning:propose
+- python -m pdg memory status
+decision_authority: Proposes; Wei applies with `pdg memory apply`.
+quality_criteria:
+- learning
+constraints:
+- Evidence before any default changes
+- Never edits product truth, requirements, evidence or approved design principles
+escalation:
+  when: A lesson cannot be evidenced
+  to: Wei
+  how: Retry budget → escalation
+runtime_binding: Skill-Agent-Smith-agent

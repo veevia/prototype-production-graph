@@ -1,0 +1,158 @@
+{
+ "requirements": [
+  {
+   "id": "R-01",
+   "type": "user",
+   "statement": "Show every certificate result next to its specification limit, with its result",
+   "priority": "P0",
+   "evidence_ids": [
+    "E-01",
+    "E-04"
+   ],
+   "assumption_ids": [],
+   "acceptance": [
+    "Each parameter row shows the specification, the certificate value and the result",
+    "No value has to be re-keyed"
+   ]
+  },
+  {
+   "id": "R-02",
+   "type": "user",
+   "statement": "Derive a verdict (ready, hold, escalate) and show how it was derived",
+   "priority": "P0",
+   "evidence_ids": [
+    "E-07"
+   ],
+   "assumption_ids": [
+    "A-01"
+   ],
+   "acceptance": [
+    "The verdict names the results that drive it",
+    "Each row shows its derivation"
+   ]
+  },
+  {
+   "id": "R-03",
+   "type": "business",
+   "statement": "Allow release only when every result is within specification",
+   "priority": "P0",
+   "evidence_ids": [
+    "E-03",
+    "E-05"
+   ],
+   "assumption_ids": [],
+   "acceptance": [
+    "Release is disabled with an 'unlocks when' reason otherwise"
+   ]
+  },
+  {
+   "id": "R-04",
+   "type": "business",
+   "statement": "Require a rationale of at least 20 characters for hold and reject",
+   "priority": "P0",
+   "evidence_ids": [
+    "E-05"
+   ],
+   "assumption_ids": [],
+   "acceptance": [
+    "A shorter rationale is refused with a message, and focus moves to the field"
+   ]
+  },
+  {
+   "id": "R-05",
+   "type": "user",
+   "statement": "Escalate lots with a missing or unreadable result to the QA lead, never lowering the tier",
+   "priority": "P0",
+   "evidence_ids": [
+    "E-06"
+   ],
+   "assumption_ids": [],
+   "acceptance": [
+    "An unreadable value makes the verdict 'Escalate to QA lead'"
+   ]
+  },
+  {
+   "id": "R-06",
+   "type": "business",
+   "statement": "Record every decision with the reviewer, the time, the rationale and the verdict at that moment",
+   "priority": "P0",
+   "evidence_ids": [
+    "E-05"
+   ],
+   "assumption_ids": [],
+   "acceptance": [
+    "The decision log lists every decision, newest first"
+   ]
+  },
+  {
+   "id": "R-07",
+   "type": "user",
+   "statement": "Draft the supplier notice from the results that need action, and never send it from the tool",
+   "priority": "P1",
+   "evidence_ids": [
+    "E-08"
+   ],
+   "assumption_ids": [
+    "A-03"
+   ],
+   "acceptance": [
+    "The draft lists every result that needs action",
+    "No send control exists"
+   ]
+  },
+  {
+   "id": "R-08",
+   "type": "technical",
+   "statement": "Run offline in a browser from one file on the plant tablets",
+   "priority": "P0",
+   "evidence_ids": [
+    "E-10"
+   ],
+   "assumption_ids": [],
+   "acceptance": [
+    "Opens from file:// with zero network requests"
+   ]
+  },
+  {
+   "id": "R-09",
+   "type": "user",
+   "statement": "Filter the queue by status and search it, with a way back from an empty result",
+   "priority": "P1",
+   "evidence_ids": [
+    "E-11"
+   ],
+   "assumption_ids": [
+    "A-04"
+   ],
+   "acceptance": [
+    "An empty result offers 'Reset filters'"
+   ]
+  }
+ ],
+ "constraints": [
+  {
+   "id": "C-01",
+   "type": "technical",
+   "statement": "No internet on plant tablets",
+   "source": "S-05 SOP §6 (E-10)"
+  },
+  {
+   "id": "C-02",
+   "type": "regulatory",
+   "statement": "Decisions must be attributable to a named reviewer with a time",
+   "source": "S-05 SOP §3"
+  },
+  {
+   "id": "C-03",
+   "type": "time",
+   "statement": "Pilot-ready prototype in six weeks",
+   "source": "S-01 brief"
+  },
+  {
+   "id": "C-04",
+   "type": "design",
+   "statement": "Use the Fabrikam Quality UI guide",
+   "source": "S-07"
+  }
+ ]
+}

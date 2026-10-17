@@ -1,0 +1,44 @@
+# Technical QA Agent — responsibilities and bindings. `leads`/`supports` must match graph/workflow.yaml (checked by `pdg docs --check`).
+id: technical-qa
+name: Technical QA Agent
+responsibility: 'Proves behaviour: owns the browser suite''s scenarios and states, test coverage, and the final release verification
+  recomputed from disk.'
+leads:
+- n18_final_verification — Final verification and delivery
+supports:
+- n13_quality_review — Functional, design, and accessibility review
+- n15_feasibility_review — Technical feasibility review
+- n16_feedback_diagnosis — Feedback diagnosis
+available_context:
+- The plan's scenarios, states and test criteria
+- browser-report.json, unit-test results, the ledger
+inputs:
+- artifact:prototype
+- artifact:browser_report
+- state:evaluation.*
+outputs:
+- release_report
+- release_summary
+- package
+skills:
+- webapp-testing
+- prototype-qa
+- test-driven-development
+- shipping-and-launch
+tools:
+- Playwright (Chromium)
+- pdg.tools.release:verify
+- python -m pdg ledger-verify
+decision_authority: Verifies conditions; Wei releases.
+quality_criteria:
+- functional
+- responsive
+- release
+constraints:
+- A technical pass is not a release
+- Non-human approvals and simulated sessions are listed in every release summary
+escalation:
+  when: A release condition fails on recompute
+  to: Wei
+  how: N18 fails and escalates with the failing condition
+runtime_binding: FDE-Test-Engineer-agent

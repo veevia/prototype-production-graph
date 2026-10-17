@@ -1,0 +1,48 @@
+# Prototype Developer — responsibilities and bindings. `leads`/`supports` must match graph/workflow.yaml (checked by `pdg docs --check`).
+id: prototype-developer
+name: Prototype Developer
+responsibility: Plans the fidelity the evidence supports with executable scenarios, then builds the working, offline prototype
+  on the approved tokens, with every screen and state implemented.
+leads:
+- n10_prototype_planning — Prototype planning
+- n11_prototype_development — Prototype development
+supports: []
+available_context:
+- prototype.md, design.md and experience.md
+- The single-file offline build pattern (sources assembled by a reproducible build script)
+- 05_Library/_starters/ for a production foundation
+inputs:
+- artifact:plan
+- artifact:design_system
+- artifact:interactions
+outputs:
+- plan
+- prototype_md
+- prototype_build
+- build_manifest
+- development_md
+skills:
+- prototyping-assist
+- poc-planner
+- frontend-design
+- web-artifacts-builder
+- design-system-as-infrastructure
+- test-driven-development
+tools:
+- python build script
+- node --check / node --test
+- pdg.tools.plan:check
+- pdg.tools.prototype:check_static
+decision_authority: Chooses implementation within the approved plan; Wei approves the fidelity.
+quality_criteria:
+- prototype-plan
+- build
+constraints:
+- Fidelity rises only with validated assumptions
+- On rework, change only what the defect needs
+- No network requests; runs from file://
+escalation:
+  when: The plan cannot be built without a change to a locked document
+  to: Wei
+  how: Needs a change request; the gate blocks until one is approved
+runtime_binding: Prototype-Runner-QA-agent

@@ -1,0 +1,383 @@
+{
+ "colors": [
+  {
+   "name": "color-canvas",
+   "value": "#F6F7F9",
+   "role": "page canvas",
+   "provenance": "Fabrikam Quality UI guide (S-07)"
+  },
+  {
+   "name": "color-surface",
+   "value": "#FFFFFF",
+   "role": "panels and tables",
+   "provenance": "Fabrikam Quality UI guide (S-07)"
+  },
+  {
+   "name": "color-surface-alt",
+   "value": "#EEF0F3",
+   "role": "table headers, quiet surfaces",
+   "provenance": "derived: 4% ink on canvas"
+  },
+  {
+   "name": "color-border",
+   "value": "#CDD2D9",
+   "role": "dividers",
+   "provenance": "derived from ink"
+  },
+  {
+   "name": "color-border-strong",
+   "value": "#8A93A0",
+   "role": "control borders (≥ 3:1)",
+   "provenance": "derived from ink"
+  },
+  {
+   "name": "color-text",
+   "value": "#1B1F24",
+   "role": "ink",
+   "provenance": "Fabrikam Quality UI guide (S-07)"
+  },
+  {
+   "name": "color-text-secondary",
+   "value": "#4A5361",
+   "role": "secondary text",
+   "provenance": "derived: ink 75%"
+  },
+  {
+   "name": "color-text-subtle",
+   "value": "#6B7280",
+   "role": "captions on white only",
+   "provenance": "derived: ink 60%"
+  },
+  {
+   "name": "color-accent",
+   "value": "#0B5CAD",
+   "role": "actions and links",
+   "provenance": "Fabrikam Quality UI guide (S-07)"
+  },
+  {
+   "name": "color-accent-strong",
+   "value": "#084A8C",
+   "role": "hover",
+   "provenance": "derived: accent −15%"
+  },
+  {
+   "name": "color-accent-tint",
+   "value": "#E7F0FA",
+   "role": "information banners",
+   "provenance": "derived: accent 10%"
+  },
+  {
+   "name": "color-on-accent",
+   "value": "#FFFFFF",
+   "role": "text on accent",
+   "provenance": "Fabrikam Quality UI guide (S-07)"
+  },
+  {
+   "name": "color-success",
+   "value": "#1D6B37",
+   "role": "pass: text and icons",
+   "provenance": "Fabrikam Quality UI guide (S-07)"
+  },
+  {
+   "name": "color-success-tint",
+   "value": "#E7F4EC",
+   "role": "pass: backgrounds",
+   "provenance": "Fabrikam Quality UI guide (S-07)"
+  },
+  {
+   "name": "color-warning",
+   "value": "#7A4F00",
+   "role": "attention: text and icons",
+   "provenance": "Fabrikam Quality UI guide (S-07)"
+  },
+  {
+   "name": "color-warning-tint",
+   "value": "#FFF3D6",
+   "role": "attention: backgrounds",
+   "provenance": "Fabrikam Quality UI guide (S-07)"
+  },
+  {
+   "name": "color-alert",
+   "value": "#B3261E",
+   "role": "alert: failures and holds only",
+   "provenance": "Fabrikam Quality UI guide (S-07)"
+  },
+  {
+   "name": "color-alert-tint",
+   "value": "#FDECEB",
+   "role": "alert backgrounds: failures and holds only",
+   "provenance": "Fabrikam Quality UI guide (S-07)"
+  },
+  {
+   "name": "color-focus",
+   "value": "#0B5CAD",
+   "role": "focus ring",
+   "provenance": "Fabrikam Quality UI guide (S-07)"
+  },
+  {
+   "name": "shadow-elevation",
+   "value": "rgba(27, 31, 36, 0.08)",
+   "role": "shadow under raised panels",
+   "provenance": "translucent token: the build's panel shadow, declared so the token block matches the system"
+  }
+ ],
+ "type_scale": [
+  {
+   "name": "xs",
+   "size_px": 12,
+   "weight": 600,
+   "line_height": 1.4
+  },
+  {
+   "name": "sm",
+   "size_px": 14,
+   "weight": 400,
+   "line_height": 1.5
+  },
+  {
+   "name": "md",
+   "size_px": 16,
+   "weight": 400,
+   "line_height": 1.5
+  },
+  {
+   "name": "lg",
+   "size_px": 18,
+   "weight": 600,
+   "line_height": 1.35
+  },
+  {
+   "name": "xl",
+   "size_px": 20,
+   "weight": 600,
+   "line_height": 1.3
+  },
+  {
+   "name": "2xl",
+   "size_px": 24,
+   "weight": 600,
+   "line_height": 1.25
+  }
+ ],
+ "spacing_px": [
+  4,
+  8,
+  12,
+  16,
+  24,
+  32
+ ],
+ "radii_px": [
+  4,
+  8,
+  999
+ ],
+ "contrast_pairs": [
+  {
+   "fg": "color-text",
+   "bg": "color-surface",
+   "use": "body text"
+  },
+  {
+   "fg": "color-text",
+   "bg": "color-canvas",
+   "use": "page text"
+  },
+  {
+   "fg": "color-text-secondary",
+   "bg": "color-surface",
+   "use": "secondary text"
+  },
+  {
+   "fg": "color-text-secondary",
+   "bg": "color-surface-alt",
+   "use": "table headers, status chips"
+  },
+  {
+   "fg": "color-text-secondary",
+   "bg": "color-success-tint",
+   "use": "verdict rule text"
+  },
+  {
+   "fg": "color-text-secondary",
+   "bg": "color-alert-tint",
+   "use": "verdict rule text"
+  },
+  {
+   "fg": "color-text-secondary",
+   "bg": "color-warning-tint",
+   "use": "verdict rule text"
+  },
+  {
+   "fg": "color-text-subtle",
+   "bg": "color-surface",
+   "use": "captions"
+  },
+  {
+   "fg": "color-accent",
+   "bg": "color-surface",
+   "use": "links"
+  },
+  {
+   "fg": "color-on-accent",
+   "bg": "color-accent",
+   "use": "primary buttons"
+  },
+  {
+   "fg": "color-success",
+   "bg": "color-success-tint",
+   "use": "pass chips"
+  },
+  {
+   "fg": "color-warning",
+   "bg": "color-warning-tint",
+   "use": "attention chips"
+  },
+  {
+   "fg": "color-alert",
+   "bg": "color-alert-tint",
+   "use": "failure chips"
+  },
+  {
+   "fg": "color-alert",
+   "bg": "color-surface",
+   "use": "error titles"
+  },
+  {
+   "fg": "color-text",
+   "bg": "color-accent-tint",
+   "use": "banners"
+  },
+  {
+   "fg": "color-border-strong",
+   "bg": "color-surface",
+   "use": "control borders",
+   "non_text": true
+  },
+  {
+   "fg": "color-focus",
+   "bg": "color-surface",
+   "use": "focus ring",
+   "non_text": true
+  },
+  {
+   "fg": "color-focus",
+   "bg": "color-canvas",
+   "use": "focus ring on canvas",
+   "non_text": true
+  }
+ ],
+ "components": [
+  {
+   "name": "Button",
+   "variants": [
+    "primary",
+    "secondary",
+    "quiet"
+   ],
+   "states": [
+    "default",
+    "hover",
+    "focus",
+    "disabled"
+   ]
+  },
+  {
+   "name": "Filter chip",
+   "variants": [
+    "pressed",
+    "unpressed"
+   ],
+   "states": [
+    "default",
+    "focus"
+   ]
+  },
+  {
+   "name": "Status chip",
+   "variants": [
+    "ready/within",
+    "attention",
+    "failure",
+    "neutral status"
+   ],
+   "states": [
+    "default"
+   ]
+  },
+  {
+   "name": "Data table",
+   "variants": [
+    "queue",
+    "comparison",
+    "log"
+   ],
+   "states": [
+    "default",
+    "stacked (< 640 px)"
+   ]
+  },
+  {
+   "name": "Decision option",
+   "variants": [
+    "release",
+    "hold",
+    "reject"
+   ],
+   "states": [
+    "default",
+    "checked",
+    "focus",
+    "locked"
+   ]
+  },
+  {
+   "name": "Text area",
+   "variants": [
+    "rationale",
+    "notice"
+   ],
+   "states": [
+    "default",
+    "focus",
+    "invalid"
+   ]
+  },
+  {
+   "name": "State panel",
+   "variants": [
+    "loading",
+    "empty",
+    "error",
+    "not needed"
+   ],
+   "states": [
+    "default"
+   ]
+  }
+ ],
+ "breakpoints_px": [
+  640,
+  1024
+ ],
+ "motion": [
+  "No animation",
+  "Transitions ≤ 0.1 s",
+  "Nothing moves under prefers-reduced-motion"
+ ],
+ "prohibited": [
+  "Gradients",
+  "Status by colour alone",
+  "Alert red outside failures and holds",
+  "Left-accent highlight borders",
+  "Decorative cards for row-by-row comparison",
+  "Web fonts or any network asset",
+  "Text below 12 px"
+ ],
+ "accessibility": [
+  "WCAG 2.2 AA",
+  "44 px touch targets on tablets",
+  "A visible 2 px focus ring",
+  "One h1 per screen; headings in order"
+ ]
+}

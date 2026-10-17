@@ -1,0 +1,8 @@
+id: gate
+name: Feedback diagnosis gate
+reviewer: orchestrator
+scale: "tool dimensions pass/fail"
+dimensions:
+  - {id: GAT-TRACE, name: "Every blocking defect traced with a smallest fix and an acceptance check", brief_dimension: "requirement coverage", level: MUST, check: {type: tool, fn: "diagnosis:gate"}, threshold: "100% of blocking defects have a known trace, a fix and an acceptance check", rule: R-GOV-005, cases: {never: ["'improve the design'"], always: ["'raise .status-chip text to --color-text on the tint (4.9:1); axe color-contrast passes on queue@390'"]}}
+  - {id: GAT-FEEDBACK, name: "Every feedback item interpreted", brief_dimension: "customer and business relevance", level: MUST, check: {type: tool, fn: "diagnosis:gate"}, threshold: "0 open feedback items after diagnosis", rule: R-GOV-006, cases: {never: [], always: []}}
+  - {id: GAT-ESCALATE, name: "Repeated failures escalate instead of looping", brief_dimension: "technical feasibility", level: MUST, check: {type: tool, fn: "diagnosis:gate"}, threshold: "blocked after 3 failed corrections of one defect or when the cycle budget is spent", rule: R-GOV-007, cases: {never: [], always: []}}

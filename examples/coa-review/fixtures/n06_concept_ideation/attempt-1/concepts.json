@@ -1,0 +1,76 @@
+{
+ "criteria": [
+  {
+   "id": "C1",
+   "name": "Speed to a correct decision",
+   "weight": 0.4,
+   "requirement_ids": [
+    "R-01",
+    "R-02"
+   ]
+  },
+  {
+   "id": "C2",
+   "name": "Errors caught before release",
+   "weight": 0.35,
+   "requirement_ids": [
+    "R-03",
+    "R-05"
+   ]
+  },
+  {
+   "id": "C3",
+   "name": "Audit readiness",
+   "weight": 0.25,
+   "requirement_ids": [
+    "R-04",
+    "R-06"
+   ]
+  }
+ ],
+ "concepts": [
+  {
+   "id": "K-1",
+   "name": "Side-by-side review workbench",
+   "summary": "A queue of lots, then one review screen with every value next to its limit, a derived verdict and a guarded decision.",
+   "before": "Re-key values into a spreadsheet and compare them by eye",
+   "after": "See each value next to its limit with an explained verdict and decide on one screen",
+   "riskiest_assumption": "Reviewers release from the derived verdict without re-keying (A-01)",
+   "scores": {
+    "C1": 5,
+    "C2": 5,
+    "C3": 4
+   }
+  },
+  {
+   "id": "K-2",
+   "name": "Exception-only inbox",
+   "summary": "Compliant lots are accepted automatically; reviewers see only exceptions.",
+   "before": "Review every lot",
+   "after": "Review only exceptions",
+   "riskiest_assumption": "QA accepts releases no person looked at (conflicts with the SOP, E-05)",
+   "scores": {
+    "C1": 5,
+    "C2": 3,
+    "C3": 2
+   }
+  },
+  {
+   "id": "K-3",
+   "name": "Guided checklist",
+   "summary": "A step-by-step checklist, one parameter per step.",
+   "before": "Scan a PDF",
+   "after": "Tick each parameter in turn",
+   "riskiest_assumption": "A checklist is faster than a table for five or more parameters",
+   "scores": {
+    "C1": 2,
+    "C2": 4,
+    "C3": 5
+   }
+  }
+ ],
+ "selected": "K-1",
+ "rationale": "Highest weighted score (4.75 vs 3.55 and 3.45) and keeps a human decision on every lot, as the SOP requires (E-05).",
+ "light": "green",
+ "disagreement": []
+}

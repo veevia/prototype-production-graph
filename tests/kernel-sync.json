@@ -1,0 +1,30 @@
+{
+  "note": "Pins the two copies of the shared kernel (ADR 0001, docs/adr/0001-standalone-engine.md). tests/test_kernel_sync.py fails when either copy changes.",
+  "compared": "2026-10-04",
+  "files": {
+    "util.py": {
+      "vpg": "be14fa5286fc9dffa8664a17e379f410ee647c5bbb4699a7e1010708f4ea1506",
+      "pdg": "7dbcbc28275467c97edb857f50fec3a5e975536a45ea93c9767566c089117a9a"
+    },
+    "provenance.py": {
+      "vpg": "acaec98aaf542a6777955926f01650ab235ad42cad46922b190b218d0f51074d",
+      "pdg": "903e1c2599642d86b8a2d2ab46bff8ecbd9ac89abce35312668aecbf821a3e5b"
+    },
+    "lock.py": {
+      "vpg": "e91bc804270d46d823e7b1ab4eceb3a137f653746f3548fff923804d7981f789",
+      "pdg": "9d4c34dc7f623dd05f5b3bf7d12e029206e4e6c20230c9ff9fa03c2bc46b4cd9"
+    }
+  },
+  "known_differences": [
+    "util.py, provenance.py, lock.py: the copies run the same logic (tests/test_kernel_sync.py compares their syntax trees with every string masked). They differ only in the words of messages and docstrings (vpg/pdg, production/project, .vpg/.pdg, N23) and in pdg's BRIEF_PLACEHOLDER constant (pdg_only). Re-compared 2026-09-27 after vpg v1.1 added is_human_name (case-insensitive agent/dry-run check); ported to pdg, where memory.is_human also requires the project's humans list. Re-compared 2026-10-04 after vpg v1.7 added Ledger.stamp (a dict merged into every event while set, never over an event's own fields); ported to pdg with a test (tests/test_hardening.py).",
+    "Both ledgers write ahead and are anchored to the saved state (deferred, write_lines, recover, pending_fill, reaches), raise LedgerCorrupt or LedgerBehind on a damaged or lagging ledger, refuse a concurrent change (ConcurrentChange, file_identity) and open only regular files (NotRegularFile, open_regular, open_append, _regular_or_absent).",
+    "Engine side (not pinned, see docs/state-model.md): both engines record ledger_tail on every save, keep a human action's events in pending_ledger until they are written, and let only a named human accept a ledger break. pdg additionally protects node commits with its commit journal.",
+    "Paths: vpg keeps run state in .vpg/, pdg in .pdg/.",
+    "When the kernel is extracted (ADR 0001 trigger), either copy is a valid starting point; the logic check proves they match."
+  ],
+  "pdg_only": {
+    "util.py": [
+      "BRIEF_PLACEHOLDER"
+    ]
+  }
+}

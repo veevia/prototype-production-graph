@@ -1,0 +1,34 @@
+{
+ "problem_statement": "Reviewers re-key certificate values to compare them with the specification, which is slow and still misses out-of-spec values.",
+ "job": "When a lot arrives with its supplier certificate, confirm every result against our specification so compliant lots are released the same shift and the rest are held with a clear reason.",
+ "primary_persona": "A plant QA reviewer who checks 15–20 incoming ingredient lots a shift against supplier certificates.",
+ "top_pain": {
+  "statement": "Re-keying certificate values into a spreadsheet takes a median 11 minutes per lot and still lets out-of-spec values past the first review.",
+  "evidence_ids": [
+   "E-01",
+   "E-02",
+   "E-03"
+  ]
+ },
+ "opportunity": "Show every certificate value next to its limit with a derived, explained verdict, so the reviewer decides on one screen without re-keying.",
+ "pov": {
+  "user": "A plant QA reviewer",
+  "need": "to confirm a certificate against the specification without re-keying it",
+  "insight": "reviewers trust a derived verdict when they can see each value next to its limit (I-02)"
+ },
+ "against": [
+  "Auto-release with no human decision",
+  "A generic document inbox that hides the numbers"
+ ],
+ "how_might_we": [
+  "How might we show every value next to its limit so nothing is re-keyed?",
+  "How might we make the verdict's reasoning visible at a glance?",
+  "How might we make unreadable values an explicit escalation instead of a phone call?",
+  "How might we give supplier quality a ready-to-send draft without the tool ever sending it?"
+ ],
+ "decisions_to_enable": [
+  "Release, hold or reject a lot",
+  "Escalate an unreadable certificate",
+  "Prepare a supplier notice"
+ ]
+}

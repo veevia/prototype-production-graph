@@ -1,0 +1,220 @@
+{
+ "$defs": {
+  "ColorToken": {
+   "additionalProperties": false,
+   "properties": {
+    "name": {
+     "title": "Name",
+     "type": "string"
+    },
+    "value": {
+     "title": "Value",
+     "type": "string"
+    },
+    "role": {
+     "title": "Role",
+     "type": "string"
+    },
+    "provenance": {
+     "title": "Provenance",
+     "type": "string"
+    },
+    "state_fill_of": {
+     "items": {
+      "type": "string"
+     },
+     "title": "State Fill Of",
+     "type": "array"
+    }
+   },
+   "required": [
+    "name",
+    "value",
+    "role",
+    "provenance"
+   ],
+   "title": "ColorToken",
+   "type": "object"
+  },
+  "ComponentSpec": {
+   "additionalProperties": false,
+   "properties": {
+    "name": {
+     "title": "Name",
+     "type": "string"
+    },
+    "variants": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Variants",
+     "type": "array"
+    },
+    "states": {
+     "items": {
+      "type": "string"
+     },
+     "title": "States",
+     "type": "array"
+    }
+   },
+   "required": [
+    "name",
+    "variants",
+    "states"
+   ],
+   "title": "ComponentSpec",
+   "type": "object"
+  },
+  "ContrastPair": {
+   "additionalProperties": false,
+   "properties": {
+    "fg": {
+     "title": "Fg",
+     "type": "string"
+    },
+    "bg": {
+     "title": "Bg",
+     "type": "string"
+    },
+    "use": {
+     "title": "Use",
+     "type": "string"
+    },
+    "large_text": {
+     "default": false,
+     "title": "Large Text",
+     "type": "boolean"
+    },
+    "non_text": {
+     "default": false,
+     "title": "Non Text",
+     "type": "boolean"
+    }
+   },
+   "required": [
+    "fg",
+    "bg",
+    "use"
+   ],
+   "title": "ContrastPair",
+   "type": "object"
+  },
+  "TypeToken": {
+   "additionalProperties": false,
+   "properties": {
+    "name": {
+     "title": "Name",
+     "type": "string"
+    },
+    "size_px": {
+     "title": "Size Px",
+     "type": "number"
+    },
+    "weight": {
+     "title": "Weight",
+     "type": "integer"
+    },
+    "line_height": {
+     "title": "Line Height",
+     "type": "number"
+    }
+   },
+   "required": [
+    "name",
+    "size_px",
+    "weight",
+    "line_height"
+   ],
+   "title": "TypeToken",
+   "type": "object"
+  }
+ },
+ "additionalProperties": false,
+ "properties": {
+  "colors": {
+   "items": {
+    "$ref": "#/$defs/ColorToken"
+   },
+   "title": "Colors",
+   "type": "array"
+  },
+  "type_scale": {
+   "items": {
+    "$ref": "#/$defs/TypeToken"
+   },
+   "title": "Type Scale",
+   "type": "array"
+  },
+  "spacing_px": {
+   "items": {
+    "type": "integer"
+   },
+   "title": "Spacing Px",
+   "type": "array"
+  },
+  "radii_px": {
+   "items": {
+    "type": "integer"
+   },
+   "title": "Radii Px",
+   "type": "array"
+  },
+  "contrast_pairs": {
+   "items": {
+    "$ref": "#/$defs/ContrastPair"
+   },
+   "title": "Contrast Pairs",
+   "type": "array"
+  },
+  "components": {
+   "items": {
+    "$ref": "#/$defs/ComponentSpec"
+   },
+   "title": "Components",
+   "type": "array"
+  },
+  "breakpoints_px": {
+   "items": {
+    "type": "integer"
+   },
+   "title": "Breakpoints Px",
+   "type": "array"
+  },
+  "motion": {
+   "items": {
+    "type": "string"
+   },
+   "title": "Motion",
+   "type": "array"
+  },
+  "prohibited": {
+   "items": {
+    "type": "string"
+   },
+   "title": "Prohibited",
+   "type": "array"
+  },
+  "accessibility": {
+   "items": {
+    "type": "string"
+   },
+   "title": "Accessibility",
+   "type": "array"
+  }
+ },
+ "required": [
+  "colors",
+  "type_scale",
+  "spacing_px",
+  "radii_px",
+  "contrast_pairs",
+  "components",
+  "breakpoints_px",
+  "motion",
+  "prohibited",
+  "accessibility"
+ ],
+ "title": "DesignSystemDoc",
+ "type": "object"
+}

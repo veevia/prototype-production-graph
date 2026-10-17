@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 1424" width="1160" height="1424" font-family="Segoe UI, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+<title id="t">Graph-based product design, prototype and development workflow — 19 nodes, 43 edges</title>
+<desc id="d">Layered view: flow edges solid, bounded loops dashed (blue), targeted rework bus on the right, escalations red.</desc>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#5A6472"/></marker><marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#2F6DB5"/></marker></defs>
+<rect width="1160" height="1424" fill="#FFFFFF"/>
+<text x="24" y="30" font-size="18" font-weight="600" fill="#1B1F24">Graph-based product design, prototype and development workflow</text>
+<text x="24" y="50" font-size="12" fill="#4A5361">v1.0.0 · 19 nodes · 43 edges · solid = flow (join = all) · dashed = bounded loop · red = escalate to Wei · 👤 = human gate</text>
+<path d="M500 133 C500 149 500 143 500 157" fill="none" stroke="#5A6472" stroke-width="1.4" marker-end="url(#a)"/>
+<path d="M500 217 C500 233 500 227 500 241" fill="none" stroke="#5A6472" stroke-width="1.4" marker-end="url(#a)"/>
+<path d="M500 301 C500 317 500 311 500 325" fill="none" stroke="#5A6472" stroke-width="1.4" marker-end="url(#a)"/>
+<path d="M500 385 C500 401 500 395 500 409" fill="none" stroke="#5A6472" stroke-width="1.4" marker-end="url(#a)"/>
+<path d="M500 469 C500 485 500 479 500 493" fill="none" stroke="#5A6472" stroke-width="1.4" marker-end="url(#a)"/>
+<path d="M500 553 C500 569 500 563 500 577" fill="none" stroke="#5A6472" stroke-width="1.4" marker-end="url(#a)"/>
+<path d="M500 637 C500 653 355 647 355 661" fill="none" stroke="#5A6472" stroke-width="1.4" marker-end="url(#a)"/>
+<path d="M500 637 C500 653 645 647 645 661" fill="none" stroke="#5A6472" stroke-width="1.4" marker-end="url(#a)"/>
+<path d="M355 721 C355 737 500 731 500 745" fill="none" stroke="#5A6472" stroke-width="1.4" marker-end="url(#a)"/>
+<path d="M645 721 C645 737 500 731 500 745" fill="none" stroke="#5A6472" stroke-width="1.4" marker-end="url(#a)"/>
+<path d="M500 805 C500 821 500 815 500 829" fill="none" stroke="#5A6472" stroke-width="1.4" marker-end="url(#a)"/>
+<path d="M500 889 C500 905 500 899 500 913" fill="none" stroke="#5A6472" stroke-width="1.4" marker-end="url(#a)"/>
+<path d="M500 973 C500 989 210 983 210 997" fill="none" stroke="#5A6472" stroke-width="1.4" marker-end="url(#a)"/>
+<path d="M500 973 C500 989 500 983 500 997" fill="none" stroke="#5A6472" stroke-width="1.4" marker-end="url(#a)"/>
+<path d="M500 973 C500 989 790 983 790 997" fill="none" stroke="#5A6472" stroke-width="1.4" marker-end="url(#a)"/>
+<path d="M210 1057 C210 1073 500 1067 500 1081" fill="none" stroke="#5A6472" stroke-width="1.4" marker-end="url(#a)"/>
+<path d="M500 1057 C500 1073 500 1067 500 1081" fill="none" stroke="#5A6472" stroke-width="1.4" marker-end="url(#a)"/>
+<path d="M790 1057 C790 1073 500 1067 500 1081" fill="none" stroke="#5A6472" stroke-width="1.4" marker-end="url(#a)"/>
+<path d="M500 1141 C500 1157 355 1151 355 1165" fill="none" stroke="#5A6472" stroke-width="1.4" marker-end="url(#a)"/>
+<path d="M500 1141 C500 1157 645 1151 645 1165" fill="none" stroke="#5A6472" stroke-width="1.4" marker-end="url(#a)"/>
+<path d="M355 1225 C355 1241 500 1235 500 1249" fill="none" stroke="#5A6472" stroke-width="1.4" marker-end="url(#a)"/>
+<path d="M370 188 C316 188 316 104 370 104" fill="none" stroke="#2F6DB5" stroke-width="1.3" stroke-dasharray="5 3" marker-end="url(#b)"/>
+<text x="312" y="146" font-size="10" fill="#2F6DB5" text-anchor="end">E03 gaps_resolvable ≤2</text>
+<path d="M370 264 C330 242 330 302 370 280" fill="none" stroke="#2F6DB5" stroke-width="1.3" stroke-dasharray="5 3" marker-end="url(#b)"/>
+<text x="326" y="276" font-size="10" fill="#2F6DB5" text-anchor="end">E07 rejected</text>
+<path d="M370 440 C316 440 316 356 370 356" fill="none" stroke="#2F6DB5" stroke-width="1.3" stroke-dasharray="5 3" marker-end="url(#b)"/>
+<text x="312" y="398" font-size="10" fill="#2F6DB5" text-anchor="end">E10 rejected ≤2</text>
+<path d="M370 516 C330 494 330 554 370 532" fill="none" stroke="#2F6DB5" stroke-width="1.3" stroke-dasharray="5 3" marker-end="url(#b)"/>
+<text x="326" y="528" font-size="10" fill="#2F6DB5" text-anchor="end">E12 rejected</text>
+<path d="M515 684 C475 662 475 722 515 700" fill="none" stroke="#2F6DB5" stroke-width="1.3" stroke-dasharray="5 3" marker-end="url(#b)"/>
+<text x="471" y="696" font-size="10" fill="#2F6DB5" text-anchor="end">E17 rejected</text>
+<path d="M370 768 C330 746 330 806 370 784" fill="none" stroke="#2F6DB5" stroke-width="1.3" stroke-dasharray="5 3" marker-end="url(#b)"/>
+<text x="326" y="780" font-size="10" fill="#2F6DB5" text-anchor="end">E19 rejected</text>
+<path d="M975 272 L634 272" stroke="#2F6DB5" stroke-width="1.3" stroke-dasharray="5 3" marker-end="url(#b)"/>
+<path d="M975 356 L634 356" stroke="#2F6DB5" stroke-width="1.3" stroke-dasharray="5 3" marker-end="url(#b)"/>
+<path d="M975 440 L634 440" stroke="#2F6DB5" stroke-width="1.3" stroke-dasharray="5 3" marker-end="url(#b)"/>
+<path d="M975 524 L634 524" stroke="#2F6DB5" stroke-width="1.3" stroke-dasharray="5 3" marker-end="url(#b)"/>
+<path d="M975 608 L634 608" stroke="#2F6DB5" stroke-width="1.3" stroke-dasharray="5 3" marker-end="url(#b)"/>
+<path d="M975 692 L489 692" stroke="#2F6DB5" stroke-width="1.3" stroke-dasharray="5 3" marker-end="url(#b)"/>
+<path d="M975 692 L779 692" stroke="#2F6DB5" stroke-width="1.3" stroke-dasharray="5 3" marker-end="url(#b)"/>
+<path d="M975 776 L634 776" stroke="#2F6DB5" stroke-width="1.3" stroke-dasharray="5 3" marker-end="url(#b)"/>
+<path d="M975 860 L634 860" stroke="#2F6DB5" stroke-width="1.3" stroke-dasharray="5 3" marker-end="url(#b)"/>
+<path d="M975 944 L634 944" stroke="#2F6DB5" stroke-width="1.3" stroke-dasharray="5 3" marker-end="url(#b)"/>
+<path d="M225 1196 C171 1196 171 1112 370 1112" fill="none" stroke="#2F6DB5" stroke-width="1.3" stroke-dasharray="5 3" marker-end="url(#b)"/>
+<text x="167" y="1154" font-size="10" fill="#2F6DB5" text-anchor="end">E42 changes_requested ≤2</text>
+<path d="M775 1196 L975 1196 L975 272" fill="none" stroke="#2F6DB5" stroke-width="1.6" stroke-dasharray="5 3"/>
+<text x="983" y="734" font-size="11" fill="#2F6DB5" transform="rotate(90 983 734)" text-anchor="middle">targeted rework: target:&lt;node&gt; loops E30–E39 (≤3 each)</text>
+<text x="638" y="176" font-size="10" fill="#B3261E">⚑ E05 gaps_blocking → Wei</text>
+<text x="638" y="1100" font-size="10" fill="#B3261E">⚑ E29 blocked → Wei</text>
+<text x="783" y="1184" font-size="10" fill="#B3261E">⚑ E40 no_target → Wei</text>
+<g><rect x="370" y="75" width="260" height="58" rx="8" fill="#E8F1FB" stroke="#3A6EA5" stroke-width="1.4"/><text y="100" font-size="12.5" font-weight="600" fill="#1B1F24"><tspan x="380" dy="0">N01 Context intake</tspan></text><text x="380" y="124" font-size="10.5" fill="#4A5361">agent · context-research</text></g>
+<g><rect x="370" y="159" width="260" height="58" rx="8" fill="#E8F1FB" stroke="#3A6EA5" stroke-width="1.4"/><text y="184" font-size="12.5" font-weight="600" fill="#1B1F24"><tspan x="380" dy="0">N02 Research and evidence review</tspan></text><text x="380" y="208" font-size="10.5" fill="#4A5361">gate · context-research</text></g>
+<g><rect x="370" y="243" width="260" height="58" rx="8" fill="#E8F1FB" stroke="#3A6EA5" stroke-width="1.4"/><text y="261" font-size="12.5" font-weight="600" fill="#1B1F24"><tspan x="380" dy="0">N03 Problem and opportunity</tspan><tspan x="380" dy="15">definition 👤</tspan></text><text x="380" y="292" font-size="10.5" fill="#4A5361">agent · product-strategist</text></g>
+<g><rect x="370" y="327" width="260" height="58" rx="8" fill="#EAF5EC" stroke="#2F7A45" stroke-width="1.4"/><text y="345" font-size="12.5" font-weight="600" fill="#1B1F24"><tspan x="380" dy="0">N04 User, business, and technical</tspan><tspan x="380" dy="15">requirements</tspan></text><text x="380" y="376" font-size="10.5" fill="#4A5361">agent · product-strategist</text></g>
+<g><rect x="370" y="411" width="260" height="58" rx="8" fill="#EAF5EC" stroke="#2F7A45" stroke-width="1.4"/><text y="429" font-size="12.5" font-weight="600" fill="#1B1F24"><tspan x="380" dy="0">N05 Product scope and success</tspan><tspan x="380" dy="15">criteria 👤</tspan></text><text x="380" y="460" font-size="10.5" fill="#4A5361">agent · product-strategist</text></g>
+<g><rect x="370" y="495" width="260" height="58" rx="8" fill="#EAF5EC" stroke="#2F7A45" stroke-width="1.4"/><text y="513" font-size="12.5" font-weight="600" fill="#1B1F24"><tspan x="380" dy="0">N06 Concept ideation and</tspan><tspan x="380" dy="15">comparison 👤</tspan></text><text x="380" y="544" font-size="10.5" fill="#4A5361">agent · service-experience-designer</text></g>
+<g><rect x="370" y="579" width="260" height="58" rx="8" fill="#EAF5EC" stroke="#2F7A45" stroke-width="1.4"/><text y="597" font-size="12.5" font-weight="600" fill="#1B1F24"><tspan x="380" dy="0">N07 Experience architecture and</tspan><tspan x="380" dy="15">user flows</tspan></text><text x="380" y="628" font-size="10.5" fill="#4A5361">agent · service-experience-designer</text></g>
+<g><rect x="225" y="663" width="260" height="58" rx="8" fill="#EAF5EC" stroke="#2F7A45" stroke-width="1.4"/><text y="688" font-size="12.5" font-weight="600" fill="#1B1F24"><tspan x="235" dy="0">N08 UX and interaction design</tspan></text><text x="235" y="712" font-size="10.5" fill="#4A5361">agent · ux-interaction-designer</text></g>
+<g><rect x="515" y="663" width="260" height="58" rx="8" fill="#EAF5EC" stroke="#2F7A45" stroke-width="1.4"/><text y="681" font-size="12.5" font-weight="600" fill="#1B1F24"><tspan x="525" dy="0">N09 Visual and design-system</tspan><tspan x="525" dy="15">definition 👤</tspan></text><text x="525" y="712" font-size="10.5" fill="#4A5361">agent · visual-design-system</text></g>
+<g><rect x="370" y="747" width="260" height="58" rx="8" fill="#FFF4DE" stroke="#9A6A00" stroke-width="1.4"/><text y="772" font-size="12.5" font-weight="600" fill="#1B1F24"><tspan x="380" dy="0">N10 Prototype planning 👤</tspan></text><text x="380" y="796" font-size="10.5" fill="#4A5361">agent · prototype-developer</text></g>
+<g><rect x="370" y="831" width="260" height="58" rx="8" fill="#FFF4DE" stroke="#9A6A00" stroke-width="1.4"/><text y="856" font-size="12.5" font-weight="600" fill="#1B1F24"><tspan x="380" dy="0">N11 Prototype development</tspan></text><text x="380" y="880" font-size="10.5" fill="#4A5361">agent · prototype-developer</text></g>
+<g><rect x="370" y="915" width="260" height="58" rx="8" fill="#FFF4DE" stroke="#9A6A00" stroke-width="1.4"/><text y="933" font-size="12.5" font-weight="600" fill="#1B1F24"><tspan x="380" dy="0">N12 Content and realistic data</tspan><tspan x="380" dy="15">integration</tspan></text><text x="380" y="964" font-size="10.5" fill="#4A5361">agent · content-designer</text></g>
+<g><rect x="80" y="999" width="260" height="58" rx="8" fill="#FFF4DE" stroke="#9A6A00" stroke-width="1.4"/><text y="1017" font-size="12.5" font-weight="600" fill="#1B1F24"><tspan x="90" dy="0">N13 Functional, design, and</tspan><tspan x="90" dy="15">accessibility review</tspan></text><text x="90" y="1048" font-size="10.5" fill="#4A5361">review · product-ux-critic</text></g>
+<g><rect x="370" y="999" width="260" height="58" rx="8" fill="#F2ECFA" stroke="#6B4FA3" stroke-width="1.4"/><text y="1017" font-size="12.5" font-weight="600" fill="#1B1F24"><tspan x="380" dy="0">N14 User and stakeholder</tspan><tspan x="380" dy="15">validation</tspan></text><text x="380" y="1048" font-size="10.5" fill="#4A5361">review · context-research</text></g>
+<g><rect x="660" y="999" width="260" height="58" rx="8" fill="#FFF4DE" stroke="#9A6A00" stroke-width="1.4"/><text y="1024" font-size="12.5" font-weight="600" fill="#1B1F24"><tspan x="670" dy="0">N15 Technical feasibility review</tspan></text><text x="670" y="1048" font-size="10.5" fill="#4A5361">review · front-end-engineer</text></g>
+<g><rect x="370" y="1083" width="260" height="58" rx="8" fill="#F2ECFA" stroke="#6B4FA3" stroke-width="1.4"/><text y="1108" font-size="12.5" font-weight="600" fill="#1B1F24"><tspan x="380" dy="0">N16 Feedback diagnosis</tspan></text><text x="380" y="1132" font-size="10.5" fill="#4A5361">gate · orchestrator</text></g>
+<g><rect x="225" y="1167" width="260" height="58" rx="8" fill="#FFF4DE" stroke="#9A6A00" stroke-width="1.4"/><text y="1185" font-size="12.5" font-weight="600" fill="#1B1F24"><tspan x="235" dy="0">N18 Final verification and</tspan><tspan x="235" dy="15">delivery 👤</tspan></text><text x="235" y="1216" font-size="10.5" fill="#4A5361">tool · technical-qa</text></g>
+<g><rect x="515" y="1167" width="260" height="58" rx="8" fill="#FFF4DE" stroke="#9A6A00" stroke-width="1.4"/><text y="1185" font-size="12.5" font-weight="600" fill="#1B1F24"><tspan x="525" dy="0">N17 Targeted redesign or</tspan><tspan x="525" dy="15">redevelopment</tspan></text><text x="525" y="1216" font-size="10.5" fill="#4A5361">tool · orchestrator</text></g>
+<g><rect x="370" y="1251" width="260" height="58" rx="8" fill="#F2ECFA" stroke="#6B4FA3" stroke-width="1.4"/><text y="1276" font-size="12.5" font-weight="600" fill="#1B1F24"><tspan x="380" dy="0">N19 Learning and memory update</tspan></text><text x="380" y="1300" font-size="10.5" fill="#4A5361">gate · learning-memory</text></g>
+<rect x="24" y="1394" width="16" height="16" rx="3" fill="#E8F1FB" stroke="#3A6EA5"/><text x="46" y="1406" font-size="12" fill="#1B1F24">Understand</text>
+<rect x="154" y="1394" width="16" height="16" rx="3" fill="#EAF5EC" stroke="#2F7A45"/><text x="176" y="1406" font-size="12" fill="#1B1F24">Design</text>
+<rect x="284" y="1394" width="16" height="16" rx="3" fill="#FFF4DE" stroke="#9A6A00"/><text x="306" y="1406" font-size="12" fill="#1B1F24">Build</text>
+<rect x="414" y="1394" width="16" height="16" rx="3" fill="#F2ECFA" stroke="#6B4FA3"/><text x="436" y="1406" font-size="12" fill="#1B1F24">Learn</text>
+</svg>

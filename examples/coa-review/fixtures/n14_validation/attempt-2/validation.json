@@ -1,0 +1,166 @@
+{
+ "sessions": [
+  {
+   "participant": "P1",
+   "role": "lot reviewer",
+   "simulated": true,
+   "tasks": [
+    {
+     "scenario_id": "S-01",
+     "success": true,
+     "time_s": 160,
+     "seq": 6
+    },
+    {
+     "scenario_id": "S-02",
+     "success": true,
+     "time_s": 215,
+     "seq": 6
+    },
+    {
+     "scenario_id": "S-03",
+     "success": true,
+     "time_s": 100,
+     "seq": 5
+    },
+    {
+     "scenario_id": "S-04",
+     "success": true,
+     "time_s": 84,
+     "seq": 6
+    }
+   ],
+   "quotes": []
+  },
+  {
+   "participant": "P2",
+   "role": "lot reviewer",
+   "simulated": true,
+   "tasks": [
+    {
+     "scenario_id": "S-01",
+     "success": true,
+     "time_s": 170,
+     "seq": 6
+    },
+    {
+     "scenario_id": "S-02",
+     "success": true,
+     "time_s": 220,
+     "seq": 6
+    },
+    {
+     "scenario_id": "S-03",
+     "success": true,
+     "time_s": 105,
+     "seq": 5
+    },
+    {
+     "scenario_id": "S-04",
+     "success": true,
+     "time_s": 88,
+     "seq": 6
+    }
+   ],
+   "quotes": []
+  },
+  {
+   "participant": "P3",
+   "role": "lot reviewer",
+   "simulated": true,
+   "tasks": [
+    {
+     "scenario_id": "S-01",
+     "success": true,
+     "time_s": 180,
+     "seq": 6
+    },
+    {
+     "scenario_id": "S-02",
+     "success": true,
+     "time_s": 225,
+     "seq": 6
+    },
+    {
+     "scenario_id": "S-03",
+     "success": true,
+     "time_s": 110,
+     "seq": 5
+    },
+    {
+     "scenario_id": "S-04",
+     "success": true,
+     "time_s": 92,
+     "seq": 6
+    }
+   ],
+   "quotes": []
+  },
+  {
+   "participant": "P4",
+   "role": "QA lead",
+   "simulated": true,
+   "tasks": [
+    {
+     "scenario_id": "S-01",
+     "success": true,
+     "time_s": 190,
+     "seq": 6
+    },
+    {
+     "scenario_id": "S-02",
+     "success": true,
+     "time_s": 230,
+     "seq": 6
+    },
+    {
+     "scenario_id": "S-03",
+     "success": true,
+     "time_s": 115,
+     "seq": 5
+    },
+    {
+     "scenario_id": "S-04",
+     "success": true,
+     "time_s": 96,
+     "seq": 6
+    }
+   ],
+   "quotes": []
+  },
+  {
+   "participant": "P5",
+   "role": "lot reviewer",
+   "simulated": true,
+   "tasks": [
+    {
+     "scenario_id": "S-01",
+     "success": true,
+     "time_s": 200,
+     "seq": 6
+    },
+    {
+     "scenario_id": "S-02",
+     "success": true,
+     "time_s": 235,
+     "seq": 6
+    },
+    {
+     "scenario_id": "S-03",
+     "success": true,
+     "time_s": 120,
+     "seq": 5
+    },
+    {
+     "scenario_id": "S-04",
+     "success": true,
+     "time_s": 100,
+     "seq": 6
+    }
+   ],
+   "quotes": []
+  }
+ ],
+ "findings": [],
+ "summary": "SIMULATED sessions for the fictional example (build v2); not user evidence. Real validation is Wei's human dimension."
+}

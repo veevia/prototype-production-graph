@@ -72,6 +72,19 @@ def names_workspace(name: str) -> bool:
     return name in DESCRIBES_WORKSPACE or name.startswith("tests/")
 
 
+def png_metadata(data: bytes) -> list[str]:
+    """A PNG's text, EXIF and content-credential chunks: a public image carries pixels only."""
+    if not data.startswith(b"\x89PNG\r\n\x1a\n"):
+        return ["not a PNG"]
+    found, i = [], 8
+    while i + 8 <= len(data):
+        length, kind = int.from_bytes(data[i:i + 4], "big"), data[i + 4:i + 8].decode("latin-1")
+        if kind in ("tEXt", "zTXt", "iTXt", "eXIf", "caBX"):
+            found.append(kind)
+        i += 12 + length
+    return found
+
+
 def encoded(data: object) -> bytes:
     return (json.dumps(data, indent=1, ensure_ascii=False) + "\n").encode()
 
@@ -133,6 +146,7 @@ def inventory(root: Path = ROOT) -> dict[str, bytes]:
         "README.md": "README.md", "CONTRIBUTING.md": "CONTRIBUTING.md",
         "LICENSE": "LICENSE", "THIRD_PARTY_NOTICES.md": "THIRD_PARTY_NOTICES.md",
         "gitignore": ".gitignore", "test.yml": ".github/workflows/test.yml",
+        "pdg-overview.png": "docs/images/pdg-overview.png",
     }.items():
         files[target] = regular_bytes(root / "community" / source)
     for name in ("vpg_score.py", "test_vpg_score.py"):
@@ -253,7 +267,9 @@ def scan(files: dict[str, bytes], root: Path = ROOT) -> None:
             errors.append(f"{name}: credential-shaped content")
         if not names_workspace(name) and WORKSPACE_ONLY.search(content.decode("utf-8", "replace")):
             errors.append(f"{name}: workspace-only path (add its public counterpart to PUBLIC_PATHS)")
-        if name.startswith("vendor/"):
+        if name.endswith(".png") and png_metadata(content):
+            errors.append(f"{name}: image metadata ({', '.join(png_metadata(content))}); strip it before export")
+        if name.startswith("vendor/") or name.endswith(".png"):   # minified or binary: no text identifiers to read
             continue
         text = content.decode("utf-8")
         if re.search(r"/(?:Users|home)/[^/\s]+/|https://[^/\s]+\.sharepoint\.com", text):

@@ -168,6 +168,28 @@ def test_export_names_public_counterparts_for_workspace_only_paths(tmp_path):
              "tests/test_example.py": b"skip unless (workspace / '00_README').is_dir()"}, tmp_path)
 
 
+def test_export_ships_images_as_pixels_only(tmp_path):
+    """The README's cover image is the first binary file in the export: its bytes skip the text checks, so a text,
+    EXIF or content-credential chunk (where generators record prompts and provenance) refuses the export instead."""
+    import struct
+    import zlib
+    ex = exporter()
+    policy = tmp_path / "knowledge/public/privacy.json"
+    policy.parent.mkdir(parents=True)
+    policy.write_text('{"banned": ["no-such-identifier"]}')
+
+    def chunk(kind: bytes, data: bytes) -> bytes:
+        return struct.pack(">I", len(data)) + kind + data + struct.pack(">I", zlib.crc32(kind + data))
+    head = b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", struct.pack(">IIBBBBB", 1, 1, 8, 0, 0, 0, 0))
+    tail = chunk(b"IDAT", zlib.compress(b"\x00\x00")) + chunk(b"IEND", b"")
+    ex.scan({"docs/images/cover.png": head + tail}, tmp_path)
+    with pytest.raises(ValueError, match="image metadata"):
+        ex.scan({"docs/images/cover.png": head + chunk(b"tEXt", b"prompt\x00draw the private roadmap") + tail}, tmp_path)
+    for cover in (PKG / "docs/images/pdg-overview.png", PKG / "community/pdg-overview.png"):
+        if cover.exists():
+            assert ex.png_metadata(cover.read_bytes()) == [], cover
+
+
 def test_the_distribution_names_no_workspace_only_folders():
     ex = exporter()
     if not (PKG / "templates/artifacts").is_dir():

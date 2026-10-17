@@ -6,21 +6,36 @@ permissions:
   contents: read
 jobs:
   workflow:
-    runs-on: ubuntu-latest
+    name: ${{ matrix.python }} · ${{ matrix.shard.name }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
     strategy:
+      fail-fast: false
       matrix:
         python: ["3.11", "3.13"]
+        # The browser suites dominate the run time, so they get their own jobs (the slow archive tests balance the second).
+        # The engine shard ignores those files rather than listing the rest, so a new test file always runs somewhere.
+        shard:
+          - name: audit-browser
+            tests: tests/test_audit_browser.py
+          - name: browser
+            tests: tests/test_browser.py tests/test_dry_run.py tests/test_b22_release_review_archive.py
+          - name: engine
+            tests: >-
+              --ignore=tests/test_audit_browser.py --ignore=tests/test_browser.py --ignore=tests/test_dry_run.py
+              --ignore=tests/test_b22_release_review_archive.py
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python }}
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: "22"
-      - run: python -m pip install -r requirements.txt
+      - run: python -m pip install -r requirements.txt -c constraints.txt
       - run: python -m playwright install --with-deps chromium
       - run: python -B -m pdg validate
       - run: python -B -m pdg docs --check
-      - run: python -B -m pytest -q
-      - run: python -B -m pytest -q scoring/test_vpg_score.py
+      - run: python -B -m pytest -q ${{ matrix.shard.tests }}
+      - if: matrix.shard.name == 'engine'
+        run: python -B -m pytest -q scoring/test_vpg_score.py

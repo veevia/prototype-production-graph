@@ -1017,6 +1017,11 @@ def _spacing_clips(after: dict[str, Any], before: tuple[int, int] | None) -> boo
     return ay > max(by, 0) + 1 or (bx <= 1 and ax > 1)
 
 
+# R2-22: a page can move the focused stop from a timer it sets on focus (a scroll). The stop is read 10 ms later on the
+# page's own clock, after the timers the key press set; a wait in the driver let a busy page answer the read first
+JS_FOCUS_OBSCURED_AFTER = "(ms) => new Promise((done) => setTimeout(() => done((" + JS_FOCUS_OBSCURED + ")()), ms))"
+
+
 def _focus_obscured(page, limit: int) -> list[dict[str, Any]]:
     hidden: list[dict[str, Any]] = []
     for key in ("Tab", "Shift+Tab"):
@@ -1024,8 +1029,7 @@ def _focus_obscured(page, limit: int) -> list[dict[str, Any]]:
         seen = set()
         for _ in range(limit):
             page.keyboard.press(key)
-            page.wait_for_timeout(10)
-            f = page.evaluate(JS_FOCUS_OBSCURED)
+            f = page.evaluate(JS_FOCUS_OBSCURED_AFTER, 10)
             if not f:
                 continue
             uid = f"{key}:{f['uid']}"
@@ -1558,6 +1562,15 @@ def _chosen(browser, entry: Path, screens: list[dict[str, Any]], widths: list[in
                 pass
 
 
+def _redrawn(page, i: int) -> bool:
+    """Whether list item `i` (or a mark in it) left the DOM. Playwright 1.63+ fails a hover whose target is replaced under
+    the pointer ("Element is not attached to the DOM"); earlier versions returned and left JS_ITEM to say so."""
+    try:
+        return bool(page.evaluate(JS_ITEM, i).get("redrawn"))
+    except Exception:  # noqa: BLE001 - the page itself went away: not a redraw
+        return False
+
+
 def _state_fills(browser, entry: Path, screens: list[dict[str, Any]], width: int, rep: dict[str, Any], renders: set[str],
                  wait_ms: int, status: dict[str, str], budget_s: float = 60.0, click_budget_s: float = 60.0) -> None:
     """Each list's interactive states against its status colours, at the widest planned width (R2-26): the fill of the
@@ -1603,7 +1616,8 @@ def _state_fills(browser, entry: Path, screens: list[dict[str, Any]], width: int
                         else:
                             g["hover"] = seen
                     except Exception as exc:  # noqa: BLE001
-                        g["hover_error"] = str(exc).splitlines()[0][:160]
+                        g["hover_error"] = ("redrawn while hovered" if _redrawn(page, i)
+                                            else str(exc).splitlines()[0][:160])
                     page.mouse.move(-1, -1)
                     page.evaluate(JS_SETTLED)
                 row = {"screen": scr["id"], "groups": got["groups"], "status": got["status"]}

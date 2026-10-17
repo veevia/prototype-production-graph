@@ -4,7 +4,7 @@ version: "1.0.0"
 description: >-
   Takes a product from Context → Problem Definition → Concept → UX Design → Prototype → Development → Validation →
   Iteration, and runs Wei's Understand → Design → Build → Learn loop as a governed graph. It was distilled from the
-  2026 hub prototype programmes (the case study in knowledge/case-studies/) and Wei's canonical frameworks (00_README/_frameworks/).
+  2026 hub prototype programmes and Wei's canonical frameworks (neither is distributed).
   Flow edges form a DAG with join = all, loop edges are bounded rework and rejection paths, and escalate edges stop and
   report to a named human.
 start: START
@@ -136,7 +136,7 @@ nodes:
     purpose: Commit to one problem — the job, the primary persona and the top pain, each in one sentence with evidence — and the opportunity and point of view that follow from it.
     depends_on: [n02_evidence_review]
     inputs: ["state:research.evidence", "state:research.insights", "state:research.assumptions", "artifact:evidence", "control:research", "rework:self"]
-    context: ["The problem-frame and POV templates (00_README/_templates/1-0, 2-1)", "Gate to Design (design-thinking-loop.md): the job, the persona and the top pain in one sentence each, with evidence", "Solve the right problem first (wei-isms §2)"]
+    context: ["The problem-frame and POV templates (templates/artifacts/1-0, 2-1)", "Gate to Design (design-thinking-loop.md): the job, the persona and the top pain in one sentence each, with evidence", "Solve the right problem first (wei-isms §2)"]
     state_read: [research.evidence, research.insights, research.assumptions]
     state_write: [product.problem, product.users, product.customer_context]
     agent: product-strategist
@@ -174,7 +174,7 @@ nodes:
     purpose: Derive user, business and technical requirements, each traced to evidence or to a named assumption and each P0 with acceptance criteria, plus the business, technical, regulatory and time constraints.
     depends_on: [n03_problem_definition]
     inputs: ["state:product.problem", "state:research.evidence", "state:research.assumptions", "artifact:problem", "control:product", "control:research", "rework:self"]
-    context: ["The PRD template §7–8 (00_README/_templates/2-3)", "Constraint mapping: technical, business, regulatory and time limits known to engineers", "A requirement without evidence must name the assumption it rests on"]
+    context: ["The PRD template §7–8 (templates/artifacts/2-3)", "Constraint mapping: technical, business, regulatory and time limits known to engineers", "A requirement without evidence must name the assumption it rests on"]
     state_read: [product.problem, research.evidence, research.assumptions]
     state_write: [product.requirements, product.constraints]
     agent: product-strategist
@@ -292,7 +292,7 @@ nodes:
     purpose: Turn the chosen concept into journeys, a screen inventory with routes, navigation and user flows that cover every P0 requirement, plus the system behaviour the flows depend on.
     depends_on: [n06_concept_ideation]
     inputs: ["state:design.concepts", "state:design.selected_concept", "state:product.requirements", "state:product.problem", "control:product", "rework:self"]
-    context: ["The journey-map template (00_README/_templates/1-4)", "Information architecture: one name per thing, and navigation that follows the domain's own lifecycle", "Keep distinct domains as distinct workflows; unify the shell, not the domain logic (Wei, 2026-09-26)"]
+    context: ["The journey-map template (templates/artifacts/1-4)", "Information architecture: one name per thing, and navigation that follows the domain's own lifecycle", "Keep distinct domains as distinct workflows; unify the shell, not the domain logic (Wei, 2026-09-26)"]
     state_read: [design.concepts, design.selected_concept, product.requirements, product.problem]
     state_write: [design.journeys, design.screens, design.flows]
     agent: service-experience-designer
@@ -331,7 +331,7 @@ nodes:
     purpose: Specify every screen's states (loading, empty, error, success and the domain's own), interactions with triggers, feedback and keyboard behaviour, validation rules, and the focus and feedback rules the prototype must honour.
     depends_on: [n07_experience_architecture]
     inputs: ["state:design.screens", "state:design.flows", "state:product.requirements", "artifact:experience", "control:experience", "rework:self"]
-    context: ["The design-handoff template §3–4, §7 (00_README/_templates/2-4)", "“The prototype looks good but does not work” → every state and error path is specified (Wei, brief 2026-09-26)", "Requirement-first panels: a locked action says what unlocks it"]
+    context: ["The design-handoff template §3–4, §7 (templates/artifacts/2-4)", "“The prototype looks good but does not work” → every state and error path is specified (Wei, brief 2026-09-26)", "Requirement-first panels: a locked action says what unlocks it"]
     state_read: [design.screens, design.flows, product.requirements]
     state_write: [design.interactions]
     agent: ux-interaction-designer
@@ -372,7 +372,7 @@ nodes:
     purpose: Define the visual language as tokens with provenance — colour roles, type scale, spacing, radii, motion, components, breakpoints — with every text and UI colour pair meeting WCAG contrast, and the prohibited patterns.
     depends_on: [n07_experience_architecture]
     inputs: ["state:design.screens", "artifact:experience", "files:sources/**", "control:product", "rework:self"]
-    context: ["The workspace design system (05_Library/DESIGN-SYSTEM-AI-INSTRUCTIONS.md) and the project's brand authority", "Design system as infrastructure: reuse tokens and components; off-system output is a defect", "One component language across surfaces: type scale, radii, focus ring, status colours (Wei, 2026-09-26)"]
+    context: ["The workspace design system (templates/artifacts/DESIGN-SYSTEM-AI-INSTRUCTIONS.md) and the project's brand authority", "Design system as infrastructure: reuse tokens and components; off-system output is a defect", "One component language across surfaces: type scale, radii, focus ring, status colours (Wei, 2026-09-26)"]
     state_read: [design.screens]
     state_write: [design.system]
     agent: visual-design-system
@@ -416,7 +416,7 @@ nodes:
     purpose: Choose the fidelity the evidence supports, and plan the goals, the scenarios that exercise every P0 flow, the states to reach, the viewports, the content needs and the measurable test criteria.
     depends_on: [n08_interaction_design, n09_visual_system]
     inputs: ["state:design.flows", "state:design.interactions", "state:design.system", "state:research.assumptions", "state:product.success_criteria", "state:product.requirements", "artifact:interactions", "artifact:design_system", "control:experience", "control:design", "control:evaluation", "rework:self"]
-    context: ["The test-plan template (00_README/_templates/3-1)", "Build the thinnest slice that tests the riskiest assumption (design-thinking-loop.md, Build)", "“Development moved too quickly” → validated assumptions and customer alignment before fidelity rises (Wei, brief 2026-09-26)"]
+    context: ["The test-plan template (templates/artifacts/3-1)", "Build the thinnest slice that tests the riskiest assumption (design-thinking-loop.md, Build)", "“Development moved too quickly” → validated assumptions and customer alignment before fidelity rises (Wei, brief 2026-09-26)"]
     state_read: [design.flows, design.interactions, design.system, research.assumptions, product.success_criteria, product.requirements]
     state_write: [build.plan]
     agent: prototype-developer

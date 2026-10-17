@@ -10,7 +10,7 @@ supports: []
 available_context:
 - prototype.md, design.md and experience.md
 - The single-file offline build pattern (sources assembled by a reproducible build script)
-- 05_Library/_starters/ for a production foundation
+- Your own production starter, if any, for a production foundation
 inputs:
 - artifact:plan
 - artifact:design_system

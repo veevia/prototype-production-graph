@@ -10,7 +10,7 @@ canonical_templates: [templates/artifacts/4-1-Learn_evidence-brief.template.md, 
 > **TL;DR:** <the one lesson this project should carry forward>
 
 Project-specific lessons stay here. Reusable lessons become candidates in the learning proposal and reach the shared
-rule base (`02_Workflows/prototype-design/knowledge/rules.json`) only when Wei runs `pdg memory apply`.
+rule base (pdg's `knowledge/rules.json`) only when Wei runs `pdg memory apply`.
 
 ## Reusable principles in force
 

@@ -32,7 +32,7 @@ Every node defines every field below. `pdg validate` fails on an empty one.
 | `context` | What the agent should know that is not an input (the case-study lessons live here) |
 | `state_read` · `state_write` | Permission: a node commits only its declared `state_write` paths |
 | `outputs` | `{key, kind, schema?, required?, description}`. Schema-bound JSON outputs are validated before commit |
-| `agent` · `support_agents` · `skills` · `tools` | Who does the work, with which workspace skills (checked against `03_Agents-and-Skills/INDEX.md`) and tools |
+| `agent` · `support_agents` · `skills` · `tools` | Who does the work, with which skills (inside the author's workspace, checked against `03_Agents-and-Skills/INDEX.md`; elsewhere guidance labels) and tools |
 | `completion` | Checks that must hold before the node passes (artifact valid, interpretation complete, …) |
 | `evaluation` | Rubric ids. Every tool dimension's check must be run by this node (completion or `run.tool`) |
 | `retry` · `escalation` · `failure_conditions` | Attempt budget and retry behaviour; who is told, when, with what report |
@@ -68,7 +68,7 @@ Every node defines every field below. `pdg validate` fails on an empty one.
 11. shares a control document without every writer owning named sections;
 12. lets two writers own the same section, names a section the template lacks, or leaves a heading unowned;
 13. maps the 19 nodes out of the brief's lifecycle order;
-14. (workspace check) names a skill that `03_Agents-and-Skills/INDEX.md` does not list.
+14. (workspace check, skipped in a standalone checkout) names a skill that `03_Agents-and-Skills/INDEX.md` does not list.
 
 Each rule has a seeded-violation test in `tests/test_graph.py`.
 

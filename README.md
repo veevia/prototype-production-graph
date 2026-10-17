@@ -22,7 +22,7 @@ git clone https://github.com/veevia/prototype-production-graph.git
 cd prototype-production-graph
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install -r requirements.txt
+python -m pip install -r requirements.txt -c constraints.txt
 python -m playwright install chromium
 python -m pdg validate
 python -m pdg docs --check

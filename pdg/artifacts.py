@@ -3,7 +3,7 @@
 One source of truth: the JSON schemas in `schemas/artifacts/` are generated from these models (`python -m pdg docs`),
 agents read them in their task packets, and the engine validates every submitted JSON artifact against its model.
 Field names are the product-design vocabulary of Wei's canonical templates (problem frame, POV, PRD, journey map,
-design handoff, test plan, evidence brief): see `00_README/_templates/`.
+design handoff, test plan, evidence brief): see `templates/artifacts/`.
 """
 
 from __future__ import annotations

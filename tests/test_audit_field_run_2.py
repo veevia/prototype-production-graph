@@ -355,7 +355,7 @@ def test_archive_moves_only_earlier_attempts_and_a_rollback_that_needs_one_says_
     from pathlib import Path
     import pytest
     from pdg.engine import EngineError
-    from pdg.models import ArtifactRecord, CheckpointRef, ProjectState
+    from pdg.models import ProjectState
     cands = eng.archive_candidates()
     moved = {r for r, _ in cands}
     assert moved, "the example run has earlier attempts (its rework cycle)"
@@ -979,6 +979,36 @@ def test_an_obscured_focus_stop_that_nothing_covers_is_named_off_screen(tmp_path
     o = res.dimensions["A11Y-FOCUS-VISIBLE-2411"]
     msg = " ".join(f["message"] for f in o.findings)
     assert not o.passed and "off-screen after focus: the page scrolled it away" in msg and "covered by" not in msg, msg
+
+
+def test_every_focus_stop_a_timer_scrolls_away_is_read_hidden(tmp_path):
+    """R2-22 hardening: the walk waited 10 ms in the driver before each read, and about a third of the reads ran before
+    the page's own scroll timer, so the stop read as shown (the test above failed on a loaded machine when both of its
+    directions lost that race). The 10 ms are now timed in the page, after the timers the key press set."""
+    import pytest
+    pytest.importorskip("playwright")
+    from playwright.sync_api import sync_playwright
+    from pdg.tools import browser
+    entry = tmp_path / "p.html"
+    entry.write_text("""<!doctype html><html><head><style>body{margin:0} main{height:4000px}</style></head><body><main>"""
+                     + "".join(f'<a href="#s{i}">Stop {i}</a><br>' for i in range(20)) + """</main>
+<script>document.addEventListener('focusin', (e) => {
+  if (e.target.tagName === 'A') setTimeout(() => window.scrollTo(0, 3000), 0);
+});</script></body></html>""")
+    with sync_playwright() as p:
+        try:
+            b = p.chromium.launch()
+        except Exception as exc:  # noqa: BLE001
+            if "Executable doesn't exist" in str(exc):
+                pytest.skip("Chromium is not installed (python -m playwright install chromium)")
+            raise
+        try:
+            page = b.new_page(viewport={"width": 1024, "height": 768})
+            page.goto(entry.as_uri())
+            hidden = browser._focus_obscured(page, 60)
+        finally:
+            b.close()
+    assert len(hidden) == 40 and all(h["offscreen"] for h in hidden), [(h["direction"], h["text"]) for h in hidden]
 
 
 def test_a_new_defect_id_is_never_one_already_used_and_a_duplicate_is_repaired(eng, tmp_path):

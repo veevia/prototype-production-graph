@@ -19,6 +19,11 @@ exercise state transitions. Tests explicitly skip private workspace-only evidenc
 checks when their sources are absent. A skip is not proof of customer validation.
 Generated catalogs and schemas must be regenerated rather than edited manually.
 
+CI installs the exact versions in `constraints.txt` and splits the suite into three
+parallel jobs per Python version (see `.github/workflows/test.yml`). Locally,
+`python -m pytest -q` still runs all of it. Raise a pinned version only after the
+full suite passes with it: a new Playwright brings a new Chromium.
+
 Preserve human gates, explicit failures, rule lifecycle enforcement, and provenance.
 Add a regression test for behavior changes. Do not weaken a check to make an example pass.
 

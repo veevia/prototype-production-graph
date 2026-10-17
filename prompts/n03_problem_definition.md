@@ -5,7 +5,7 @@ schemas, the quality bar and the exact submit command. The engine, not you, deci
 
 ## Method
 
-1. Follow the problem-frame template (`00_README/_templates/1-0-Understand_problem-frame.template.md`) and the POV template §5–9.
+1. Follow the problem-frame template (`templates/artifacts/1-0-Understand_problem-frame.template.md`) and the POV template §5–9.
    Write the job in the JTBD template's shape (`1-3-Understand_jtbd.template.md` §1–4: goal, problem space, success
    metrics, job map). When the evidence spans several domains, rank the opportunities with the JTBD synthesis
    template (`1-3b-Understand_jtbd-synthesis.template.md` §2–5) before choosing the one problem.

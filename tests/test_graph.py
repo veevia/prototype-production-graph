@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+from pathlib import Path
 
 import yaml
 
@@ -135,13 +136,24 @@ def test_every_skill_exists_in_the_workspace_index():
         assert "not found" in warns[0]
 
 
-def test_workspace_error_for_an_unknown_skill():
+def test_workspace_error_for_an_unknown_skill(tmp_path):
     wf = copy.deepcopy(_wf())
     wf.nodes[0].skills.append("no-such-skill-xyz")
-    errs, warns = workspace_errors(wf)
-    assert errs or warns
-    if not warns:
-        assert any("no-such-skill-xyz" in e for e in errs)
+    index = tmp_path / "ws" / "03_Agents-and-Skills" / "INDEX.md"
+    index.parent.mkdir(parents=True)
+    index.write_text("\n".join(f"- `{s}`" for n in wf.nodes for s in n.skills if s != "no-such-skill-xyz"))
+    errs, warns = workspace_errors(wf, tmp_path / "ws" / "02_Workflows" / "prototype-design")
+    assert warns == [] and errs == [f"{wf.nodes[0].id}: skill 'no-such-skill-xyz' is not in 03_Agents-and-Skills/INDEX.md"]
+
+
+def test_a_standalone_checkout_skips_the_workspace_skill_check_quietly(tmp_path):
+    """Every `pdg validate` in the public checkout warned that a folder only the author's workspace has was missing."""
+    wf = _wf()
+    assert workspace_errors(wf, tmp_path / "clones" / "pdg") == ([], [])
+    assert workspace_errors(wf, Path("/pdg")) == ([], [])   # a checkout just below the root has no grandparent
+    (tmp_path / "ws" / "03_Agents-and-Skills").mkdir(parents=True)
+    errs, warns = workspace_errors(wf, tmp_path / "ws" / "02_Workflows" / "prototype-design")
+    assert errs == [] and len(warns) == 1 and "not found" in warns[0]
 
 
 def test_agent_runtime_bindings_are_known_custom_agents_or_builtins():

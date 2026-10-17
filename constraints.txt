@@ -1,0 +1,7 @@
+# The exact versions CI verifies; requirements.txt holds the minimums. Playwright pins the Chromium build, and a new
+# one can change browser verdicts, so install with: python -m pip install -r requirements.txt -c constraints.txt
+jsonschema==4.26.0
+playwright==1.63.0
+pydantic==2.14.0
+PyYAML==6.0.3
+pytest==9.1.1

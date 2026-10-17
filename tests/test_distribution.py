@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import importlib.util
 import json
-from pathlib import Path
 
 import pytest
 
@@ -149,3 +148,33 @@ def test_public_control_template_references_are_bundled():
         fm = yaml.safe_load(path.read_text().split("---", 2)[1])
         for ref in fm.get("canonical_templates", []):
             assert (PKG / ref).is_file(), ref
+
+
+def test_export_names_public_counterparts_for_workspace_only_paths(tmp_path):
+    """The public checkout told agents and new projects to open workspace folders it does not have: prompts and the graph
+    named `00_README/_templates/…` and `05_Library/…`, and every `pdg init` copied `02_Workflows/…` into controls/."""
+    ex = exporter()
+    assert ex.public_paths("Follow `00_README/_templates/1-0-Understand_problem-frame.template.md`, use "
+                           "05_Library/DESIGN-SYSTEM-AI-INSTRUCTIONS.md and the rubrics in "
+                           "`02_Workflows/prototype-design/rubrics/`.") == (
+        "Follow `templates/artifacts/1-0-Understand_problem-frame.template.md`, use "
+        "templates/artifacts/DESIGN-SYSTEM-AI-INSTRUCTIONS.md and the rubrics in pdg's `rubrics/`.")
+    policy = tmp_path / "knowledge/public/privacy.json"
+    policy.parent.mkdir(parents=True)
+    policy.write_text('{"banned": ["no-such-identifier"]}')
+    with pytest.raises(ValueError, match="workspace-only path"):
+        ex.scan({"prompts/n99_example.md": b"Read 05_Library/guide.md first."}, tmp_path)
+    ex.scan({"CONTRIBUTING.md": b"Export from `02_Workflows/prototype-design/`.",
+             "tests/test_example.py": b"skip unless (workspace / '00_README').is_dir()"}, tmp_path)
+
+
+def test_the_distribution_names_no_workspace_only_folders():
+    ex = exporter()
+    if not (PKG / "templates/artifacts").is_dir():
+        pytest.skip("workspace sources name the workspace's own folders; the public exporter rewrites them")
+    skip = ex.NOISE | {".git", ".venv"}
+    leaks = [p.relative_to(PKG).as_posix() for p in sorted(PKG.rglob("*"))
+             if p.is_file() and not set(p.relative_to(PKG).parts) & skip
+             and not ex.names_workspace(p.relative_to(PKG).as_posix())
+             and ex.WORKSPACE_ONLY.search(p.read_bytes().decode("utf-8", "replace"))]
+    assert leaks == []

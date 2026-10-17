@@ -9,7 +9,7 @@ schemas, the quality bar and the exact submit command. The engine, not you, deci
 2. Class each lesson: scope (reusable | project_specific), evidence class (verified | inferred | recommendation | missing), evidence ids, and the rule it observes (and whether it helped).
 3. Keep project-specific notes in your work-folder copy of `memory.md` (start from `controls/memory.md`); reusable ones become candidates in the learning proposal.
    Shape them with Wei's Learn templates:
-   - the evidence brief (`00_README/_templates/4-1-Learn_evidence-brief.template.md` §2–5: what shipped, measured vs
+   - the evidence brief (`templates/artifacts/4-1-Learn_evidence-brief.template.md` §2–5: what shipped, measured vs
      promised, what we learned, the confidence shift);
    - the retro (`4-2-Learn_retro.template.md` §3–6: what worked, what didn't, action items, artifacts to update).
    Simulated sessions stay labelled as simulated in both.

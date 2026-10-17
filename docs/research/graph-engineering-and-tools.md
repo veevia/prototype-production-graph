@@ -45,8 +45,8 @@ runnable with Python and Node alone ([ADR 0001](../../CONTRIBUTING.md)).
 | `node --check` and `node --test` (Node 22) | n11, n15 | Syntax check; the built-in test runner | *observed:* Node v22.23.1; 10 domain tests pass (`tests/test_prototype_unit.py`) |
 | Python build script; seeded synthetic-data generator | n11, n12 | A deterministic single-file offline build with `build-manifest.json`; seeded data | *observed:* two builds are byte-identical (`test_the_build_is_reproducible`) |
 | `pdg.tools.validation:prepare` and `validation:check` | n14 | Task success rate ("the bottom line of usability"), time on task, SEQ (7-point post-task item); 5 participants find about 85% of problems in a round | nngroup.com/articles/success-rate-the-simplest-usability-metric/; measuringu.com/seq-prediction/; nngroup.com/articles/why-you-only-need-to-test-with-5-users/ |
-| markitdown MCP | n01 | Converts documents to Markdown for registration as sources | *observed:* `markitdown` CLI at `~/.local/bin/markitdown`; adapter in `04_MCP/markitdown/` |
-| WorkIQ MCP (read-only M365 grounding) | n01 | Pulls meetings, mail and files into the shared intake cache | *observed:* `04_MCP/workiq/`; workspace skill `workiq-grounding` |
+| markitdown MCP | n01 | Converts documents to Markdown for registration as sources | *observed:* `markitdown` CLI at `~/.local/bin/markitdown`; an MCP adapter in the author's workspace |
+| WorkIQ MCP (read-only M365 grounding) | n01 | Pulls meetings, mail and files into the shared intake cache | *observed:* in the author's workspace, with its skill `workiq-grounding` |
 | Local file search | n01 | Registers files in `sources/` | *observed:* standard shell tools |
 | Deterministic `pdg.tools.*` checks (evidence, product, concepts, experience, plan, prototype, content, feasibility, diagnosis, regen, release, learning) | n02–n19 | Schema validation, counts, hashes and recomputation from state and disk | *observed:* `tests/test_tools.py`, `tests/test_engine.py`, and the dry run |
 

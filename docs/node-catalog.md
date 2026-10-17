@@ -76,7 +76,7 @@
 | Responsible agent | `product-strategist` |
 | Skills | `problem-framing`, `problem-statement-builder`, `design-pov-author`, `jobs-to-be-done`, `how-might-we` |
 | Tools | pdg.tools.product:check_problem |
-| Context | The problem-frame and POV templates (00_README/_templates/1-0, 2-1); Gate to Design (design-thinking-loop.md): the job, the persona and the top pain in one sentence each, with evidence; Solve the right problem first (wei-isms §2) |
+| Context | The problem-frame and POV templates (templates/artifacts/1-0, 2-1); Gate to Design (design-thinking-loop.md): the job, the persona and the top pain in one sentence each, with evidence; Solve the right problem first (wei-isms §2) |
 | Control documents | read research · write product |
 | Completion criteria | The problem frame validates against its schema<br>Job, persona and top pain are one sentence each; the pain cites known evidence; ≥ 3 How-Might-We questions |
 | Evaluation checks | `PRB-ONE-SENTENCE` MUST tool · enforced (R-CBV-001)<br>`PRB-EVIDENCE` MUST tool · enforced (R-CBV-001)<br>`PRB-HMW` SHOULD tool · advisory (R-CBV-002)<br>`PRB-APPROVED` MUST human · enforced (R-GOV-003) |
@@ -105,7 +105,7 @@
 | Responsible agent | `product-strategist` |
 | Skills | `prd-author`, `constraint-mapping`, `jobs-to-be-done`, `spec-driven-development`, `evidence-tagging` |
 | Tools | pdg.tools.product:check_requirements |
-| Context | The PRD template §7–8 (00_README/_templates/2-3); Constraint mapping: technical, business, regulatory and time limits known to engineers; A requirement without evidence must name the assumption it rests on |
+| Context | The PRD template §7–8 (templates/artifacts/2-3); Constraint mapping: technical, business, regulatory and time limits known to engineers; A requirement without evidence must name the assumption it rests on |
 | Control documents | read product, research · write product |
 | Completion criteria | The requirements document validates against its schema<br>Every requirement traces to evidence or an assumption; every P0 has acceptance criteria; all three types are present |
 | Evaluation checks | `REQ-TRACE` MUST tool · enforced (R-EVD-002)<br>`REQ-ACCEPTANCE` MUST tool · enforced (R-SCP-007)<br>`REQ-TYPES` SHOULD tool · enforced (R-SCP-008)<br>`REQ-CONSTRAINTS` MUST tool · enforced (R-SCP-009) |
@@ -192,7 +192,7 @@
 | Responsible agent | `service-experience-designer` |
 | Skills | `user-journey-map`, `information-architecture-designer`, `terminology-taxonomy-designer`, `storyboard`, `jobs-to-be-done` |
 | Tools | pdg.tools.experience:check_flows |
-| Context | The journey-map template (00_README/_templates/1-4); Information architecture: one name per thing, and navigation that follows the domain's own lifecycle; Keep distinct domains as distinct workflows; unify the shell, not the domain logic (Wei, 2026-09-26) |
+| Context | The journey-map template (templates/artifacts/1-4); Information architecture: one name per thing, and navigation that follows the domain's own lifecycle; Keep distinct domains as distinct workflows; unify the shell, not the domain logic (Wei, 2026-09-26) |
 | Control documents | read product · write experience |
 | Completion criteria | The experience document validates against its schema<br>Every P0 requirement is covered by a flow; every flow step names a known screen; every screen is reachable; routes are unique |
 | Evaluation checks | `EXP-COVERAGE` MUST tool · enforced (R-IA-002)<br>`EXP-SCREENS` MUST tool · enforced (R-IA-003) |
@@ -221,7 +221,7 @@
 | Responsible agent | `ux-interaction-designer` |
 | Skills | `prototyping-principles`, `heuristic-evaluation`, `hitl-boundary-designer`, `content-writing`, `design-review` |
 | Tools | pdg.tools.experience:check_interactions |
-| Context | The design-handoff template §3–4, §7 (00_README/_templates/2-4); “The prototype looks good but does not work” → every state and error path is specified (Wei, brief 2026-09-26); Requirement-first panels: a locked action says what unlocks it |
+| Context | The design-handoff template §3–4, §7 (templates/artifacts/2-4); “The prototype looks good but does not work” → every state and error path is specified (Wei, brief 2026-09-26); Requirement-first panels: a locked action says what unlocks it |
 | Control documents | read experience, product · write experience |
 | Completion criteria | The interaction document validates against its schema<br>Every screen has a spec; list screens specify empty and error states, record screens an error state; every interaction has keyboard behaviour; focus and feedback rules exist |
 | Evaluation checks | `EXP-STATES` MUST tool · enforced (R-UX-002)<br>`EXP-KEYBOARD` MUST tool · enforced (R-A11Y-003)<br>`EXP-LOCKED-EXPLAINED` MUST tool · enforced (R-UX-003) |
@@ -250,7 +250,7 @@
 | Responsible agent | `visual-design-system` (consults `accessibility-reviewer`) |
 | Skills | `design-system-author`, `design-system-as-infrastructure`, `frontend-design`, `impeccable`, `accessibility-verification` |
 | Tools | pdg.tools.design_system:check (WCAG contrast of every declared pair, type-scale and radius counts) |
-| Context | The workspace design system (05_Library/DESIGN-SYSTEM-AI-INSTRUCTIONS.md) and the project's brand authority; Design system as infrastructure: reuse tokens and components; off-system output is a defect; One component language across surfaces: type scale, radii, focus ring, status colours (Wei, 2026-09-26) |
+| Context | The workspace design system (templates/artifacts/DESIGN-SYSTEM-AI-INSTRUCTIONS.md) and the project's brand authority; Design system as infrastructure: reuse tokens and components; off-system output is a defect; One component language across surfaces: type scale, radii, focus ring, status colours (Wei, 2026-09-26) |
 | Control documents | read product · write design · locks on approval design |
 | Completion criteria | The design-system document validates against its schema<br>Every declared pair meets WCAG contrast, and every ratio design.md states is the one the tokens give; ≤ 8 type sizes, none below 12 px; spacing on a 4 px grid; tokens carry provenance; prohibited patterns listed |
 | Evaluation checks | `VIS-CONTRAST` MUST tool · enforced (R-A11Y-002)<br>`VIS-RATIO-STATED` SHOULD tool · enforced (R-VIS-002)<br>`VIS-TYPE` MUST tool · enforced (R-VIS-001)<br>`VIS-RADII` SHOULD tool · enforced (R-VIS-001)<br>`VIS-SPACING` SHOULD tool · advisory (R-VIS-003)<br>`VIS-PROVENANCE` MUST tool · enforced (R-VIS-002)<br>`VIS-PROHIBITED` MUST tool · enforced (R-VIS-004)<br>`VIS-ALERT-RESERVED` MUST tool · enforced (R-VIS-005)<br>`VIS-APPROVED` MUST human · enforced (R-GOV-003) |
@@ -279,7 +279,7 @@
 | Responsible agent | `prototype-developer` (consults `ux-interaction-designer`) |
 | Skills | `prototyping-assist`, `poc-planner`, `experiment-planner`, `hypothesis-creator`, `mve-mvp-planner` |
 | Tools | pdg.tools.plan:check (fidelity gate, scenario and state coverage) |
-| Context | The test-plan template (00_README/_templates/3-1); Build the thinnest slice that tests the riskiest assumption (design-thinking-loop.md, Build); “Development moved too quickly” → validated assumptions and customer alignment before fidelity rises (Wei, brief 2026-09-26) |
+| Context | The test-plan template (templates/artifacts/3-1); Build the thinnest slice that tests the riskiest assumption (design-thinking-loop.md, Build); “Development moved too quickly” → validated assumptions and customer alignment before fidelity rises (Wei, brief 2026-09-26) |
 | Control documents | read experience, design, evaluation · write prototype · locks on approval prototype |
 | Completion criteria | The plan validates against its schema<br>The fidelity gate holds; every P0 flow has a scenario ending in an expectation; every data screen's empty and error states are planned; viewports span ≤ 400 and ≥ 1280 px; every record screen names its worst-case samples |
 | Evaluation checks | `PLN-FIDELITY-GATE` MUST tool · enforced (R-FID-001)<br>`PLN-SCENARIOS` MUST tool · enforced (R-VAL-002)<br>`PLN-STATES` MUST tool · enforced (R-UX-002)<br>`PLN-FOCUS` MUST tool · enforced (R-A11Y-003)<br>`PLN-ACCEPTANCE` MUST tool · enforced (R-SCP-007)<br>`PLN-SAMPLES` SHOULD tool · enforced (R-A11Y-004)<br>`PLN-VIEWPORTS` MUST tool · enforced (R-A11Y-004)<br>`PLN-APPROVED` MUST human · enforced (R-GOV-003) |

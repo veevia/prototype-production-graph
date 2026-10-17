@@ -12,7 +12,7 @@ import yaml
 from pdg.engine import Engine, EngineError
 from pdg.provenance import Ledger
 
-from .conftest import PKG, copy_example, fake_browser
+from .conftest import PKG, fake_browser
 
 
 def _step_until(eng: Engine, done, limit: int = 300) -> None:

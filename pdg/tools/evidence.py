@@ -59,7 +59,7 @@ def review(ctx: NodeContext) -> CheckResult:
                         resolve_by="register user research, or waive with a note if the product is a pure probe"))
     if not kinds & {"design-system", "brand"}:
         gaps.append(Gap(id="G-DESIGN-AUTHORITY", severity="resolvable", what="no design-system or brand authority",
-                        resolve_by="register the design system (05_Library) or brand guide"))
+                        resolve_by="register the design system or brand guide"))
     for q in ev.open_questions:
         if q.blocking and not q.resolved:
             gaps.append(Gap(id=f"G-Q-{q.id}", severity="blocking", what=f"blocking open question {q.id}: {q.question}",

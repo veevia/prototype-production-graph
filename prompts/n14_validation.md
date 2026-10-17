@@ -8,7 +8,7 @@ schemas, the quality bar and the exact submit command. The engine, not you, deci
 1. Run the moderator guide with named participants (role + anonymised id). Think-aloud; don't demonstrate.
 2. Per task record: scenario id, success, time, SEQ (1–7) and quotes. Five users per round finds most problems (NN/g).
    Draw any post-session questions (outcomes, jobs, pain points) from the UX survey template
-   (`00_README/_templates/1-2-Understand_UX_survey.template.md` §2–4); never add questions the plan did not ask for.
+   (`templates/artifacts/1-2-Understand_UX_survey.template.md` §2–4); never add questions the plan did not ask for.
 3. Record stakeholder concerns as findings with `by: human` and the participant; each traced to the node it implicates.
 4. Mark every session `simulated: true|false` honestly. A simulated session is never user evidence.
 5. Append the validation findings to your work-folder copy of `research.md` (start from `controls/research.md`; the section is append-only).

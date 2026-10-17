@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from pathlib import Path
 
 from ..artifacts import SourcesDoc
 from ..context import CheckResult, NodeContext

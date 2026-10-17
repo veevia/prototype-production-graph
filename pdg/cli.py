@@ -22,7 +22,7 @@ def _print(obj) -> None:
 
 
 def _summary(status: dict) -> str:
-    from .engine_common import HUMAN_ONLY_ACTIONS, delegation_text, resets_text
+    from .engine_common import delegation_text, resets_text
     resets = resets_text(status.get("budget_resets", {}))
     lines = [f"{status['project']}: {status['status']} · build v{status['build_version']} · {status['rework_cycles']} rework "
              f"cycle(s)" + (f" · {resets}" if resets else "")

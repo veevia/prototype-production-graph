@@ -16,16 +16,13 @@ import re
 import subprocess
 import sys
 from pathlib import Path
-from typing import TYPE_CHECKING, Any
+from typing import Any
 
 import yaml
 
 from .artifacts import ARTIFACT_MODELS
 from .context import NodeContext, NodeResult
 from .util import PKG_ROOT, rel
-
-if TYPE_CHECKING:  # pragma: no cover
-    from .engine import Engine
 
 
 class Executor:

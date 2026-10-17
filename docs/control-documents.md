@@ -22,7 +22,7 @@ Templates live in `templates/control/`. Each derives from Wei's canonical artifa
 | `memory.md` | N19 | N01, N02 | — | Lessons log |
 
 Canonical sources: problem frame and PRD (product), research report (research), journey map and design handoff
-(experience, development), `05_Library/DESIGN-SYSTEM-AI-INSTRUCTIONS.md` (design), test plan (prototype).
+(experience, development), `templates/artifacts/DESIGN-SYSTEM-AI-INSTRUCTIONS.md` (design), test plan (prototype).
 
 ## How a change is installed
 

@@ -1,4 +1,5 @@
 # Python 3.11+. Also needs Node 22+ (node --test) and Chromium: python -m playwright install chromium
+# Minimum versions. CI installs with -c constraints.txt, the exact versions it verifies.
 pydantic>=2.13
 PyYAML>=6.0
 jsonschema>=4.26

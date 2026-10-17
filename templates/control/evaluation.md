@@ -11,7 +11,7 @@ thresholds: {}
 
 > **TL;DR:** <the bar a version must clear before Wei is asked to release it>
 
-The gates below are enforced by the rubrics in `02_Workflows/prototype-design/rubrics/`; a dimension blocks only when its
+The gates below are enforced by the rubrics in pdg's `rubrics/`; a dimension blocks only when its
 rule is adopted (see `pdg memory status`). Human dimensions are decided by Wei, never by an agent.
 
 ## Product quality gates

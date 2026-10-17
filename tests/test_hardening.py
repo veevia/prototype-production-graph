@@ -3,7 +3,6 @@ action, refusal of concurrent changes and of special files. Each test fails on t
 
 from __future__ import annotations
 
-import json
 import os
 import signal
 from contextlib import contextmanager

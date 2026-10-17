@@ -33,6 +33,43 @@ SECRET = re.compile(
     rb"sk-(?:proj-|ant-)?[A-Za-z0-9_-]{32,}|"
     rb"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----)"
 )
+# Folders that exist only in the author's workspace. Exported text names what a standalone checkout has instead
+# (PUBLIC_PATHS); only the files that describe the workspace itself, the tests that look for it and the shared kernel's
+# provenance notes (pinned byte for byte by tests/kernel-sync.json) still name them.
+WORKSPACE_ONLY = re.compile(r"\b(?:00_README|02_Workflows|04_MCP|05_Library)\b")
+DESCRIBES_WORKSPACE = frozenset({"CONTRIBUTING.md", "scripts/export_public.py", "pdg/lock.py", "pdg/provenance.py",
+                                 "pdg/util.py"})
+PUBLIC_PATHS = (   # whole phrases first, then the general prefixes
+    ("(the case study in knowledge/case-studies/) and Wei's canonical frameworks (00_README/_frameworks/)",
+     "and Wei's canonical frameworks (neither is distributed)"),
+    ("(for example `05_Library/DESIGN-SYSTEM-AI-INSTRUCTIONS.md` copied into `sources/`)",
+     "(for example your design system's AI instructions, as `templates/artifacts/DESIGN-SYSTEM-AI-INSTRUCTIONS.md` "
+     "describes, copied into `sources/`)"),
+    ("05_Library/_starters/ for a production foundation", "Your own production starter, if any, for a production foundation"),
+    ("the design system (05_Library) or brand guide", "the design system or brand guide"),
+    ("from the workspace starter's installed dependencies\n  (`05_Library/_starters/next-tailwind/node_modules/axe-core/`).",
+     "from an installed copy of the package."),
+    ("adapter in `04_MCP/markitdown/`", "an MCP adapter in the author's workspace"),
+    ("`04_MCP/workiq/`; workspace skill `workiq-grounding`", "in the author's workspace, with its skill `workiq-grounding`"),
+    ("| `knowledge/case-studies/hub-programmes-2026/*_TENANT*` | the evidence behind the rules | the builder script "
+     "(identifiers stay in `_TENANT` files) |",
+     "| `knowledge/public/evidence.json` | the public evidence records behind the rules (the private case studies are "
+     "not distributed) | the author's public export |"),
+    ("05_Library/DESIGN-SYSTEM-AI-INSTRUCTIONS.md", "templates/artifacts/DESIGN-SYSTEM-AI-INSTRUCTIONS.md"),
+    ("00_README/_templates/", "templates/artifacts/"),
+    ("`02_Workflows/prototype-design/", "pdg's `"),
+)
+
+
+def public_paths(text: str) -> str:
+    for old, new in PUBLIC_PATHS:
+        text = text.replace(old, new)
+    return text
+
+
+def names_workspace(name: str) -> bool:
+    """Whether an exported file may name workspace-only folders."""
+    return name in DESCRIBES_WORKSPACE or name.startswith("tests/")
 
 
 def encoded(data: object) -> bytes:
@@ -86,7 +123,7 @@ def inventory(root: Path = ROOT) -> dict[str, bytes]:
             if any(parent.is_symlink() for parent in path.parents if parent != root.parent):
                 raise ValueError(f"symlink source directory: {path}")
             files[rel.as_posix()] = regular_bytes(path)
-    for name in ("requirements.txt", "pytest.ini"):
+    for name in ("requirements.txt", "constraints.txt", "pytest.ini"):
         files[name] = regular_bytes(root / name)
     for name in DOCS:
         files[f"docs/{name}.md"] = regular_bytes(root / f"docs/{name}.md")
@@ -141,7 +178,8 @@ def inventory(root: Path = ROOT) -> dict[str, bytes]:
         "# Dependency inventory\n\n**TL;DR:** The engine needs Python, Node and Chromium; host skills and enterprise integrations are optional.\n\n"
         "## Runtime and tests\n\n"
         "Python 3.11+, pydantic, PyYAML, jsonschema and Playwright; pytest for tests. "
-        "Exact minimum constraints are in `requirements.txt`. Node.js 22+ runs prototype unit tests. "
+        "Minimum versions are in `requirements.txt`; `constraints.txt` pins the exact versions CI verifies, "
+        "because a new Playwright brings a new Chromium that can change browser verdicts. Node.js 22+ runs prototype unit tests. "
         "Chromium is installed with `python -m playwright install chromium`. axe-core and its license are bundled. "
         "The candidate scorer and its tests are copied, not imported from a sibling checkout.\n\n"
         "## Source closure\n\n"
@@ -183,6 +221,14 @@ def inventory(root: Path = ROOT) -> dict[str, bytes]:
                               "are not distributed, and author defaults do not approve your project's decisions:", text,
                               flags=re.S)
             files[name] = text.encode()
+    for name, content in list(files.items()):
+        if names_workspace(name):
+            continue
+        try:
+            text = content.decode()
+        except UnicodeDecodeError:
+            continue
+        files[name] = public_paths(text).encode()
     return files
 
 
@@ -205,6 +251,8 @@ def scan(files: dict[str, bytes], root: Path = ROOT) -> None:
             errors.append(f"{name}: exceeds GitHub ordinary-file limit")
         if SECRET.search(content):
             errors.append(f"{name}: credential-shaped content")
+        if not names_workspace(name) and WORKSPACE_ONLY.search(content.decode("utf-8", "replace")):
+            errors.append(f"{name}: workspace-only path (add its public counterpart to PUBLIC_PATHS)")
         if name.startswith("vendor/"):
             continue
         text = content.decode("utf-8")

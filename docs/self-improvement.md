@@ -9,7 +9,7 @@
 | Store | Scope | Changes through |
 |---|---|---|
 | `knowledge/rules.json` (77 rules, v1.0.0) | every future project | `pdg memory …` only: versioned, with `knowledge/history/` snapshots and `knowledge/rules-changelog.jsonl` |
-| `knowledge/case-studies/hub-programmes-2026/*_TENANT*` | the evidence behind the rules | the builder script (identifiers stay in `_TENANT` files) |
+| `knowledge/public/evidence.json` | the public evidence records behind the rules (the private case studies are not distributed) | the author's public export |
 | `knowledge/design-principles.md` | human-readable principles | generated from the rules (`pdg docs`) |
 | `<project>/controls/memory.md` | one project | N19; its Lessons log is append-only |
 

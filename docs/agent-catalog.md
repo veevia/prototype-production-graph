@@ -118,7 +118,7 @@ Commits the problem (job, persona, top pain), derives traced requirements and co
 |---|---|
 | Leads | n03_problem_definition — Problem and opportunity definition<br>n04_requirements — User, business, and technical requirements<br>n05_scope_success — Product scope and success criteria |
 | Supports | n06_concept_ideation — Concept ideation and comparison |
-| Available context | research.md, the evidence and assumptions; Wei's templates: problem frame, POV, brief, PRD (00_README/_templates/); Traffic-light and extreme-clarity disciplines |
+| Available context | research.md, the evidence and assumptions; Wei's templates: problem frame, POV, brief, PRD (templates/artifacts/); Traffic-light and extreme-clarity disciplines |
 | Inputs → outputs | state:research.*, control:research, control:product → problem, requirements, scope, product_md, evaluation_md |
 | Skills | `problem-framing`, `design-pov-author`, `prd-author`, `success-metrics`, `constraint-mapping`, `traffic-light-decisions` |
 | Tools | pdg.tools.product:check_problem; pdg.tools.product:check_requirements; pdg.tools.product:check_scope |
@@ -154,7 +154,7 @@ Plans the fidelity the evidence supports with executable scenarios, then builds 
 |---|---|
 | Leads | n10_prototype_planning — Prototype planning<br>n11_prototype_development — Prototype development |
 | Supports | — |
-| Available context | prototype.md, design.md and experience.md; The single-file offline build pattern (sources assembled by a reproducible build script); 05_Library/_starters/ for a production foundation |
+| Available context | prototype.md, design.md and experience.md; The single-file offline build pattern (sources assembled by a reproducible build script); Your own production starter, if any, for a production foundation |
 | Inputs → outputs | artifact:plan, artifact:design_system, artifact:interactions → plan, prototype_md, prototype_build, build_manifest, development_md |
 | Skills | `prototyping-assist`, `poc-planner`, `frontend-design`, `web-artifacts-builder`, `design-system-as-infrastructure`, `test-driven-development` |
 | Tools | python build script; node --check / node --test; pdg.tools.plan:check; pdg.tools.prototype:check_static |
@@ -226,7 +226,7 @@ Defines the visual language as tokens with provenance, components, breakpoints, 
 |---|---|
 | Leads | n09_visual_system — Visual and design-system definition |
 | Supports | — |
-| Available context | 05_Library/DESIGN-SYSTEM-AI-INSTRUCTIONS.md and the project's brand authority; Earlier programmes' DESIGN.md files (project-specific values never become defaults) |
+| Available context | templates/artifacts/DESIGN-SYSTEM-AI-INSTRUCTIONS.md and the project's brand authority; Earlier programmes' DESIGN.md files (project-specific values never become defaults) |
 | Inputs → outputs | artifact:experience, files:sources/** → design_system, design_md |
 | Skills | `design-system-author`, `design-system-as-infrastructure`, `frontend-design`, `impeccable` |
 | Tools | pdg.tools.design_system:check (WCAG contrast calculator, counts) |

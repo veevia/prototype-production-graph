@@ -11,7 +11,7 @@ supports:
 - n06_concept_ideation — Concept ideation and comparison
 available_context:
 - research.md, the evidence and assumptions
-- 'Wei''s templates: problem frame, POV, brief, PRD (00_README/_templates/)'
+- 'Wei''s templates: problem frame, POV, brief, PRD (templates/artifacts/)'
 - Traffic-light and extreme-clarity disciplines
 inputs:
 - state:research.*

@@ -7,7 +7,7 @@ leads:
 - n09_visual_system — Visual and design-system definition
 supports: []
 available_context:
-- 05_Library/DESIGN-SYSTEM-AI-INSTRUCTIONS.md and the project's brand authority
+- templates/artifacts/DESIGN-SYSTEM-AI-INSTRUCTIONS.md and the project's brand authority
 - Earlier programmes' DESIGN.md files (project-specific values never become defaults)
 inputs:
 - artifact:experience

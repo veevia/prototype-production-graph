@@ -546,7 +546,6 @@ def test_a_cycle_after_a_budget_reset_still_gets_its_before_and_after_comparison
     """Field run W38: comparisons were keyed on the cycle number, which a budget reset restarts, so the audit loop's
     cycles collided with cycles 1 and 2 of the first run and were never recorded. They are keyed on the plan now."""
     import json as _json
-    from pdg.models import ArtifactRecord
     done = eng.state.evaluation.comparisons
     assert done, "the example's run compares at least one cycle"
     old = eng.current("regeneration_plan")[-1]
@@ -1357,7 +1356,8 @@ def test_m07_checks_record_git_state_and_status_warns_on_uncommitted_pdg_code(en
     assert eng.rt("n15_feasibility_review").passed_checks.git_state == dirty
     assert main(["status", str(eng.project.root)]) == 0
     assert "checks ran on uncommitted pdg code (2 files)" in capsys.readouterr().out
-    summary = next(p for p in eng.project.root.rglob("RELEASE-SUMMARY.md") if "package" in p.parts)
+    gate = "n18_final_verification"   # its latest attempt: an earlier one's summary predates the dirty code
+    summary = eng.project.root / "work" / gate / f"a{eng.rt(gate).attempt}" / "package" / "RELEASE-SUMMARY.md"
     assert "uncommitted pdg files: pdg/tools/browser.py, tests/test_browser.py" in summary.read_text()
 
 

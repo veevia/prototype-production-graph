@@ -4,7 +4,7 @@
 
 ## Runtime and tests
 
-Python 3.11+, pydantic, PyYAML, jsonschema and Playwright; pytest for tests. Exact minimum constraints are in `requirements.txt`. Node.js 22+ runs prototype unit tests. Chromium is installed with `python -m playwright install chromium`. axe-core and its license are bundled. The candidate scorer and its tests are copied, not imported from a sibling checkout.
+Python 3.11+, pydantic, PyYAML, jsonschema and Playwright; pytest for tests. Minimum versions are in `requirements.txt`; `constraints.txt` pins the exact versions CI verifies, because a new Playwright brings a new Chromium that can change browser verdicts. Node.js 22+ runs prototype unit tests. Chromium is installed with `python -m playwright install chromium`. axe-core and its license are bundled. The candidate scorer and its tests are copied, not imported from a sibling checkout.
 
 ## Source closure
 

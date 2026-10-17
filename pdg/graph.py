@@ -2,7 +2,8 @@
 
 `structural_errors` is the contract `python -m pdg validate` enforces and the engine re-checks before it opens a run:
 the engine refuses a graph that fails any rule. `workspace_errors` adds the checks that need the surrounding workspace
-(skills must exist in 03_Agents-and-Skills/INDEX.md); it degrades to a warning when the package runs outside it.
+(skills must exist in 03_Agents-and-Skills/INDEX.md); a standalone checkout skips them, and a workspace whose index is
+missing gets a warning.
 """
 
 from __future__ import annotations
@@ -494,9 +495,10 @@ def _node_fns(n: NodeDef) -> set[str]:
 
 def workspace_errors(wf: Workflow, root: Path = PKG_ROOT) -> tuple[list[str], list[str]]:
     """Checks that need the surrounding workspace. Returns (errors, warnings)."""
-    index = root.parents[1] / "03_Agents-and-Skills" / "INDEX.md"
-    if not index.is_file():
-        return [], [f"workspace skill index not found at {index}; skill bindings not checked"]
+    skills = root.parent.parent / "03_Agents-and-Skills"   # not parents[1]: a checkout at /app has no grandparent
+    index = skills / "INDEX.md"
+    if not index.is_file():   # a standalone checkout has no skills folder, so nothing to check against
+        return [], ([f"workspace skill index not found at {index}; skill bindings not checked"] if skills.is_dir() else [])
     text = index.read_text()
     errs = []
     for n in wf.nodes:

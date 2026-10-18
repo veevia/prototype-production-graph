@@ -110,6 +110,14 @@ def image_metadata(name: str, data: bytes) -> list[str]:
     return png_metadata(data) if name.endswith(".png") else gif_metadata(data) if name.endswith(".gif") else []
 
 
+def standalone(name: str, data: bytes) -> bytes:
+    """A copied tool must run without the package it was written in: refuse one that imports vpg."""
+    if re.search(rb"^[ \t]*(?:from|import)[ \t]+vpg\b", data, re.M):
+        raise ValueError(f"{name} imports the vpg package, which the public checkout does not have; "
+                         "export its standalone implementation")
+    return data
+
+
 def encoded(data: object) -> bytes:
     return (json.dumps(data, indent=1, ensure_ascii=False) + "\n").encode()
 
@@ -174,8 +182,12 @@ def inventory(root: Path = ROOT) -> dict[str, bytes]:
         "pdg-overview.gif": "docs/images/pdg-overview.gif",
     }.items():
         files[target] = regular_bytes(root / "community" / source)
-    for name in ("vpg_score.py", "test_vpg_score.py"):
-        files[f"scoring/{name}"] = regular_bytes(workspace / "02_Workflows/video-production/scoring" / name)
+    # The scorer is copied, never imported from a sibling checkout. VPG v1.8 moved its implementation into the vpg
+    # package and left scoring/vpg_score.py as a shim over it, which cannot run in the public checkout.
+    files["scoring/vpg_score.py"] = standalone(
+        "scoring/vpg_score.py", regular_bytes(workspace / "02_Workflows/video-production/vpg/scoring.py"))
+    files["scoring/test_vpg_score.py"] = regular_bytes(
+        workspace / "02_Workflows/video-production/scoring/test_vpg_score.py")
     # Artifact templates retain their headings and placeholders, not private workspace navigation.
     refs = sorted({ref for path in (root / "templates/control").glob("*.md")
                    for ref in re.findall(r"(?:00_README/_templates|05_Library)/[\w.-]+\.md", path.read_text())})

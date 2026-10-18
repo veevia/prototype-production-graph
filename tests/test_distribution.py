@@ -212,3 +212,38 @@ def test_the_distribution_names_no_workspace_only_folders():
              and not ex.names_workspace(p.relative_to(PKG).as_posix())
              and ex.WORKSPACE_ONLY.search(p.read_bytes().decode("utf-8", "replace"))]
     assert leaks == []
+
+
+def test_export_copies_only_a_standalone_scorer():
+    """VPG v1.8 turned scoring/vpg_score.py into a shim over its vpg package; copied as is, the public scorer and its
+    tests failed with ModuleNotFoundError. The exporter copies the implementation and refuses a shim."""
+    ex = exporter()
+    with pytest.raises(ValueError, match="imports the vpg package"):
+        ex.standalone("scoring/vpg_score.py", b'"""Compatibility CLI."""\nimport sys\nfrom vpg.scoring import main\n')
+    with pytest.raises(ValueError, match="imports the vpg package"):
+        ex.standalone("scoring/vpg_score.py", b"    import vpg\n")
+    code = b'import json\n"""from vpg.scoring import x is only text here"""\nvpg_weights = {}\n'
+    assert ex.standalone("scoring/vpg_score.py", code) == code
+    scorer = (PKG / "scoring/vpg_score.py").read_bytes()
+    assert ex.standalone("scoring/vpg_score.py", scorer) == scorer      # the copy this checkout ships runs on its own
+
+
+def test_vendored_axe_core_is_the_unmodified_release_its_notices_describe():
+    """MPL-2.0 covers axe.min.js only with its notices: the vendored copy must be the hashed release, keep its header,
+    and ship the release's own list of the MIT and ISC libraries bundled inside it."""
+    import hashlib
+    import re
+    vendor = PKG / "vendor/axe-core"
+    readme = (vendor / "README.md").read_text()
+    version, digest = re.search(r"\*\*Version:\*\* ([0-9.]+) \(`axe\.min\.js`, sha256 `([0-9a-f]{64})`\)", readme).groups()
+    code = (vendor / "axe.min.js").read_bytes()
+    assert hashlib.sha256(code).hexdigest() == digest
+    assert code.startswith(f"/*! axe v{version}\n".encode()) and b"Mozilla Public" in code[:600]
+    assert (vendor / "LICENSE").read_text().startswith("Mozilla Public License, version 2.0")
+    bundled = (vendor / "LICENSE-3RD-PARTY.txt").read_text()
+    assert "MIT License" in bundled and "ISC License" in bundled
+    # the notices sit at the root of the public checkout and under community/ in the author's workspace
+    notices = next(p for p in (PKG / "THIRD_PARTY_NOTICES.md", PKG / "community/THIRD_PARTY_NOTICES.md") if p.exists())
+    text = notices.read_text()
+    assert f"axe-core {version}" in text and "LICENSE-3RD-PARTY.txt" in text
+    assert f"github.com/dequelabs/axe-core/tree/v{version}" in text      # where the Source Code Form is (MPL-2.0 3.2)

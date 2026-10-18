@@ -169,8 +169,9 @@ def test_export_names_public_counterparts_for_workspace_only_paths(tmp_path):
 
 
 def test_export_ships_images_as_pixels_only(tmp_path):
-    """The README's cover image is the first binary file in the export: its bytes skip the text checks, so a text,
-    EXIF or content-credential chunk (where generators record prompts and provenance) refuses the export instead."""
+    """The README's animated cover is binary, so its bytes skip the text checks. A PNG text, EXIF or
+    content-credential chunk, or a GIF comment or non-looping application block (where generators record
+    prompts, XMP and provenance), refuses the export instead."""
     import struct
     import zlib
     ex = exporter()
@@ -185,9 +186,20 @@ def test_export_ships_images_as_pixels_only(tmp_path):
     ex.scan({"docs/images/cover.png": head + tail}, tmp_path)
     with pytest.raises(ValueError, match="image metadata"):
         ex.scan({"docs/images/cover.png": head + chunk(b"tEXt", b"prompt\x00draw the private roadmap") + tail}, tmp_path)
-    for cover in (PKG / "docs/images/pdg-overview.png", PKG / "community/pdg-overview.png"):
+
+    screen = b"GIF89a" + struct.pack("<HHBBB", 1, 1, 0x80, 0, 0) + b"\x00\x00\x00\xff\xff\xff"
+    loop = b"!\xff\x0bNETSCAPE2.0\x03\x01\x00\x00\x00"
+    frame = b"!\xf9\x04\x04\x04\x00\x00\x00" + b"," + struct.pack("<HHHHB", 0, 0, 1, 1, 0) + b"\x02\x02\x44\x01\x00"
+    assert ex.gif_metadata(screen + loop + frame + b";") == []
+    ex.scan({"docs/images/cover.gif": screen + loop + frame + b";"}, tmp_path)
+    for extra, found in ((b"!\xfe\x06prompt\x00", "comment"),
+                         (b"!\xff\x0bXMP DataXMP\x04<x/>\x00", "application XMP DataXMP")):
+        assert ex.gif_metadata(screen + loop + extra + frame + b";") == [found]
+        with pytest.raises(ValueError, match="image metadata"):
+            ex.scan({"docs/images/cover.gif": screen + loop + extra + frame + b";"}, tmp_path)
+    for cover in (PKG / "docs/images/pdg-overview.gif", PKG / "community/pdg-overview.gif"):
         if cover.exists():
-            assert ex.png_metadata(cover.read_bytes()) == [], cover
+            assert ex.gif_metadata(cover.read_bytes()) == [], cover
 
 
 def test_the_distribution_names_no_workspace_only_folders():

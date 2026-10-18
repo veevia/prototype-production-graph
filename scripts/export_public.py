@@ -85,6 +85,31 @@ def png_metadata(data: bytes) -> list[str]:
     return found
 
 
+def gif_metadata(data: bytes) -> list[str]:
+    """A GIF's comment, plain-text and application blocks other than the looping one (XMP rides in these)."""
+    if data[:6] not in (b"GIF87a", b"GIF89a") or len(data) < 13:
+        return ["not a GIF"]
+    found, i = [], 13 + (3 << ((data[10] & 7) + 1) if data[10] & 0x80 else 0)
+    while i < len(data) and data[i] != 0x3B:
+        if data[i] == 0x21:
+            label, j = data[i + 1], i + 2
+            name = data[j + 1:j + 12] if label == 0xFF else b""
+            if label == 0xFE or label == 0x01 or (label == 0xFF and name != b"NETSCAPE2.0"):
+                found.append({0xFE: "comment", 0x01: "plain text"}.get(label) or "application " + name.decode("latin-1"))
+        elif data[i] == 0x2C:
+            j = i + 10 + (3 << ((data[i + 9] & 7) + 1) if data[i + 9] & 0x80 else 0) + 1
+        else:
+            return found + ["malformed"]
+        while j < len(data) and data[j]:   # data sub-blocks up to their terminator
+            j += data[j] + 1
+        i = j + 1
+    return found
+
+
+def image_metadata(name: str, data: bytes) -> list[str]:
+    return png_metadata(data) if name.endswith(".png") else gif_metadata(data) if name.endswith(".gif") else []
+
+
 def encoded(data: object) -> bytes:
     return (json.dumps(data, indent=1, ensure_ascii=False) + "\n").encode()
 
@@ -146,7 +171,7 @@ def inventory(root: Path = ROOT) -> dict[str, bytes]:
         "README.md": "README.md", "CONTRIBUTING.md": "CONTRIBUTING.md",
         "LICENSE": "LICENSE", "THIRD_PARTY_NOTICES.md": "THIRD_PARTY_NOTICES.md",
         "gitignore": ".gitignore", "test.yml": ".github/workflows/test.yml",
-        "pdg-overview.png": "docs/images/pdg-overview.png",
+        "pdg-overview.gif": "docs/images/pdg-overview.gif",
     }.items():
         files[target] = regular_bytes(root / "community" / source)
     for name in ("vpg_score.py", "test_vpg_score.py"):
@@ -267,9 +292,9 @@ def scan(files: dict[str, bytes], root: Path = ROOT) -> None:
             errors.append(f"{name}: credential-shaped content")
         if not names_workspace(name) and WORKSPACE_ONLY.search(content.decode("utf-8", "replace")):
             errors.append(f"{name}: workspace-only path (add its public counterpart to PUBLIC_PATHS)")
-        if name.endswith(".png") and png_metadata(content):
-            errors.append(f"{name}: image metadata ({', '.join(png_metadata(content))}); strip it before export")
-        if name.startswith("vendor/") or name.endswith(".png"):   # minified or binary: no text identifiers to read
+        if image_metadata(name, content):
+            errors.append(f"{name}: image metadata ({', '.join(image_metadata(name, content))}); strip it before export")
+        if name.startswith("vendor/") or name.endswith((".png", ".gif")):   # minified or binary: no text to read
             continue
         text = content.decode("utf-8")
         if re.search(r"/(?:Users|home)/[^/\s]+/|https://[^/\s]+\.sharepoint\.com", text):

@@ -5,7 +5,7 @@
 **TL;DR:** Turn a product brief into a verified, working prototype. One YAML graph takes the brief through evidence,
 definition, concepts, experience design and the build, then parallel reviews, targeted rework and a human release.
 
-![The Prototype Production Graph: 19 steps in 8 phases. A brief moves through discovery and evidence, problem and product definition, concept, experience design, and prototype and development; three reviews judge each build in parallel; defects return only to the step that made them; a named person approves at six human gates, including the release, and blocking problems escalate to that person.](docs/images/pdg-overview.png)
+![Animated overview of the Prototype Production Graph. 19 steps in 8 phases build up from a brief to a verified prototype, then a tour lights each phase in turn: discovery and evidence, problem and product definition, concept, experience design, prototype and development, three parallel reviews, iteration, and delivery and learning. Defects return only to the step that made them, a named person approves at six human gates, including the release, and blocking problems escalate to that person.](docs/images/pdg-overview.gif)
 
 - **One graph drives the work.** 19 nodes, 43 edges and 8 subgraphs in [`graph/workflow.yaml`](graph/workflow.yaml)
   define every step, review and rework path, and 22 rubrics define when each one is done.
@@ -38,7 +38,7 @@ design, prototype and development, validation, iteration, and delivery and learn
 - **Every run ends by learning.** N19 proposes reusable lessons; they reach the shared rule base only when a person
   applies them.
 
-The diagram is an overview. The [graph specification](docs/graph-spec.md) and the generated
+The animation is an overview. The [graph specification](docs/graph-spec.md) and the generated
 [graph diagram](docs/graph.svg) are rebuilt from the YAML and checked in CI.
 
 ## Install and verify

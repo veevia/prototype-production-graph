@@ -1,180 +1,137 @@
-# Prototype Production Graph (pdg)
+# Prototype Production Graph (`pdg`)
 
 [![Tests](https://github.com/veevia/prototype-production-graph/actions/workflows/test.yml/badge.svg)](https://github.com/veevia/prototype-production-graph/actions/workflows/test.yml)
 
-**TL;DR:** Turn a product brief into a verified, working prototype. One YAML graph takes the brief through evidence,
-definition, concepts, experience design and the build, then parallel reviews, targeted rework and a human release.
+**TL;DR:** Turn a product brief into a verified, working prototype. One declarative graph takes the brief through
+evidence, problem framing, concepts, UX architecture and the build, then parallel reviews, targeted rework and human
+release sign-off.
 
 ![Animated overview of the Prototype Production Graph. 19 steps in 8 phases build up from a brief to a verified prototype, then a tour lights each phase in turn: discovery and evidence, problem and product definition, concept, experience design, prototype and development, three parallel reviews, iteration, and delivery and learning. Defects return only to the step that made them, a named person approves at six human gates, including the release, and blocking problems escalate to that person.](docs/images/pdg-overview.gif)
 
-- **One graph drives the work.** 19 nodes, 43 edges and 8 subgraphs in [`graph/workflow.yaml`](graph/workflow.yaml)
-  define every step, review and rework path, and 22 rubrics define when each one is done.
-- **Agents create; tools measure; people approve.** Your coding assistant, or you, works from file-based task packets;
-  deterministic checks, including real-browser tests of the prototype, measure the result; named people decide.
-- **Resumable and auditable:** checkpoints, artifact lineage and a hash-chained ledger record every step and decision.
-- **No hosted service required.** pdg needs no LLM API, cloud service, Microsoft account or the author's workspace.
+## Why use `pdg`?
 
-> The fictional example proves the workflow mechanics, not design quality, real user research or production
-> readiness. See [non-goals and limitations](#non-goals-and-limitations).
+Frontier models can generate a plausible UI from a single prompt, but high-stakes product work still fails when models
+invent missing requirements, skip edge states, misjudge browser layout or accessibility, or overwrite approved specs
+during iteration.
+
+`pdg` separates **generation** from **measurement** and **governance**:
+
+- **Agents create; tools measure; people approve.** Agents work from self-contained file packets; deterministic checks
+  and real-browser tests verify the output; named humans decide at six gates.
+- **Evidence before pixels.** Sources and claims are tagged (`observed`, `reported`, `assumed`). Missing context is
+  surfaced explicitly rather than fabricated (`N01`–`N05`), and ≥ 3 concepts are compared before converging (`N06`).
+- **Real-browser verification, not prompt self-grading.** `N13` drives the built prototype in headless Chromium with
+  `axe-core` across mobile, tablet and desktop viewports—checking WCAG contrast, 320 px reflow, target sizes, keyboard
+  focus and every screen state. A reviewer agent cannot override a failed tool check.
+- **Surgical rework, not start-over loops.** Feedback diagnosis (`N16`) traces each defect to the earliest node that
+  caused it (`N03`–`N12`), and targeted rework (`N17`) re-runs only affected steps while keeping untouched work.
+- **No lock-in or hosted service.** Runs locally with Python, Node and Chromium. Works with any coding assistant (GitHub
+  Copilot, Claude Code, Cursor, or manual execution) with a resumable state and a SHA-256 hash-chained ledger.
+
+### How `pdg` compares
+
+`pdg` complements your existing design skills, MCP tools and coding assistants by adding the deterministic runtime and
+product-design governance they leave out:
+
+| Category | Common open-source approaches | Where they stop | What `pdg` adds |
+|---|---|---|---|
+| **UI & prototyping skills** | `frontend-design` skills, prompt packs, one-shot UI generators | Polish visual styling on a single pass, but invent missing requirements, skip edge/error states, and break working screens during edits. | **Evidence tags (`N01`–`N02`), ≥ 3 concepts (`N06`), full state specs (`N08`), and surgical root-cause rework (`N16`–`N17`).** |
+| **Design-to-code bridges** | Figma MCP, screenshot-to-code, component libraries | Translate existing mockups into code, assuming the problem, flows and edge cases are already solved. | **Upstream product discovery (`N01`–`N07`)** plus **downstream usability & feasibility reviews (`N14`–`N15`)**. |
+| **Spec-driven SDLC packs** | `spec-kit`, `hve-core`, `.instructions.md` collections | Rely on the LLM following Markdown instructions; jump straight from spec to code with no UX or browser verification harness. | **Hard Python state machine**, section-locked control docs, and **real Chromium + `axe-core` pre-checks (`N13`)** agents cannot override. |
+| **Agent graph SDKs** | LangGraph, CrewAI, AutoGen | Provide low-level graph primitives, leaving you to build your own design stages, rubrics, browser checks and audit trail. | **Ready-to-run 19-node design graph**, 22 rubrics (98 dimensions), governed rule learning (`N19`), and a SHA-256 ledger. |
 
 ## How it works
 
-A brief moves through eight phases: discovery and evidence, problem and product definition, concept, experience
-design, prototype and development, validation, iteration, and delivery and learning.
+A brief moves through **8 phases** and **19 nodes** defined in [`graph/workflow.yaml`](graph/workflow.yaml) and scored
+by **22 rubrics**:
 
-- **Three reviews judge every build in parallel** once content and data are in (N12): the functional, design and
-  accessibility review (N13), which drives the prototype in real Chromium with axe-core; user and stakeholder
-  validation (N14); and technical feasibility (N15).
-- **Defects go back only to the step that made them.** Feedback diagnosis (N16) traces each defect to its source, and
-  targeted rework (N17) reopens only those steps, anywhere from the problem frame (N03) to content and data (N12).
-  Everything else is kept.
-- **People approve at six human gates:** the problem frame (N03), the scope and quality bar (N05), the concept (N06),
-  the visual system (N09), the prototype plan and fidelity (N10), and the release (N18), where they can instead request
-  changes.
-- **Every loop is bounded.** Rejections, retries and rework cycles have budgets (at most four rework cycles by default).
-  A spent budget stops the run with an escalation report instead of looping silently.
-- **Blocking problems escalate to a named human.** Blocking evidence gaps (N02), a diagnosis that cannot proceed (N16)
-  and a defect with no step to return to (N17) stop the run and write a report to `.pdg/escalations/`.
-- **Every run ends by learning.** N19 proposes reusable lessons; they reach the shared rule base only when a person
-  applies them.
+| Phase | Nodes | What happens |
+|---|---|---|
+| **1. Discovery & evidence** | `N01`–`N02` | Register sources with evidence tags, extract insights and riskiest assumptions, detect gaps, and freeze inputs. |
+| **2. Problem & scope** | `N03`–`N05` | Define the problem frame (`N03` 👤), requirements (`N04`), and measurable scope & quality bar (`N05` 👤). |
+| **3. Concept** | `N06` | Compare ≥ 3 distinct concepts against weighted criteria and lock the chosen direction (`N06` 👤). |
+| **4. Experience design** | `N07`–`N09` | Map journeys and flows (`N07`), specify interaction states (`N08`) in parallel with visual tokens (`N09` 👤). |
+| **5. Prototype & build** | `N10`–`N12` | Approve the fidelity and test plan (`N10` 👤), build the offline prototype (`N11`), and wire realistic data (`N12`). |
+| **6. Parallel validation** | `N13`–`N15` | Run three reviews in parallel: Chromium + `axe-core` quality (`N13`), usability validation (`N14`), and feasibility (`N15`). |
+| **7. Targeted iteration** | `N16`–`N17` | Diagnose findings into traced defects (`N16`) and reopen only the originating nodes (`N17`) within bounded budgets. |
+| **8. Delivery & learning** | `N18`–`N19` | Recompute release checks for human sign-off (`N18` 👤) and propose reusable lessons for the rule base (`N19`). |
 
-The animation is an overview. The [graph specification](docs/graph-spec.md) and the generated
-[graph diagram](docs/graph.svg) are rebuilt from the YAML and checked in CI.
+## Quick onboarding
 
-## Install and verify
+### 1. Install and run the demo
 
-You need Python **3.11+**, Node.js **22+** and Chromium installed through Playwright. Installing Chromium needs network
-access once; everything else runs locally.
+Requires **Python 3.11+**, **Node.js 22+**, and Chromium via Playwright.
 
 ```bash
 git clone https://github.com/veevia/prototype-production-graph.git
 cd prototype-production-graph
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install -r requirements.txt -c constraints.txt   # the exact versions CI verifies
+python -m pip install -r requirements.txt -c constraints.txt
 python -m playwright install chromium
 
-python -m pdg validate                                # check the workflow graph
-python -m pdg docs --check                            # confirm the generated docs match the graph
-python -m pdg dry-run --out /tmp/pdg-community-demo   # run the fictional example end to end (about 3 minutes)
-python -m pdg ledger-verify /tmp/pdg-community-demo   # check the run's hash-chained ledger
-python -m pdg report /tmp/pdg-community-demo          # write an HTML run report
+python -m pdg validate                                # verify the workflow graph
+python -m pdg docs --check                            # verify generated docs and schemas
+python -m pdg dry-run --out /tmp/pdg-demo             # run the fictional example end to end (~3 min)
+python -m pdg ledger-verify /tmp/pdg-demo             # verify the hash-chained ledger
+python -m pdg report /tmp/pdg-demo                    # write the HTML run report
 ```
 
-The dry run builds the fictional Lot Release Workbench with scripted agents. Its first build intentionally fails review;
-only the affected steps are reworked, and build v2 passes. Dry-run approvals are labelled `dry-run-auto`, and simulated
-sessions are not real user research. Use a new output directory each time you repeat it.
+The dry run builds the fictional *Lot Release Workbench* ([`examples/coa-review/`](examples/coa-review/README.md)): its
+first build intentionally fails review, reworks only the affected nodes, and passes on the next build.
 
-Run commands from this checkout: it is a source checkout, not a published package. The full regression suite
-(`python -m pytest -q`) drives real Chromium and takes about 40 minutes; see [CONTRIBUTING.md](CONTRIBUTING.md).
+### 2. Run on your own project
 
-## Use it on your own project
-
-1. **Create a project.**
+1. **Initialize a project** and configure your brief and approver:
 
    ```bash
    python -m pdg init ../my-prototype --name "My prototype"
    ```
 
-   Paste the requester's brief, verbatim, into `sources/brief.md`, and add authorized sources such as research,
-   analytics or your design system. Then set `humans: [Your Name]` in `pdg.project.yaml`: the human gates accept
-   decisions only from the people listed there.
+   Put your brief in `../my-prototype/sources/brief.md`, add supporting sources under `sources/`, and set
+   `humans: [Your Name]` in `../my-prototype/pdg.project.yaml`.
 
-2. **Run until the graph stops** for an agent (`WAITING_AGENT`), a human (`WAITING_HUMAN`) or an escalation
-   (`BLOCKED`), or until the prototype passes (`RUN_PASS`).
+2. **Advance the workflow** until it waits for an agent (`WAITING_AGENT`), a human gate (`WAITING_HUMAN`), or an
+   escalation (`BLOCKED`):
 
    ```bash
    python -m pdg run ../my-prototype
-   python -m pdg status ../my-prototype   # node states, waits and escalations
-   python -m pdg tasks ../my-prototype    # open task packets
+   python -m pdg status ../my-prototype
+   python -m pdg tasks ../my-prototype
    ```
 
-3. **Resolve the stop.** `submit` and `approve` record the result and continue the run.
-   - `WAITING_AGENT`: give each task packet in `.pdg/tasks/` to your coding assistant, or do the work yourself. Write
-     the declared outputs, then run the submit command printed in the packet, which carries its dispatch token. Add
-     `--dry-run` to check the outputs without using an attempt.
-   - `WAITING_HUMAN`: the named approver decides. Record their actual decision, adding `--reject` to send the work
-     back; never invent an approval.
-   - `BLOCKED`: read the report in `.pdg/escalations/` and fix the cause; then a named human unblocks the node.
+3. **Complete the active step** and continue:
+   - **Agent task (`WAITING_AGENT`):** hand the packet in `.pdg/tasks/` to your coding assistant (or complete it
+     yourself), write the declared outputs, and run the packet's submit command (use `--dry-run` to pre-check):
+     ```bash
+     python -m pdg submit ../my-prototype <node> --token <token> --actor agent:<agent> --output <key>=<path>
+     ```
+   - **Human gate (`WAITING_HUMAN`):** record the named approver's decision (or `--reject --feedback "…"`):
+     ```bash
+     python -m pdg approve ../my-prototype <node> --actor "<your name>" --reason "<decision>"
+     ```
+   - **Escalation (`BLOCKED`):** inspect `.pdg/escalations/`, resolve the blocker, and unblock:
+     ```bash
+     python -m pdg unblock ../my-prototype <node> --actor "<your name>" --note "<what was fixed>"
+     ```
 
-   ```bash
-   python -m pdg submit ../my-prototype <node> --token <token> --actor agent:<agent> --output <key>=<path>
-   python -m pdg approve ../my-prototype <node> --actor "<your name>" --reason "<their decision>"
-   python -m pdg unblock ../my-prototype <node> --actor "<your name>" --note "<what was fixed>"
-   ```
+## Repository structure & docs
 
-4. **Before handoff, verify the ledger** and review the run report.
+| Path | Purpose | Guide |
+|---|---|---|
+| `graph/workflow.yaml` | Single declarative authority for nodes, edges and policies | [Graph spec](docs/graph-spec.md) · [Diagram](docs/graph.svg) |
+| `pdg/` | Deterministic engine, CLI, state, control locks, ledger and tools | [Architecture](docs/architecture.md) · [Orchestration](docs/orchestration.md) · [State model](docs/state-model.md) |
+| `rubrics/`, `config/`, `schemas/` | 22 quality rubrics, thresholds, and JSON schemas | [Evaluation & gates](docs/evaluation-and-gates.md) · [Rubric catalog](docs/rubric-catalog.md) |
+| `templates/control/`, `templates/artifacts/` | Eight shared control documents with section ownership and locks | [Control documents](docs/control-documents.md) · [Control access](docs/control-access.md) |
+| `agents/`, `prompts/` | 13 role cards and 19 node task instructions | [Node catalog](docs/node-catalog.md) · [Edge catalog](docs/edge-catalog.md) · [Agent catalog](docs/agent-catalog.md) |
+| `knowledge/`, `scoring/` | Governed design rules (`rules.json`) and candidate preference scorer | [Self-improvement](docs/self-improvement.md) · [Design principles](knowledge/design-principles.md) |
+| `examples/coa-review/` | End-to-end fictional workbench, fixtures and expected outputs | [Example guide](examples/coa-review/README.md) · [Dependencies](docs/dependencies.md) |
 
-   ```bash
-   python -m pdg ledger-verify ../my-prototype
-   python -m pdg report ../my-prototype
-   ```
+## Non-goals and boundaries
 
-Run `run` again after an interruption; the engine resumes from its saved state. No standing delegation is inherited
-from the author's workspace: release, publication, risk acceptance and rule changes each need their own explicit
-authorization. After a pdg upgrade, `pdg status` reports changed engine code or rule fingerprints; inspect it and run
-`pdg recheck-release` rather than bypassing the checks.
+- **Not a hosted service, model provider or UI generator.** `pdg` governs and verifies the workflow locally.
+- **Automated checks complement, not replace, real user research.** Browser checks and simulated dry-run sessions do not
+  substitute for testing with real users or production security review.
+- **License:** MIT for project code; MPL-2.0 for vendored `axe-core`. See [LICENSE](LICENSE),
+  [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md), and [CONTRIBUTING.md](CONTRIBUTING.md).
 
-The role cards use **Wei** as the example principal. Your `humans` setting names your own approvers; a name is not
-authentication, and pdg is a trusted local workflow, not a sandbox for hostile agents.
-
-## Project map
-
-| Directory | Purpose |
-|---|---|
-| `graph/` | The workflow definition, the single graph authority |
-| `pdg/` | Engine, CLI, state, provenance, deterministic checks, reports and privacy-policy selection |
-| `agents/`, `prompts/` | 13 role cards and 19 node instructions |
-| `rubrics/`, `config/`, `schemas/` | 22 quality rubrics, thresholds, and artifact and state contracts |
-| `templates/control/`, `templates/artifacts/` | Eight shared control documents and the artifact templates they reference |
-| `knowledge/` | The public quality-rule profile; no customer case studies or personal preferences |
-| `examples/coa-review/` | Fictional sources, prototype, fixtures and expected outputs |
-| `scoring/` | Bundled dependency-free candidate scoring tool and its tests |
-| `vendor/axe-core/` | Offline accessibility checker, with its MPL-2.0 license |
-| `tests/`, `.github/workflows/` | Regression suite and GitHub Actions checks |
-| `docs/` | Architecture, catalogs, evaluation, state and learning guides |
-
-## Documentation
-
-| Guide | Covers |
-|---|---|
-| [Architecture](docs/architecture.md) | How the declarative graph drives the deterministic engine |
-| [Graph specification](docs/graph-spec.md) | Node, edge and subgraph fields and the validator's rules, with the [generated diagram](docs/graph.svg) |
-| [Node catalog](docs/node-catalog.md) and [edge catalog](docs/edge-catalog.md) | Every node and edge, generated from the graph |
-| [Agent catalog](docs/agent-catalog.md) | The 13 agent roles and the nodes they own or support |
-| [Orchestration](docs/orchestration.md) | How the engine schedules and batches ready nodes |
-| [Evaluation and gates](docs/evaluation-and-gates.md) | Rubrics, tool and review checks, and the human gates |
-| [Rubric catalog](docs/rubric-catalog.md) | Every rubric dimension and when it blocks |
-| [Control documents](docs/control-documents.md) and [control access](docs/control-access.md) | The eight documents people read and sign, and who may change each section |
-| [State model](docs/state-model.md) | Typed state, checkpoints and resumability |
-| [Self-improvement](docs/self-improvement.md) | Learning proposals and the governed rule base |
-| [Dependencies](docs/dependencies.md) | Runtime requirements, the source closure and optional host skills |
-| [Evidence in the public distribution](docs/previous-iterations.md) | What the public rule profile's evidence is, and what is withheld |
-| [Graph engineering and tools](docs/research/graph-engineering-and-tools.md) | The graph model and tools the engine is built on |
-
-## Agents, skills and integrations
-
-The graph names 74 skill labels and optional host tools. They guide whoever executes a packet; they are not Python
-imports or services that pdg installs. Each packet carries the node's instructions, inputs, schemas, rubrics and submit
-command, so you can do the work yourself or map the role cards to your own assistant. WorkIQ, wiki retrieval, Figma,
-MCP tools and the author's custom agents are optional; use authorized local sources and your own design system instead.
-
-## What is not included
-
-No proprietary skill collection, Microsoft credentials, customer hub, runtime session, private transcript, private Git
-history or personal scoring model is included. The sample privacy vocabulary is fictional: configure your own
-identifiers locally before recording sensitive review data. Static identifier checks are not a privacy guarantee.
-
-## Contributing
-
-Read [CONTRIBUTING.md](CONTRIBUTING.md) for the checks, the contribution boundaries and how updates flow from the
-author's workspace to this repository.
-
-## Non-goals and limitations
-
-- Not a design generator, agent host, model provider, authentication service or production backend.
-- Browser checks and rubric scores do not substitute for real usability research or production readiness.
-- Do not publish project sources, ledgers, reviews or credentials with contributions.
-
-Original project code is MIT-licensed; vendored axe-core keeps its MPL-2.0 license.
-See [LICENSE](LICENSE) and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

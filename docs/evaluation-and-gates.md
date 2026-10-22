@@ -87,7 +87,7 @@ and without a terminal it refuses.
 its approver again compares its outputs with the ones last approved: its artifacts, and each control document it writes
 as the whole accepted document. `pdg status` and the `awaiting_human` event then say either that the outputs are
 byte-identical to the version approved (by whom, when) or which outputs changed, and why the gate re-ran. The approver
-still decides: a byte-identical re-ask is shown, never approved automatically (vpg's finding #43 recommended the same).
+still decides: a byte-identical re-ask is shown, never approved automatically.
 
 **Defects.** Every blocking finding and every open feedback item becomes a defect (or is dismissed with a reason):
 
@@ -104,7 +104,7 @@ finding and every open feedback item (`interpretation_complete`); an unmapped it
 interpreter checked and disproved is answered instead (`answered_findings`: the finding's `node:signature`, the reason,
 the evidence and who checked). The answer stands in for a defect, is recorded on the gate, and is listed at release
 beside the finding. A tool finding cannot be answered away: fix the build or the tool. An answer never resolves an
-existing defect, which a reviewer's re-report keeps open (the first field run's W22).
+existing defect, which a reviewer's re-report keeps open.
 `pdg draft-interpretation <project>` writes a schema-valid N16 skeleton and a `.findings.json` sidecar from current
 reviews: each finding's exact signature, its default traced node by dimension, re-failed resolved defect ids and empty
 `answered_findings` slots to copy into the interpretation when needed. `check-output --project` and `check-node` refuse
@@ -118,11 +118,10 @@ re-reviewed since then too. A fix need not change the prototype: a wording fix i
 version and still resolves. An interpreter that merely stops mentioning a defect resolves nothing, because its node
 must have re-run. A defect in rework whose correction did not resolve it is **persisting**, and its failure count
 rises. Any current finding with a defect's signature, blocking or advisory, still reports it: a reviewer re-filing
-a problem on a SHOULD dimension files an advisory finding, and that must not resolve a blocking defect (the first
-field run's W20). An advisory defect is never routed, so it resolves the same way once its node re-ran (until that
-run it could never resolve: its W13). Without this rule, a defect
-fixed outside targeted rework would block the run for good; vpg's first real run ended that way (its finding #46).
-Defects saved by an older pdg, which carry no attempt record, fall back to the old rule (a newer build) until their
+a problem on a SHOULD dimension files an advisory finding, and that must not resolve a blocking defect. An advisory
+defect is never routed, so it resolves the same way once its node re-ran. Without this rule, a defect fixed outside
+targeted rework would block the run for good.
+Defects saved without an attempt record fall back to checking for a newer build until their
 next rework records one.
 
 **Outcome**, recomputed from state and never taken from the agent:
@@ -150,8 +149,7 @@ that did not is memo-restored), so an advisory elsewhere can stay open for good.
 these as `stranded_advisories`, each with why and a remedy that works for its node: N16 re-files it at a blocking
 severity where the gate can route it, a named human approves a change request where its document is locked (raising it
 would block the gate), or a named human invalidates a node the gate cannot route, or any node once the rework budget
-is spent (raising it then would block the gate too). N16's packet lists every open
-advisory with the same remedy (the first field run's W54). A node
+is spent (raising it then would block the gate too). N16's packet lists every open advisory with the same remedy. A node
 re-opened while its defects are still in rework (by `pdg invalidate`, say) is told to keep them fixed. N16's packet lists
 every blocking finding at the current build as `node:signature`, with severity, dimension and message. Its
 descendants re-run only if their inputs changed, and unaffected nodes are memo-restored. A defect with no routable
@@ -172,8 +170,8 @@ human's words, and what was done under it. **Who reviewed** lists each current r
 independence. **Defects still open at release** lists every open defect (none can block, or release
 fails): its severity, the reviewer's own when it was kept advisory, and whether its fix waits on a human because the
 node's document is locked; the TL;DR counts them. **Reviewer severities the last gate kept advisory** lists each
-reviewer P1–P3 finding the interpretation did not raise to a defect. Every gate records those it raised and kept
-(the first field run's W25); which of them should block is a policy Wei decides. Its **human record** lists
+reviewer P1–P3 finding the interpretation did not raise to a defect. Every gate records those it raised and kept;
+which of them should block is a policy Wei decides. Its **human record** lists
 every action taken under a human's name: gate decisions, change requests, unblocks, accepted configurations, risks and
 ledger breaks, waivers, restores, rollbacks and delegated actions. It also lists delegation grants and revocations. Each
 row shows the reason and, for a gate decision, how long the gate had been waiting. Decisions made within 60 s of the gate

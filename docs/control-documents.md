@@ -51,8 +51,7 @@ validator requires exactly one owner per section, every template heading owned, 
   A writer may submit only its own sections (N03 and N04 do in the example); a section it leaves out keeps its text.
 - An edit to a section the writer does not own is **ignored and reported**: `control_edits_ignored` on the ledger, and
   a `note:` line in the `submit` output naming each section and its owner. An agent working from a stale copy
-  therefore cannot erase another node's work, and the change is never silent. (Until the first field run the only
-  report was the ledger event; the agent found its ignored edit by searching the ledger.)
+  therefore cannot erase another node's work, and the change is never silent.
 - For memoisation, a reader's fingerprint covers only the sections written upstream of it
   ([state model](state-model.md#fingerprints-and-memoisation)). A validation finding appended by N14 does not force
   N03 to re-run.
@@ -71,7 +70,7 @@ evaluation, N09 design, N10 prototype. After that:
   re-approves. The original signing gate keeps the lock owner throughout.
 - Write a change request's reason as the stakeholder's words, quoted, then the outcome they ask for, paraphrased: not
   the components the build happened to have. A request that names the parts ("title in capitals, capability chip,
-  subtitle") needs a second request when the next feedback removes one of them (field run 2, R2-32).
+  subtitle") needs a second request when the next feedback removes one of them.
 - The review gate marks a defect `needs_human` when fixing it would need a change request, so the run stops and says
   so instead of looping.
 

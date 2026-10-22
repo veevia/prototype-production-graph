@@ -27,37 +27,6 @@ full suite passes with it: a new Playwright brings a new Chromium.
 Preserve human gates, explicit failures, rule lifecycle enforcement, and provenance.
 Add a regression test for behavior changes. Do not weaken a check to make an example pass.
 
-## Source and update ownership
-
-The author currently develops and uses the engine in Wei_workspace, at
-`02_Workflows/prototype-design/`. This public repository is a reviewed, filtered
-distribution, not a submodule or a mirror of private history.
-
-For workspace maintainers, run from that workflow directory:
-
-```bash
-python -B scripts/export_public.py --dest /path/to/prototype-production-graph --check
-python -B scripts/export_public.py --dest /path/to/prototype-production-graph --apply
-```
-
-The first command reports whether the public checkout matches the current source.
-The second copies only the allowlisted distribution, regenerates public docs, and
-refuses to overwrite locally edited or unowned destination files. Neither command
-commits, pushes, changes GitHub visibility, or modifies an existing project run.
-Resolve community contributions back into the workspace source before exporting
-again; there is intentionally no automatic bidirectional merge.
-
-After exporting, run this repository's checks, review `git diff`, then explicitly
-stage, commit and push in this repository. Never subtree-push the private workflow:
-its history contains customer evidence and personal review data.
-
-## Reports and pull requests
-
-Include the command, Python/Node versions, expected result, actual result, and a
-minimal fictional reproduction. For sensitive reports, use GitHub's private
-vulnerability reporting if enabled; never post credentials or customer evidence.
-
 ## Scope-out
 
-Automatic model execution, cloud hosting, secret storage, and distribution of the
-author's optional skill library are outside this release.
+Automatic model execution, cloud hosting, and secret storage are outside this repository's scope.

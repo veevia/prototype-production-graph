@@ -75,15 +75,14 @@ A step runs **in parallel, then commits serially**, like bulk-synchronous (Prege
 
 ## Design choices
 
-Each choice comes from the case study ([previous iterations](previous-iterations.md)) or the graph-engineering
-research ([research](research/graph-engineering-and-tools.md)):
+Each choice is grounded in product design practice and graph-engineering research ([research](research/graph-engineering-and-tools.md)):
 
 | Choice | Why |
 |---|---|
-| Rubrics are written before the work, and tool checks run before the reviewer agent | Case-study lesson: write the behaviour rules and thresholds down before testing, and verify in a real browser first |
+| Rubrics are written before the work, and tool checks run before the reviewer agent | Write the behaviour rules and thresholds down before testing, and verify in a real browser first |
 | Defects carry a trace (node · location · smallest fix · acceptance check) | Rework reaches the cause, not the symptom; a defect nobody can trace escalates to a human instead of looping |
-| Only traced nodes and their descendants re-run; identical inputs are memo-restored | "Do not restart the full workflow when a targeted revision is sufficient" (the brief) |
+| Only traced nodes and their descendants re-run; identical inputs are memo-restored | "Do not restart the full workflow when a targeted revision is sufficient" |
 | Parallel execution with serial commit | Throughput without write races; a deterministic commit order makes runs reproducible |
 | Section ownership in shared documents | Several nodes write one document without clobbering each other; a downstream write never silently invalidates an upstream node |
 | Enforcement follows the rule lifecycle | A new rule is advisory until a named human approves it; nothing unreviewed can block a run |
-| Scope the change to the request | Wei's correction of an over-designed iteration (F01): unify components and usability, never flatten distinct workflows |
+| Scope the change to the request | Unify components and usability, never flatten distinct workflows |

@@ -192,7 +192,7 @@
 | Responsible agent | `service-experience-designer` |
 | Skills | `user-journey-map`, `information-architecture-designer`, `terminology-taxonomy-designer`, `storyboard`, `jobs-to-be-done` |
 | Tools | pdg.tools.experience:check_flows |
-| Context | The journey-map template (templates/artifacts/1-4); Information architecture: one name per thing, and navigation that follows the domain's own lifecycle; Keep distinct domains as distinct workflows; unify the shell, not the domain logic (Wei, 2026-09-26) |
+| Context | The journey-map template (templates/artifacts/1-4); Information architecture: one name per thing, and navigation that follows the domain's own lifecycle; Keep distinct domains as distinct workflows; unify the shell, not the domain logic |
 | Control documents | read product · write experience |
 | Completion criteria | The experience document validates against its schema<br>Every P0 requirement is covered by a flow; every flow step names a known screen; every screen is reachable; routes are unique |
 | Evaluation checks | `EXP-COVERAGE` MUST tool · enforced (R-IA-002)<br>`EXP-SCREENS` MUST tool · enforced (R-IA-003) |
@@ -221,7 +221,7 @@
 | Responsible agent | `ux-interaction-designer` |
 | Skills | `prototyping-principles`, `heuristic-evaluation`, `hitl-boundary-designer`, `content-writing`, `design-review` |
 | Tools | pdg.tools.experience:check_interactions |
-| Context | The design-handoff template §3–4, §7 (templates/artifacts/2-4); “The prototype looks good but does not work” → every state and error path is specified (Wei, brief 2026-09-26); Requirement-first panels: a locked action says what unlocks it |
+| Context | The design-handoff template §3–4, §7 (templates/artifacts/2-4); “The prototype looks good but does not work” → every state and error path is specified; Requirement-first panels: a locked action says what unlocks it |
 | Control documents | read experience, product · write experience |
 | Completion criteria | The interaction document validates against its schema<br>Every screen has a spec; list screens specify empty and error states, record screens an error state; every interaction has keyboard behaviour; focus and feedback rules exist |
 | Evaluation checks | `EXP-STATES` MUST tool · enforced (R-UX-002)<br>`EXP-KEYBOARD` MUST tool · enforced (R-A11Y-003)<br>`EXP-LOCKED-EXPLAINED` MUST tool · enforced (R-UX-003) |
@@ -250,7 +250,7 @@
 | Responsible agent | `visual-design-system` (consults `accessibility-reviewer`) |
 | Skills | `design-system-author`, `design-system-as-infrastructure`, `frontend-design`, `impeccable`, `accessibility-verification` |
 | Tools | pdg.tools.design_system:check (WCAG contrast of every declared pair, type-scale and radius counts) |
-| Context | The workspace design system (templates/artifacts/DESIGN-SYSTEM-AI-INSTRUCTIONS.md) and the project's brand authority; Design system as infrastructure: reuse tokens and components; off-system output is a defect; One component language across surfaces: type scale, radii, focus ring, status colours (Wei, 2026-09-26) |
+| Context | The workspace design system (templates/artifacts/DESIGN-SYSTEM-AI-INSTRUCTIONS.md) and the project's brand authority; Design system as infrastructure: reuse tokens and components; off-system output is a defect; One component language across surfaces: type scale, radii, focus ring, status colours |
 | Control documents | read product · write design · locks on approval design |
 | Completion criteria | The design-system document validates against its schema<br>Every declared pair meets WCAG contrast, and every ratio design.md states is the one the tokens give; ≤ 8 type sizes, none below 12 px; spacing on a 4 px grid; tokens carry provenance; prohibited patterns listed |
 | Evaluation checks | `VIS-CONTRAST` MUST tool · enforced (R-A11Y-002)<br>`VIS-RATIO-STATED` SHOULD tool · enforced (R-VIS-002)<br>`VIS-TYPE` MUST tool · enforced (R-VIS-001)<br>`VIS-RADII` SHOULD tool · enforced (R-VIS-001)<br>`VIS-SPACING` SHOULD tool · advisory (R-VIS-003)<br>`VIS-PROVENANCE` MUST tool · enforced (R-VIS-002)<br>`VIS-PROHIBITED` MUST tool · enforced (R-VIS-004)<br>`VIS-ALERT-RESERVED` MUST tool · enforced (R-VIS-005)<br>`VIS-APPROVED` MUST human · enforced (R-GOV-003) |
@@ -279,7 +279,7 @@
 | Responsible agent | `prototype-developer` (consults `ux-interaction-designer`) |
 | Skills | `prototyping-assist`, `poc-planner`, `experiment-planner`, `hypothesis-creator`, `mve-mvp-planner` |
 | Tools | pdg.tools.plan:check (fidelity gate, scenario and state coverage) |
-| Context | The test-plan template (templates/artifacts/3-1); Build the thinnest slice that tests the riskiest assumption (design-thinking-loop.md, Build); “Development moved too quickly” → validated assumptions and customer alignment before fidelity rises (Wei, brief 2026-09-26) |
+| Context | The test-plan template (templates/artifacts/3-1); Build the thinnest slice that tests the riskiest assumption (design-thinking-loop.md, Build); “Development moved too quickly” → validated assumptions and customer alignment before fidelity rises |
 | Control documents | read experience, design, evaluation · write prototype · locks on approval prototype |
 | Completion criteria | The plan validates against its schema<br>The fidelity gate holds; every P0 flow has a scenario ending in an expectation; every data screen's empty and error states are planned; viewports span ≤ 400 and ≥ 1280 px; every record screen names its worst-case samples |
 | Evaluation checks | `PLN-FIDELITY-GATE` MUST tool · enforced (R-FID-001)<br>`PLN-SCENARIOS` MUST tool · enforced (R-VAL-002)<br>`PLN-STATES` MUST tool · enforced (R-UX-002)<br>`PLN-FOCUS` MUST tool · enforced (R-A11Y-003)<br>`PLN-ACCEPTANCE` MUST tool · enforced (R-SCP-007)<br>`PLN-SAMPLES` SHOULD tool · enforced (R-A11Y-004)<br>`PLN-VIEWPORTS` MUST tool · enforced (R-A11Y-004)<br>`PLN-APPROVED` MUST human · enforced (R-GOV-003) |
@@ -308,7 +308,7 @@
 | Responsible agent | `prototype-developer` (consults `front-end-engineer`) |
 | Skills | `frontend-design`, `web-artifacts-builder`, `design-system-as-infrastructure`, `test-driven-development`, `prototyping-principles` |
 | Tools | python build script (assembles the single-file offline build and build-manifest.json); node --check and node --test (Node 22); pdg.tools.prototype:check_static |
-| Context | The approved plan (prototype.md), design system (design.md) and interaction spec (experience.md); Single-file offline builds assembled from parts by a reproducible build script (the case-study pattern); “A visually polished prototype is not complete if its primary workflows do not function” (Wei, brief 2026-09-26) |
+| Context | The approved plan (prototype.md), design system (design.md) and interaction spec (experience.md); Single-file offline builds assembled from parts by a reproducible build script; “A visually polished prototype is not complete if its primary workflows do not function” |
 | Control documents | read prototype, design, experience, product · write development |
 | Completion criteria | The prototype build directory was registered<br>The build manifest validates against its schema<br>Manifest hashes match; entry is offline; every screen is implemented; only design tokens are used; no placeholder text<br>Every script passes node --check and the domain unit tests pass |
 | Evaluation checks | `BLD-OFFLINE` MUST tool · enforced (R-TEC-002)<br>`BLD-SCREENS` MUST tool · enforced (R-FUN-001)<br>`BLD-TOKENS` MUST tool · enforced (R-VIS-002)<br>`BLD-PLACEHOLDER` MUST tool · enforced (R-FID-003)<br>`BLD-REPRO` SHOULD tool · advisory (R-TEC-004)<br>`BLD-SYNTAX` MUST tool · enforced (R-TEC-003)<br>`BLD-UNIT` MUST tool · enforced (R-TEC-003) |
@@ -337,7 +337,7 @@
 | Responsible agent | `content-designer` |
 | Skills | `content-writing`, `content-designer`, `terminology-taxonomy-designer`, `asset-collection`, `evidence-tagging` |
 | Tools | seeded synthetic-data generator; python build script; pdg.tools.content:check |
-| Context | “The prototype is too generic” → product-specific, realistic content and meaningful workflows (Wei, brief 2026-09-26); Synthetic or invented data is labelled at the point of decision; missing data is shown as missing, never as zero; Seeded generators make data reproducible |
+| Context | “The prototype is too generic” → product-specific, realistic content and meaningful workflows; Synthetic or invented data is labelled at the point of decision; missing data is shown as missing, never as zero; Seeded generators make data reproducible |
 | Control documents | read prototype, research · write — |
 | Completion criteria | The integrated prototype directory was registered<br>The content document validates against its schema<br>Datasets exist and parse; volume meets the plan; provenance is labelled in the UI; every source id is known and every verified field is in the data; every edge case appears in the data; no placeholder text |
 | Evaluation checks | `CNT-PLACEHOLDER` MUST tool · enforced (R-FID-003)<br>`CNT-PROVENANCE` MUST tool · enforced (R-FID-002)<br>`CNT-VOLUME` SHOULD tool · advisory (R-FID-004)<br>`CNT-EDGE` MUST tool · enforced (R-FID-005) |
@@ -366,7 +366,7 @@
 | Responsible agent | `product-ux-critic` (consults `accessibility-reviewer`, `technical-qa`) |
 | Skills | `design-review`, `accessibility-verification`, `webapp-testing`, `prototype-qa`, `heuristic-evaluation` |
 | Tools | Playwright Chromium through pdg.tools.browser:check; axe-core 4.11.4 (vendored; WCAG 2.0/2.1/2.2 A and AA tags); full-page screenshots per screen, state and viewport |
-| Context | Rendered-output inspection finds defects that value checks miss (case-study lesson); Automated accessibility testing finds about 57% of WCAG issues (Deque); the rest needs judgement; “The design is hard to read” → hierarchy, contrast, typography, spacing, density (Wei, brief 2026-09-26) |
+| Context | Rendered-output inspection finds defects that value checks miss; Automated accessibility testing finds about 57% of WCAG issues (Deque); the rest needs judgement; “The design is hard to read” → hierarchy, contrast, typography, spacing, density |
 | Control documents | read design, experience, evaluation · write — |
 | Completion criteria | The browser suite ran and wrote its report<br>Every MUST review dimension is scored with evidence |
 | Evaluation checks | `FUNC-SCENARIOS` MUST tool · enforced (R-FUN-001)<br>`FUNC-STATES` MUST tool · enforced (R-UX-002)<br>`VIS-TOKENS-RUNTIME` MUST tool · enforced (R-VIS-002)<br>`VIS-STATE-FILLS` SHOULD tool · enforced (R-VIS-005)<br>`REF-PARITY` SHOULD tool · enforced (R-SCP-001)<br>`FUNC-CONSOLE` MUST tool · enforced (R-TEC-005)<br>`FUNC-OFFLINE` MUST tool · enforced (R-TEC-002)<br>`PERF-LOAD` SHOULD tool · informational (R-TEC-006)<br>`A11Y-AXE` MUST tool · enforced (R-A11Y-001)<br>`A11Y-FOCUS` MUST tool · enforced (R-A11Y-003)<br>`A11Y-FOCUS-VISIBLE-2411` MUST tool · enforced (R-A11Y-003)<br>`A11Y-FOCUS-POINTER` SHOULD tool · enforced (R-A11Y-003)<br>`A11Y-TEXT-SPACING-1412` MUST tool · enforced (R-A11Y-007)<br>`A11Y-TARGET-AA` MUST tool · enforced (R-A11Y-005)<br>`A11Y-TARGET-44` SHOULD tool · advisory (R-A11Y-006)<br>`A11Y-TYPE-MIN` MUST tool · enforced (R-A11Y-007)<br>`A11Y-REDUCED-MOTION` MUST tool · enforced (R-A11Y-009)<br>`A11Y-SEMANTICS` MUST review · enforced (R-A11Y-008)<br>`A11Y-MANUAL` MUST review · enforced (R-A11Y-008)<br>`RESP-OVERFLOW` MUST tool · enforced (R-A11Y-004)<br>`RESP-REFLOW-320` MUST tool · enforced (R-A11Y-004)<br>`RESP-BAND` MUST tool · enforced (R-A11Y-004)<br>`RESP-TEXT` MUST tool · advisory (R-VIS-006)<br>`RESP-LAYOUT` SHOULD review · advisory (R-VIS-006)<br>`DES-HIERARCHY` MUST review · enforced (R-VIS-007)<br>`DES-SPECIFICITY` MUST review · enforced (R-FID-006)<br>`DES-CONSISTENCY` MUST review · enforced (R-VIS-001)<br>`DES-DENSITY` MUST review · enforced (R-VIS-008)<br>`DES-SEMANTIC-COLOR` MUST review · enforced (R-VIS-005)<br>`DES-DERIVATION` MUST review · enforced (R-UX-001)<br>`DES-SCOPE-VISIBLE` MUST review · enforced (R-SCP-006)<br>`DES-DOMAIN` SHOULD review · enforced (R-IA-001)<br>`DES-TASTE` SHOULD human · enforced (R-GOV-003) |
@@ -453,7 +453,7 @@
 | Responsible agent | `orchestrator` (consults `product-ux-critic`, `technical-qa`) |
 | Skills | `debugging-and-error-recovery`, `five-whys`, `fishbone-diagram`, `traffic-light-decisions`, `rose-bud-thorn` |
 | Tools | pdg.tools.diagnosis:gate (tri-state gate and before/after comparison) |
-| Context | The seven-step failure procedure: identify, trace, smallest fix, re-run only what is affected, compare, record, escalate; Tool findings arrive pre-traced; confirm or re-trace them; Wei's words are feedback, not instructions to redesign everything (“you made an over design”, 2026-09-26) |
+| Context | The seven-step failure procedure: identify, trace, smallest fix, re-run only what is affected, compare, record, escalate; Tool findings arrive pre-traced; confirm or re-trace them; Stakeholder feedback scopes a targeted fix, not a full redesign |
 | Control documents | read evaluation · write — |
 | Completion criteria | The interpretation validates against its schema<br>Every open feedback item and blocking agent/human finding is mapped; every defect has a known trace, a smallest fix and an acceptance check |
 | Evaluation checks | `GAT-TRACE` MUST tool · enforced (R-GOV-005)<br>`GAT-FEEDBACK` MUST tool · enforced (R-GOV-006)<br>`GAT-ESCALATE` MUST tool · enforced (R-GOV-007) |

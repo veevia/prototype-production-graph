@@ -1,6 +1,6 @@
 # Design principles library
 
-> **TL;DR:** 77 rules in rule base v1.0.22, each a testable check with its evidence. 63 adopted, 5 candidate, 9 validated. Adopted rules block; validated rules advise until Wei approves them; candidates only inform.
+> **TL;DR:** 77 rules in the rule base, each a testable check with its evidence. 63 adopted, 5 candidate, 9 validated. Adopted rules block; validated rules advise until Wei approves them; candidates only inform.
 
 Generated from `knowledge/rules.json` (the governed store) and the de-identified case study. Evidence ids resolve in `knowledge/public/evidence.json`. **Stable** principles apply to every project; **project-specific** preferences never become defaults.
 

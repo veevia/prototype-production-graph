@@ -5,12 +5,10 @@
 > usability metrics come from published methods, and simulated input is always labelled. Every tool below carries a
 > citation or a local observation from this machine.
 
-**Provenance.** Graph-engineering concepts were researched and source-verified for the video production graph, 2026-09-26
-([upstream graph reference](https://docs.langchain.com/oss/python/langgraph/overview), 40+ cited sources). They are
-cited here, not repeated. The tooling and usability rows come from a second source-verified pass on 2026-09-26 by a
-research agent with web access (claims it could not confirm are listed at the end). Local observations were made on
-this machine on 2026-09-26. Evidence tags: cited documentation = *reported*; local runs = *observed*; the mapping to
-nodes = *introduced by this task*.
+**Provenance.** Graph-engineering concepts are source-verified against
+[LangGraph's architecture reference](https://docs.langchain.com/oss/python/langgraph/overview) and 40+ cited sources.
+The tooling and usability rows come from source-verified documentation and local execution benchmarks. Evidence tags:
+cited documentation = *reported*; local runs = *observed*; the mapping to nodes = *workflow binding*.
 
 ## 1. Graph-engineering choices
 

@@ -292,7 +292,7 @@ nodes:
     purpose: Turn the chosen concept into journeys, a screen inventory with routes, navigation and user flows that cover every P0 requirement, plus the system behaviour the flows depend on.
     depends_on: [n06_concept_ideation]
     inputs: ["state:design.concepts", "state:design.selected_concept", "state:product.requirements", "state:product.problem", "control:product", "rework:self"]
-    context: ["The journey-map template (templates/artifacts/1-4)", "Information architecture: one name per thing, and navigation that follows the domain's own lifecycle", "Keep distinct domains as distinct workflows; unify the shell, not the domain logic (Wei, 2026-09-26)"]
+    context: ["The journey-map template (templates/artifacts/1-4)", "Information architecture: one name per thing, and navigation that follows the domain's own lifecycle", "Keep distinct domains as distinct workflows; unify the shell, not the domain logic"]
     state_read: [design.concepts, design.selected_concept, product.requirements, product.problem]
     state_write: [design.journeys, design.screens, design.flows]
     agent: service-experience-designer
@@ -331,7 +331,7 @@ nodes:
     purpose: Specify every screen's states (loading, empty, error, success and the domain's own), interactions with triggers, feedback and keyboard behaviour, validation rules, and the focus and feedback rules the prototype must honour.
     depends_on: [n07_experience_architecture]
     inputs: ["state:design.screens", "state:design.flows", "state:product.requirements", "artifact:experience", "control:experience", "rework:self"]
-    context: ["The design-handoff template §3–4, §7 (templates/artifacts/2-4)", "“The prototype looks good but does not work” → every state and error path is specified (Wei, brief 2026-09-26)", "Requirement-first panels: a locked action says what unlocks it"]
+    context: ["The design-handoff template §3–4, §7 (templates/artifacts/2-4)", "“The prototype looks good but does not work” → every state and error path is specified", "Requirement-first panels: a locked action says what unlocks it"]
     state_read: [design.screens, design.flows, product.requirements]
     state_write: [design.interactions]
     agent: ux-interaction-designer
@@ -372,7 +372,7 @@ nodes:
     purpose: Define the visual language as tokens with provenance — colour roles, type scale, spacing, radii, motion, components, breakpoints — with every text and UI colour pair meeting WCAG contrast, and the prohibited patterns.
     depends_on: [n07_experience_architecture]
     inputs: ["state:design.screens", "artifact:experience", "files:sources/**", "control:product", "rework:self"]
-    context: ["The workspace design system (templates/artifacts/DESIGN-SYSTEM-AI-INSTRUCTIONS.md) and the project's brand authority", "Design system as infrastructure: reuse tokens and components; off-system output is a defect", "One component language across surfaces: type scale, radii, focus ring, status colours (Wei, 2026-09-26)"]
+    context: ["The workspace design system (templates/artifacts/DESIGN-SYSTEM-AI-INSTRUCTIONS.md) and the project's brand authority", "Design system as infrastructure: reuse tokens and components; off-system output is a defect", "One component language across surfaces: type scale, radii, focus ring, status colours"]
     state_read: [design.screens]
     state_write: [design.system]
     agent: visual-design-system
@@ -416,7 +416,7 @@ nodes:
     purpose: Choose the fidelity the evidence supports, and plan the goals, the scenarios that exercise every P0 flow, the states to reach, the viewports, the content needs and the measurable test criteria.
     depends_on: [n08_interaction_design, n09_visual_system]
     inputs: ["state:design.flows", "state:design.interactions", "state:design.system", "state:research.assumptions", "state:product.success_criteria", "state:product.requirements", "artifact:interactions", "artifact:design_system", "control:experience", "control:design", "control:evaluation", "rework:self"]
-    context: ["The test-plan template (templates/artifacts/3-1)", "Build the thinnest slice that tests the riskiest assumption (design-thinking-loop.md, Build)", "“Development moved too quickly” → validated assumptions and customer alignment before fidelity rises (Wei, brief 2026-09-26)"]
+    context: ["The test-plan template (templates/artifacts/3-1)", "Build the thinnest slice that tests the riskiest assumption (design-thinking-loop.md, Build)", "“Development moved too quickly” → validated assumptions and customer alignment before fidelity rises"]
     state_read: [design.flows, design.interactions, design.system, research.assumptions, product.success_criteria, product.requirements]
     state_write: [build.plan]
     agent: prototype-developer
@@ -460,7 +460,7 @@ nodes:
     purpose: Build a working, offline prototype of the planned scenarios on the approved tokens and components, with every screen and state implemented, domain logic unit-tested, and development.md as the implementation-ready foundation.
     depends_on: [n10_prototype_planning]
     inputs: ["state:build.plan", "state:design.system", "state:design.interactions", "state:design.screens", "artifact:plan", "artifact:design_system", "artifact:interactions", "control:prototype", "control:design", "control:experience", "control:product", "rework:self"]
-    context: ["The approved plan (prototype.md), design system (design.md) and interaction spec (experience.md)", "Single-file offline builds assembled from parts by a reproducible build script (the case-study pattern)", "“A visually polished prototype is not complete if its primary workflows do not function” (Wei, brief 2026-09-26)"]
+    context: ["The approved plan (prototype.md), design system (design.md) and interaction spec (experience.md)", "Single-file offline builds assembled from parts by a reproducible build script", "“A visually polished prototype is not complete if its primary workflows do not function”"]
     state_read: [build.plan, design.system, design.interactions, design.screens]
     state_write: [build.code_artifacts]
     agent: prototype-developer
@@ -505,7 +505,7 @@ nodes:
     purpose: Replace seed data with realistic, labelled, reproducible content — datasets that exercise the planned edge cases and a copy deck in the users' vocabulary — and integrate them into the prototype build under review.
     depends_on: [n11_prototype_development]
     inputs: ["artifact:prototype_build", "artifact:plan", "state:build.plan", "state:design.screens", "state:research.evidence", "control:prototype", "control:research", "rework:self"]
-    context: ["“The prototype is too generic” → product-specific, realistic content and meaningful workflows (Wei, brief 2026-09-26)", "Synthetic or invented data is labelled at the point of decision; missing data is shown as missing, never as zero", "Seeded generators make data reproducible"]
+    context: ["“The prototype is too generic” → product-specific, realistic content and meaningful workflows", "Synthetic or invented data is labelled at the point of decision; missing data is shown as missing, never as zero", "Seeded generators make data reproducible"]
     state_read: [build.plan, design.screens, research.evidence]
     state_write: [build.prototype, build.version, build.content_artifacts]
     agent: content-designer
@@ -546,7 +546,7 @@ nodes:
     purpose: Run every planned scenario in a real browser at every viewport, audit accessibility, responsiveness, console, network and performance, then judge visual hierarchy, product specificity and consistency from the screenshots.
     depends_on: [n12_content_data]
     inputs: ["artifact:prototype", "artifact:plan", "state:build.plan", "state:build.prototype", "state:design.system", "state:design.screens", "control:design", "control:experience", "control:evaluation", "rework:self"]
-    context: ["Rendered-output inspection finds defects that value checks miss (case-study lesson)", "Automated accessibility testing finds about 57% of WCAG issues (Deque); the rest needs judgement", "“The design is hard to read” → hierarchy, contrast, typography, spacing, density (Wei, brief 2026-09-26)"]
+    context: ["Rendered-output inspection finds defects that value checks miss", "Automated accessibility testing finds about 57% of WCAG issues (Deque); the rest needs judgement", "“The design is hard to read” → hierarchy, contrast, typography, spacing, density"]
     state_read: [build.plan, build.prototype, design.system, design.screens]
     state_write: [evaluation.reviews, evaluation.test_results]
     agent: product-ux-critic
@@ -670,7 +670,7 @@ nodes:
     purpose: Turn every blocking finding and every open piece of feedback into a traced defect — the requirement, design decision, node or implementation it comes from, the smallest effective fix and an acceptance check — then gate the version pass, rework or blocked.
     depends_on: [n13_quality_review, n14_validation, n15_feasibility_review]
     inputs: ["state:evaluation.reviews", "state:evaluation.feedback", "state:evaluation.defects", "feedback:open", "defects:open", "artifact:browser_report", "artifact:quality_review", "artifact:validation_review", "artifact:feasibility_review", "control:evaluation", "rework:self"]
-    context: ["The seven-step failure procedure: identify, trace, smallest fix, re-run only what is affected, compare, record, escalate", "Tool findings arrive pre-traced; confirm or re-trace them", "Wei's words are feedback, not instructions to redesign everything (“you made an over design”, 2026-09-26)"]
+    context: ["The seven-step failure procedure: identify, trace, smallest fix, re-run only what is affected, compare, record, escalate", "Tool findings arrive pre-traced; confirm or re-trace them", "Stakeholder feedback scopes a targeted fix, not a full redesign"]
     state_read: [evaluation.reviews, evaluation.feedback, evaluation.defects]
     state_write: [evaluation.defects, evaluation.feedback, evaluation.gates, evaluation.comparisons]
     agent: orchestrator

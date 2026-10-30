@@ -1,0 +1,106 @@
+{
+ "$defs": {
+  "Interaction": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "trigger": {
+     "title": "Trigger",
+     "type": "string"
+    },
+    "response": {
+     "title": "Response",
+     "type": "string"
+    },
+    "feedback": {
+     "title": "Feedback",
+     "type": "string"
+    },
+    "keyboard": {
+     "title": "Keyboard",
+     "type": "string"
+    }
+   },
+   "required": [
+    "id",
+    "trigger",
+    "response",
+    "feedback",
+    "keyboard"
+   ],
+   "title": "Interaction",
+   "type": "object"
+  },
+  "ScreenSpec": {
+   "additionalProperties": false,
+   "properties": {
+    "screen": {
+     "title": "Screen",
+     "type": "string"
+    },
+    "states": {
+     "additionalProperties": {
+      "type": "string"
+     },
+     "title": "States",
+     "type": "object"
+    },
+    "interactions": {
+     "items": {
+      "$ref": "#/$defs/Interaction"
+     },
+     "title": "Interactions",
+     "type": "array"
+    },
+    "validation": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Validation",
+     "type": "array"
+    }
+   },
+   "required": [
+    "screen",
+    "states",
+    "interactions"
+   ],
+   "title": "ScreenSpec",
+   "type": "object"
+  }
+ },
+ "additionalProperties": false,
+ "properties": {
+  "screens": {
+   "items": {
+    "$ref": "#/$defs/ScreenSpec"
+   },
+   "title": "Screens",
+   "type": "array"
+  },
+  "focus_rules": {
+   "items": {
+    "type": "string"
+   },
+   "title": "Focus Rules",
+   "type": "array"
+  },
+  "feedback_rules": {
+   "items": {
+    "type": "string"
+   },
+   "title": "Feedback Rules",
+   "type": "array"
+  }
+ },
+ "required": [
+  "screens",
+  "focus_rules",
+  "feedback_rules"
+ ],
+ "title": "InteractionDoc",
+ "type": "object"
+}

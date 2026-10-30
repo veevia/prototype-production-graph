@@ -1,0 +1,9 @@
+id: requirements
+name: Requirements and constraints
+reviewer: product-strategist
+scale: "tool dimensions pass/fail"
+dimensions:
+  - {id: REQ-TRACE, name: "Every requirement traces to evidence or a named assumption", brief_dimension: "requirement coverage", level: MUST, check: {type: tool, fn: "product:check_requirements"}, threshold: "100% of requirements cite ≥ 1 known evidence or assumption id", rule: R-EVD-002, cases: {never: ["a requirement nobody asked for"], always: ["R-03 ← E-02, A-01"]}}
+  - {id: REQ-ACCEPTANCE, name: "Every P0 has acceptance criteria", brief_dimension: "requirement coverage", level: MUST, check: {type: tool, fn: "product:check_requirements"}, threshold: "100% of P0 requirements have ≥ 1 acceptance criterion", rule: R-SCP-007, cases: {never: [], always: []}}
+  - {id: REQ-TYPES, name: "User, business and technical requirements present", brief_dimension: "requirement coverage", level: SHOULD, check: {type: tool, fn: "product:check_requirements"}, threshold: "≥ 1 of each type", rule: R-SCP-008, cases: {never: [], always: []}}
+  - {id: REQ-CONSTRAINTS, name: "Constraints documented before design", brief_dimension: "technical feasibility", level: MUST, check: {type: tool, fn: "product:check_requirements"}, threshold: "≥ 1 constraint with a source", rule: R-SCP-009, cases: {never: ["a technical limit discovered during build that an engineer knew at intake"], always: []}}

@@ -1,0 +1,27 @@
+tool: scoring/candidate_score.py
+store: knowledge/preferences/principal
+run_from: "."
+usage: "python scoring/candidate_score.py --data <private-preference-store> <score|record|fit|report> ..."
+fork_file: "<private-project>/review/forks/<fork-id>.json"
+floor: "Only candidates passing enforced checks are eligible for a human comparison."
+tool_dimension_scores:
+  pass_fail: {pass: 5, fail: 1}
+fork_types:
+  concept:
+    node: n06_concept_ideation
+    question: "Which generic candidate best satisfies the project criteria?"
+    dims:
+      - {id: DES-HIERARCHY, measured: false}
+      - {id: EXP-COVERAGE, measured: true}
+  visual:
+    node: n09_visual_system
+    question: "Which candidate satisfies the authorized design constraints?"
+    dims:
+      - {id: VIS-CONTRAST, measured: true}
+      - {id: DES-CONSISTENCY, measured: false}
+  refinement:
+    node: "any node after a build"
+    question: "Which candidate resolves the scoped trade-off?"
+    dims:
+      - {id: REF-PARITY, measured: true}
+not_forks: "Human gates and risk acceptances remain explicit decisions, not automatically selected candidates."

@@ -1,0 +1,7 @@
+id: experience
+name: Experience architecture and flows
+reviewer: service-experience-designer
+scale: "tool dimensions pass/fail"
+dimensions:
+  - {id: EXP-COVERAGE, name: "Every P0 requirement is covered by a complete flow", brief_dimension: "workflow completeness", level: MUST, check: {type: tool, fn: "experience:check_flows"}, threshold: "100% of P0 requirements appear in ≥ 1 flow; every flow has an entry, steps and an exit", rule: R-IA-002, cases: {never: [], always: []}}
+  - {id: EXP-SCREENS, name: "Every screen reachable, with one name and one route", brief_dimension: "workflow completeness", level: MUST, check: {type: tool, fn: "experience:check_flows"}, threshold: "0 orphan screens; 0 duplicate routes; 0 flow steps on unknown screens; every screen declares its kind", rule: R-IA-003, cases: {never: [], always: []}}

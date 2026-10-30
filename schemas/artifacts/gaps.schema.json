@@ -1,0 +1,166 @@
+{
+ "$defs": {
+  "Gap": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "severity": {
+     "enum": [
+      "blocking",
+      "resolvable",
+      "note"
+     ],
+     "title": "Severity",
+     "type": "string"
+    },
+    "what": {
+     "title": "What",
+     "type": "string"
+    },
+    "resolve_by": {
+     "title": "Resolve By",
+     "type": "string"
+    }
+   },
+   "required": [
+    "id",
+    "severity",
+    "what",
+    "resolve_by"
+   ],
+   "title": "Gap",
+   "type": "object"
+  },
+  "Source": {
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "title": "Id",
+     "type": "string"
+    },
+    "kind": {
+     "enum": [
+      "brief",
+      "research",
+      "interview",
+      "survey",
+      "analytics",
+      "spec",
+      "prototype",
+      "recording",
+      "brand",
+      "design-system",
+      "feedback",
+      "prior-version",
+      "transcript",
+      "data",
+      "url",
+      "other"
+     ],
+     "title": "Kind",
+     "type": "string"
+    },
+    "title": {
+     "title": "Title",
+     "type": "string"
+    },
+    "path": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Path"
+    },
+    "url": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Url"
+    },
+    "evidence": {
+     "enum": [
+      "observed",
+      "reported",
+      "assumed"
+     ],
+     "title": "Evidence",
+     "type": "string"
+    },
+    "notes": {
+     "default": "",
+     "title": "Notes",
+     "type": "string"
+    },
+    "sha256": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Sha256"
+    },
+    "bytes": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Bytes"
+    }
+   },
+   "required": [
+    "id",
+    "kind",
+    "title",
+    "evidence"
+   ],
+   "title": "Source",
+   "type": "object"
+  }
+ },
+ "additionalProperties": false,
+ "properties": {
+  "gaps": {
+   "items": {
+    "$ref": "#/$defs/Gap"
+   },
+   "title": "Gaps",
+   "type": "array"
+  },
+  "sources": {
+   "items": {
+    "$ref": "#/$defs/Source"
+   },
+   "title": "Sources",
+   "type": "array"
+  }
+ },
+ "required": [
+  "gaps",
+  "sources"
+ ],
+ "title": "GapReport",
+ "type": "object"
+}

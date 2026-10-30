@@ -1,0 +1,12 @@
+id: build
+name: Prototype build
+reviewer: prototype-developer
+scale: "tool dimensions pass/fail"
+dimensions:
+  - {id: BLD-OFFLINE, name: "Runs offline from file:// with no network references", brief_dimension: "performance and reliability", level: MUST, check: {type: tool, fn: "prototype:check_static"}, threshold: "0 http(s) references in src/href/url(); entry opens from file://", rule: R-TEC-002, cases: {never: ["a CDN font", "a dev-server-only build"], always: ["one self-contained HTML file"]}}
+  - {id: BLD-SCREENS, name: "Every planned screen is implemented", brief_dimension: "workflow completeness", level: MUST, check: {type: tool, fn: "prototype:check_static"}, threshold: "every screen id appears as data-screen in the build", rule: R-FUN-001, cases: {never: [], always: []}}
+  - {id: BLD-TOKENS, name: "Only design-system tokens are used", brief_dimension: "visual quality and consistency", level: MUST, check: {type: tool, fn: "prototype:check_static"}, threshold: "0 colour literals outside the token block, and every colour the token block declares is a colour in the approved design system", rule: R-VIS-002, cases: {never: ["#777 typed into a component rule"], always: ["var(--color-text-secondary)"]}}
+  - {id: BLD-PLACEHOLDER, name: "No placeholder text", brief_dimension: "content realism", level: MUST, check: {type: tool, fn: "prototype:check_static"}, threshold: "0 occurrences of lorem/ipsum/TODO/TBD/FIXME/xxx in visible text", rule: R-FID-003, cases: {never: [], always: []}}
+  - {id: BLD-REPRO, name: "The build is reproducible from its sources", brief_dimension: "code quality", level: SHOULD, check: {type: tool, fn: "prototype:check_static"}, threshold: "every manifest hash matches the file on disk", rule: R-TEC-004, cases: {never: [], always: []}}
+  - {id: BLD-SYNTAX, name: "Every script parses", brief_dimension: "code quality", level: MUST, check: {type: tool, fn: "prototype:check_unit"}, threshold: "node --check exits 0 for every .js file", rule: R-TEC-003, cases: {never: [], always: []}}
+  - {id: BLD-UNIT, name: "Domain logic unit tests pass", brief_dimension: "functional correctness", level: MUST, check: {type: tool, fn: "prototype:check_unit"}, threshold: "node --test exits 0 with ≥ 1 test", rule: R-TEC-003, cases: {never: [], always: []}}

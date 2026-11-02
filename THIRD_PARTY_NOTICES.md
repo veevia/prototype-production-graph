@@ -7,9 +7,9 @@
   The last lists the MIT- and ISC-licensed libraries bundled inside `axe.min.js`.
   The Source Code Form is available at [the v4.11.4 tag upstream](https://github.com/dequelabs/axe-core/tree/v4.11.4)
   and as `axe.js` in the same npm release.
-- `docs/images/pdg-overview.gif`: the README's animated overview, original to this project.
-  Its text is set in Liberation Sans and Liberation Mono (Copyright Red Hat, Inc. and Google),
-  under the SIL Open Font License 1.1. No font file is bundled.
+- `docs/images/pdg-overview.avif`, `docs/images/pdg-overview.gif` and `docs/images/pdg-overview.png`: the README's
+  animated overview (an AVIF with a GIF fallback) and its still image, original to this project. Their text is set in Geist and Geist Mono (Copyright The Geist
+  Project Authors), under the SIL Open Font License 1.1. No font file is bundled.
 - Python dependencies (Pydantic, PyYAML, jsonschema, Playwright, pytest) and Chromium
   are installed separately, not relicensed by this repository.
 - Optional host skills, agents, MCP servers, hosted services, design systems,

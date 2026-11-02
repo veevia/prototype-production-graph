@@ -6,7 +6,13 @@
 evidence, problem framing, concepts, UX architecture and the build, then parallel reviews, targeted rework and human
 release sign-off.
 
-![Animated overview of the Prototype Production Graph. 19 steps in 8 phases build up from a brief to a verified prototype, then a tour lights each phase in turn: discovery and evidence, problem and product definition, concept, experience design, prototype and development, three parallel reviews, iteration, and delivery and learning. Defects return only to the step that made them, a named person approves at six human gates, including the release, and blocking problems escalate to that person.](docs/images/pdg-overview.gif)
+<picture>
+  <source media="(prefers-reduced-motion: reduce)" srcset="docs/images/pdg-overview.png">
+  <source type="image/avif" srcset="docs/images/pdg-overview.avif">
+  <img alt="The Prototype Production Graph as an animated diagram: 19 steps in 8 phase columns take a brief to a verified prototype. Discovery: context intake, then evidence review. Definition: problem frame, requirements, and scope and success. Concept: concepts. Experience: experience flows feed interaction and the visual system. Prototype: the prototype plan, the build, and content and data. Validation: quality review, user validation and feasibility judge each build in parallel. Iteration: diagnosis traces each defect, and targeted rework sends it back only to the step that made it, among N03 to N12. Delivery: verify and release, then learning. A person approves six steps: the problem frame, scope and success, concepts, the visual system, the prototype plan and the release. Evidence review and diagnosis escalate blocking problems to that person, the Approver. The animation brings each stage into focus in turn (Discover, Define, Design, Build, Validate and Release), then returns to the full view." src="docs/images/pdg-overview.gif">
+</picture>
+
+<sub>Still image: [docs/images/pdg-overview.png](docs/images/pdg-overview.png)</sub>
 
 ## Why use `pdg`?
 
